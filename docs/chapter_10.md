@@ -1,262 +1,273 @@
-# Chapter 10. Autonomous Background Coding Agents
+# Глава 10. Автономные фоновые кодинг-агенты
 
+Автономные фоновые кодинг-агенты стремительно врываются в нашу жизнь как следующая ступень эволюции ИИ-инструментов. В отличие от привычных «копайлотов» (copilots), которые просто подкидывают код под руку, пока ты печатаешь, эти агенты работают скорее как джуниоры на удалёнке. Ты можешь скинуть на них целую задачу, и они будут перемалывать её в фоне. Код генерируется в изолированном окружении, поднятом специально под агента; там же прогоняются тесты, а результат часто прилетает тебе в виде готового пулл-реквеста (PR) на ревью.
 
-Autonomous background coding agents are rapidly emerging as the next evolution of AI coding tools.  Unlike familiar “copilot” assistants that suggest code while you type, these agents operate more like background junior developers you can dispatch to handle entire tasks asynchronously. Code is generated in an isolated environment spun up for the agent, tests can be run, and the result often comes back as a fully formed pull request for you to review.
+В этом разделе я разберу, что это за звери такие — фоновые агенты, как они работают, что сейчас есть на рынке (OpenAI Codex, Google Jules, Cursor, Devin и прочие) и как они соотносятся с традиционными помощниками внутри IDE. Также глянем на их возможности, ограничения и те прагматичные сдвиги, которые они несут в будущее программной инженерии.
 
-In this section, I’ll explore what background coding agents are, how they work, the current landscape of tools (OpenAI Codex, Google Jules, Cursor, Devin, and more), and how they compare to traditional in-IDE assistants. I’ll also examine their capabilities, limitations, and the pragmatic changes they signal for the future of software engineering.
+### От Копайлотов к Автономным Агентам: Ху из ху?
 
-From Copilots to Autonomous Agents: What Are Background Coding Agents?
-Traditional AI coding assistants (like Cursor, GitHub Copilot, or VSCode extensions like Cline) are supervised coding agents—interactive helpers that respond to a developer’s prompts or inline context. They’re essentially autocomplete on steroids, generating suggestions in a chat or as you write, but the human developer is in the driver’s seat guiding every step.
+Традиционные ИИ-ассистенты (типа Cursor, GitHub Copilot или расширений для VSCode вроде Cline) — это *контролируемые* агенты. Это интерактивные помощники, реагирующие на промты разработчика или контекст строки. По сути, это автокомплит на стероидах: они генерируют подсказки в чате или прямо в коде, но кожаный мешок (то есть вы) всё ещё крепко держит руль и контролирует каждый шаг.
 
-In contrast, autonomous background coding agents operate with much greater independence. You give them a high-level task or goal, then “send them off” to work through the problem on their own, without constant supervision. These agents will read and modify your codebase, formulate a plan, execute code (even running tests or commands), and produce a result (often a commit or pull request)—all in an asynchronous workflow.
+Напротив, автономные фоновые агенты действуют с куда большей независимостью. Ты ставишь им высокоуровневую задачу или цель, а потом «отправляешь их пахать» самостоятельно, без постоянного надзора. Эти агенты читают и правят твою кодовую базу, строят план, исполняют код (вплоть до прогона тестов или команд терминала) и выдают результат (обычно коммит или PR) — и всё это в асинхронном режиме.
 
-Think of the difference between a copilot and an autopilot: your copilot (much like GitHub Copilot) is always in the cockpit beside you, awaiting your input; the autopilot (background agent) can fly the plane on its own for a while. This autonomy means that background agents can tackle multistep coding tasks while you focus elsewhere. Using async agents like Codex and Jules is like expanding your cognitive bandwidth: you can fire off a task to the AI and forget about it until it’s done. Instead of a single-threaded back-and-forth with an AI, you suddenly have a multithreaded workflow: the agent works in parallel with you, much like a competent junior dev working in the background.
+Представь разницу между вторым пилотом и автопилотом: твой второй пилот (как GitHub Copilot) всегда сидит в кабине рядом и ждёт твоей команды; автопилот (фоновый агент) может вести самолёт самостоятельно какое-то время. Эта автономия означает, что фоновые агенты могут разгребать многоступенчатые задачи, пока ты сфокусирован на чем-то другом. Использование асинхронных агентов типа Codex или Jules похоже на расширение твоей «когнитивной пропускной способности» (cognitive bandwidth): ты пуляешь задачу в ИИ и забываешь о ней, пока она не будет готова. Вместо однопоточного пинг-понга с ИИ у тебя внезапно появляется многопоточный воркфлоу: агент работает параллельно с тобой, прямо как толковый джун, шуршащий над тасками в фоне.
 
-Crucially, background agents operate in isolated development environments (often cloud VMs or containers) rather than directly in your editor. They typically clone your repository into a sandbox, install dependencies, and have the tools needed to build and test the project. For security, these sandboxes are restricted (with rules like “No internet access unless explicitly allowed”) and ephemeral. The agent can run compilers, tests, linters, and the like without any risk to your local machine. When the task is complete, the agent outputs the code changes (diffs) and a summary of what it did. Usually this comes through as a pull request (with code diffs, commit message, and sometimes an explanation), which you can then review and merge.
+Что критически важно: фоновые агенты работают в *изолированных средах разработки* (часто это облачные виртуалки или контейнеры), а не напрямую в твоем редакторе. Обычно они клонируют твой репозиторий в песочницу, накатывают зависимости и получают инструменты для сборки и тестов проекта. Ради безопасности эти песочницы урезаны в правах (правила типа «Никакого интернета, если явно не разрешено») и эфемерны — живут недолго. Агент может гонять компиляторы, тесты, линтеры и прочую дичь без риска положить твою локальную машину. Когда задача выполнена, агент выкатывает изменения кода (diffs) и саммари того, что он натворил. Обычно это приходит в виде PR (с диффами, сообщением коммита и иногда пояснением), который ты потом ревьюишь и мержишь.
 
-To sum up, a background coding agent is an AI-powered autonomous coder that understands your intent, works through an entire task in a sandbox environment by reading and writing code and testing it, and then delivers the results for you to review. It’s not just suggesting a line or two—it can handle larger-scope tasks:
+Короче говоря, фоновый кодинг-агент — это автономный кодер на ИИ-тяге, который понимает твое намерение, прорабатывает задачу целиком в песочнице (читает, пишет, тестирует) и приносит результат на проверку. Это не просто «подскажи пару строк», он тянет задачи покрупнее:
 
-Write a new feature X across the codebase.
+*   Напиши новую фичу X и протащи её по всей кодовой базе.
+*   Отрефактори модуль Y для оптимизации.
+*   Обнови зависимости в этом проекте.
 
-Refactor module Y for efficiency.
+Это тектонический сдвиг в том, как мы встраиваем ИИ в разработку: от вспомогательных подсказок мы переходим к делегированию реальной реализации.
 
-Upgrade this project’s dependencies.
+### Как работают автономные кодинг-агенты?
 
-This is a significant shift in how we might incorporate AI into development workflows, moving from assistive suggestions to delegating actual implementation work.
+Под капотом большинство фоновых агентов работают по схожей схеме: **План**, **Исполнение**, **Проверка** и **Отчет**. Пройдемся по шагам и посмотрим, на что они способны.
 
-How Do Autonomous Coding Agents Work?
-Under the hood, most background agents follow a similar pattern of operation: plan, execute, verify, and report. Let’s walk through these steps and their capabilities.
+#### План (Plan)
 
-## Plan
-When you give an agent a task (typically via a prompt or command describing what you want), the agent first parses the request and formulates a plan of attack. Some agents explicitly show you this plan before proceeding. For example, Google’s Jules presents an execution plan that you can review and tweak before it starts coding, which “prevents the anxiety of wondering whether the agent understood your request correctly.” A good agent will break the task into substeps:
+Когда ты даешь агенту задачу (обычно через промт или команду), он сначала парсит запрос и формулирует план атаки. Некоторые агенты явно показывают этот план перед стартом. Например, Google Jules выкатывает план выполнения, который ты можешь отрецензировать и подкрутить, прежде чем он начнет кодить. Это «избавляет от мандража: а понял ли этот электронный болван, чё я от него вообще хочу». Хороший агент разобьет задачу на подшаги:
 
-Step 1: search the codebase for relevant sections; Step 2: make changes in files A, B, C; Step 3: run tests; Step 4: commit changes.
+*   Шаг 1: пошерстить кодовую базу на предмет нужных кусков;
+*   Шаг 2: внести правки в файлы A, B, C;
+*   Шаг 3: прогнать тесты;
+*   Шаг 4: закоммитить изменения.
 
-This planning stage is key to effective autonomy: it’s the AI’s way of reasoning about how to accomplish your goal before diving in.
+Эта стадия планирования — ключ к эффективной автономии: так ИИ рассуждает о том, как достичь цели, прежде чем бросаться в бой.
 
-The agent launches a dedicated development environment for the task. Jules, for instance, “clones your codebase into a secure Google Cloud VM” and works asynchronously there. OpenAI’s Codex similarly runs each task in its own cloud sandbox, preloaded with your repository. Tools like Cursor’s background agents use a remote Ubuntu-based machine that has internet access to install packages and can be customized via Docker or snapshots. Ensuring the environment has all needed dependencies (like the correct language runtimes and build tools) is both critical and nontrivial. As I noted in a previous analysis, “Figuring out a smooth experience to spin up just the right environment for an agent is key…and the user experience to configure it is as frustrating, if not more, than it can be for CI pipelines.” Nonetheless, agents are tackling this by allowing configuration files to specify setup steps. The goal is to create a dev environment in the cloud that mirrors what a human developer would need to successfully run the project’s code and tests.
+Агент поднимает выделенную среду разработки под задачу. Jules, например, «клонирует твой код в защищенную виртуалку Google Cloud» и шуршит там асинхронно. OpenAI Codex аналогично запускает каждую задачу в своей облачной песочнице, предзагруженной твоим репозиторием. Инструменты вроде фоновых агентов Cursor используют удаленную машину на Ubuntu, у которой есть выход в инет для установки пакетов и которую можно кастомизировать через Docker или снапшоты. Обеспечить наличие всех зависимостей (правильные рантаймы языков, тулзы сборки) — задача критическая и нифига не тривиальная. Как я уже отмечал в предыдущем разборе: «Настроить всё так, чтобы окружение поднималось гладко и именно то, что нужно агенту — это ключевой момент... и UX настройки этого процесса бесит так же, если не больше, как настройка CI пайплайнов». Тем не менее, агенты решают это через конфиг-файлы. Цель — создать в облаке dev-окружение, зеркально отражающее то, что нужно живому разрабу для запуска кода и тестов.
 
-Notably, many agents disable internet access to their code after setup, so they can sandbox the run without unauthorized data exfiltration or unrestricted internet calls. Some allow controlled internet use for specific needs: for example, OpenAI recently enabled optional internet access for Codex tasks like fetching package updates or documentation.
+Примечательно, что многие агенты отрубают доступ в интернет после настройки, чтобы запереть выполнение в песочнице и избежать утечки данных или бесконтрольных запросов в сеть. Некоторые разрешают контролируемый доступ: например, OpenAI недавно включили опциональный инет для Codex, чтобы тот мог подтягивать обновления пакетов или документацию.
 
-## Execute
-Next comes the main show: the agent starts writing and modifying code according to the plan. Armed with a large language model (or a mix of models) fine-tuned for coding, it can read multiple files, generate new code, and even create new files if needed. This is where the agent essentially acts like a programmer: locating where changes should be made, editing code, and inserting new logic.
+#### Исполнение (Execute)
 
-One interesting observation from early runs is that agents often use brute-force text search (like the Unix grep command) to find relevant parts of the codebase. For example, an agent might search for a function name or a keyword to figure out where in the repository to make changes. This seems surprisingly simplistic—shouldn’t they use fancy semantic code search or AST-based analysis? Yet, it’s effective and reliable. As Birgitta Böckeler notes, many coding agents default to straightforward full-text search, perhaps finding it the most broadly effective method despite more advanced techniques existing.
+Дальше начинается самое мясо: агент пишет и модифицирует код согласно плану. Вооруженный большой языковой моделью (или миксом моделей), заточенной под код, он читает файлы, генерит новый код и даже создает новые файлы, если припрет. Тут агент реально ведет себя как программист: ищет места для правок, редактирует код, вставляет новую логику.
 
-As the agent edits code, some systems provide real-time logs or status updates so you can follow along if you want. OpenAI Codex exposes a log of the agent’s “thoughts” and commands (summarized) as it works through a task. Cursor allows you to “view their status and enter the machine the agent is running in” to observe or even intervene midtask. In practice, though, the idea is you don’t need to babysit—you can let the agent run on autopilot.
+Забавное наблюдение из ранних запусков: агенты часто используют тупой текстовый поиск (типа команды `grep`), чтобы найти нужные куски. Например, агент может искать имя функции или кейворд, чтобы понять, где в репе вносить изменения. Кажется дико примитивным — разве они не должны юзать модный семантический поиск или анализ AST? Но это работает, и надежно. Как замечает Биргитта Бёкелер, многие агенты дефолтно скатываются к прямолинейному полнотекстовому поиску, видимо, считая его самым эффективным методом, несмотря на существование более продвинутых техник.
 
-## Verify
-A defining capability of these agents is that they don’t stop at writing code—they often compile the code and run tests to verify their changes. For instance, OpenAI’s Codex is designed to iteratively run tests until it receives a passing result. If an agent can run the project’s test suite (or at least a relevant subset of tests), it can catch mistakes and automatically correct them in subsequent iterations. This is huge: it moves the AI from just generating code to also debugging and validating its code.
+Пока агент правит код, некоторые системы выдают логи в реальном времени, чтобы ты мог залипать на процесс, если хочешь. OpenAI Codex вываливает лог «мыслей» агента и команд. Cursor позволяет «посмотреть статус и зайти в машину, где крутится агент», чтобы понаблюдать или даже вмешаться посреди процесса. Но на практике идея в том, чтобы не нянчиться с ним — пусть летит на автопилоте.
 
-In theory, an agent with a robust test harness can attempt a fix, see a test fail, adjust the code, and loop until tests pass—without a human in the loop. In practice, environment issues sometimes thwart this. In one case I studied, Codex wasn’t able to run the full test suite due to environment mismatches (certain tools were missing), resulting in a pull request that still had two failing tests. Had the environment been fully aligned, the agent could have fixed those trivial issues before making the PR.
+#### Проверка (Verify)
 
-This underscores why environment setup is so important for autonomous agents: if they can run everything a developer would (linters, tests, builds), they can self-correct many errors automatically. Agents like Devin emphasize this loop—Devin “writes code, finds bugs in the code, corrects the code, and runs its own end-to-end tests to verify it works” as a normal part of its operation. In fact, Devin will even spin up a live preview deployment of a frontend app it built so you can manually verify a feature in the browser, which is a clever extension of the verification step.
+Киллер-фича этих агентов в том, что они не останавливаются на написании кода — они часто компилируют его и гоняют тесты для верификации. Например, OpenAI Codex спроектирован так, чтобы итеративно гонять тесты, пока не увидит зеленый свет. Если агент может запустить тестовый набор проекта (или хотя бы релевантную часть), он способен отловить косяки и автоматически исправить их на следующих итерациях. Это мощно: ИИ переходит от простой генерации кода к отладке и валидации.
 
-## Report
-Once the agent has a candidate solution (all tests have passed, or it deems the code ready), it prepares the results for you. Depending on the platform, this might come as a PR on GitHub, a diff and explanation in chat, or files ready to merge.
+В теории, агент с надежной обвязкой тестов может попытаться применить фикс, увидеть, что тест упал, поправить код и крутить этот цикл, пока тесты не пройдут — без участия человека. На практике кривое окружение часто всё портит. В одном кейсе, который я разбирал, Codex не смог прогнать полный сьют тестов из-за несовпадения окружения (не хватало тулзов), и в итоге выкатил PR с двумя упавшими тестами. Если бы среда была настроена идеально, агент мог бы пофиксить эти мелочи до создания PR.
 
-At this point, you—the human—do a review. Here we come back to “Trust but verify”: you trust the agent to produce something useful, but you verify the changes through code review and additional testing. Many agent systems explicitly integrate with the PR review process because it’s a familiar workflow for developers. Jules, for example, plugs into your GitHub and will open a branch and PR with its changes. OpenAI’s Codex presents the diff inside ChatGPT for you to approve or ask follow-up questions. If you find issues or have change requests, you can often feed that back to the agent for another iteration.
+Это подчеркивает, почему настройка среды так важна для автономных агентов: если они могут запустить всё то же, что и разраб (линтеры, тесты, билды), они могут самоисцеляться от многих ошибок. Агенты вроде Devin делают упор на этот цикл — Devin «пишет код, находит баги, исправляет код и гоняет свои end-to-end тесты, чтобы убедиться, что оно работает». Devin даже поднимает лайв-превью фронтенда, который он запилил, чтобы ты мог потыкать фичу в браузере — умное расширение этапа проверки.
 
-Some agents handle this via chat (Devin can take feedback from a linked Slack thread: if you point out a problem or ask for tweaks, it will “start working on a reply” to address it). Others might require a new run with an adjusted prompt or use a review comment interface. Impressively, Devin even responded to a GitHub PR comment asking why it made certain changes—it reacted with an “eyes” emoji to signal it saw the comment, then posted a detailed explanation of its reasoning. (The explanation turned out to be not entirely correct in that case, but the fact that it can discuss PRs says something about how interactive these agents can become.)
+#### Отчет (Report)
 
-If all looks good, you merge the agent’s PR or integrate the changes. If not, you might discard it or have the agent try again. One pragmatic question teams face is what to do if an agent’s output is almost good but not quite. Do you spend time fixing up the last 10%–20% of an agent-generated patch, even if it was a low-priority task you offloaded to the AI? This is what I call the “sunk cost” dilemma for AI contributions. Birgitta Böckeler muses that if an agent PR only partly succeeds, teams will have to decide “in which situations would [they] discard the pull request, and in which situations would they invest the time to get it the last 20% there” for a task that originally wasn’t worth much dev time. There’s no one answer—it depends on the context and value of the change—but it’s a new kind of trade-off introduced by autonomous agents.
+Как только у агента готово решение-кандидат (все тесты прошли или он решил, что код готов), он готовит результаты для тебя. В зависимости от платформы, это может быть PR на GitHub, дифф с объяснением в чате или файлы, готовые к мержу.
 
-In summary, background coding agents handle the end-to-end cycle of coding tasks: understand → plan → code → test → deliver. They essentially simulate what a diligent, methodical developer might do when assigned a task, albeit within the current limits of AI (see Figure 10-1).
+В этот момент вступаешь ты — человек — и делаешь ревью. Тут мы возвращаемся к принципу «Доверяй, но проверяй»: ты доверяешь агенту сделать что-то полезное, но проверяешь изменения через код-ревью и доп. тесты. Многие системы явно интегрируются в процесс PR-ревью, потому что это привычный флоу для разрабов. Jules, например, подключается к твоему GitHub, создает ветку и открывает PR. OpenAI Codex показывает дифф внутри ChatGPT, чтобы ты одобрил или задал уточняющие вопросы. Если находишь косяки или хочешь что-то поменять, часто можно скормить этот фидбек агенту для новой итерации.
 
+Некоторые агенты обрабатывают это через чат (Devin может принимать фидбек из связанного треда в Slack: укажешь на проблему — он начнет «готовить ответ» и фиксить). Другим может потребоваться новый запуск с скорректированным промтом. Что впечатляет, Devin даже ответил на коммент в PR на GitHub, где спрашивали, зачем он сделал определенные правки — он отреагировал эмодзи «глаза» (типа «видел»), а потом запостил детальное объяснение своей логики. (Объяснение оказалось не совсем верным в том случае, но сам факт, что он может дискутировать в PR, говорит о многом).
 
+Если всё ок — мержишь PR агента. Если нет — можешь выкинуть или заставить переделать. Прагматичный вопрос, с которым сталкиваются команды: что делать, если выхлоп агента «почти норм», но не совсем? Тратить ли время на допиливание последних 10–20% патча от агента, даже если это была низкоприоритетная задача, которую скинули на ИИ? Я называю это дилеммой «невозвратных затрат» (sunk cost) для вклада ИИ. Биргитта Бёкелер размышляет, что если PR агента успешен лишь частично, командам придется решать: «в каких ситуациях мы выкидываем пулл-реквест, а в каких инвестируем время, чтобы дожать эти последние 20%» для задачи, которая изначально не стоила времени разраба. Единого ответа нет — всё зависит от контекста и ценности изменений, но это новый вид компромисса, принесенный автономными агентами.
+
+Итого, фоновые агенты тащат end-to-end цикл: понять → спланировать → закодить → протестить → доставить. Они по сути симулируют действия старательного, методичного разработчика, пусть и в рамках текущих ограничений ИИ (см. Рис. 10-1).
 
 > [!NOTE]
-> **Image Missing**
-> *Figure 10-1. Autonomous AI agent workflow: self-directed agents plan tasks, execute solutions, verify results, and report outcomes with minimal human intervention.*
+> **Изображение отсутствует**
+> *Рисунок 10-1. Воркфлоу автономного ИИ-агента: самоуправляемые агенты планируют задачи, исполняют решения, верифицируют результаты и отчитываются с минимальным вмешательством человека.*
 
-How Do Background Agents Compare to In-IDE AI Assistants?
-It’s worth drawing a clear line between the coding AI tools we’ve had for a couple years (GitHub Copilot, ChatGPT coding mode, etc.) and this new generation of autonomous agents. Both are useful, but they play different roles and have different strengths/weaknesses.
+### Сравнение фоновых агентов и ИИ-ассистентов в IDE
 
-The most obvious difference is their level of autonomy. In-IDE assistants like Copilot or VSCode’s AI extensions work synchronously with you—they generate suggestions or answer questions when invoked, and their scope is usually limited to the immediate context (like the file or function you’re editing or a specific prompt you gave). You decide when to accept a suggestion, ask for another, or apply a change.
+Стоит провести четкую черту между инструментами ИИ-кодинга, которые у нас уже пару лет (GitHub Copilot, режим кодинга в ChatGPT и т.д.), и этим новым поколением автономных агентов. И те и другие полезны, но играют разные роли и имеют разные сильные/слабые стороны.
 
-With background agents, once you hit “go” on a task, the agent will autonomously perform potentially hundreds of actions (file edits, runs, searches) without further confirmation. It’s operating asynchronously. This requires a higher degree of trust (you’re letting it change things on its own) but also frees you from micromanaging. I often describe it as the difference between having an AI pair programmer versus an AI assistant developer on the team. The pair programmer (Copilot) is with you keystroke by keystroke; the assistant dev (Codex/Jules/etc.) works in parallel on another issue.
+Самая очевидная разница — уровень автономии. Ассистенты в IDE, типа Copilot, работают синхронно с тобой — генерируют подсказки или отвечают на вопросы, когда их пнешь, и их скоуп обычно ограничен немедленным контекстом (файл или функция, которую ты правишь). Ты решаешь, когда принять подсказку, попросить другую или применить изменение.
 
-The copilot style of AI tools means they excel at microtasks—writing a function, completing a line, generating a small snippet, answering a question about how to use an API. They don’t maintain a long narrative or project-wide understanding, beyond what’s in your editor’s open files or a limited window.
+С фоновыми агентами: как только жмешь «фас» на задачу, агент автономно выполняет потенциально сотни действий (правки файлов, запуски, поиски) без лишних подтверждений. Он работает асинхронно. Это требует более высокого уровня доверия (ты даешь ему менять вещи самому), но и освобождает от микроменеджмента. Я часто описываю это как разницу между ИИ-напарником (pair programmer) и ИИ-помощником (assistant developer) в команде. Напарник (Copilot) с тобой на каждом нажатии клавиши; помощник (Codex/Jules/etc.) работает параллельно над другой задачей.
 
-Autonomous agents operate at the project level. They load your entire repository (or at least index it) and can make coordinated changes across multiple modules. They keep track of a multistep plan. For example, GitHub Copilot might help you write a unit test if you prompt it, but a background agent could, on its own, decide to add the corresponding implementation in one file, the test in another, and a modified a config in a third—all as part of one unified task. This makes agents far better suited for things like refactoring a cross-cutting concern (logging, error handling), performing upgrades (which often involve many files), or implementing a feature that touches backend and frontend. IDE assistants couldn’t easily handle those because they lack long-term task memory and whole-repo visibility.
+Стиль «копайлота» означает, что они хороши в микрозадачах — написать функцию, добить строку, сгенерить сниппет, ответить на вопрос по API. Они не удерживают длинный нарратив или понимание всего проекта за пределами открытых файлов или небольшого окна контекста.
 
-Copilot-style assistants are reactive—they respond to your code or queries. They don’t initiate actions. Background agents are proactive in the sense that once activated, they will take initiative to reach the goal. A Jules or Devin agent might decide, “I need to create a new file here” or “Let me run the tests now,” without being explicitly told at each step. They also can notify you of things proactively, like:
+Автономные агенты работают на уровне проекта. Они загружают весь репозиторий (или индексируют его) и могут вносить согласованные изменения в куче модулей. Они держат в голове многоступенчатый план. Например, GitHub Copilot может помочь написать юнит-тест, если попросишь, но фоновый агент может сам решить добавить реализацию в один файл, тест в другой, и поправить конфиг в третьем — всё в рамках одной задачи. Это делает агентов куда более пригодными для штук типа рефакторинга сквозного функционала (логирование, обработка ошибок), апгрейдов (где часто затронута куча файлов) или реализации фичи, которая трогает и бэкенд, и фронтенд. IDE-ассистенты такое не вывозят, потому что у них нет «памяти задачи» и видимости всей репы.
 
-I found another place to apply this change, so I’ll include that too.
+Ассистенты типа Copilot реактивны — они отвечают на твой код или запросы. Они не инициируют действия. Фоновые агенты проактивны в том смысле, что будучи активированными, они проявят инициативу для достижения цели. Jules или Devin могут решить: «Мне надо создать новый файл здесь» или «Дай-ка я прогоню тесты сейчас», без явной указки на каждом шагу. Они также могут уведомлять тебя проактивно:
 
-They behave more like an employee, who might say, “I noticed X while I was in the code, so I fixed that as well.” That said, autonomy also means they might do something you didn’t expect or necessarily want. The supervised nature of this style of tool means it will only do exactly what you accept (except maybe for subtle missuggestions you didn’t notice). So with great power (proactivity) comes the need for greater oversight.
+*   *Я нашел еще одно место, где надо применить это изменение, так что я его тоже включил.*
 
-A major difference is that background agents can execute code and commands, whereas traditional IDE assistants usually cannot (unless you count things like ChatGPT’s Code Interpreter mode, but that’s more for data analysis, not integrated with your project’s build).
+Они ведут себя скорее как сотрудник, который может сказать: «Я заметил X, пока копался в коде, так что пофиксил и это заодно». С другой стороны, автономия означает, что они могут сделать что-то, чего ты не ожидал или не хотел. Контролируемая природа старых тулзов означает, что они делают только то, что ты примешь (ну, кроме тихих галлюцинаций, которые ты проглядел). Так что с большой силой (проактивностью) приходит необходимость в большем надзоре.
 
-Agents will run your test suite, start your dev server, compile the app, maybe even deploy it. They operate in a sandbox, but it’s effectively like having an automated developer who can use the terminal. This is a game changer—it closes the loop of verify/fix. An IDE helper might generate code that looks plausible, but if it didn’t actually run it, there could be runtime issues or failing tests.
+Крупное отличие в том, что фоновые агенты могут исполнять код и команды, тогда как традиционные IDE-ассистенты обычно этого не могут (если не считать штук типа Code Interpreter в ChatGPT, но это больше про анализ данных, а не интеграцию с билдом проекта).
 
-With an agent that runs the code, you have a higher chance the output is actually functional. It also offloads the debugging step; if something fails, the agent can try to fix it immediately. The flip side is this requires the agent’s environment to be correct (as discussed earlier), and it opens the door to potential side effects. Imagine an agent running a database migration or modifying data—usually they’re in sandbox mode, so this doesn’t affect production, but be careful.
+Агенты запустят твой тестовый сьют, поднимут дев-сервер, скомпилят приложение, может даже задеплоят. Они работают в песочнице, но это фактически как автоматизированный разраб, умеющий юзать терминал. Это меняет правила игры — замыкается цикл «проверка/фикс». Помощник в IDE может сгенерить код, который выглядит правдоподобно, но если он его не запускал, там могут быть рантайм-ошибки или упавшие тесты.
 
-GitHub Copilot and tools like it live in the editor, which is great for in-the-flow coding. Agents often integrate with project management and DevOps tools, too. For example, you might create a GitHub issue and have an agent pick it up and generate a PR, or trigger an agent run from a CI pipeline for certain tasks (like autofixing lint errors on PRs). In fact, CodeGen advertises its agents’ ability to attach to issue trackers so that when an issue moves to “In Progress,” the AI agent works on it. This kind of integration is beyond what IDE tools do. It hints that AI agents could become part of the CI/CD loop—for instance, automatically attempting to fix build failures or automatically creating follow-up PRs for minor issues. That’s a different mode of collaboration: not just helping a dev write code but acting as a bot user in the team’s toolchain.
+С агентом, который запускает код, шансы на то, что выхлоп рабочий, куда выше. Это также снимает задачу отладки; если что-то падает, агент может попытаться пофиксить это немедленно. Обратная сторона медали — окружение агента должно быть правильным (как обсуждали выше), и открывается дверь для побочных эффектов. Представь, что агент запускает миграцию БД или меняет данные — обычно они в песочнице, так что прод не положат, но будь осторожен.
 
-Using copilot-type assistants often still feels like programming, just faster—you type, they suggest, you accept, you test. Using a background agent feels more like delegation followed by review. The human effort shifts from writing code to writing a good task description and then reviewing the code produced. I call this “generator versus reviewer asymmetry”—generating a solution (or code) from scratch is hard, but reviewing and refining it is easier. Async agents capitalize on this: they handle the bulk generation, leaving you with the (typically faster) job of vetting and tweaking. This can be a productivity boon, but it also means as an engineer you need to sharpen your code review and verification skills.
+GitHub Copilot и подобные живут в редакторе, что круто для состояния потока. Агенты часто интегрируются с таск-трекерами и DevOps-инструментами. Например, ты можешь создать тикет на GitHub, и агент подхватит его и сгенерит PR, или триггернуть запуск агента из CI пайплайна для определенных задач (типа автофикса ошибок линтера в PR). CodeGen, например, рекламирует способность своих агентов цепляться к трекерам задач: когда тикет переходит в «In Progress», ИИ-агент начинает над ним работать. Такой уровень интеграции недоступен IDE-тулзам. Это намекает на то, что ИИ-агенты могут стать частью CI/CD петли — например, автоматически пытаясь починить упавшие билды или создавая фоллоу-ап PR для мелких проблем. Это другой режим сотрудничества: не просто помощь разрабу в написании кода, а действие в роли бота-пользователя в инструментарии команды.
 
-Code review has always been important, but now it’s not just for other human colleagues’ code—it’s for AI-generated code as well, which might have different patterns of mistakes. My mantra is that you should treat agent-produced code as if it were written by a slightly overeager junior developer: assume good intentions and decent competence, but verify everything and don’t hesitate to request changes or reject if it’s not up to standards.
+Использование ассистентов типа Copilot всё ещё ощущается как программирование, просто быстрее — ты пишешь, они предлагают, ты принимаешь, тестируешь. Использование фонового агента ощущается скорее как делегирование с последующим ревью. Усилия человека смещаются от написания кода к написанию хорошего описания задачи и ревью полученного кода. Я называю это «асимметрией генератора и ревьюера» — сгенерировать решение (или код) с нуля сложно, а вот отрецензировать и допилить его — проще. Асинхронные агенты играют на этом: они берут на себя основную массу генерации, оставляя тебе (обычно более быструю) работу по проверке и тюнингу. Это может дико бустануть продуктивность, но также означает, что как инженер ты должен прокачивать свои скиллы код-ревью и верификации.
 
-In practice, I find that I use copilot-style tools and background agents together. For instance, I might use Copilot or Cursor’s inline suggestions while I’m actively coding a complex piece of logic, because I want tight control over that logic. Meanwhile, I might delegate a peripheral but time-consuming task (like updating all our API client libraries for new endpoints) to a background agent to handle in parallel. They fill different niches. One doesn’t necessarily replace the other. In fact, I foresee IDEs offering a unified experience: a palette of options from “Complete this line” to “Generate a function” to “Hey, AI, please implement this entire ticket for me.” You’d choose the tool depending on the scope.
+Код-ревью всегда было важным, но теперь это не только для кода коллег-людей — это и для ИИ-кода, у которого могут быть свои паттерны ошибок. Моя мантра: относись к коду от агента так, будто его написал слегка перевозбужденный джун: исходи из добрых намерений и сносной компетентности, но проверяй всё досконально и не стесняйся требовать правок или реджектить, если не соответствует стандартам.
 
-## Combining Multiple AI Models to Maximize Strengths
-So far, I’ve often referred to “the AI” as if it’s one monolithic assistant. In reality, there are many AI models, each with different strengths. Some are great at natural language understanding, others excel at generating code, and some might be specialized in certain domains (like a math problem solver or a UI generator). An advanced practitioner of vibe coding can orchestrate multiple AIs together, using each for what it’s best at. This is like having a team of specialists rather than a single generalist.
+На практике я использую и копайлоты, и фоновых агентов вместе. Например, я могу юзать инлайн-подсказки Copilot или Cursor, пока активно пилю сложный кусок логики, потому что я хочу жестко контролировать эту логику. В то же время, я могу делегировать периферийную, но времязатратную задачу (типа обновления всех клиентских библиотек API под новые эндпоинты) фоновому агенту, чтобы он шуршал параллельно. Они закрывают разные ниши. Один не обязательно заменяет другого. Более того, я предвижу, что IDE будут предлагать унифицированный опыт: палитра опций от «Дополни эту строку» до «Сгенерируй функцию» и вплоть до «Эй, ИИ, запили мне этот тикет целиком». Ты будешь выбирать инструмент в зависимости от масштаба задачи.
+## Миксуем нейронки: как собрать команду мечты
 
-Consider a future workflow where you have:
+До сих пор я говорил про "ИИ" как про одного монолитного истукана. Но в реальности это целый зоопарк моделей, и у каждой свои фишки. Кто-то шарит за понимание текста, кто-то кодит как боженька, а кто-то — узкоспециализированный задрот (решатель матана или генератор UI). Продвинутый вайб-кодер умеет дирижировать этим оркестром, используя каждую модель там, где она тащит лучше всего. Это как иметь команду узких спецов вместо одного "мастера на все руки", который умеет всё, но хреново.
 
-## A CodeGen AI highly trained on programming that can produce code and fix code efficiently
+Представь себе воркфлоу будущего, где у тебя в обойме:
 
-A TestGen AI, specialized in generating test cases and finding edge cases
+*   **CodeGen AI** — машина, натасканная на программирование, которая пишет и фибачит код промышленных масштабов.
+*   **TestGen AI** — душнила, специализирующийся на тестах и поиске граничных случаев (edge cases).
+*   **Doc AI** — гуманитарий, который пишет внятную документацию и объяснения.
+*   **Design AI** — эстет, генерирующий UI-макеты и графику.
+*   **Optimization AI** — зацикленный на перформансе гик, который, возможно, даже шарит в низкоуровневых деталях.
 
-## A Doc AI that writes clear documentation and explanations
+Ты можешь прогонять свою задачу через эту трубу. Например: просишь **CodeGen AI** написать реализацию. Тут же скармливаешь выхлоп **TestGen AI**, чтобы тот накидал тестов (или разнес код в пух и прах). Потом кидаешь код и тесты в **Doc AI**, чтобы получить мануал. Если дело касается интерфейса, сначала **Design AI** накидывает структуру, а **CodeGen AI** её верстает. Выстраивая их в цепочку, ты юзаешь доменную экспертизу каждой модели. Это тот же конвейер разработки, только вместо потных людей на разных ролях у тебя разные ИИ.
 
-## A Design AI that’s skilled at generating UI layouts or graphics
+Даже комбинирование похожих моделей повышает надежность. Если у тебя есть два генератора кода от разных вендоров или с разной архитектурой, заставь их обоих решить задачу, а потом сравни результаты. Если выхлоп одной модели проходит тесты, а другой — нет, берешь рабочий. Если оба работают, но по-разному — выбираешь тот, что не выглядит как бред сумасшедшего. Если одна модель облажалась, покажи ей код успешной коллеги — пусть учится. Такой "кросс-токинг" снижает количество багов, потому что вероятность того, что две разные модели совершат одну и ту же тупую ошибку, крайне мала. Это как второе мнение у врача. Уже есть исследования и тулзы, где один ИИ проверяет логику другого — один генерит, другой судит.
 
-## An Optimization AI focused on performance tuning and perhaps even aware of low-level details
+## Разделяй модели по типу задач
 
-You can pipe your task through several of these AIs. For example, you ask CodeGen AI to write an implementation. Immediately, you feed that output to TestGen AI to generate tests for it (or to critique it). Then feed both code and tests to Doc AI to produce documentation or a usage guide. If the code involves user interface, maybe Design AI is used earlier to propose the layout structure that CodeGen AI then implements. By chaining them, you leverage each model’s domain expertise. This is analogous to a software pipeline or assembly line, but instead of different human roles, it’s different AI roles.
+Каждой задаче — свой инструмент. Большие языковые модели (LLM) — крутые универсалы, но иногда мелкие, специализированные тулзы справляются лучше. Например, для арифметики или жестких алгоритмов детерминированный инструмент (или сильно ограниченный ИИ) будет надежнее. Некоторые продвинутые сетапы используют символьные решатели или старый добрый AI на правилах для конкретных подзадач, а LLM оставляют для остального.
 
-Even among similar models, combining them can improve reliability. If you have two code-generation models from different providers or of different architectures, you can have them both attempt the solution and then compare or test both outputs. If one model’s output passes all tests and the other doesn’t, you pick the passing one. If both pass but have different approaches, you might manually choose the more readable one. If one fails, you can even show the failing one the successful code as a hint to learn from. This kind of AI cross-talk can reduce errors since it’s less likely that two different models will make the exact same mistake. It’s like getting a second opinion. You can already find research and tools that use one AI to check another’s reasoning⁠—for instance, one generates an answer and another judges it.
+Как продвинутый вайб-кодер, ты должен держать под рукой тулбокс: нужен regex — зовешь генератор регексов; нужен коммит-месседж — берешь модель, файн-тюненную на саммаризации. Прелесть в том, что всё это можно связать простыми скриптами. Например, у тебя может быть локальный скрипт `ai_regex_generator`, который внутри дергает ИИ, но с пре- и постпроцессингом, чтобы убедиться, что на выходе валидный регекс, и, может быть, даже прогоняет его на примерах.
 
-## Differentiate Models by Task Type
-Use the right tool for the job. Large language models (LLMs) are good generalists, but sometimes smaller, specialized models or tools do better. For example, for arithmetic or certain algorithms, a deterministic tool (or an AI that’s more constrained) might be better. Some advanced dev setups use symbolic solvers or older rule-based AI for specific subtasks and LLMs for others. As an advanced vibe coder, you might maintain a toolbox: when you need regex, you call a regex-specific generator; when you need a commit message, maybe a model fine-tuned for summarization is used. The beauty is these can be integrated via simple scripts or prompt wrappers. For instance, you could have a local script like ai_regex_generator that internally prompts an AI but with some pre- and postprocessing to ensure the output is a valid regex, and maybe tests it on provided examples.
+## Используй систему оркестрации
 
-## Use an Orchestration System
-If you find yourself frequently combining models, you might use or build an orchestration system, an emerging category of frameworks often referred to as AI orchestration or agents. These systems allow you to define a flow; for example:
+Если ты постоянно жонглируешь моделями, тебе понадобится система оркестрации. Сейчас этот класс фреймворков модно называть AI-оркестраторами или агентами. Они позволяют задать флоу, типа:
 
-Step 1: Use Model A to interpret user request.
+**Шаг 1:** Используй Модель А, чтобы понять, чё надо юзеру.
 
-Step 2: If request is about data analysis, use Model B to generate SQL; if about text, use Model C…
+**Шаг 2:** Если запрос про анализ данных — зови Модель B генерить SQL; если про текст — зови Модель C...
 
-Step 3: Feed the result to Model D to explain it.
+**Шаг 3:** Скорми результат Модели D, чтобы она объяснила, что произошло.
 
-This is more relevant if you’re building an app or service powered by multiple AI steps. But even in personal dev, you can script a multistep approach. For example, one custom CLI tool, ai_dev_assist, takes a prompt and behind the scenes uses an AI to classify the prompt into categories like code, design, test, and optimize. Based on the category, it forwards the prompt to the appropriate specialist AI. When it receives the result, it can optionally pipe the result into another AI for review or improvement.
+Это особенно актуально, если ты пилишь приложение или сервис на базе ИИ. Но даже для личной разработки можно заскриптовать многоступенчатый подход. Например, кастомная CLI-тулза `ai_dev_assist` принимает промпт, под капотом классифицирует его (код, дизайн, тест, оптимизация) и форвардит нужному ИИ-спецу. Получив результат, она может опционально кинуть его другому ИИ на ревью.
 
-This kind of meta-AI coordinating other AIs sounds complex, but an advanced user can set it up with current technology. It will likely get easier as we begin to see dedicated support in IDEs or cloud platforms.
+Такой мета-ИИ, рулящий другими ИИ, звучит сложно, но продвинутый юзер может настроить это уже сейчас. Скоро это станет еще проще благодаря поддержке в IDE и облаках.
 
-## Human-AI Hybrid Teams
-While on the subject of multiple intelligences, let’s not forget human collaborators. An advanced vibe coder also knows when to involve fellow human developers in the loop. For example, you might use AI to generate two or three different design prototypes for a feature, then bring those to your team’s UX designer for feedback. Which one aligns with our brand? Which feels intuitive? If an AI writes a complex piece of code, you might do a code review session with a colleague focusing on that piece, acknowledging that “an AI helped write this, so I want another pair of human eyes on it too.” In a sense, the “multiple model” approach can include humans as just highly advanced models—each entity (human or AI) has unique strengths. The future of development might often be human + AI pair programming or even team programming where some “team members” are AI.
+## Гибридные команды: Люди + Железо
 
-Imagine building a small web application through vibe coding. Your workflow might look like this:
+Раз уж мы заговорили про множественный интеллект, давай не забывать про кожаных мешков. Продвинутый вайб-кодер знает, когда нужно подключить живых коллег. Например, ИИ нагенерил три варианта дизайна фичи — неси их своему UX-дизайнеру. Какой из них вписывается в бренд? Какой интуитивнее?
 
-You use a UI Layout AI to generate the HTML/CSS for your page given a description (specialized in frontend).
+Если ИИ написал сложный кусок кода, устрой сессию код-ревью с коллегой, честно признав: "Братан, это писал робот, глянь своим глазом, чтоб мы не положили прод". В каком-то смысле подход "нескольких моделей" включает в себя людей как очень продвинутые "модели" — у каждого (человека или ИИ) свои сильные стороны. Будущее разработки — это парное программирование "Человек + ИИ" или даже командная работа, где часть "сотрудников" — нейронки.
 
-You use a Content AI to generate some placeholder text or images needed (like marketing text, maybe using a model geared for copywriting).
+Представь, что ты пилишь небольшое веб-приложение через вайб-кодинг. Твой воркфлоу может выглядеть так:
 
-You then use your main Code AI to generate the interactive functionality in JavaScript, feeding it the HTML so it knows which element IDs to hook into.
+1.  Юзаешь **UI Layout AI** (спец по фронту), чтобы получить HTML/CSS по описанию.
+2.  Юзаешь **Content AI** (копирайтер), чтобы нагенерить "рыбу" или нормальные тексты/картинки.
+3.  Запрягаешь основной **Code AI** писать интерактив на JS, скармливая ему HTML, чтобы он знал ID элементов.
+4.  Просишь **Testing AI** написать тесты на Selenium или Playwright для интерфейса.
+5.  Наконец, натравливаешь **Security AI** искать дыры (это может быть модель или статический анализатор с ИИ-мозгами).
 
-You then ask a Testing AI to generate Selenium or Playwright tests for the interface interactions.
+Этот мультимодельный подход закрывает фронт, бэк, контент, тесты и безопасность в одном процессе. Каждый ИИ сделал свой кусок, а ты, как дирижер, проследил, чтобы всё срослось.
 
-Finally, you use a Security AI to scan the code for common vulnerabilities. This could be a model or simply a static-analysis tool augmented with AI.
+Пока что приходится копипастить выхлоп из одного окна в другое или писать скрипты-клей, но завтрашние IDE позволят настраивать такие пайплайны бесшовно. Главный урок: не зацикливайся на одной модели, если есть доступ к нескольким. Используй лучший инструмент для каждой задачи. Это дает лучший результат и убирает единую точку отказа — если одна модель где-то тупит, другая прикроет.
 
-This multimodel approach covers frontend, backend (if there is one), content, testing, and security in one integrated process. Each AI handled its portion and you, as the orchestrator, ensured they all align.
+Комбинирование моделей — это продвинутый скилл, но это логичное продолжение специализации (вспомни микросервисы). Здесь каждый ИИ-сервис делает одну вещь хорошо. Твоя роль расширяется от "промптера" до "ИИ-дирижера". Требует чуть больше настройки и мозгов, но на выходе — симфония ИИ-коллабораторов и качественный продукт.
 
-While today you might have to manually copy outputs from one tool to another or use some glue scripts, tomorrow’s IDEs might let you configure this pipeline so it feels seamless. The key takeaway is: don’t rely on just one AI model if you have access to several. Use the best one for each job and make them work together. It leads to better outcomes and also reduces single-point failure—if one model isn’t good at something, another might cover that weakness.
+Теперь, когда ты знаешь теорию, давай познакомимся с главными игроками и посмотрим, чего они стоят.
 
-Combining AI models is an advanced move, but it’s a logical extension of specialization, a principle well known in software engineering (think microservices, each service doing one thing well). Here, each AI service does one thing well. As a vibe coder, your role expands to AI conductor, not just AI prompter. It requires a bit more setup and thought, but the payoff is a symphony of AI collaborators each contributing to a high-quality end product.
+## Главные игроки на рынке автономных кодинг-агентов
 
-Now that you know how they work, let’s meet some of the leading examples and see how they stack up.
+Пишу я это в 2025-м, и ландшафт автономных агентов за последний год изменился до неузнаваемости. Появились четкие подходы на разных платформах. Эти инструменты — это сдвиг от пассивного "допиши строчку" к активным партнерам, которые могут самостоятельно тащить сложные задачи.
 
-## Major Players in Autonomous Coding Agents
-As I write this in 2025, the autonomous coding agent landscape has rapidly evolved over the past year, with distinct approaches emerging across different platforms. These tools represent a shift from passively completing code to acting as active development partners that can execute complex tasks independently.
+### Облачные CLI-агенты: OpenAI Codex
 
-## Cloud-based command-line agents: OpenAI Codex
-OpenAI’s Codex exemplifies the cloud-based agent approach, operating through ChatGPT’s interface or an open source CLI. It spins up isolated sandboxes to execute coding tasks in parallel, handling everything from React upgrades to unit test creation. What distinguishes Codex is its reinforcement-learning training on real coding tasks, enabling it to follow best practices, like running tests iteratively until they pass. While results can vary between runs, Codex typically converges on working solutions for well-bounded tasks. Its strength lies in actual code execution within CI-like environments, representing the first wave of agents that truly “pair” with development pipelines.
+OpenAI Codex — пример облачного подхода, работающего через интерфейс ChatGPT или опенсорсный CLI. Он поднимает изолированные песочницы для выполнения задач параллельно, справляясь со всем: от обновления React до написания юнит-тестов. Фишка Codex — обучение с подкреплением (RL) на реальных задачах. Он умеет следовать бест-практис, например, гонять тесты итеративно, пока они не позеленеют. Хотя результаты могут плавать от запуска к запуску, Codex обычно находит рабочее решение для четко очерченных задач. Его сила — в реальном исполнении кода в среде, похожей на CI. Это первая волна агентов, которые реально встраиваются в пайплайны.
 
-## Workflow-integrated agents: Google Jules
-Google Jules takes a different approach by deeply integrating with GitHub workflows. Running on Google Cloud VMs with full repository clones, Jules emphasizes visible, structured planning—presenting its reasoning and allowing plan modifications before execution. This “plan, then execute” philosophy, combined with real-time feedback capabilities, positions Jules as a supervised assistant rather than a black-box automation. Its GitHub-native design means it operates directly where teams work, creating branches and PRs without context switching. The agent even experiments with novel features like audio changelogs, pointing toward more accessible code review processes.
+### Агенты, встроенные в воркфлоу: Google Jules
 
-## IDE-integrated agents: Cursor
-Cursor’s background agents represent the IDE-centric approach, launched directly from the editor but executing on remote machines. This hybrid model lets developers orchestrate multiple AI workers from their command center while maintaining local control. Cursor provisions Ubuntu instances with customizable environments (via environment.json or Dockerfiles), giving agents full internet access and package installation capabilities. The key innovation is seamless IDE integration: developers can monitor agent progress, intervene when needed, and immediately access changes locally when complete. This approach blurs the line between local AI assistance and cloud execution power.
+Google Jules заходит с другой стороны, глубоко интегрируясь в GitHub-процессы. Он крутится на виртуалках Google Cloud с полными клонами репозиториев. Jules делает ставку на прозрачное планирование: он показывает ход своих мыслей и дает поправить план *до* исполнения. Философия "сначала план, потом код" плюс риал-тайм фидбек делают его скорее поднадзорным ассистентом, чем черным ящиком. Благодаря нативности для GitHub, он работает прямо там, где команда: создает ветки и PR, не заставляя переключать контекст. Агент даже экспериментирует с аудио-чейнджлогами (да, он может рассказать, что накодил), что намекает на более доступные процессы код-ревью.
 
-## Team-integrated agents: Devin
-Devin positions itself as an “AI teammate” rather than just a tool, integrating with Slack, GitHub, and issue trackers like Jira. Built by Cognition Labs, it uses custom AI models tuned for long-term reasoning and multistep execution. Devin excels at parallel execution of small maintenance tasks like bugfixes, test additions, and linter cleanups that often get deprioritized. Its collaborative design includes status updates, clarification requests, and even automatic preview deployments. While it handles straightforward tasks well, complex issues can still require significant human intervention, highlighting the current boundaries of autonomous coding.
+### Агенты, встроенные в IDE: Cursor
 
-The field is expanding rapidly, with both established players and startups racing to define the category. Microsoft has hinted at “Copilot++,” moving beyond inline suggestions to agent capabilities. Enterprises are being courted by startups like CodeGen (which uses Anthropic’s Claude) promising “SWEs that never sleep.” Meanwhile, open source projects and academic research continue pushing boundaries, exploring how to make code generation more reliable and contextual.
+Фоновые агенты Cursor — это подход "от IDE". Запускаются из редактора, но пашут на удаленных машинах. Эта гибридная модель позволяет дирижировать кучей ИИ-воркеров из своего командного центра, сохраняя локальный контроль. Cursor поднимает Ubuntu-инстансы с настраиваемым окружением (через `environment.json` или Dockerfile), давая агентам полный доступ в инет и возможность ставить пакеты. Главная инновация — бесшовная интеграция: ты мониторишь прогресс, вмешиваешься если надо, и сразу видишь изменения у себя локально. Граница между "помощником на компе" и "мощью облака" стирается.
 
-This proliferation suggests that we’re witnessing the birth of a new development paradigm where individual developers orchestrate multiple AI agents, each specialized for different aspects of the software lifecycle. The key differentiators emerging are:
+### Командные агенты: Devin
 
-## Execution environment (local versus cloud)
+Devin позиционирует себя как "ИИ-тиммейт", а не просто тулза. Он интегрируется в Slack, GitHub и Jira. Созданный Cognition Labs, он юзает кастомные модели, заточенные под долгосрочное планирование и многоходовки. Devin хорош в параллельном выполнении мелкой текучки: багфиксы, добавление тестов, чистка линтером — всё то, на что обычно забивают. Он ведет себя как коллега: кидает апдейты, задает уточняющие вопросы и даже делает превью-деплои. С простыми задачами справляется на ура, но на сложных всё еще требует няньку-человека, что показывает текущий потолок автономности.
 
-## Integration depth (IDE versus workflow tools)
+Поле расширяется бешено. И гиганты, и стартапы бегут наперегонки. Microsoft намекает на "Copilot++", выходящий за рамки подсказок. Энтерпрайз окучивают стартапы типа CodeGen (на базе Claude), обещающие "разрабов, которые никогда не спят". А опенсорс и наука пушат границы надежности и контекста.
 
-## Autonomy level (supervised versus independent)
+Мы наблюдаем рождение новой парадигмы, где один разраб рулит толпой агентов. Ключевые различия сейчас:
+*   **Среда исполнения:** Локал vs Облако.
+*   **Глубина интеграции:** IDE vs Воркфлоу-тулзы.
+*   **Уровень автономии:** Под присмотром vs Самостоятельный.
+*   **Юзкейсы:** Поддержка штанов (maintenance) vs Пилилово фич.
 
-## Target use cases (maintenance versus feature development)
+## Грабли и ограничения
 
-## Challenges and Limitations
-While autonomous coding agents inherit the foundational challenges of AI-assisted development, as discussed throughout this book—particularly the 70% problem, explored in Chapter 3—their autonomous nature introduces distinct complications that warrant separate examination:
+Автономные агенты наследуют все болячки ИИ-разработки (особенно "проблему 70%", о которой мы говорили в 3-й главе), но их самостоятельность добавляет уникальных проблем.
 
-## The compounding effect of sequential decisions
-Unlike interactive AI assistance where humans intervene at each step, autonomous agents make chains of decisions that can compound errors in unique ways. When an agent misinterprets the initial requirements, it doesn’t just generate one flawed function: it builds an entire implementation architecture on that misunderstanding. Each subsequent decision reinforces the original error, creating what I call “coherent incorrectness”: code that’s internally consistent but fundamentally misaligned with actual needs.
+### Эффект снежного кома (последовательные решения)
 
-This sequential decision making particularly challenges agents that tackle multifile changes. An agent implementing a new feature might correctly modify the backend API but then propagate incorrect assumptions through the frontend, database schema, and test suites. By the time you review the complete pull request, untangling these interconnected mistakes tends to require more effort than the interactive, incremental corrections that are possible with traditional AI assistance.
+В отличие от интерактивного режима, где ты бьешь ИИ по рукам на каждом шаге, автономные агенты принимают цепочки решений. Ошибка в начале растет как снежный ком. Если агент неправильно понял требования, он не просто напишет одну кривую функцию — он выстроит целую архитектуру на фундаменте из заблуждений. Каждое следующее решение цементирует ошибку. Я называю это "когерентная неправильность": код внутри логичен и последователен, но фундаментально не соответствует задаче.
 
-## Environmental brittleness at scale
-While Chapter 8 discusses general environment configuration challenges, autonomous agents face unique complications from their sandbox execution model. Each agent run requires spinning up an isolated environment that precisely mirrors your development setup—a challenge that scales poorly. When you’re running multiple agents concurrently, even slight variations in the environment can lead to dramatically different outcomes.
+Особенно больно, когда агент правит сразу кучу файлов. Он может верно поправить бэкенд API, но потом растащить неверные предположения по фронту, базе и тестам. К моменту ревью распутывать этот клубок "взаимосвязанных косяков" сложнее, чем писать с нуля.
 
-Consider a scenario where five agents work on different features simultaneously. Agent A might have a slightly older Node version in its container, Agent B might lack a specific system library, and Agent C might have different time zone settings. These variations, invisible during execution, surface as subtle bugs that only appear when you begin integrating their work. This “environmental drift” between agent sandboxes represents a new class of integration challenge that is absent from single-developer workflows.
+### Хрупкость среды на масштабе
 
-## The async coordination paradox
-Autonomous agents promise parallel development, but this introduces coordination challenges that are quite distinct from human team dynamics. When multiple agents modify overlapping code sections, they lack the implicit communication channels humans use—there’s no quick Slack message asking, “Are you touching the auth module?” or informal awareness of what colleagues are working on.
+В главе 8 мы говорили про настройку окружения, но у агентов тут свой ад. Каждый запуск агента требует поднятия изолированной песочницы, которая должна зеркально отражать твой дев-сетап. Это плохо масштабируется. Когда у тебя параллельно пашут пять агентов, малейшие отклонения в среде ведут к разным результатам.
 
-This creates what I term the async coordination paradox: the more agents you run in parallel to increase productivity, the more complex integrating them becomes. Unlike human developers, who naturally coordinate through standups and informal communication, agents operate in isolation. You might discover that Agent A has refactored a utility function, while Agent B was busy adding new calls to the old version, creating conflicts that wouldn’t occur if agents had human developers’ natural awareness of each other’s work.
+Представь: Агент А получил контейнер со старой Нодой, у Агента Б нет системной либы, у Агента В другой часовой пояс. Эти мелочи не видны при запуске, но вылезают как мерзкие баги при интеграции. Этот "дрейф окружения" (environmental drift) между песочницами — новый вид геморроя, которого нет, когда ты кодишь один.
 
-## The review bottleneck—amplified
-While code review remains essential for all AI-generated code (as discussed in previous chapters), autonomous agents amplify this challenge through sheer volume and timing. Unlike interactive AI assistance, where code arrives incrementally as you work, agent-generated PRs appear as complete implementations—often as multiple PRs arriving simultaneously after overnight runs.
+### Парадокс асинхронной координации
 
-This creates a kind of cognitive overload that’s distinct from the kind you get when reviewing human PRs. With human contributions, you can often rely on commit messages and PR descriptions to reflect a coder’s actual thought processes. Agent PRs, however, require you to reverse-engineer the agent’s “reasoning” from the code itself. When five agents each deliver PRs of 500 lines or more on Monday morning, the review burden shifts from being a collaborative quality check to something more like an archaeological expedition.
+Агенты обещают параллельную разработку, но координации у них — ноль. Люди могут крикнуть в Слак: "Кто трогает модуль авторизации?", а агенты работают в вакууме.
 
-## Delegating to agents requires trust
-Perhaps most significantly, autonomous agents challenge our trust models in ways interactive AI tools don’t. When you delegate a task to an agent and walk away, you’re making an implicit bet about acceptable risk. This differs fundamentally from supervised AI assistance, where you maintain moment-by-moment control.
+Это "парадокс асинхронной координации": чем больше агентов ты запускаешь для продуктивности, тем сложнее сводить их работу. Агент А рефакторит утилиту, а Агент Б в это время старательно дописывает вызовы к старой версии этой утилиты. Конфликты на ровном месте, которых бы не было у живой команды.
 
-Consider agentic technologies’ security implications. Autonomous agents with repository write access and execution capabilities present unique attack surfaces. A compromised or misdirected agent doesn’t just suggest bad code—it actively commits it and potentially even deploys it. Our sandboxing and access controls for agents must be correspondingly more sophisticated than for suggestion-based tools (covered in Chapter 8).
+### Бутылочное горлышко ревью (теперь х10)
 
-## Emerging organizational challenges
-As teams scale up their agent usage, new organizational patterns are emerging that don’t exist with traditional AI assistance. Who “owns” agent-generated code when the requesting developer is out sick? How do you track agent resource usage across teams? What happens when an agent’s monthlong refactoring project conflicts with urgent feature development?
+Ревью кода от ИИ обязательно (см. предыдущие главы), но агенты превращают это в лавину. В интерактивном режиме код появляется по чуть-чуть. Агенты же вываливают готовые PR — часто пачкой, утром в понедельник, после ночных прогонов.
 
-These aren’t technical limitations but organizational challenges, and they’re unique to autonomous systems. They require new roles (agent coordinators?), new processes (agent impact assessments?), and new tools (agent fleet management?) that extend beyond the individual developer considerations this book has addressed in earlier chapters.
+Это вызывает когнитивную перегрузку. У людей есть коммиты и описания, отражающие ход мысли. У агентов тебе приходится реверс-инжинирить их "логику" по самому коду. Когда пять агентов приносят по 500 строк кода каждый, ревью превращается из проверки качества в археологическую экспедицию.
 
-The autonomous nature of these agents—their ability to work independently, make sequential decisions, and operate at scale—transforms them from productivity tools into something approaching team members. This shift demands not just the technical practices discussed throughout this book but entirely new frameworks for coordination, trust, and integration that we’re only beginning to understand.
+### Доверие к агентам — это ставка
 
-## Best Practices for Using AI Coding Agents Effectively
-While many general AI development practices apply to autonomous coding agents, certain aspects of agent-based development require specific consideration. Based on collective experience with tools like Codex, Jules, Devin, and Cursor’s background agents, these practices address the unique challenges of delegating entire development tasks to AI systems operating independently.
+Делегирование задачи агенту требует другого уровня доверия. Ты делаешь ставку на приемлемый риск. Это не то же самое, что супервайзинг ИИ в реальном времени.
 
-## Strategically Select the Tasks Autonomous Agents Are Going to Implement
-The fundamental difference between AI assistants and autonomous agents lies in their scope and independence. Agents excel at well-defined, encapsulated tasks with clear success criteria—particularly those involving parallel execution of many small tasks. Ideal agent assignments include comprehensive test coverage improvements, systematic dependency updates, bulk refactoring operations, and standardized feature implementations across multiple components.
+Подумай о безопасности. Автономный агент с правами на запись в репозиторий — это вектор атаки. Взломанный или глючный агент не просто *предложит* плохой код — он его закоммитит и, возможно, задеплоит. Наши песочницы и контроль доступа для агентов должны быть куда серьезнее, чем для тулз-подсказчиков.
 
-Consider the difference between asking an AI assistant to help write a single test versus tasking an agent to achieve 80% test coverage across an entire module. The agent can methodically work through each untested function, generate appropriate test cases, run them to verify correctness, and iterate until the coverage target is met. This type of systematic, measurable work is the sweet spot for autonomous agents.
+### Новые организационные челленджи
 
-Conversely, tasks that require making significant architectural decisions, interpreting complex stakeholder requirements, or designing novel algorithms remain better suited to human-led development with AI assistance. The key lies in recognizing which aspects of a larger task can be effectively delegated to agents and which require human judgment and creativity.
+Кто "владеет" кодом агента, если заказчик заболел? Как трекать потребление ресурсов агентами? Что делать, если агент затеял рефакторинг на месяц и заблокировал работу команды?
 
-## Leverage Agent-Specific Planning and Oversight Features
-Modern autonomous agents  distinguish themselves through sophisticated planning and execution transparency features that demand active engagement. When Jules presents its execution plan before beginning work or when Cursor displays real-time logs of agent activity, these represent critical intervention points that are unique to agent-based development.
+Это уже не технические баги, а проблемы менеджмента. Нужны новые роли (координатор агентов?), процессы (оценка импакта агента?) и тулзы (управление флотом агентов?). Об этом в книгах по аджайлу еще не пишут.
 
-The planning phase serves as your primary quality gate. Review proposed plans not just for correctness but for efficiency and alignment with your codebase conventions. If Jules plans to update a Next.js application but omits critical webpack configuration changes, catching this during planning prevents extensive rework later on. This proactive review differs fundamentally from reactive code review and represents a new skill in the developer toolkit.
+Автономная природа агентов превращает их из "инструментов" в подобие "членов команды". Это требует совершенно новых фреймворков координации и доверия, которые мы только начинаем нащупывать.
 
-Runtime monitoring provides another layer of agent-specific oversight. While you need not watch every operation, periodic checks can prevent agents from pursuing inefficient solutions or making unnecessarily broad changes. Cursor’s ability to “enter” the agent’s environment midtask exemplifies how modern tools support intervention without completely abandoning the autonomous workflow. To maximize efficiency, you’ll need to learn when to intervene and when to let the agent self-correct.
+## Бест-практис: Как юзать агентов и не сойти с ума
 
-## Manage Concurrent Agent Operations
-Unlike traditional development, where a single developer works on one task at a time, agents enable true parallel development. This capability requires new coordination strategies. When running multiple agents simultaneously—perhaps one updating dependencies while another adds logging infrastructure—you must consider the potential conflicts and dependencies between their work.
+Многие практики работы с ИИ применимы и здесь, но автономность требует особого подхода. Опыт работы с Codex, Jules, Devin и Cursor подсказывает следующее:
 
-Establish clear boundaries for each agent’s scope to minimize merge conflicts. Assign agents to different modules or layers of the application when possible. Consider the order of integration: an agent that is adding new features might need to wait for another agent’s infrastructure improvements to complete. This orchestration resembles managing a distributed team more than it does traditional solo development.
+### Стратегически выбирай задачи для агентов
 
-## Evolve Your Team Practices to Integrate Agents
-The introduction of autonomous agents fundamentally alters team dynamics and review processes. Unlike reviewing a colleague’s carefully crafted PR, agent-generated PRs may contain technically correct but stylistically inconsistent code. Teams must develop new review practices that account for this difference.
+Главное отличие помощника от агента — скоуп и независимость. Агенты тащат в четко очерченных, инкапсулированных задачах с понятными критериями успеха — особенно там, где нужно много мелкой параллельной работы. Идеально: улучшение покрытия тестами, обновление зависимостей, массовый рефакторинг, стандартизированные фичи в разных компонентах.
 
-Consider establishing agent-specific review checklists that emphasize not just correctness but also alignment with team conventions and architectural patterns. Document common quirks you spot as you work with the agent: perhaps your chosen agent consistently uses certain antipatterns or misses specific optimization opportunities. This institutional knowledge helps reviewers quickly identify and address recurring issues.
+Почувствуй разницу: попросить ассистента "помоги написать тест" vs поручить агенту "добей покрытие тестами в этом модуле до 80%". Агент будет методично перебирать функции, генерить кейсы, гонять их и фиксить, пока не увидит заветные цифры. Такая систематическая, измеримая работа — это золотая жила для агентов.
 
-## Build Feedback Loops with Autonomous Systems
-Perhaps most importantly, autonomous agents enable a new form of iterative development in which the feedback loop extends beyond mere code review. When an agent’s pull request needs refinement, you can often send it back and ask for another iteration with specific guidance. This differs from traditional development, where sending work back to a human colleague carries social and time costs.
+А вот задачи, требующие серьезных архитектурных решений, интерпретации мутных хотелок заказчика или изобретения новых алгоритмов, лучше оставить людям (с помощью ИИ, конечно). Ключ в том, чтобы понять: что можно сгрузить на робота, а где нужны человеческие мозги и креатив.
+## Используй фичи планирования и надзора (не пускай всё на самотёк)
+Современные автономные агенты отличаются от тупых скриптов продвинутыми фичами планирования и прозрачностью исполнения. И это требует твоего участия, бро. Когда Jules выкатывает план действий перед тем, как начать кодить, или Cursor выводит логи активности агента в реал-тайме — это твои критические точки вмешательства. Это уникальная фишка разработки с агентами.
 
-Work to develop prompting patterns that work well with your chosen agents. When you find successful prompt formulations that consistently yield high-quality results, document them. Create templates for common task types that include all necessary context and constraints. This is a kind of prompt engineering specifically for agents that considers their planning, execution, and revision cycles, and it represents a distinct skill from general AI interaction.
+Этап планирования — это твой главный **quality gate**. Чекай предложенные планы не только на предмет того, сработает ли эта хрень, но и на эффективность и соответствие конвенциям твоей кодовой базы. Если Jules собирается обновить приложение на Next.js, но забил болт на критические изменения в конфиге webpack, то, поймав его за руку на этапе планирования, ты сэкономишь кучу времени на переделках. Этот проактивный подход фундаментально отличается от реактивного код-ревью (когда уже всё написано и воняет), и это новый скилл в твоем арсенале.
 
-The goal remains unchanged: delivering high-quality software efficiently. Autonomous agents simply provide a new tool for achieving this goal, one you should integrate into your existing practices thoughtfully rather than replacing established methods wholesale. By understanding these agents and leveraging their unique capabilities while maintaining rigorous quality standards, teams can realize significant productivity gains without sacrificing code quality or architectural integrity.
+Рантайм-мониторинг дает еще один слой надзора. Тебе не нужно пялиться на каждую операцию, как параноик, но периодические проверки не дадут агентам уйти в дебри неэффективных решений или начать переписывать полпроекта без причины. Фишка Cursor, позволяющая «влететь» в среду агента посреди задачи, — отличный пример того, как современные тулзы позволяют вмешиваться, не убивая весь автономный процесс. Чтобы выжать максимум КПД, тебе придется научиться чувствовать момент: когда дать агенту подзатыльник, а когда позволить ему исправиться самому.
 
-## Summary and Next Steps
-To wrap up, I’ll echo a sentiment from Chapter 4: AI won’t replace developers, but developers who can use AI effectively may well replace those who can’t. The advent of autonomous coding agents is a leap in that direction—those who learn to harness these “headless colleagues” will be able to do more in less time. It’s an exciting time to be a software engineer, as long as we adapt and continue to hold our work to high standards. The tools may be changing, but the goals remain: build reliable, efficient, and innovative software. With AI agents at our side (or in the background), we have new ways to reach those goals—and perhaps get a good night’s sleep while the bots burn the midnight oil.
+## Разруливай параллельную работу агентов
+В отличие от старой школы, где один разраб ковыряет одну таску, агенты позволяют херачить по-настоящему параллельно. И тут нужны новые стратегии координации. Когда ты запускаешь несколько агентов одновременно — скажем, один обновляет зависимости, а другой прикручивает инфраструктуру для логов, — ты должен понимать, где они могут пересечься и устроить кровавую баню в зависимостях.
 
-Next, the final chapter of this book takes a broader look at the future of AI in coding, including the future of agentic AI.
+Очерти четкие границы для каждого агента, чтобы минимизировать конфликты слияния (merge conflicts). Если можно, раскидай их по разным модулям или слоям приложения. Подумай о порядке интеграции: агенту, который пилит новые фичи, возможно, стоит подождать, пока другой закончит ковырять инфраструктуру. Эта оркестрация больше напоминает управление распределенной командой, чем традиционную соло-разработку.
 
+## Адаптируй командные процессы под железяк
+Появление автономных агентов меняет динамику команды и процессы ревью так же сильно, как переход с SVN на Git. В отличие от ревью PR, который с любовью вылизывал твой коллега, PR от агента может содержать технически верный, но стилистически убогий код. Командам нужно выработать новые практики, учитывающие эту разницу.
 
+Подумайте о создании чеклистов специально для ревью агентов. Акцент там должен быть не только на корректности, но и на соответствии командным конвенциям и архитектурным паттернам. Документируйте «закидоны», которые вы замечаете в работе с агентом: может, ваш бот постоянно юзает какие-то антипаттерны или в упор не видит возможности для оптимизации. Эта база знаний поможет ревьюерам быстро выцеплять и фиксить повторяющиеся косяки.
+
+## Построй петли обратной связи с автономными системами
+Пожалуй, самое важное: автономные агенты позволяют создать новый вид итеративной разработки, где петля обратной связи (feedback loop) выходит за рамки простого код-ревью. Когда пулл-реквест агента требует доработки, ты можешь просто швырнуть его обратно с комментарием «переделай вот так». Это отличается от работы с людьми, где возврат задачи коллеге несет социальные и временные издержки (никто не любит, когда его код называют говном).
+
+Работай над созданием паттернов промтинга, которые хорошо заходят вашим агентам. Нашел формулировку, от которой бот выдает годноту стабильно? Запиши её. Создай шаблоны (темплейты) для типовых задач, включив туда весь контекст и ограничения. Это своего рода промт-инжиниринг специально для агентов, учитывающий их циклы планирования, исполнения и исправлений. Это отдельный скилл, отличный от обычной болтовни с ChatGPT.
+
+Цель остается прежней: шипать качественный софт и делать это эффективно. Автономные агенты — это просто новый мощный инструмент для достижения этой цели. Инструмент, который нужно грамотно встроить в существующие процессы, а не тупо заменять им всё подряд. Понимая этих агентов и используя их уникальные фичи, не снижая при этом планку качества, команды могут получить дикий буст продуктивности, не жертвуя архитектурной целостностью.
+
+## Итоги и что дальше
+Завершая этот раздел, повторю мысль из 4-й главы: ИИ не заменит разработчиков, но разработчики, которые умеют эффективно юзать ИИ, вполне могут заменить тех, кто тупит. Приход автономных кодинг-агентов — это квантовый скачок в этом направлении. Те, кто научится укрощать этих «безголовых коллег», смогут делать больше за меньшее время. Сейчас охренительное время, чтобы быть софтверным инженером, при условии, что мы адаптируемся и продолжаем держать марку качества. Инструменты меняются, но цель одна: строить надежный, эффективный и инновационный софт. С ИИ-агентами под боком (или в фоне) у нас появляются новые способы достичь этих целей — и, возможно, наконец-то нормально выспаться, пока боты жгут электричество по ночам.
+
+Далее — финальная глава книги, где мы широко взглянем на будущее ИИ в кодинге, включая перспективы агентного ИИ.

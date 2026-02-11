@@ -1,251 +1,240 @@
-# Chapter 3. The 70% Problem: AI-Assisted Workflows That Actually Work
+# Глава 3. Проблема 70%: AI-воркфлоу, которые реально работают
 
+ИИ-инструменты для кодинга чертовски хороши в определенных задачах. Они шикарно генерируют бойлерплейт, пишут рутинные функции и дотаскивают проекты почти до финиша. На деле многие разрабы замечают, что ИИ-ассистент может выкатить первичное решение, закрывающее где-то 70% требований.
 
-AI-based coding tools are astonishingly good at certain tasks.1 They excel at producing boilerplate, writing routine functions, and getting projects most of the way to completion. In fact, many developers find that an AI assistant can implement an initial solution that covers roughly 70% of the requirements.
+Питер Янг в Твиттере (X) идеально описал то, что я наблюдаю в полях:
 
-Peter Yang perfectly captured what I’ve been observing in the field in a post on X:
+> Честные мысли не-инженера о кодинге с ИИ на данный момент:
+>
+> Он довозит тебя на 70% пути, но последние 30% — это адская боль. Постоянно: шаг вперед, два назад, новые баги, проблемы и вот это всё.
+>
+> Если бы я шарил, как работает код, я бы, наверное, сам пофиксил. Но поскольку я не шарю, я начинаю сомневаться, что вообще чему-то учусь.
 
-Honest reflections from coding with AI so far as a non-engineer:
+Не-технари, использующие ИИ для кодинга, лбом упираются в эту стену. Они пролетают 70% пути удивительно быстро, но финальные 30% превращаются в упражнение по закону убывающей отдачи.
 
-It can get you 70% of the way there, but that last 30% is frustrating. It keeps taking one step forward and two steps backward with new bugs, issues, etc.
+Эта "проблема 70%" вскрывает важную суть текущего состояния ИИ-разработки. Поначалу всё выглядит как магия: описываешь свои хотелки, и тулзы типа v0 или Bolt выплевывают рабочий прототип, который выглядит внушительно. Но потом наступает суровая реальность.
 
-If I knew how the code worked I could probably fix it myself. But since I don’t, I question if I’m actually learning that much.
+Эти 70% — зачастую самая прямолинейная, шаблонная часть работы. Код, который ходит по протоптанным дорожкам и использует стандартные фреймворки. Как заметил один чел в комментах на Hacker News, ИИ великолепен в управлении "случайной сложностью" софта (рутинная, механическая хрень), в то время как "существенная сложность" — понимание и управление глубинной сложностью проблемы — всё еще лежит на плечах кожаных мешков. Говоря классическими терминами Фреда Брукса, ИИ решает сопутствующие проблемы разработки, но не фундаментальные.
 
-Nonengineers using AI for coding find themselves hitting a frustrating wall. They can get 70% of the way there surprisingly quickly, but that final 30% becomes an exercise in diminishing returns.
+Где эти инструменты лажают? Опытные инженеры постоянно говорят о разрыве "последней мили". ИИ может родить правдоподобное решение, но последние 30% — покрытие граничных случаев (edge cases), шлифовка архитектуры и обеспечение поддерживаемости — "требуют серьезной человеческой экспертизы".
 
-This “70% problem” reveals something crucial about the current state of AI-assisted development. The initial progress feels magical: you can describe what you want, and AI tools like v0 or Bolt will generate a working prototype that looks impressive. But then reality sets in.
+Например, ИИ может выдать функцию, которая технически работает в базовом сценарии, но она не будет автоматически учитывать кривые инпуты, гонки состояний (race conditions), ограничения производительности или будущие требования, если только ты прямым текстом не прикажешь это сделать. ИИ довезет тебя почти до конца, но эти финальные критические 30% (эдж-кейсы, поддерживаемость и нормальная архитектура) требуют скиллов живого спеца.
 
-The 70% is often the straightforward, patterned part of the work—the kind of code that follows well-trod paths or common frameworks. As one Hacker News commenter observed, AI is superb at handling the “accidental complexity” of software (the repetitive, mechanical stuff), while the “essential complexity”⁠—understanding and managing the inherent complexity of a problem—remains on human shoulders. In Fred Brooks’s classic terms, AI tackles the incidental but not the intrinsic difficulties of development.
+Более того, у ИИ есть известная склонность генерить убедительную, но некорректную дичь. Он может внедрить неочевидные баги или "сгаллюцинировать" несуществующие функции и либы. Стив Йегге язвительно сравнивает нынешние LLM с "дико продуктивными джунами" — невероятно быстрыми и полными энтузиазма, но "потенциально обдолбанными тяжелыми веществами", склонными изобретать безумные или нерабочие подходы.
 
-Where do these tools struggle? Experienced engineers consistently report a “last mile” gap. AI can generate a plausible solution, but the final 30%—covering edge cases, refining the architecture, and ensuring maintainability—“needs serious human expertise.”
+По словам Йегге, LLM может выблевать код, который на первый взгляд выглядит прилизанным. Но если неопытный разраб наивно скажет "Вроде норм!" (LGTM) и покатит это в работу, следующие недели превратятся в цирк (или катастрофу). ИИ не понимает проблему по-настоящему; он сшивает паттерны, которые *обычно* имеют смысл. Только человек может разглядеть, не скрывает ли с виду нормальное решение мины замедленного действия. Саймон Уиллисон подтвердил это, увидев, как ИИ предложил дьявольски хитрый дизайн, который только сеньор с глубоким пониманием проблемы мог распознать как дефектный. Урок прост: уверенность ИИ сильно превышает его надежность.
 
-For example, an AI might give you a function that technically works for the basic scenario, but it won’t automatically account for unusual inputs, race conditions, performance constraints, or future requirements unless explicitly told. AI can get you most of the way there, but that final crucial 30% (edge cases, keeping things maintainable, and solid architecture) needs serious human expertise.
+Важно понимать: текущие ИИ не создают фундаментально новые абстракции или стратегии за пределами своих обучающих данных. Они не изобретут для вас новый алгоритм или инновационную архитектуру — они ремиксуют то, что уже известно. И они не несут ответственности за решения. Как заметил один инженер: "У ИИ нет идей 'лучше', чем те, что были в их датасетах. И они не отвечают за свою работу".
 
-Moreover, AI has a known tendency to generate convincing but incorrect output. It may introduce subtle bugs or “hallucinate” nonexistent functions and libraries. Steve Yegge wryly likens today’s LLMs to “wildly productive junior developers”—incredibly fast and enthusiastic but “potentially whacked out on mind-altering drugs,” prone to concocting crazy or unworkable approaches.
+Всё это означает, что креативное и аналитическое мышление — решение, *что* строить, *как* структурировать и *зачем* — твердо остается прерогативой человека. Короче говоря, ИИ — это мультипликатор силы для разработчиков, берущий на себя рутинные 70% и дающий нам "турбо-буст" производительности. Но это не серебряная пуля, способная заменить человеческое суждение. Оставшиеся 30% инженерии — самая жесть — всё еще требуют навыков, которые могут привнести только обученные, думающие разработчики. Именно на этих "вечных" навыках стоит фокусироваться, и Глава 4 посвящена им. Как говорилось в одной дискуссии: "ИИ — мощный инструмент, но не волшебная палочка... Человеческое суждение и хорошие инженерные практики всё еще необходимы".
 
-In Yegge’s words, an LLM can spew out code that looks polished at first glance, yet if a less-experienced developer naively says, “Looks good to me!” and runs with it, hilarity (or disaster) ensues in the following weeks. The AI doesn’t truly understand the problem; it stitches together patterns that usually make sense. Only a human can discern whether a seemingly fine solution hides long-term landmines. Simon Willison echoed this after seeing an AI propose a bewitchingly clever design that only a senior engineer with deep understanding of the problem could recognize as flawed. The lesson: AI’s confidence far exceeds its reliability.
+## Как разрабы реально юзают ИИ
 
-Crucially, current AIs do not create fundamentally new abstractions or strategies beyond their training data. They won’t invent a novel algorithm or an innovative architecture for you—they remix what’s known. They also won’t take responsibility for decisions. As one engineer noted, “AIs don’t have ‘better ideas’ than what their training data contains. They don’t take responsibility for their work.”
+Я наблюдаю два четких паттерна в том, как команды используют ИИ. Назовем их "бутстраперы" и "итераторы". Оба помогают инженерам (и даже не-технарям) сократить разрыв между идеей и исполнением (или MVP).
 
-All of this means that creative and analytical thinking—deciding what to build, how to structure it, and why—firmly remains a human domain. In summary, AI is a force multiplier for developers, handling the repetitive 70% and giving us a “turbo boost” in productivity. But it is not a silver bullet that can replace human judgment. The remaining 30% of software engineering—the hard parts—still requires skills that only trained, thoughtful developers can bring. Those are the durable skills to focus on, and Chapter 4 is dedicated to them. As one discussion put it: “AI is a powerful tool, but it’s not a magic bullet.…Human judgment and good software engineering practices are still essential.”
+Первые — это **бутстраперы**, которые обычно поднимают новый проект с нуля до MVP. Инструменты вроде Bolt, v0 и "скриншот-в-код" революционизируют то, как эти команды стартуют проекты. Обычно они:
 
-## How Developers Are Actually Using AI
-I’ve observed two distinct patterns in how teams are leveraging AI for development. Let’s call them the “bootstrappers” and the “iterators.” Both are helping engineers (and even nontechnical users) reduce the gap from idea to execution (or MVP).
+## Начинают с дизайна или чернового концепта
+## Используют ИИ для генерации полной начальной кодовой базы
+## Получают рабочий прототип за часы или дни вместо недель
+## Фокусируются на быстрой валидации и итерациях
 
-First, there are the bootstrappers, who are generally taking a new project from zero to MVP. Tools like Bolt, v0, and screenshot-to-code AI are revolutionizing how these teams bootstrap new projects. These teams typically:
+Результаты могут впечатлять. Недавно я видел, как соло-разраб с помощью Bolt превратил дизайн из Figma в рабочее веб-приложение практически мгновенно. Это было не "прод-реди", но вполне достаточно для получения самых первых отзывов пользователей.
 
-## Start with a design or rough concept
+Второй лагерь, **итераторы**, используют инструменты вроде Cursor, Cline, Copilot и Windsurf в своем повседневном рабочем процессе. Это менее хайпово, но потенциально более трансформационно. Эти разработчики:
 
-## Use AI to generate a complete initial codebase
+## Используют ИИ для автокомплита и подсказок
+## Припрягают ИИ для сложных задач по рефакторингу
+## Генерируют тесты и документацию
+## Используют ИИ как "парного программиста" для решения проблем
 
-## Get a working prototype in hours or days instead of weeks
+Но тут есть подвох: хотя оба подхода могут дико ускорить разработку, у них есть скрытая цена, которая не сразу бросается в глаза.
 
-## Focus on rapid validation and iteration
+Когда смотришь, как сеньор работает с тулзами типа Cursor или Copilot, это выглядит как магия. Они могут скаффолдить (набрасывать структуру) целые фичи за минуты, с тестами и доками. Но приглядись внимательнее, и ты заметишь кое-что важное: они не просто принимают то, что предлагает ИИ. Они постоянно рефакторят сгенерированный код, разбивая его на мелкие, сфокусированные модули. Они добавляют нормальную обработку ошибок и эдж-кейсов, которые ИИ пролюбил, усиливают типизацию и интерфейсы, и ставят под сомнение архитектурные решения машины. Другими словами, они применяют годы выстраданной инженерной мудрости, чтобы формировать и ограничивать выхлоп ИИ. ИИ ускоряет их реализацию, но именно их экспертиза делает код поддерживаемым.
 
-The results can be impressive. I recently watched a solo developer use Bolt to turn a Figma design into a working web app in next to no time. It wasn’t production-ready, but it was good enough to get very initial user feedback.
+## Типичные паттерны провала
 
-The second camp, the iterators, uses tools like Cursor, Cline, Copilot, and Windsurf for their daily development workflow. This is less flashy but potentially more transformative. These developers are:
+Джуниоры часто пропускают эти критические шаги. Они принимают результат ИИ с большей готовностью, что приводит к тому, что я называю "кодом карточного домика" — он выглядит законченным, но складывается под реальной нагрузкой.
 
-## Using AI for code completion and suggestions
+## Шаг вперед, два назад
 
-## Leveraging AI for complex refactoring tasks
+То, что происходит дальше, обычно следует предсказуемому антипаттерну, который я называю "два шага назад" (показан на Рис. 3-1):
 
-## Generating tests and documentation
-
-## Using AI as a “pair programmer” for problem solving
-
-But here’s the catch: while both approaches can dramatically accelerate development, they come with hidden costs that aren’t immediately obvious.
-
-When you watch a senior engineer work with AI tools like Cursor or Copilot, it looks like magic. They can scaffold entire features in minutes, complete with tests and documentation. But watch carefully, and you’ll notice something crucial: they’re not just accepting what the AI suggests. They’re constantly refactoring the generated code into smaller, focused modules. They’re adding comprehensive error handling and edge-case handling the AI missed, strengthening its type definitions and interfaces, and questioning its architectural decisions. In other words, they’re applying years of hard-won engineering wisdom to shape and constrain the AI’s output. The AI is accelerating their implementation, but their expertise is what keeps the code maintainable.
-
-## Common Failure Patterns
-Junior engineers often miss these crucial steps.  They accept the AI’s output more readily, leading to what I call “house of cards code”—it looks complete but collapses under real-world pressure.
-
-## Two steps back
-What typically happens next follows a predictable antipattern I call the “two steps back” pattern (shown in Figure 3-1):
-
-You try to fix a small bug.
-
-The AI suggests a change that seems reasonable.
-
-This fix breaks something else.
-
-You ask AI to fix the new issue.
-
-This creates two more problems.
-
-Rinse and repeat.
-
-
+1.  Ты пытаешься пофиксить мелкий баг.
+2.  ИИ предлагает изменение, которое кажется разумным.
+3.  Этот фикс ломает что-то другое.
+4.  Ты просишь ИИ пофиксить новую проблему.
+5.  Это создает еще две проблемы.
+6.  Повторять до посинения.
 
 > [!NOTE]
 > **Image Missing**
-> *Figure 3-1. The “two steps back” antipattern.*
+> *Рис. 3-1. Антипаттерн "два шага назад".*
 
-This cycle is particularly painful for nonengineers because they lack the mental models to understand what’s actually going wrong. When an experienced developer encounters a bug, they can reason about potential causes and solutions based on years of pattern recognition. Without this background, you’re essentially playing whack-a-mole with code you don’t fully understand. This is the “knowledge paradox” I mentioned back in this book’s preface: senior engineers and developers use AI to accelerate what they already know how to do, while juniors try to use it to learn what to do.
+Этот цикл особенно мучителен для не-инженеров, потому что у них нет ментальных моделей, чтобы понять, что, черт возьми, происходит. Когда опытный разраб натыкается на баг, он может рассуждать о причинах и решениях, опираясь на годы распознавания паттернов. Без этого бэкграунда ты, по сути, играешь в "удари крота" (whack-a-mole) с кодом, который не до конца понимаешь. Это "парадокс знаний", о котором я упоминал в предисловии: сеньоры используют ИИ, чтобы ускорить то, что они *уже умеют* делать, в то время как джуны пытаются использовать его, чтобы научиться тому, *что* делать.
 
-This cycle is particularly painful for nonengineers using AI in a “bootstrapper” pattern, because they lack the mental models needed to address these issues building their MVP. However, even experienced “iterators” can fall into this whack-a-mole trap if they overly rely on AI suggestions without deep validation.
+Этот цикл особенно болезнен для не-технарей, использующих ИИ в режиме "бутстрапера", так как им не хватает ментальных моделей для решения проблем при сборке MVP. Однако даже опытные "итераторы" могут попасть в эту ловушку, если будут слишком полагаться на предложения ИИ без глубокой проверки.
 
-There’s a deeper issue here: the very thing that makes AI coding tools accessible to nonengineers—their ability to handle complexity on your behalf—can actually impede learning. When code just “appears” without you understanding the underlying principles, you don’t develop debugging skills. You miss learning fundamental patterns. You can’t reason about architectural decisions, and so you struggle to maintain and evolve the code. This creates a dependency where you need to keep going back to the AI model to fix issues rather than developing the expertise to handle them yourself.
+Здесь есть проблема поглубже: то самое, что делает ИИ-кодинг доступным для не-инженеров — его способность брать на себя сложность — на самом деле может мешать обучению. Когда код просто "появляется", а ты не понимаешь лежащих в его основе принципов, ты не качаешь скилл отладки. Ты упускаешь изучение фундаментальных паттернов. Ты не можешь рассуждать об архитектурных решениях, и поэтому тебе трудно поддерживать и развивать код. Это создает зависимость: тебе приходится снова и снова бежать к ИИ, чтобы пофиксить проблемы, вместо того чтобы развивать экспертизу для их самостоятельного решения.
 
-This dependency risk enters a new dimension with the emergence of autonomous AI coding agents—a topic I explore in depth in Chapter 10.  Unlike current tools that suggest code snippets, these agents represent a fundamental shift in how software can be developed. As I write this, we’re witnessing the early deployment of systems that can independently plan, execute, and iterate on entire development tasks with minimal human oversight.
+Этот риск зависимости выходит на новый уровень с появлением автономных ИИ-агентов для кодинга — тему, которую я глубоко копаю в Главе 10. В отличие от текущих инструментов, которые просто предлагают сниппеты, эти агенты представляют собой фундаментальный сдвиг в разработке софта. Пока я пишу эти строки, мы наблюдаем раннее внедрение систем, способных самостоятельно планировать, выполнять и итерировать целые задачи разработки с минимальным надзором человека.
 
-This evolution from assistive to autonomous AI introduces profound questions about developer expertise and control. When an AI system can handle complete development workflows, from initial implementation through testing and deployment, the risk of skill atrophy becomes acute. Developers who rely heavily on these agents without maintaining their foundational knowledge may find themselves unable to effectively audit, guide, or intervene when the AI’s decisions diverge from intended outcomes.
+Эта эволюция от ассистирующего к автономному ИИ ставит серьезные вопросы об экспертизе и контроле разработчика. Когда ИИ-система может тащить полные рабочие процессы — от реализации до тестов и деплоя — риск атрофии навыков становится острым. Разработчики, которые слишком сильно полагаются на этих агентов, не поддерживая свои фундаментальные знания, могут оказаться неспособными эффективно аудировать, направлять или вмешиваться, когда решения ИИ начнут расходиться с желаемым результатом.
 
-The challenge compounds when we consider how these autonomous systems make cascading decisions throughout a project. Each individual choice might appear reasonable in isolation, yet the cumulative effect could steer development in unintended directions. Without the expertise to recognize and correct these trajectory shifts early, teams risk building increasingly complex systems on foundations they don’t fully understand.
+Проблема усугубляется, если учесть, как эти автономные системы принимают каскадные решения на протяжении проекта. Каждый отдельный выбор может казаться разумным в изоляции, но кумулятивный эффект может увести разработку совсем не туда. Без экспертизы, позволяющей распознать и скорректировать эти сдвиги траектории на раннем этапе, команды рискуют построить всё более сложные системы на фундаменте, который они не до конца понимают.
 
-As we’ll examine more thoroughly later, the advent of autonomous coding agents doesn’t diminish the importance of software engineering fundamentals—it amplifies it. The more powerful our AI tools become, the more critical it is that we maintain the expertise to remain architects of our systems rather than mere operators. Only through deep understanding of software principles can we ensure these remarkable tools enhance our capabilities rather than erode them.
+Как мы увидим позже, приход автономных кодинг-агентов не уменьшает важность основ программной инженерии — он её усиливает. Чем мощнее наши ИИ-инструменты, тем критичнее сохранять экспертизу, чтобы оставаться архитекторами наших систем, а не просто операторами. Только через глубокое понимание принципов софта мы можем гарантировать, что эти замечательные инструменты расширяют наши возможности, а не размывают их.
 
-## The demo-quality trap
-It’s becoming a pattern: teams use AI to rapidly build impressive demos. The happy path works beautifully. Investors and social networks are wowed. But when real users start clicking around? That’s when things fall apart.
+## Ловушка демо-качества
 
-I’ve seen this firsthand: error messages that make no sense to normal users, edge cases that crash the application, confusing UI states that never got cleaned up, accessibility completely overlooked, and performance issues on slower devices. These aren’t just low-priority bugs—they’re the difference between software people tolerate and software people love.
+Это становится паттерном: команды используют ИИ, чтобы быстро клепать впечатляющие демки. "Счастливый путь" (happy path) работает идеально. Инвесторы и соцсети в восторге. Но когда реальные пользователи начинают тыкать кнопки? Вот тут всё и разваливается.
 
-Creating truly self-serve software—the kind where users never need to contact support—requires a different mindset, one that’s all about the lost art of polish. You need to be obsessing over error messages; testing on slow connections and with real, nontechnical users; making features discoverable; and handling every edge case gracefully. This kind of attention to detail (perhaps) can’t be AI-generated. It comes from empathy, experience, and caring deeply about craft.
+Я видел это своими глазами: сообщения об ошибках, которые не имеют смысла для нормальных людей, эдж-кейсы, крашащие приложение, запутанные состояния UI, которые так и не почистили, полностью забытая доступность (accessibility) и проблемы с производительностью на медленных девайсах. Это не просто баги с низким приоритетом — это разница между софтом, который люди терпят, и софтом, который они любят.
 
-## What Actually Works: Practical Workflow Patterns
-Before we dive into coding in Part II of this book, we need to talk about modern development practices and how AI-assisted coding fits within a team workflow. Software development is more than writing code, after all—it’s a whole workflow that includes planning, collaboration, testing, deployment, and maintenance. And vibe coding isn’t a standalone novelty—it can be woven into agile methodologies and DevOps practices, augmenting the team’s productivity while preserving quality and reliability.
+Создание по-настоящему "самообслуживаемого" софта — такого, где юзерам никогда не нужно писать в саппорт — требует другого мышления, завязанного на утраченном искусстве "полировки". Тебе нужно быть одержимым текстами ошибок; тестировать на медленном интернете и с реальными, нетехническими пользователями; делать фичи обнаруживаемыми; и грациозно обрабатывать каждый эдж-кейс. Такое внимание к деталям (пока что) не может быть сгенерировано ИИ. Оно рождается из эмпатии, опыта и глубокой заботы о ремесле.
 
-In this section, we’ll explore how team members can collectively use vibe-coding tools without stepping on each other’s toes, how to balance AI suggestions with human insight, and how continuous integration/continuous delivery (CI/CD) pipelines can incorporate AI or adapt to AI-generated code. I’ll also touch on important considerations like version-control strategies.
+## Что реально работает: Практические паттерны воркфлоу
 
-After observing dozens of teams, here are three patterns I’ve seen work consistently in both solo and team workflows:
+Прежде чем мы нырнем в кодинг в Части II этой книги, нам нужно поговорить о современных практиках разработки и о том, как AI-assisted кодинг вписывается в командный процесс. Разработка софта — это ведь больше, чем просто написание кода. Это целый воркфлоу, включающий планирование, коллаборацию, тестирование, деплой и поддержку. И вайб-кодинг — это не какая-то отдельная диковинка; его можно вплести в гибкие методологии (Agile) и практики DevOps, повышая продуктивность команды и сохраняя качество и надежность.
 
-## AI as first drafter
-The AI model generates the initial code and developers then refine, refactor, and test it
+В этом разделе мы разберем, как члены команды могут коллективно использовать инструменты вайб-кодинга, не наступая друг другу на пятки, как балансировать предложения ИИ с человеческим инсайтом, и как пайплайны CI/CD могут включать ИИ или адаптироваться к сгенерированному коду. Я также затрону важные моменты, вроде стратегий контроля версий.
 
-## AI as pair programmer
-Developer and AI are in constant conversation, with tight feedback loops, frequent code review, and minimal context provided
+Понаблюдав за десятками команд, я выделил три паттерна, которые стабильно работают как в соло, так и в командных процессах:
 
-## AI as validator
-Developers still write the initial code and then use AI to validate, test, and improve it (see Figure 3-2)
+## ИИ как автор черновика (First drafter)
+ИИ-модель генерирует начальный код, а разработчики затем его дорабатывают, рефакторят и тестируют.
 
+## ИИ как парный программист (Pair programmer)
+Разработчик и ИИ находятся в постоянном диалоге, с короткими петлями обратной связи, частым код-ревью и минимальным контекстом.
 
+## ИИ как валидатор (Validator)
+Разработчики сами пишут начальный код, а затем используют ИИ для валидации, тестов и улучшений (см. Рис. 3-2).
 
 > [!NOTE]
 > **Image Missing**
-> *Figure 3-2. AI validation workflow: developers write initial code; AI systems analyze for bugs and security issues, then suggest improvements; and developers review and apply recommended changes.*
+> *Рис. 3-2. Воркфлоу ИИ-валидации: разработчики пишут начальный код; ИИ-системы анализируют его на баги и проблемы безопасности, затем предлагают улучшения; разработчики ревьюят и применяют рекомендации.*
 
-In this section, I’ll walk you through each pattern in turn, discussing workflows and tips for success.
+В этом разделе я проведу вас через каждый паттерн, обсуждая рабочие процессы и советы для успеха.
 
-## AI as first drafter
-It’s important to ensure everyone on the team is on the same page before you ask your AI model to draft any code. Communication is key so that developers don’t ask their AI assistants to do redundant tasks or generate conflicting implementations.
+## ИИ как автор черновика
 
-In daily stand-ups (a staple of agile workflows), it’s worth discussing not just what you’re working on but also whether you plan to use AI for certain tasks. For example, two developers might be working on different features that both involve a utility function for date formatting. If both ask the AI to create a formatDate helper, you might end up with two similar functions. Coordinating up front (“I’ll generate a date utility we can both use”) can prevent duplication.
+Важно убедиться, что все в команде на одной волне, прежде чем просить ИИ набросать какой-либо код. Коммуникация — это ключ, чтобы разработчики не просили своих ИИ-ассистентов делать дублирующую работу или генерировать конфликтующие реализации.
 
-Teams that successfully integrate AI tools often start by agreeing on coding standards and prompting practices. For example, the team might decide on a consistent style (linting rules, project conventions) and even feed those guidelines into their AI tools (some assistants allow providing style preferences or example code to steer outputs). As noted in Codacy’s blog, by familiarizing the AI with the team’s coding standards, you get generated code that is more uniform and easier for everyone to work with. On a practical level, this could mean having a section in your project README for “AI Usage Tips,” where you note things like “We use functional components only” or “Prefer using Fetch API over Axios,” which developers can keep in mind when prompting AI.
+На дейли-стендапах (классика Agile) стоит обсуждать не только то, над чем вы работаете, но и планируете ли вы использовать ИИ для определенных задач. Например, два разраба могут пилить разные фичи, которые обе требуют утилиту для форматирования дат. Если оба попросят ИИ создать хелпер `formatDate`, вы можете получить две похожие функции. Координация на старте ("Я сгенерю утилиту для дат, которую мы оба сможем юзать") предотвратит дублирование.
 
-Another practice is to use your tools’ collaboration features, if available. Some AI-assisted IDEs allow users to share their AI sessions or at least the prompts they use. If Developer A got a great result with a prompt for a complex component, sharing that prompt with Developer B (perhaps via the issue tracker or a team chat) can save time and ensure consistency.
+Команды, успешно внедряющие ИИ-тулзы, часто начинают с согласования стандартов кодирования и практик промптинга. Например, команда может решить придерживаться единого стиля (правила линтинга, конвенции проекта) и даже скормить эти гайдлайны своим ИИ-инструментам (некоторые ассистенты позволяют задавать предпочтения по стилю или примеры кода для корректировки выдачи). Как отмечено в блоге Codacy, знакомя ИИ со стандартами команды, вы получаете сгенерированный код, который более единообразен и с которым всем проще работать. На практике это может означать наличие раздела в README проекта "Советы по использованию ИИ", где вы пишете вещи вроде "Мы используем только функциональные компоненты" или "Предпочитаем Fetch API вместо Axios", чтобы разработчики держали это в голове при общении с ИИ.
 
-As for using version control, the fundamentals remain—with a twist. Using Git (or another version control system) is nonnegotiable in modern development, and that doesn’t change with vibe coding. In fact, version control becomes even more crucial when AI is generating code rapidly. Commits act as the safety net to catch AI missteps; if an AI-generated change breaks something, you can revert to a previous commit.
+Еще одна практика — использовать функции коллаборации ваших инструментов, если они есть. Некоторые AI-assisted IDE позволяют шарить сессии или хотя бы промпты. Если Разработчик А получил отличный результат с промптом для сложного компонента, шеринг этого промпта с Разработчиком Б (через трекер задач или командный чат) сэкономит время и обеспечит консистентность.
 
-One strategy is to commit more frequently when using AI assistance. Each time the AI produces a significant chunk of code (like generating a feature or doing some major refactoring) that you accept, consider making a commit with a clear message. Frequent commits ensure that if you need to bisect issues or undo a portion of AI-introduced code, the history is granular enough.
+Что касается контроля версий, фундамент остается прежним — но с нюансом. Использование Git (или другой VCS) не обсуждается в современной разработке, и это не меняется с вайб-кодингом. На самом деле, контроль версий становится еще важнее, когда ИИ быстро генерит код. Коммиты работают как страховочная сетка для отлова косяков ИИ; если сгенерированное изменение что-то ломает, можно откатиться.
 
-Also, try to isolate different AI-introduced changes. If you let the AI make many changes across different areas and commit them all together, it’s harder to disentangle if something goes wrong. For example, if you use an agent to optimize performance and it also tweaks some UI texts, commit those separately. (Your two commit messages might be “Optimize list rendering performance [AI-assisted]” and “Update UI copy for workout completion message [AI-assisted]”). Descriptive commit messages are important; some teams even tag commits that had heavy AI involvement, just for traceability. It’s not about blame but about understanding the origin of code—a commit tagged with “[AI]” might signal to a reviewer that the code could use an extra thorough review for edge cases.
+Одна из стратегий — коммитить чаще при использовании помощи ИИ. Каждый раз, когда ИИ выдает значительный кусок кода (типа генерации фичи или крупного рефакторинга), который вы принимаете, делайте коммит с внятным сообщением. Частые коммиты гарантируют, что если вам нужно будет искать причину бага (bisect) или отменять часть кода от ИИ, история будет достаточно детальной.
 
-Essentially, the team should treat AI usage as a normal part of the development conversation: share experiences, successful techniques, and warnings about what not to do (like “Copilot suggests using an outdated library for X, so be careful with that”).
+Также старайтесь изолировать разные изменения от ИИ. Если позволить ИИ внести кучу правок в разных местах и закоммитить всё скопом, будет сложнее распутать клубок, если что-то пойдет не так. Например, если вы используете агента для оптимизации производительности, и он попутно правит тексты в UI, коммитьте это раздельно. (Ваши два сообщения коммитов могут быть "Optimize list rendering performance [AI-assisted]" и "Update UI copy for workout completion message [AI-assisted]"). Описательные сообщения важны; некоторые команды даже тегают коммиты, где было много ИИ, просто для отслеживаемости. Это не для того, чтобы кого-то винить, а чтобы понимать происхождение кода — коммит с тегом `[AI]` может сигнализировать ревьюеру, что код стоит проверить с тройным пристрастием на предмет эдж-кейсов.
 
-Review and refinement are crucial to this pattern. Developers should manually review and refactor the code for modularity, add comprehensive error handling, write thorough tests, and document key decisions as they refine the code. The next chapter goes into detail about these processes.
+По сути, команда должна относиться к использованию ИИ как к нормальной части рабочего разговора: делитесь опытом, удачными техниками и предупреждениями о том, чего делать не стоит (типа "Copilot предлагает юзать устаревшую либу для X, так что аккуратнее").
 
-## AI as pair programmer
-Traditional pair programming involves two humans collaborating at one workstation. With the advent of AI, a hybrid approach has emerged: one human developer working alongside an AI assistant. This setup can be particularly effective, offering a blend of human intuition and machine efficiency.
+Ревью и доработка критичны для этого паттерна. Разработчики должны вручную просматривать и рефакторить код для модульности, добавлять исчерпывающую обработку ошибок, писать тщательные тесты и документировать ключевые решения по ходу пьесы. Следующая глава подробно описывает эти процессы.
 
-In a human-AI pairing, the developer interacts with the AI to generate code suggestions while also reviewing and refining the output. This dynamic allows the human to leverage the AI’s speed in handling repetitive tasks, such as writing boilerplate code or generating test cases, while maintaining oversight to ensure code quality and relevance.
+## ИИ как парный программист
 
-For instance, when integrating a new library, a developer might prompt the AI to draft the initial integration code. The developer then reviews the AI’s suggestions, cross-referencing with official documentation to verify accuracy. This process not only accelerates development but also facilitates knowledge acquisition, as the developer engages deeply with both the AI’s output and the library’s intricacies. 
+Традиционное парное программирование подразумевает двух людей, работающих за одним компом. С приходом ИИ появился гибридный подход: один человек-разработчик работает бок о бок с ИИ-ассистентом. Этот сетап может быть особенно эффективным, предлагая смесь человеческой интуиции и машинной эффективности.
 
-Let’s compare this to traditional human-human pair programming:
+В паре "человек-ИИ" разработчик взаимодействует с ИИ для получения предложений кода, одновременно проверяя и дорабатывая результат. Эта динамика позволяет человеку использовать скорость ИИ в рутинных задачах, таких как написание бойлерплейта или генерация тест-кейсов, сохраняя при этом контроль над качеством и релевантностью кода.
 
-Human-AI pairing offers rapid code generation and can handle mundane tasks efficiently. It’s particularly beneficial for solo developers or when team resources are limited.
+Например, при интеграции новой библиотеки разработчик может попросить ИИ набросать начальный код интеграции. Затем он проверяет предложения ИИ, сверяясь с официальной документацией для точности. Этот процесс не только ускоряет разработку, но и способствует получению знаний, так как разработчик глубоко погружается и в выдачу ИИ, и в тонкости библиотеки.
 
-Human-human pairing excels in complex problem-solving scenarios, where nuanced understanding and collaborative brainstorming are essential. It fosters shared ownership and collective code comprehension.
+Давайте сравним это с традиционным парным программированием "человек-человек":
 
-Both approaches have their merits, and your choice between them can be guided by the project’s complexity, resource availability, and the specific goals of the development process.
+**Пара Человек-ИИ** предлагает быструю генерацию кода и эффективно справляется с рутиной. Это особенно выгодно для соло-разработчиков или когда ресурсы команды ограничены.
 
-## Best practices for AI pair programming
-To maximize the benefits of AI-assisted development, consider the following practices:
+**Пара Человек-Человек** превосходит в решении сложных проблем, где необходимо нюансированное понимание и совместный мозговой штурм. Это способствует разделению ответственности и коллективному пониманию кода.
 
-## Initiate new AI sessions for distinct tasks
-This helps maintain context clarity and ensures the AI’s suggestions are relevant to the specific task at hand.
+Оба подхода имеют свои плюсы, и выбор между ними может зависеть от сложности проекта, доступности ресурсов и конкретных целей процесса разработки.
 
-## Keep prompts focused and concise
-Providing clear and specific instructions enhances the quality of the AI’s output.
+## Лучшие практики для ИИ-пейринга
 
-## Review and commit changes frequently
-Regularly integrating and testing AI-generated code helps catch issues early and maintains project momentum.
+Чтобы выжать максимум из AI-assisted разработки, рассмотрите следующие практики:
 
-## Maintain tight feedback loops
-Continuously assess the AI’s contributions, providing corrections or refinements as needed to guide its learning and improve future suggestions.
+## Начинайте новые ИИ-сессии для отдельных задач
+Это помогает сохранять чистоту контекста и гарантирует, что предложения ИИ релевантны конкретной задаче.
 
-## AI as validator
-Beyond code generation, AI can serve as a valuable validator, assisting in code review and quality assurance. AI tools can analyze code for potential bugs, security vulnerabilities, and adherence to best practices. For example, platforms like DeepCode and Snyk’s AI-powered code checker can identify issues such as missing input sanitization or insecure configurations, providing actionable insights directly within the development environment. Platforms such as Qodo and TestGPT can automatically generate test cases, ensuring broader coverage and reducing manual effort. And many AI tools can assist in monitoring application performance, detecting anomalies that might indicate underlying issues.
+## Держите промпты сфокусированными и краткими
+Предоставление четких и конкретных инструкций повышает качество выдачи ИИ.
+## Чаще ревьювь и пушь коммиты
+Регулярная интеграция и тестирование кода, который высрала нейронка, помогают отлавливать баги на ранних стадиях и не ронять темп проекта.
 
-By integrating AI validators into the development workflow, teams can enhance code quality, reduce the likelihood of defects, and ensure compliance with security standards. This proactive approach to validation complements human oversight, leading to more robust and reliable software. These tools enhance the efficiency and effectiveness of the quality assurance (QA) process by handling repetitive and time-consuming tasks, allowing human testers to focus on more complex and nuanced aspects of QA.
+## Держи петлю обратной связи короткой
+Постоянно оценивай, что там ИИ нагенерил. Пинай его, давай исправления и уточнения — пусть учится, собака, чтобы в следующий раз выдал что-то более вменяемое.
 
-Incorporating AI into the development process, whether as a pair programmer or validator, offers opportunities to enhance productivity and code quality. By thoughtfully integrating these tools, developers can harness the strengths of both human and artificial intelligence.
+## ИИ как контролёр (валидатор)
+ИИ годится не только чтобы код писать, он ещё и отличный душнила-контролёр. Он может помочь с код-ревью и QA. Инструменты на базе ИИ способны просканировать код на баги, дыры в безопасности и соответствие бест-практис. Например, платформы вроде DeepCode или чекера от Snyk могут ткнуть тебя носом в отсутствие санитайзинга инпутов или дырявые конфиги прямо в IDE. А ребята типа Qodo и TestGPT могут автоматически нагенерить тест-кейсов, чтобы покрыть код тестами и сэкономить тебе кучу времени. Плюс, многие ИИ-тулзы умеют мониторить перфоманс приложения и орать, если появляются аномалии, намекающие на скрытые проблемы.
 
-To maximize the benefits of both AI and human capabilities in QA, I recommend a few best practices:
+Встраивая ИИ-валидаторов в рабочий процесс, команды могут подтянуть качество кода, снизить вероятность факапов и закрыть вопросы по безопасности. Этот проактивный подход дополняет (а не заменяет!) человеческий надзор, делая софт более надёжным. Эти инструменты берут на себя всю нудную и рутинную работу в QA, позволяя кожаным тестировщикам сосредоточиться на реальных проблемах и сложных нюансах.
 
-Use AI for initial assessments and preliminary scans to identify obvious issues.
+Внедрение ИИ в процесс разработки — будь то в роли парного прогера или валидатора — реально бустит продуктивность и качество. Но только если подходить к этому с умом, объединяя сильные стороны человеческого и искусственного интеллекта.
 
-Prioritize human review for critical areas, such as complex functionalities, user experience, and AI limitations.
+Чтобы выжать максимум из этого союза в QA, рекомендую пару проверенных практик:
 
-Foster an environment of continuous collaboration, where AI tools and human testers work in tandem, with ongoing feedback loops to improve both AI performance and human decision making.
+*   Используй ИИ для первичного сканирования и поиска очевидных косяков.
+*   Оставь людям ревью критически важных зон: сложной функциональности, UX и тех моментов, где ИИ обычно тупит.
+*   Создавай среду постоянного сотрудничества, где ИИ-тулзы и живые тестировщики работают в тандеме, постоянно обмениваясь фидбеком для прокачки и тех, и других.
 
-## The Golden Rules of Vibe Coding
-While vibe coding offers unprecedented speed and creative freedom in software development, its very flexibility demands a structured approach to ensure consistent quality and team cohesion. The rapid, intuitive nature of AI-assisted development can quickly lead to chaos without clear guidelines that balance creative exploration with engineering discipline.
+## Золотые правила Вайб-кодинга
+Хоть вайб-кодинг и даёт дикую скорость и свободу, без структуры это прямой путь в ад. Быстрая, интуитивная природа ИИ-разработки может моментально превратить проект в хаос, если нет чётких гайдлайнов, балансирующих творческий угар и инженерную дисциплину.
 
-These golden rules emerged from collective experience across teams who have successfully integrated vibe coding into their workflows. They represent hard-won insights about where AI excels, where it stumbles, and how human judgment remains essential throughout the process. Rather than constraining creativity, these principles create a framework within which teams can confidently experiment while maintaining the standards necessary for production-ready software.
+Эти золотые правила написаны кровью и потом команд, которые успешно внедрили вайб-кодинг и выжили. Это выстраданное понимание того, где ИИ красавчик, а где спотыкается, и почему человеческая "чуйка" всё ещё незаменима. Эти принципы не душат креатив, а создают рамки, в которых можно смело экспериментировать, не роняя прод.
 
-The rules address three critical dimensions of vibe coding: the interaction between human and AI, the integration of AI-generated code into existing systems, and the cultivation of team practices that support sustainable AI-assisted development. By following these guidelines, teams can harness the transformative power of vibe coding while avoiding common pitfalls that lead to technical debt, security vulnerabilities, or unmaintainable codebases:
+Правила покрывают три критических фронта: взаимодействие "человек-ИИ", интеграция сгенерированного кода и командные процессы. Следуй им, и ты оседлаешь вайб-кодинг, избежав техдолга, дыр в безопасности и спагетти-кода, который невозможно поддерживать:
 
-## Be specific and clear about what you want
-Clearly articulate your requirements, tasks, and outcomes when interacting with AI. Precise prompts yield precise results.
+## Будь конкретен и чёток в своих хотелках
+Ясно формулируй требования, задачи и ожидаемый результат при общении с ИИ. Точный промт — точный результат. Говно на входе — говно на выходе.
 
-## Always validate AI output against your intent
-AI-generated code must always be checked against your original goal. Verify functionality, logic, and relevance before accepting.
+## Всегда сверяй выхлоп ИИ со своим замыслом
+Код от нейронки всегда нужно чекать на соответствие твоей изначальной цели. Проверяй функционал, логику и адекватность, прежде чем тащить это к себе.
 
-## Treat AI as a junior developer (with supervision)
-Consider AI outputs as drafts that require your careful oversight. Provide feedback, refine, and ensure quality and correctness.
+## Относись к ИИ как к джуну (за которым нужен глаз да глаз)
+Считай всё, что выдал ИИ, черновиком. Ревьювь, правь, давай по шапке и следи за качеством.
 
-Use AI to expand your capabilities, not replace your thinking
-Leverage AI to automate routine or complex tasks, but always remain actively engaged in problem solving and decision making.
+## Юзай ИИ для расширения возможностей, а не отключения мозга
+Спихни на ИИ рутину или сложные, но типовые задачи, но сам оставайся включённым в решение проблем и принятие решений.
 
-## Coordinate up front among the team before generating code
-Align with your team on AI usage standards, code expectations, and practices before starting AI-driven development.
+## Договоритесь "на берегу" всей командой
+Синхронизируйтесь по стандартам использования ИИ, ожиданиям от кода и практикам *до того*, как начнёте безудержно генерить.
 
-## Treat AI usage as a normal part of the development conversation
-Regularly discuss AI experiences, techniques, successes, and pitfalls with your team. Normalize AI as another tool for collective improvement.
+## Сделай ИИ нормальной темой для разговора
+Регулярно обсуждайте успехи, факапы, новые фишки и подводные камни. ИИ — это просто ещё один инструмент для общего блага, не делайте из этого табу.
 
-## Isolate AI changes in Git by doing separate commits
-Clearly identify and separate AI-generated changes within version control to simplify reviews, rollbacks, and tracking.
+## Изолируй изменения от ИИ в отдельных коммитах
+Мухи отдельно, котлеты отдельно. Чётко помечай изменения, сделанные ИИ, в системе контроля версий. Так проще делать ревью, откатывать и трекать, кто (или что) накосячило.
 
-Ensure that all code, whether human or AI-written, undergoes code review
-Maintain consistent standards by subjecting all contributions to the same rigorous review processes, enhancing code quality and team understanding.
+## Весь код, человеческий или машинный, должен проходить ревью
+Поддерживай единые стандарты: любой вклад в репозиторий должен проходить через ту же мясорубку ревью. Это держит качество и понимание кода командой на уровне.
 
-## Don’t merge code you don’t understand
-Never integrate AI-generated code unless you thoroughly comprehend its functionality and implications. Understanding is critical to maintainability and security.
+## Не мержи код, который не понимаешь
+Никогда не вливай сгенерированный код, если ты досконально не врубаешься, как он работает и к чему это приведёт. Понимание — ключ к поддерживаемости и безопасности. Если ты это замержил, ты за это отвечаешь.
 
-Prioritize documentation, comments, and ADRs
-Clearly document the rationale, functionality, and context for AI-generated code. Good documentation ensures long-term clarity and reduces future technical debt.
+## Приоритет на документацию, комменты и ADR
+Чётко документируй "почему", "как" и контекст для кода от ИИ. Хорошая дока спасёт тебя от похмелья через полгода и снизит будущий техдолг.
 
-## Share and reuse effective prompts
-Document prompts that lead to high-quality AI outputs. Maintain a repository of proven prompts to streamline future interactions and enhance consistency.
+## Делись и переиспользуй рабочие промты
+Записывай промты, которые выдают годноту. Ведите базу проверенных промтов, чтобы не изобретать велосипед каждый раз.
 
-## Regularly reflect and iterate
-Periodically review and refine your AI development workflow. Use insights from past experiences to continuously enhance your team’s approach.
+## Рефлексируй и итерируй
+Периодически пересматривай свой процесс работы с ИИ. Используй опыт прошлых факапов, чтобы постоянно улучшать подход команды.
 
-By adhering to these golden rules, your team can harness AI effectively, enhancing productivity while maintaining clarity, quality, and control.
+Соблюдая эти правила, ваша команда сможет эффективно юзать ИИ, повышая продуктивность, но сохраняя ясность, качество и контроль над ситуацией.
 
-## Summary and Next Steps
-The 70% problem defines the current state of AI-assisted development: these tools excel at generating boilerplate and routine functions but struggle with the final 30% that includes edge cases, architectural decisions, and production readiness. We’ve identified two main usage patterns—bootstrappers who rapidly build MVPs, and iterators who integrate AI into daily workflows—along with common failure patterns like the “two steps back” antipattern and the “demo-quality trap” where impressive prototypes fail under real-world pressure.
+## Итоги и следующие шаги
+Проблема "70%" определяет текущее состояние ИИ-разработки: эти инструменты отлично клепают бойлерплейт и рутинные функции, но сливаются на последних 30% — корнер-кейсах, архитектурных решениях и подготовке к проду. Мы выделили два основных паттерна использования: "бутстраперы" (быстро лепят MVP) и "итераторы" (встраивают ИИ в повседневку). А также вспомнили типичные грабли, вроде антипаттерна "два шага назад" и ловушки "демо-качества", когда впечатляющий прототип разваливается под реальной нагрузкой.
 
-Three proven workflow patterns have emerged: AI as first drafter (generate then refine), AI as pair programmer (continuous collaboration), and AI as validator (human-written code with AI analysis). The golden rules of vibe coding provide essential guardrails, emphasizing clear communication, thorough validation, team coordination, and the nonnegotiable requirement to understand all code before merging it.
+Вырисовались три рабочих сценария: ИИ как черновик (сгенерил — допилил), ИИ как парный прогер (постоянный диалог) и ИИ как валидатор (ты пишешь, он чекает). Золотые правила вайб-кодинга — это ваши отбойники на трассе: чёткая коммуникация, жёсткая валидация, командная координация и железное правило "не понимаешь — не мержишь".
 
-Individual developers should choose one workflow pattern to experiment with systematically while implementing the golden rules in daily practice. Focus on developing the durable skills covered in Chapter 4: system design, debugging, and architecture—rather than competing with AI on code generation.
+Каждому разрабу стоит выбрать один паттерн и систематически его обкатывать, применяя золотые правила. Фокусируйтесь на прокачке "вечных" скиллов из 4-й главы: системный дизайн, дебаггинг и архитектура. Не пытайтесь соревноваться с ИИ в написании кода — станьте его боссом.
 
-Teams need to establish standards for AI usage, create shared repositories of effective prompts, and integrate AI considerations into existing agile practices. Regular knowledge sharing about successes and pitfalls will help teams avoid common traps while maximizing AI’s benefits.
+Командам нужно установить стандарты, создать общие базы промтов и интегрировать ИИ в свои аджайл-процессы. Регулярный обмен знаниями об успехах и провалах поможет не наступать на одни и те же грабли.
 
-As autonomous AI coding agents emerge, the human role will shift toward architectural oversight and strategic decision making. The next chapter explores how to maximize this irreplaceable human contribution, helping engineers at every level thrive as partners to increasingly capable AI systems rather than competitors.
+С появлением автономных ИИ-агентов роль человека смещается в сторону архитектурного надзора и стратегических решений. В следующей главе мы разберем, как максимизировать этот незаменимый человеческий вклад, чтобы инженеры любого уровня процветали как партнёры всё более мощных ИИ-систем, а не как их конкуренты.
 
-1 This chapter is based on an essay originally published on my Substack newsletter. See Addy Osmani, “The 70% Problem: Hard Truths About AI-Assisted Coding”, Elevate with Addy Osmani, December 4, 2024.
-
+---
+*1 Эта глава основана на эссе, изначально опубликованном в моей рассылке на Substack. См. Addy Osmani, “The 70% Problem: Hard Truths About AI-Assisted Coding”, Elevate with Addy Osmani, December 4, 2024.*

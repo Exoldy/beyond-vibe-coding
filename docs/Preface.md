@@ -1,100 +1,97 @@
-# Preface
+# Предисловие
 
-## Preface
-We’re in the midst of a profound shift in how software is built. Professional vibe coding—the art of collaborating with AI to create software—is transforming developers from code artisans into product visionaries and orchestrators.
+## Предисловие
 
-Vibe coding is about leveraging AI’s prowess to handle the heavy lifting of coding, allowing developers to focus more on ideas, design, and high-level problem solving. As Andrej Karpathy quipped, it’s like “forget[ting] the code even exists” and simply building—describing what you need and letting the AI fill in the implementation details. This can lead to order-of-magnitude productivity gains, making the mythical “10x engineer” potentially a 100x reality.
+Мы находимся в эпицентре тектонического сдвига в том, как создается софт. Профессиональный вайб-кодинг — искусство коллаборации с ИИ для создания ПО — превращает разработчиков из простых ремесленников кода в визионеров продукта и дирижеров оркестра.
 
-## Who This Book Is For
-This book is written for three key audiences. The first is experienced developers and engineering leaders who want to multiply their impact. If you’ve been coding for years and feel the weight of repetitive tasks, this book will show you how to delegate the mundane to AI while elevating your role to architect and strategist. You’ll learn to build faster without sacrificing the quality standards you’ve developed over your career.
+Суть вайб-кодинга — запрячь мощь ИИ, чтобы он тащил на себе всю грязную работу по написанию кода, позволяя разработчикам фокусироваться на идеях, дизайне и решении высокоуровневых задач. Как метко пошутил Андрей Карпаты, это все равно что «забыть, что код вообще существует» и просто строить — описываешь, что тебе нужно, а ИИ заполняет детали реализации. Это может бустануть продуктивность на порядок, превращая мифического «10x инженера» в потенциальную 100x реальность.
 
-Second, this book serves product-minded engineers who see code as a means to an end rather than an end itself. If you’re frustrated by the gap between having a vision and implementing it, vibe coding can dramatically compress that distance. You’ll discover how to rapidly prototype, iterate, and ship products that would have taken months with traditional approaches.
+## Для кого эта книга
 
-Here’s the most counterintuitive thing I’ve discovered about AI tools: they help experienced developers more than beginners. This seems backward—shouldn’t AI democratize coding?
+Эта книга написана для трех ключевых аудиторий. Первая — опытные разработчики и технические лидеры, желающие умножить свой импакт. Если ты кодишь годами и чувствуешь, как рутина давит на плечи, эта книга покажет, как делегировать скучную херню нейронке, а самому подняться до уровня архитектора и стратега. Ты научишься билдить быстрее, не жертвуя стандартами качества, которые нарабатывал всю карьеру.
 
-The reality is that AI is like having a very eager junior developer on your team. They can write code quickly, but they need constant supervision and correction. The more you know, the better you can guide them.
+Вторая — инженеры с продуктовым мышлением, для которых код — это средство, а не самоцель. Если тебя бесит пропасть между «у меня есть видение» и «я это реализовал», вайб-кодинг может дико сократить эту дистанцию. Ты узнаешь, как быстро прототипировать, итерировать и шипить продукты, на создание которых традиционными методами ушли бы месяцы.
 
-This creates what I call the knowledge paradox: senior engineers and developers use AI to accelerate what they already know how to do, while juniors try to use it to learn what to do, and the results differ dramatically.
+Вот самая контринтуитивная вещь, которую я понял про ИИ-тулзы: они помогают тертым калачам больше, чем новичкам. Звучит странно — разве ИИ не должен демократизировать кодинг?
 
-I’ve watched senior engineers use AI to:
+Реальность такова: ИИ — это как очень ретивый джун в твоей команде. Он может писать код быстро, но за ним нужен глаз да глаз и постоянная коррекция. Чем больше ты знаешь, тем лучше сможешь его направить.
 
-## Rapidly prototype ideas they already understand
+Это создает то, что я называю парадоксом знаний: сеньоры используют ИИ, чтобы ускорить то, что они *и так умеют делать*, в то время как джуны пытаются использовать его, чтобы узнать, *что делать*, — и результаты отличаются кардинально.
 
-## Generate basic implementations they can then refine
+Я наблюдал, как сеньоры используют ИИ, чтобы:
+## Быстро прототипировать идеи, которые они уже понимают
+## Генерить базовую реализацию, которую потом можно допилить
+## Искать альтернативные подходы к известным проблемам
+## Автоматизировать рутинные задачи по кодингу
 
-## Explore alternative approaches to known problems
+В то же время джуны часто:
+## Хавают некорректные или устаревшие решения
+## Пропускают критические моменты по безопасности и перформансу
+## Мучаются с отладкой кода, сгенерированного ИИ
+## Строят хрупкие системы, которые сами до конца не выкупают
 
-## Automate routine coding tasks
+Третья аудитория — инжиниринг-менеджеры и CTO, пытающиеся переварить влияние ИИ на свои команды и процессы. Вы поймете, как строить команды, оценивать таланты и поддерживать качество кода в эпоху, когда один инженер может выдать объем, который раньше требовал целой команды. Здешние стратегии помогут вам вырулить в этом переходе, не развалив инженерную культуру.
 
-Meanwhile, juniors often:
+Чего вы тут не найдете, так это гайда «программирование для чайников». Хотя ИИ делает кодинг доступнее, эффективное владение им всё еще требует «чуйки», которая приходит с опытом. Считайте эту книгу курсом повышения квалификации для тех, кто готов выйти за рамки традиционного программирования и принять новую парадигму создания софта.
 
-## Accept incorrect or outdated solutions
+## Чего ожидать
 
-## Miss critical security and performance considerations
+Эта книга исследует, как эволюционирует роль разработчика: от долбежки по клавишам к продуктовой инженерии. Это значит использовать человеческое суждение, чтобы направлять ИИ, гарантируя качество, архитектуру и удовлетворение потребностей юзера. Мы по-прежнему обеспечиваем креативность, системное мышление и эмпатию, которые превращают функциональную программу в крутой продукт. ИИ не заменяет нас; он нас усиливает — если пользоваться им с умом.
 
-## Struggle to debug AI-generated code
+В **Части I** я обозначу области, где вайб-кодинг рулит: запуск новых продуктов, прототипирование фич, клепание стандартных CRUD-приложений или кода для интеграций — всё, где скорость и паттерн-матчинг важнее глубокой оригинальности. И наоборот, я рассмотрю, где нам стоит быть осторожными с ИИ: в реально сложных, низкоуровневых или новых алгоритмах, где он может споткнуться. Понимание текущих лимитов ИИ спасает от фрустрации и факапов; всё еще есть куча вещей, доступных только человеческой смекалке.
 
-## Build fragile systems they don’t fully understand
+Человеческий фактор остается стержнем. Мы гарантируем, что архитектура здоровая, дебажим хитрые баги и оцениваем качество кода глубже, чем просто «оно запускается». Критически важно то, что мы привносим ориентированное на пользователя мышление — то, чего ИИ не умеет. Именно нам предстоит убедиться, что софт не просто работает, а работает для людей и имеет смысл. Короче, разработчики становятся кураторами и редакторами выхлопа ИИ, постоянно сверяя его с реальными потребностями и высокими стандартами.
 
-Third, this book addresses engineering managers and CTOs grappling with the implications of AI on their teams and processes. You’ll gain insights into how to structure teams, evaluate talent, and maintain code quality in an era where a single engineer can produce what once required a team. The strategies here will help you navigate the transition while keeping your engineering culture intact.
+**Часть II** рассматривает практические аспекты вайб-кодинга. Принятие новых рабочих процессов — это маст-хэв. Техники типа «ролль, а не фикси» напоминают нам не зарываться — иногда перегенерить код быстрее, чем отлаживать его. Параллельный промптинг позволяет решать проблемы с разных углов одновременно. Нам нужно балансировать между быстрой итерацией и итоговой шлифовкой, чтобы не накопить гору неподдерживаемого говнокода. Лучшие практики, вроде модульности ИИ-кода, тщательного тестирования и итеративного улучшения, помогут сохранить кодовую базу чистой и надежной, несмотря на бешеную скорость разработки.
 
-What you won’t find here is a beginner’s guide to programming. While AI makes coding more accessible, wielding it effectively still requires judgment that comes from experience. Think of this book as advanced training for those ready to transcend traditional programming and embrace a new paradigm of software creation.
+По мере масштабирования проектов нам придется разгребать ускоренный приток кода и потенциальный технический долг. ИИ может зафлудить ваш репозиторий кодом; только дисциплина и хорошие инженерные практики (плюс, возможно, рефакторинг с помощью ИИ) сохранят его поддерживаемым. Что касается людей, мы будем нанимать и обучать инженеров, умеющих обращаться с ИИ-тулзами, ценя адаптивность и навыки системного дизайна. И мы будем знать, когда переключиться обратно в традиционный режим — например, при стабилизации продукта для долгосрочной поддержки или работе с критическими системами, где осторожность важнее скорости.
 
-## What to Expect
-This book explores how the role of developers is evolving, from hands-on-keyboard programming to product engineering. This means using human judgment to guide AI, ensuring that quality, architecture, and user needs are met. We still provide the creativity, system thinking, and empathy that turn a functional program into a great product. AI doesn’t replace us; it amplifies us—if we wield it wisely.
+**Часть III** покрывает безопасность и надежность, этику и арсенал инструментов, делающих вайб-кодинг возможным сегодня: ИИ-прокачанные IDE вроде Cursor и Windsurf, которые интегрируют модели от Anthropic, Google Gemini и OpenAI, чтобы понимать всю вашу кодовую базу и ассистировать на каждом повороте. Знание того, какие тулзы и модели применять (варианты Claude для разных задач, ChatGPT для общих вопросов) — это часть нового скиллсета разработчика. У каждого свои фишки: Cursor для интерактивного редактирования, Windsurf для контекстно-зависимых задач, чат-интерфейсы для брейншторминга и траблшутинга, и так далее.
 
-In Part I, I’ll identify domains where vibe coding excels: spinning up new products, prototyping features, churning out standard CRUD apps or integration code—all areas where speed and pattern matching trump deep originality. Conversely, I’ll also look at where we remain cautious about relying on AI: for truly complex, low-level, or novel algorithms where it might stumble. Recognizing the current limits of AI prevents frustration and failure; there’s still plenty only human ingenuity can achieve.
+Глядя в будущее, я предвижу еще более абстрактные способы создания софта («вайб-дизайн» через GUI и высокоуровневый ввод), снижение зависимости от дженерик-библиотек, так как ИИ будет генерить более кастомный код, и даже софт, который сам эволюционирует на основе петель обратной связи от ИИ. В этом будущем успех в софте будет сильно зависеть от человеческой креативности, умения в дистрибуцию и способности оседлать сетевые эффекты, потому что барьер «грубой силы» кодинга станет совсем низким. Могут появиться новые парадигмы UX, движимые повсеместностью ИИ — от разговорных интерфейсов до адаптивных UI и дальше.
 
-The human element remains the linchpin. We ensure the architecture is sound, debug the tricky bugs, and judge the quality of code beyond “it runs.” Critically, we infuse development with user-centric thinking—something an AI can’t do. It’s up to us to make sure the software not only works but works for the users in a meaningful way. In short, developers become curators and editors of AI output, always aligning it with real-world needs and high standards.
+Во всем этом выделяется одна тема: слияние сильных сторон человека и ИИ. Никто по одиночке не так силен, как вместе. ИИ дает скорость, широту знаний и неутомимое исполнение. Люди дают направление, глубину понимания и ценности. Оптимальный рабочий процесс будущего — это симбиоз. Представьте это как пару из мастера-ремесленника и суперсильного подмастерья, который может мгновенно принести любой инструмент или справочник. Экспертиза мастера всё еще критична для создания чего-то по-настоящему крутого.
 
-Part II looks at the practical aspects of vibe coding. Embracing new workflows is crucial. Techniques like “roll, not fix” remind us not to get bogged down—sometimes regenerating code is faster than debugging it. Parallel prompting lets us solve problems from multiple angles at once. We must balance rapid iteration with eventual refinement, ensuring we don’t accumulate unsustainable mess. Best practices like modularizing AI code, thorough testing, and iterative refinement help keep the codebase clean and robust despite the speed of development.
+Разработчикам, читающим это: пришло время принять эти инструменты и парадигмы. Эта книга подтолкнет вас поэкспериментировать с ИИ-ассистентом на следующем проекте, попрактиковаться в декомпозиции задач для ИИ и прокачать скилл создания промптов и курирования результатов. Но она также призовет вас удвоить ставку на то, что делает вас уникально ценными — вашу способность проектировать системы, сопереживать пользователям и принимать взвешенные решения, которые синхронизируют софт с реальностью.
 
-As projects scale, we have to manage an accelerated influx of code and potential technical debt. AI can flood your repo with code; only discipline and good engineering practices (plus maybe AI-assisted refactoring) will keep it maintainable. On the people side, we’ll hire and train engineers to be adept at using AI tools, valuing adaptability and system design skills. And we’ll know when to dial back into traditional modes⁠—like when solidifying a product for long-term maintenance or handling critical systems where caution trumps velocity.
+## Условные обозначения, используемые в этой книге
 
-Part III covers security and reliability, ethics, and an arsenal of tools that make vibe coding possible today: AI-augmented IDEs like Cursor and Windsurf that integrate models from Anthropic, Google’s Gemini, and OpenAI to understand your entire codebase and assist at every turn. Knowing which tools and models to apply (Claude’s variants for different tasks, ChatGPT for general Q&A) is part of the new developer skill set. They each have strengths: Cursor for interactive editing, Windsurf for context-heavy tasks, chat interfaces for brainstorming and troubleshooting, etc.
+В этой книге используются следующие типографские соглашения:
 
-Looking to the future, I anticipate even more abstract ways of building software (“vibe designing” through GUIs and higher-level input), diminishing reliance on generic libraries as AI generates more bespoke code, and even software that evolves on its own based on AI feedback loops. In this future, success in software will lean heavily on human creativity, distribution savvy, and the ability to harness network effects, because the brute-force barrier of coding will be so low. New user experience paradigms may emerge, driven by AI’s ubiquity—from conversational interfaces to adaptive UIs and beyond.
+## Курсив (Italic)
+Обозначает новые термины, URL-адреса, адреса электронной почты, имена файлов и расширения файлов.
 
-In all of this, one theme stands out: the fusion of human and AI strengths. Neither alone is as powerful as both together. AI brings speed, breadth of knowledge, and tireless execution. Humans bring direction, depth of understanding, and values. The optimal workflow of the future is a symbiosis—think of it as pairing a master craftsperson with a superpowered apprentice who can instantly fetch any tool or reference. The craftsperson’s expertise is still crucial to create something truly excellent.
+## Моноширинный шрифт (Constant width)
+Используется для листингов программ, а также внутри абзацев для обозначения элементов программы, таких как имена переменных или функций, баз данных, типов данных, переменных окружения, операторов и ключевых слов.
 
-For developers reading this: it’s time to embrace these tools and paradigms. This book will encourage you to experiment with an AI coding assistant on your next project, practice breaking problems down for an AI to solve parts of it, and cultivate that skill of crafting prompts and curating results. But it will also urge you to double down on what makes you uniquely valuable—your ability to design systems, empathize with users, and make judgment calls that align software with reality.
+## Совет (Tip)
+Этот элемент обозначает общее примечание или подсказку.
 
-## Conventions Used in This Book
-The following typographical conventions are used in this book:
+## Предупреждение (Warning)
+Этот элемент указывает на предупреждение или предостережение.
 
-## Italic
-Indicates new terms, URLs, email addresses, filenames, and file extensions.
+## O’Reilly Online Learning ## Примечание
+Уже более 40 лет O’Reilly Media предоставляет обучение технологиям и бизнесу, знания и инсайты, помогающие компаниям добиваться успеха.
 
-## Constant width
-Used for program listings, as well as within paragraphs to refer to program elements such as variable or function names, databases, data types, environment variables, statements, and keywords.
+Наша уникальная сеть экспертов и инноваторов делится знаниями через книги, статьи и нашу платформу онлайн-обучения. Платформа O’Reilly дает вам доступ по запросу к живым тренингам, углубленным путям обучения, интерактивным средам кодинга и огромной коллекции текстов и видео от O’Reilly и более чем 200 других издателей. Для получения дополнительной информации посетите https://oreilly.com.
 
-## Tip
-This element signifies a general note.
+## Как с нами связаться
 
-## Warning
-This element indicates a warning or caution.
-
-## O’Reilly Online Learning
-## Note
-For more than 40 years, O’Reilly Media has provided technology and business training, knowledge, and insight to help companies succeed.
-
-Our unique network of experts and innovators share their knowledge and expertise through books, articles, and our online learning platform. O’Reilly’s online learning platform gives you on-demand access to live training courses, in-depth learning paths, interactive coding environments, and a vast collection of text and video from O’Reilly and 200+ other publishers. For more information, visit https://oreilly.com.
-
-## How to Contact Us
-Please address comments and questions concerning this book to the publisher:
+Пожалуйста, направляйте комментарии и вопросы касательно этой книги издателю:
 
 O’Reilly Media, Inc.
 141 Stony Circle, Suite 195
 Santa Rosa, CA 95401
-800-889-8969 (in the United States or Canada)
-707-827-7019 (international or local)
-707-829-0104 (fax)
+800-889-8969 (в США или Канаде)
+707-827-7019 (международный или местный)
+707-829-0104 (факс)
 support@oreilly.com
 https://oreilly.com/about/contact.html
-We have a web page for this book, where we list errata and any additional information. You can access this page at https://oreil.ly/BeyondVibeCoding.
 
-For news and information about our books and courses, visit https://oreilly.com.
+У нас есть веб-страница для этой книги, где мы публикуем список опечаток и любую дополнительную информацию. Вы можете найти эту страницу по адресу https://oreil.ly/BeyondVibeCoding.
 
-Find us on LinkedIn: https://linkedin.com/company/oreilly-media.
+Новости и информацию о наших книгах и курсах ищите на https://oreilly.com.
 
-Watch us on YouTube: https://youtube.com/oreillymedia.
+Ищите нас в LinkedIn: https://linkedin.com/company/oreilly-media.
+
+Смотрите нас на YouTube: https://youtube.com/oreillymedia.

@@ -1,607 +1,634 @@
-# Chapter 2. The Art of the Prompt: Communicating Effectively with AI
+# Глава 2. Искусство промта: Как базарить с ИИ, чтобы он тебя понял
 
+В вайб-кодинге промты — это новый исходный код.
 
-In vibe coding, prompts are the new source code.
-
-The way you communicate your intent to the AI has a direct impact on the quality of the code it generates. Writing a good prompt is both an art and a science, often called prompt engineering. This chapter will equip you with techniques to get the most out of your AI coding assistant. We’ll start with some fundamentals about why prompts matter and then delve into a toolbox of prompting techniques, from simple to advanced. By learning how to craft effective prompts and how to iteratively refine them (Figure 2-1), you’ll be able to cocreate with AI more efficiently and accurately.
-
-
+То, как ты доносишь свои хотелки до ИИ, напрямую влияет на качество кода, который он выплюнет. Написание годного промта — это и искусство, и наука, которую часто называют промт-инжинирингом. Эта глава вооружит тебя техниками, чтобы выжать максимум из твоего кремниевого ассистента. Мы начнем с базы — почему промты вообще важны, а затем залезем в ящик с инструментами: от простых приемов до продвинутых техник. Научившись крафтить эффективные запросы и итеративно их допиливать (Рисунок 2-1), ты сможешь кодить в тандеме с ИИ гораздо быстрее и точнее.
 
 > [!NOTE]
 > **Image Missing**
-> *Figure 2-1. An illustration of a chatbot assisting with coding. The developer and AI engage in a dialogue: the developer provides instructions or questions (prompts), and the AI responds with code or answers. Communicating effectively with the AI through well-crafted prompts is key to getting accurate and useful code generation.*
+> *Рисунок 2-1. Иллюстрация чат-бота, помогающего с кодом. Разработчик и ИИ ведут диалог: разраб кидает инструкции или вопросы (промты), а ИИ отвечает кодом или советами. Грамотная коммуникация через четкие промты — ключ к получению рабочего и полезного кода.*
 
-## Prompt Engineering Fundamentals
-If vibe coding is a conversation between you and an AI model, prompt engineering is the skill of speaking the AI’s language to get the best results. A well-crafted prompt can be the difference between an irrelevant or buggy code suggestion and a perfect solution. Mastering prompt engineering means understanding how to guide the AI effectively, how to provide context, and how to iterate with the AI when the first answer isn’t quite right.
+## Основы промт-инжиниринга
 
-When you program with an AI, you are essentially programming through the AI using natural language. The prompt you provide is like a high-level programming language that the AI interpreter then translates into actual code. Just as a compiler’s output is only as good as the source code fed to it, an AI’s output is only as good as the prompt.
+Если вайб-кодинг — это разговор между тобой и моделью, то промт-инжиниринг — это умение говорить на языке ИИ, чтобы получить нормальный результат. Грамотно составленный промт может стать разницей между бесполезным куском забагованного кода и идеальным решением, попавшим точно в цель. Овладеть этим навыком — значит понять, как направлять ИИ, как давать контекст и как итерировать, когда первый ответ оказался "ну такое".
 
-Why are prompts so important? LLMs, despite their sophistication, are not mind readers. They respond only to the input they’re given. Ambiguous or poorly worded prompts can lead to irrelevant or incorrect code, while a clear and specific prompt can yield a spot-on solution on the first try. In traditional coding, you spend time thinking about algorithms and writing code; in vibe coding, you spend time thinking about how to convey your requirements to the AI. It’s a shift in what “writing code” means: you might write a paragraph instead of a function, but you still need to be precise and logical.
+Когда ты программируешь с ИИ, ты, по сути, программируешь *через* ИИ, используя естественный язык. Твой промт — это высокоуровневый язык программирования, который интерпретатор ИИ транслирует в реальный код. И точно так же, как выхлоп компилятора зависит от качества исходников, выхлоп ИИ зависит от качества промта.
 
-Think of writing prompts as being like writing documentation or user stories for a very literal and pedantic junior developer, one who will do exactly (and only) what the documentation says, and who has a lot of knowledge but no common sense beyond patterns they have seen. If your instructions (prompts) leave room for interpretation, the AI might fill the gaps in ways you didn’t intend. Thus, learning to communicate with the AI is as crucial as learning a programming language’s syntax used to be.
+Почему промты так важны? LLM-ки, при всей их крутости, мысли читать не умеют. Они реагируют только на то, что им скормили. Мутные или криво сформулированные промты ведут к левому или нерабочему коду, в то время как четкий и конкретный запрос может выдать решение в яблочко с первой попытки. В традиционном кодинге ты тратишь время на продумывание алгоритмов и написание синтаксиса; в вайб-кодинге ты тратишь время на то, чтобы сформулировать требования для ИИ. Это сдвиг парадигмы того, что значит "писать код": ты можешь накатать абзац текста вместо функции, но логика и точность всё равно должны быть железными.
 
-Another reason prompts are crucial is reproducibility and future-proofing. If you discover a prompt that reliably generates good code for a certain pattern or task, that prompt becomes a valuable piece of knowledge (almost like a snippet or template). You might save it or reuse it in similar contexts. In teams, developers might share effective prompt patterns with each other, similar to how they share coding best practices.
+Представь, что пишешь доку или user story для очень душного джуна-буквоеда. Он сделает ровно (и только) то, что написано в документации. У него вагон знаний, но здравого смысла — ноль, только паттерны, которые он где-то видел. Если твои инструкции (промты) оставляют простор для интерпретации, ИИ заполнит пробелы так, как тебе точно не понравится. Поэтому учиться общаться с ИИ сейчас так же важно, как раньше было учить синтаксис языка.
 
-Finally, as models get better and more integrated, they may allow more complex interactions. Being good at prompting will let you harness new capabilities quickly. For instance, some advanced systems allow you to attach extensive instructions or provide entire reference documents as part of the context for the model. Knowing how to structure that input is key to leveraging such power.
+Еще одна причина важности промтов — воспроизводимость и задел на будущее. Если ты нашел промт, который стабильно генерит хороший код для определенного паттерна или задачи, этот промт становится ценным активом (почти как сниппет или шаблон). Ты можешь сохранить его или переиспользовать в похожих ситуациях. В командах разработчики могут шарить эффективные промты друг с другом, так же как они делятся лучшими практиками кодинга.
 
-So treat prompt writing as a new essential skill. In many ways, prompting is programming. The main difference is you’re writing in a language (like English) that the AI then converts into code. But you still have to be clear, logical, and anticipate edge cases in your description.
+И наконец, по мере того как модели становятся умнее и интегрированнее, они позволяют всё более сложные взаимодействия. Умение грамотно промтить позволит тебе быстро осваивать новые фичи. Например, некоторые продвинутые системы позволяют прикреплять обширные инструкции или скармливать целые доки в качестве контекста. Понимание того, как структурировать этот входной поток — ключ к использованию всей этой мощи.
 
-## Specificity and Clarity: Writing Prompts That Deliver
-One of the golden rules of prompting (which I’ll lay out more fully in Chapter 3) is to be specific and clear about what you want. Unlike a human collaborator, an AI doesn’t truly understand your goal beyond the words you provide. A common mistake is giving the AI a very high-level prompt like “Make a website” and expecting magic. The AI works better with concrete details.
+Так что относись к написанию промтов как к новому обязательному скиллу. Во многих смыслах промтинг — это и есть программирование. Главное отличие в том, что ты пишешь на языке (типа английского), который ИИ конвертирует в код. Но тебе всё равно нужно быть четким, логичным и предусматривать граничные случаи (edge cases) в своем описании.
 
-Always assume it knows nothing about your project beyond what you provide. Include relevant details such as the programming language, framework, and libraries, as well as the specific function or snippet in question. If there’s an error, provide the exact error message and describe what the code is supposed to do. Any vagueness or room for interpretation can lead to unintended outputs.
+## Конкретика и ясность: Пишем промты, которые работают
 
-For example, instead of “Write a sorting function,” you could say:
+Одно из золотых правил промтинга (которое я разверну подробнее в Главе 3) — быть конкретным и четко понимать, чего ты хочешь. В отличие от коллеги-человека, ИИ ни черта не понимает твою конечную цель за пределами тех слов, что ты написал. Типичная ошибка новичка — кинуть ИИ супер-абстрактный промт типа "Сделай веб-сайт" и ждать магии. ИИ лучше работает с конкретными деталями.
 
-Write a Python function sort_by_lastname(customers) that takes a list of customer records (each with a first_name and last_name field) and returns a list sorted by last_name alphabetically. Include a brief docstring and handle the case of missing last names by treating them as empty strings.
+Всегда исходи из того, что он не знает о твоем проекте ничего, кроме того, что ты ему дал. Включай релевантные детали: язык программирования, фреймворк, библиотеки, а также конкретную функцию или кусок, над которым работаешь. Если вылезла ошибка — дай точный текст ошибки и опиши, что код *должен* был сделать. Любая муть или недосказанность может привести к непредсказуемым результатам.
 
-This prompt sets clear expectations about the language (Python), the function name and purpose, the input structure, the sort key, additional requirements (docstring), and an edge case. It’s likely to produce exactly what you need or very close to it. Essentially, think like a spec writer: the more precisely you specify the task, the less guesswork the AI has to do and the fewer revisions you’ll need.
+Например, вместо "Напиши функцию сортировки", скажи:
 
-Strategies for specificity include:
+> Напиши функцию на Python `sort_by_lastname(customers)`, которая принимает список записей клиентов (у каждой есть поля `first_name` и `last_name`) и возвращает список, отсортированный по `last_name` в алфавитном порядке. Добавь краткий docstring и обработай случай отсутствия фамилии, считая её пустой строкой.
 
-## Mention the language or environment
-If you want a solution in JavaScript, say so: “Write a JavaScript function...” versus just “Write a function...” If you want it for a specific framework or version, include that (“Using React Hooks...” or “in Python 3...”).
+Этот промт задает четкие ожидания по языку (Python), имени и назначению функции, структуре входных данных, ключу сортировки, доп. требованиям (docstring) и граничному случаю. Скорее всего, он выдаст ровно то, что тебе нужно, или очень близко к этому. По сути, думай как составитель техзадания: чем точнее ты опишешь задачу, тем меньше ИИ придется гадать на кофейной гуще и тем меньше правок тебе придется вносить.
 
-## Define the scope of the output
-Do you want just a single function? A full file or module? Tests included? For example, “Provide only the function implementation” and “Provide a complete runnable script” can yield different responses.
+Стратегии для повышения конкретики:
 
-## Include requirements and constraints
-In the login example, we specified password length and attempt limit. Think of edge cases or constraints and put them in the prompt. If you need the code to be optimized for performance or use a certain algorithm, say so: “using O(n) time and O(1) space” or “using a binary search approach.”
+### Укажи язык или окружение
+Если тебе нужно решение на JavaScript, так и скажи: "Напиши JavaScript функцию..." вместо просто "Напиши функцию...". Если это под конкретный фреймворк или версию, уточни ("Используя React Hooks..." или "на Python 3...").
 
-## Avoid ambiguous references
-Don’t use words like it without a clear antecedent. Instead of “Process it and return the result,” say, “Process the array and return the resulting array.”
+### Определи объем выхлопа
+Тебе нужна только одна функция? Полный файл или модуль? Тесты нужны? Например, "Дай только реализацию функции" и "Дай полный запускаемый скрипт" дадут совершенно разные ответы.
 
-## Name your desired output format
-If you want the AI to output just code or code with comments or an explanation, you can instruct that: “Give only the code, no explanation” or “Provide code and a brief comment for each step.”
+### Включи требования и ограничения
+В примере с логином мы указывали длину пароля и лимит попыток. Подумай о граничных случаях или ограничениях и запихни их в промт. Если код должен быть оптимизирован по производительности или использовать определенный алгоритм, скажи об этом: "используя время O(n) и память O(1)" или "используя подход бинарного поиска".
 
-A clear prompt sets the AI up for success. If you find the AI’s answers often need a lot of correction, examine whether your prompts might be underspecified.
+### Избегай двусмысленных ссылок
+Не используй слова типа "это/его" без четкого контекста. Вместо "Обработай это и верни результат", скажи: "Обработай массив и верни результирующий массив".
 
-Here’s what not to do:
+### Назови желаемый формат ответа
+Если ты хочешь, чтобы ИИ выдал только код, или код с комментами, или объяснение, ты можешь это прописать: "Дай только код, без объяснений" или "Предоставь код и краткий коммент к каждому шагу".
 
-## Don’t write a whole novel
-Long-winded prompts that include irrelevant info can confuse the model or cause it to focus on the wrong thing. Be concise but complete in your description. For instance, you usually don’t need to preface with “You are a world-class programmer...” in a coding context (some people do that in general ChatGPT usage, but for coding tasks, it’s often unnecessary and could add noise).
+Четкий промт настраивает ИИ на успех. Если ты замечаешь, что ответы ИИ часто приходится жестко править, проверь, не слишком ли размыты твои запросы.
 
-## Don’t assume the AI will fill in details by itself correctly
-If something is important (like thread safety, handling of special characters, etc.), mention it. If it’s not mentioned, assume the AI might not handle it.
+А вот чего делать **не надо**:
 
-## Avoid open-ended “creative” prompts when you need deterministic outputs
-For example, saying, “Write some code to analyze data” might cause the AI to guess what analysis you want. Instead, specify:
+### Не пиши гребаные романы
+Длинные простыни текста с кучей лишней инфы могут сбить модель с толку или заставить её сфокусироваться не на том. Будь краток, но полон в описании. Например, тебе обычно не нужно начинать с "Ты — программист мирового класса..." в контексте кодинга (некоторые делают так в обычном ChatGPT, но для задач по коду это часто лишний шум).
 
-Calculate the average and standard deviation of a list of numbers.
+### Не надейся, что ИИ сам правильно додумает детали
+Если что-то важно (типа потокобезопасности, обработки спецсимволов и т.д.), упомяни это. Если не упомянул — считай, что ИИ это проигнорит.
 
-In summary, say exactly what you mean. The more the AI “knows” about what you truly want, the better it can deliver. If you find yourself having to correct the AI multiple times, ask: could my initial prompt have been clearer?
+### Избегай открытых "креативных" промтов, когда нужен детерминированный результат
+Например, фраза "Напиши какой-нибудь код для анализа данных" заставит ИИ гадать, какой именно анализ ты хочешь. Вместо этого уточни:
 
-## Iterative Refinement: The Feedback Loop with the AI
-Even with clear prompts, you won’t always get the perfect answer on the first try. Think of interacting with the AI as a conversation or an iterative development process. This is the feedback loop I touched on in Chapter 1.
+> Рассчитай среднее и стандартное отклонение списка чисел.
 
-When the AI gives you code, review it critically, just as you would code written by a human. Does it meet the requirements? If not, identify what’s missing or wrong. Then provide feedback or a refined prompt. This can be done in a conversational AI by simply continuing the dialogue, or in an editor by writing another comment for the AI to respond to.
+Короче, говори именно то, что имеешь в виду. Чем больше ИИ "знает" о том, что ты реально хочешь, тем лучше он справится. Если ловишь себя на том, что правишь ИИ по десять раз, спроси себя: мог ли мой изначальный промт быть понятнее?
 
-By providing feedback to the AI, you steer it closer to your desired outcome. In a sense, you are training it on the fly for your specific problem. Advanced prompt engineering is like the loop in Figure 2-2: Prompt → AI output → Review → Refine prompt → AI output →...until satisfied. Keeping each iteration’s changes small is useful; if you overhaul the prompt too much, you may lose some good parts of the previous output.
+## Итеративное улучшение: Петля обратной связи с ИИ
 
+Даже с четкими промтами ты не всегда получишь идеальный ответ с первого раза. Воспринимай взаимодействие с ИИ как разговор или итеративный процесс разработки. Это та самая петля обратной связи, о которой я заикнулся в Главе 1.
 
+Когда ИИ выдает тебе код, проверяй его критически, так же, как код, написанный человеком. Соответствует ли он требованиям? Если нет, найди, чего не хватает или где косяк. Затем дай фидбек или уточни промт. Это можно сделать в чате, просто продолжив диалог, или в редакторе, написав еще один коммент, на который ИИ ответит.
+
+Давая обратную связь ИИ, ты рулишь им в сторону нужного результата. В каком-то смысле, ты тренируешь его на лету под свою конкретную проблему. Продвинутый промт-инжиниринг похож на цикл на Рисунке 2-2: Промт → Ответ ИИ → Ревью → Уточнение промта → Ответ ИИ → ...пока не будешь доволен. Полезно делать изменения в каждой итерации небольшими; если перелопатишь промт слишком сильно, можешь потерять хорошие куски из предыдущего ответа.
 
 > [!NOTE]
 > **Image Missing**
-> *Figure 2-2. Advanced prompt engineering loop.*
+> *Рисунок 2-2. Цикл продвинутого промт-инжиниринга.*
 
-For example, you might prompt:
+Например, ты пишешь:
 
-Write a function that takes a list of integers and returns their sum.
+> Напиши функцию, которая принимает список целых чисел и возвращает их сумму.
 
-The AI then returns a function, but its code assumes a non-empty list and doesn’t handle an empty list well. You could then reply:
+ИИ возвращает функцию, но код предполагает, что список не пустой, и ломается на пустом списке. Ты можешь ответить:
 
-That looks good. However, please modify it to return 0 if the list is empty.
+> Выглядит норм. Однако, поправь её так, чтобы она возвращала 0, если список пуст.
 
-The AI would then update the function accordingly. In this way, you didn’t have to prompt from scratch; you just told the AI to make an adjustment. The AI already had the context of the previous code it gave.
+ИИ обновит функцию соответствующим образом. Таким макаром тебе не пришлось писать промт с нуля; ты просто сказал ИИ внести правку. У ИИ уже был контекст предыдущего кода.
 
-If you’re using an inline assistant, refinement might look like editing the code and perhaps writing a comment like # TODO: handle empty list and then seeing if the AI suggests a fix for that.
+Если ты используешь встроенного ассистента (inline), уточнение может выглядеть как редактирование кода и, возможно, написание коммента типа `# TODO: обработать пустой список`, чтобы посмотреть, предложит ли ИИ фикс.
 
-Another refinement approach is reprompting with more info if the first output wasn’t right. Suppose you said, “Sort a list of names,” and it gave code sorting case-sensitively but you wanted case-insensitive. You could rephrase:
+Другой подход к уточнению — переспросить с большим количеством инфы, если первый выхлоп был мимо. Допустим, ты сказал: "Отсортируй список имен", и он дал код с сортировкой, чувствительной к регистру, а тебе нужно без учета регистра. Ты можешь перефразировать:
 
-Sort a list of names case-insensitively.
+> Отсортируй список имен без учета регистра.
 
-Or even:
+Или даже:
 
-The previous code sorts case-sensitively. Modify it to be case-insensitive.
+> Предыдущий код сортирует с учетом регистра. Измени его, чтобы было без учета регистра.
 
-In debugging, for more complex logic bugs (where no obvious error message is thrown but the output is wrong), you can prompt the AI to walk through the code’s execution. For instance:
+В отладке, для более сложных логических багов (где нет явной ошибки, но результат кривой), можно попросить ИИ пройтись по выполнению кода. Например:
 
-Walk through this function line by line and track the value of total at each step. It’s not accumulating correctly—where does the logic go wrong?
+> Пройдись по этой функции построчно и отслеживай значение переменной total на каждом шаге. Она накапливается неправильно — где логика сворачивает не туда?
 
-This is an example of a “rubber duck” debugging prompt: you’re essentially asking the AI to simulate the debugging process a human might do with prints or a debugger. Such prompts often reveal subtle issues like variables not resetting or incorrect conditional logic, because the AI will spell out the state at each step. If you suspect a certain part of the code, you can zoom in:
+Это пример промта для отладки методом "резиновой уточки": ты, по сути, просишь ИИ симулировать процесс отладки, который делал бы человек с принтами или дебаггером. Такие промты часто вскрывают неочевидные проблемы, типа несброшенных переменных или кривых условий, потому что ИИ проговаривает состояние на каждом шаге. Если подозреваешь конкретную часть кода, можешь зумить туда:
 
-Explain what the filter call is doing here and if it might be excluding more items than it should.
+> Объясни, что здесь делает вызов filter, и может ли он исключать больше элементов, чем нужно.
 
-Engaging the AI in an explanatory role can surface the bug in the process of explanation.
+Вовлечение ИИ в роль "объяснятора" может выявить баг прямо в процессе объяснения.
 
-After the explanation, it’s often effective to directly ask for what you need:
+После объяснения часто эффективно прямо попросить то, что нужно:
 
-What might be causing this issue, and how can I fix it?
+> Что может вызывать эту проблему и как мне это пофиксить?
 
-This invites the AI to both diagnose and propose a solution. If the AI’s first answer is unclear or partially helpful, don’t hesitate to ask a follow-up question:
+Это приглашает ИИ и поставить диагноз, и предложить лекарство. Если первый ответ ИИ мутный или помог лишь частично, не стесняйся задать уточняющий вопрос:
 
-That explanation makes sense. Can you show me how to fix the code? Please provide the corrected code.
+> Объяснение логичное. Можешь показать, как исправить код? Пожалуйста, дай исправленный вариант.
 
-In a chat setting, the AI has the conversation history, so it can directly output the modified code. If you’re using an inline tool like Copilot in VSCode or Cursor without a chat, you might instead write a comment above the code:
+В чате у ИИ есть история переписки, так что он может сразу выдать модифицированный код. Если используешь inline-инструмент типа Copilot в VSCode или Cursor без чата, можешь написать коммент над кодом:
 
-// BUG: returns NaN, fix this function and see how it autocompletes 
-In general, though, the interactive chat yields more thorough explanations.
+`// BUG: возвращает NaN, исправь эту функцию и посмотри, как она автодополнится`
 
-Another follow-up pattern: if the AI gives a fix but you don’t understand why, ask:
+Но в целом, интерактивный чат дает более глубокие объяснения.
 
-Can you explain why that change solves the problem?
+Еще один паттерн для фоллоу-апа: если ИИ дает фикс, но ты не вдупляешь почему, спроси:
 
-This way, you learn for next time, and you double-check that the AI’s reasoning is sound.
+> Можешь объяснить, почему это изменение решает проблему?
 
-LLMs thrive on examples and corrections. If you point out what’s wrong or give a quick example, the AI can incorporate it:
+Так ты учишься на будущее и перепроверяешь, что логика ИИ здоровая.
 
-If input is [], it should return 0, but now it errors.
+LLM-ки обожают примеры и исправления. Если ты указываешь на ошибку или даешь быстрый пример, ИИ может это впитать:
 
-This iterative process is normal. In fact, trying to cram every detail into one prompt might be less effective than a couple of back-and-forth turns. Use that to your advantage.
+> Если вход [], должно возвращать 0, но сейчас падает с ошибкой.
 
-Be patient and specific in your feedback. Instead of saying, “No, that’s wrong,” say what’s wrong or what’s needed:
+Этот итеративный процесс — норма. На самом деле, попытка впихнуть каждую деталь в один мега-промт может быть менее эффективной, чем пара ходов "туда-сюда". Используй это.
 
-This code doesn’t handle negative numbers correctly. It should treat them as 0 in the sum.
+Будь терпелив и конкретен в своем фидбеке. Вместо того чтобы говорить "Нет, это неправильно", скажи, что именно не так или что нужно:
 
-Also, if the AI goes off track, you can steer it back: sometimes resetting or rephrasing is easier than trying to salvage a very incorrect attempt. Use your judgment. If the AI output shows that it is completely misunderstanding you, clarify your prompt from scratch.
+> Этот код неправильно обрабатывает отрицательные числа. Он должен считать их за 0 в сумме.
 
-As you refine, you’ll also learn how the AI interpreted your prompt. This can inform how you write future prompts. You might realize, “Oh, it took ‘login system’ to mean an entire UI. Next time I’ll specify backend only.”
+Также, если ИИ понесло не туда, ты можешь вернуть его на рельсы: иногда проще сбросить контекст или перефразировать, чем пытаться спасти совсем уж кривую попытку. Смотри по ситуации. Если ответ ИИ показывает, что он вообще тебя не понял, перепиши промт с нуля.
 
-Think of it like debugging code: if the AI output is wrong, the “bug” might be in your prompt, not in the AI’s processing. Just as you’d examine and fix your code when it produces incorrect results, you should refine your prompts when the AI generates unexpected or incorrect output. The conversation between you and the AI is like a debugging session where each exchange helps you pinpoint and fix the issue.
+В процессе допиливания ты также поймешь, как ИИ интерпретировал твой промт. Это поможет писать будущие запросы лучше. Ты можешь осознать: "А, он воспринял 'система логина' как весь UI целиком. В следующий раз уточню, что нужен только бэкенд".
 
-## Comparing Two Prompts
-Imagine you have a simple Node.js function meant to convert a list of user objects to a lookup map by user ID. However, it’s throwing an error. Here’s the buggy code:
+Думай об этом как об отладке кода: если выхлоп ИИ неверен, "баг" может быть в твоем промте, а не в мозгах ИИ. Точно так же, как ты бы искал ошибки в своем коде при неверном результате, тебе стоит рефакторить свои промты, когда ИИ генерит дичь. Разговор между тобой и ИИ — это сессия отладки, где каждый обмен репликами помогает найти и устранить проблему.
 
-// Buggy function: converts array of users to a map by ID
+## Сравнение двух промтов
+
+Представь, что у тебя есть простая Node.js функция, которая должна конвертировать список объектов пользователей в карту (lookup map) по ID пользователя. Но она кидает ошибку. Вот забагованный код:
+
+```javascript
+// Забагованная функция: конвертирует массив юзеров в карту по ID
 function mapUsersById(users) {
   const userMap = {};
   for (let i = 0; i <= users.length; i++) {  
-    // Note: using <= will go out of bounds on the last iteration
+    // Примечание: использование <= приведет к выходу за границы на последней итерации
     const user = users[i];
     userMap[user.id] = user;
   }
   return userMap;
 }
 
-// Example usage:
+// Пример использования:
 const result = mapUsersById([{ id: 1, name: "Alice" }]);
-This code is supposed to iterate through the user’s array and build an object where keys are user IDs. However, there is a bug: the loop uses i <= users.length instead of i < users.length. This will cause users[i] to be undefined on the last iteration, likely leading to a runtime error (like attempting to access the property ID of undefined). Let’s see how an AI assistant might respond to two different prompts about this issue (see Figure 2-3).
+```
 
-
+Этот код должен пробежаться по массиву юзеров и собрать объект, где ключи — это ID юзеров. Однако тут есть баг: цикл использует `i <= users.length` вместо `i < users.length`. Это приведет к тому, что `users[i]` будет `undefined` на последней итерации, что, скорее всего, вызовет ошибку рантайма (типа попытки доступа к свойству ID у `undefined`). Давай посмотрим, как ИИ-ассистент может ответить на два разных промта об этой проблеме (см. Рисунок 2-3).
 
 > [!NOTE]
 > **Image Missing**
-> *Figure 2-3. Prompt quality impact comparison: vague prompts produce generic or incorrect code, while specific, well-structured prompts generate accurate, contextually appropriate solutions.*
+> *Рисунок 2-3. Сравнение влияния качества промта: мутные промты дают дженерик-ответы или неверный код, в то время как конкретные, хорошо структурированные промты генерируют точные, подходящие по контексту решения.*
 
-## Poor prompt
-Here’s an example of a poor prompt:
+### Плохой промт
 
-Why isn’t my mapUsersById function working?
+Вот пример хренового промта:
 
-AI’s response to the poor prompt (simulated):
+> Почему моя функция mapUsersById не работает?
 
-It’s hard to say without more information. Are you sure the function is being called with a proper array of users? Perhaps the issue is that users is empty or not an array, causing the loop not to execute properly. It could also be that there’s an error when setting the property on userMap. Make sure that each user has an id property. If users is undefined or null, that would also cause it to not work.
+Ответ ИИ на плохой промт (симуляция):
 
-This answer is quite vague. The prompt gave no details except the function name, so the AI is guessing at generic causes (“Maybe the array is empty or not an array,” “Make sure each user has an ID”). It did not identify the actual bug.
+> Трудно сказать без дополнительной информации. Вы уверены, что функция вызывается с правильным массивом пользователей? Возможно, проблема в том, что `users` пуст или не является массивом, из-за чего цикл не выполняется корректно. Также может быть ошибка при установке свойства в `userMap`. Убедитесь, что у каждого пользователя есть свойство `id`. Если `users` равно `undefined` или `null`, это тоже приведет к неработоспособности.
 
-This is the kind of response you get when the question is underspecified—the model can only regurgitate common debugging tips. If you’re a developer, this isn’t very helpful because it doesn’t address the real mistake. The lack of context and specificity in the prompt yields a generic answer: essentially, the AI equivalent of “Have you tried turning it off and on again?” This aligns with the community advice that vague prompts lead to irrelevant or generic answers.
+Этот ответ довольно размытый. Промт не дал никаких деталей, кроме имени функции, поэтому ИИ гадает на кофейной гуще, предлагая общие причины ("Может, массив пустой", "Убедитесь, что у каждого юзера есть ID"). Он не нашел реальный баг.
 
-## Improved prompt
-Let’s try this again:
+Это тот тип ответа, который ты получаешь, когда вопрос недоопределен — модель может только выдать набор банальных советов по отладке. Если ты разраб, это не особо помогает, потому что не решает реальную проблему. Нехватка контекста и конкретики в промте дает дженерик-ответ: по сути, ИИ-эквивалент фразы "А вы пробовали выключить и включить?". Это подтверждает общее правило: мутные промты ведут к бесполезным или общим ответам.
 
-I have a JavaScript function mapUsersById that should convert an array of user objects into a map (object) keyed by user ID. However, it throws an error when I run it. For example, when I pass [ {id: 1, name: "Alice"} ], I get TypeError: Cannot read property 'id' of undefined. Here is the function code:
+### Улучшенный промт
 
-function mapUsersById(users) {
-  const userMap = {};
-  for (let i = 0; i <= users.length; i++) {  
-    const user = users[i];
-    userMap[user.id] = user;
-  }
-  return userMap;
-}
-It should return { "1": {id: 1, name: "Alice"} }. What is the bug and how can I fix it?
+Давай попробуем еще раз:
 
-The AI’s response to the improved prompt (simulated):
+> У меня есть JavaScript функция `mapUsersById`, которая должна конвертировать массив объектов пользователей в карту (объект) с ключами по ID пользователя. Однако она кидает ошибку при запуске. Например, когда я передаю `[ {id: 1, name: "Alice"} ]`, я получаю `TypeError: Cannot read property 'id' of undefined`. Вот код функции:
+>
+> ```javascript
+> function mapUsersById(users) {
+>   const userMap = {};
+>   for (let i = 0; i <= users.length; i++) {  
+>     const user = users[i];
+>     userMap[user.id] = user;
+>   }
+>   return userMap;
+> }
+> ```
+> Она должна возвращать `{ "1": {id: 1, name: "Alice"} }`. В чем баг и как мне его исправить?
 
-The error Cannot read property 'id' of undefined suggests that at some point, user is undefined, and then you try to access user.id. Looking at your loop, the issue is with the loop bounds. You are using i <= users.length. If users.length is 1 (for one user in the array), the loop runs with i = 0 and i = 1. When i is 1, users[1] is undefined (since the only index in the array is 0). Thus user becomes undefined on that iteration, and user.id throws a TypeError. The fix is to change the loop condition to i < users.length so that i goes from 0 to users.length-1. For example:
+Ответ ИИ на улучшенный промт (симуляция):
 
-for (let i = 0; i < users.length; i++) {
-  const user = users[i];
-  userMap[user.id] = user;
-}
-This way, i will be 0 for the first (and only) element, and then the loop stops. With that change, your function will no longer hit an undefined user and should work as expected, returning {"1": {id: 1, name: "Alice"}} for the given input.
+> Ошибка `Cannot read property 'id' of undefined` подсказывает, что в какой-то момент `user` становится `undefined`, и затем вы пытаетесь обратиться к `user.id`. Глядя на ваш цикл, проблема в границах цикла. Вы используете `i <= users.length`. Если `users.length` равно 1 (для одного юзера в массиве), цикл выполняется для `i = 0` и `i = 1`. Когда `i` равно 1, `users[1]` будет `undefined` (так как единственный индекс в массиве — 0). Таким образом, `user` становится `undefined` на этой итерации, и `user.id` вызывает `TypeError`. Исправление — изменить условие цикла на `i < users.length`, чтобы `i` шло от 0 до `users.length-1`. Например:
+>
+> ```javascript
+> for (let i = 0; i < users.length; i++) {
+>   const user = users[i];
+>   userMap[user.id] = user;
+> }
+> ```
+> Таким образом, `i` будет 0 для первого (и единственного) элемента, и затем цикл остановится. С этим изменением ваша функция больше не наткнется на `undefined` user и должна работать как ожидается, возвращая `{"1": {id: 1, name: "Alice"}}` для данных входных параметров.
 
-This response directly pinpoints the bug (using <= in the loop) and explains why it causes the user to be undefined. It then provides the correct code solution (i < users.length) and confirms the expected outcome. The improved prompt succeeded because it followed our principles: it specified the language (JavaScript), described the function’s purpose, included the exact error message and a sample input, and even provided the code snippet in question.
+Этот ответ прямо указывает на баг (использование `<=` в цикле) и объясняет, почему это приводит к `undefined`. Затем он дает правильное решение в коде (`i < users.length`) и подтверждает ожидаемый результат. Улучшенный промт сработал, потому что следовал нашим принципам: он указал язык (JavaScript), описал цель функции, включил точное сообщение об ошибке и пример входных данных, и даже предоставил сам кусок проблемного кода.
 
-Notice how the AI used the error message as a clue to focus on the loop bounds—a targeted prompt enabled the AI to engage in true problem solving, effectively simulating how a human debugger would think: “Where could undefined come from? Likely from the loop indexing.” This is a concrete demonstration of the benefit of detailed prompts.
+Зацени, как ИИ использовал сообщение об ошибке как зацепку, чтобы сфокусироваться на границах цикла — целевой промт позволил ИИ заняться реальным решением проблем, эффективно симулируя ход мыслей человека-дебаггера: "Откуда может взяться `undefined`? Скорее всего, из индексации цикла". Это наглядная демонстрация пользы детальных промтов.
 
-## Prompting Techniques: A Toolbox for Effective Communication
-Now let’s get into specific techniques that can supercharge your prompting skills. These are like patterns or recipes you can use when a straightforward instruction isn’t enough or when you want to guide the AI in a certain way.
+## Техники промтинга: Ящик с инструментами для эффективного общения
 
-By mastering these techniques, you can handle an array of situations: instructing the AI in plain English, giving it examples, making it explain or structure its output, or setting it into different mindsets or roles. All of these help you guide the AI to produce exactly what you need.
+Теперь давай перейдем к конкретным техникам, которые могут прокачать твои скиллы промтинга. Это как паттерны или рецепты, которые можно использовать, когда простой инструкции недостаточно или когда ты хочешь направить ИИ в определенное русло.
 
-Prompting techniques are not mutually exclusive; you will often use several together for best results, especially on complex tasks.
+Освоив эти техники, ты сможешь разруливать кучу ситуаций: инструктировать ИИ простым языком, давать ему примеры, заставлять его объяснять или структурировать свой ответ, или задавать ему разные майндсеты или роли. Всё это поможет тебе заставить ИИ выдать именно то, что тебе нужно.
 
-## A Note on Style
-When you use these techniques, adapt your tone to the model. Many models respond well to polite or neutral instructions. You don’t need to use archaic or overly formal language. Direct but polite often works: “Please do X” or “Let’s do Y.” For example, with chain-of-thought (CoT) prompting, a popular phrase is “Let’s think step-by-step.” Models like GPT-4 recognize this as a cue to show reasoning.
+Техники промтинга не исключают друг друга; часто ты будешь использовать несколько сразу для наилучшего результата, особенно на сложных задачах.
+## Заметка о стиле
+Когда юзаешь эти техники, подстраивай тон под модель. Многие сетки отлично реагируют на вежливые или нейтральные инструкции. Не надо включать режим "джентльмена из 19 века" или писать канцелярщиной. Прямота с налетом вежливость работает на ура: "Пожалуйста, сделай X" или "Давай запилим Y". Например, для промптинга с цепочкой мыслей (CoT) коронная фраза — "Давай подумаем пошагово" (Let’s think step-by-step). Модели типа GPT-4 воспринимают это как триггер, чтобы включить логику и показать ход мыслей.
 
-## Zero-Shot Prompting
-Zero-shot prompting is simply asking the model to do something without providing any examples or additional guidance beyond the instruction. Essentially, the model is solving the task from “zero” examples.
+## Зеро-шот промптинг (Zero-Shot Prompting)
+Зеро-шот — это когда ты просишь модель что-то сделать в лоб, без всяких примеров и лишних наводок, кроме самой инструкции. По сути, модель решает задачу с "нулем" примеров перед глазами.
 
-When to use: This is the most common scenario: you just ask for what you want in plain language. If the task is standard and the prompt is clear, this is often sufficient.
+**Когда юзать:** Самый частый сценарий. Ты просто просишь то, что тебе нужно, обычным человеческим языком. Если задача стандартная, а промпт четкий — этого обычно хватает за глаза.
 
-Example:
+**Пример:**
 
-Write a Python function that checks if a number is prime.
+> Напиши функцию на Python, которая проверяет, является ли число простым.
 
-This is zero shot. The AI will likely produce a prime-checking function using a loop or trial division.
+Это зеро-шот. ИИ, скорее всего, выплюнет функцию проверки простоты через цикл или перебор делителей.
 
-Pros: It’s quick and relies on the model’s learned knowledge. Modern models are surprisingly good at zero-shot responses for many programming tasks, especially if they’re common (like prime checking, sorting, or string manipulation).
+**Плюсы:** Быстро и работает на "мышечной памяти" модели. Современные сетки удивительно хороши в зеро-шот режиме для кучи задач по кодингу, особенно если это классика (типа проверки простых чисел, сортировки или возни со строками).
 
-Cons: If the task is unusual or output format is specific, zero shot might yield a result that doesn’t quite match what you need on the first try, because the model might have multiple ways to interpret it.
+**Минусы:** Если задача с подвывертом или нужен специфический формат вывода, зеро-шот может выдать результат, который не совсем "в кассу" с первого раза, потому что у модели слишком много вариантов интерпретации.
 
-Usually, it’s a good idea to try zero shot first for simple things. If the result is off, you may then shift to refining or other techniques.
+Обычно хорошая тактика — попробовать зеро-шот для простых вещей. Если результат кривой — переходишь к уточнению или другим техникам.
 
-## One-Shot and Few-Shot Prompting
-One-shot prompting means you provide exactly one example of what you want (input and desired output) as part of the prompt; few-shot prompting means providing a few examples (typically two to five) before asking the model to perform the task on a new input.
+## Ван-шот и Фью-шот промптинг (One-Shot and Few-Shot)
+Ван-шот (one-shot) — это когда ты скармливаешь ровно один пример того, что хочешь (входные данные и желаемый результат) прямо в промпте. Фью-шот (few-shot) — это когда даешь несколько примеров (обычно от двух до пяти), прежде чем попросить модель сделать то же самое с новыми данными.
 
-This is like showing the model, “Here’s how I solve one instance. Now you do the next one similarly.”
+Это как показать джуну: "Смотри, вот так я решил одну задачу. Теперь сделай следующую по аналогии".
 
-When to use: This type of prompting is useful when the model might not know exactly the format or style you need or when the task is a bit unusual. By giving examples, you reduce ambiguity.
+**Когда юзать:** Эта техника — мастхэв, когда модель может не догнать формат или стиль, который тебе нужен, или когда задача немного нестандартная. Давая примеры, ты убираешь двусмысленность.
 
-Example (one shot): Suppose you’re using a language or a certain style that the model might not have seen as much. Let’s say you want pseudocode in a specific format. Your prompt might be:
+**Пример (ван-шот):** Допустим, ты используешь язык или стиль, который модель видела не так часто. Скажем, тебе нужен псевдокод в специфическом формате. Твой промпт может выглядеть так:
 
-Convert the following English instructions to Python-like pseudocode.
+> Конвертируй следующие инструкции на английском в Python-подобный псевдокод.
+>
+> Пример инструкции: "Вычислить факториал числа n":
+>
+> Пример псевдокода:
+>
+> ```text
+> function factorial(n):
+>
+>     if n <= 1:
+>
+>         return 1
+>
+>     else:
+>
+>         return n * factorial(n-1)
+> ```
+>
+> ## Инструкция: "Найти самое большое число в списке"
+>
+> Псевдокод:
 
-Example instruction: “Calculate the factorial of n”:
+Ты дал один пример (факториал) и показал формат. Теперь модель с гораздо большей вероятностью выдаст псевдокод для "самого большого числа" в том же стиле (с функцией, с if/else или циклом, как положено).
 
-Example pseudocode:
+**Пример (фью-шот):** Допустим, ты хочешь, чтобы ИИ использовал конкретный алгоритм. Ты можешь подкинуть ему пример этого алгоритма в действии как подсказку. Или, если у задачи есть несколько правильных ответов, но ты предпочитаешь определенный стиль, пример подтолкнет ее в нужную сторону.
 
-function factorial(n):
+Фью-шот промптинг — мощная штука для форматирования. Например:
 
-    if n <= 1:
+> Преобразуй следующие фразы на английском в SQL-запросы.\
+> 1. "Получить всех сотрудников, нанятых после 2020 года" → Select * From Employees Where Hire_Date > ’2020-01-01’;\
+> 2. "Список имен клиентов, совершивших покупку в прошлом месяце" → Select Name From Customers Join Purchases On ... Where Purchase_Date > ...;\
+> 3. "Количество товаров, которых нет в наличии" →
 
-        return 1
+Здесь, дав два примера перевода с английского на SQL, ты практически гарантируешь, что ИИ правильно ответит на третий запрос, следуя паттерну. Фью-шот примеры применимы и к кодингу: покажи ИИ нужный стиль на маленьком куске и попроси добавки. Это как скормить ей мини-датасет для обучения прямо внутри промпта.
 
-    else:
+**Плюсы:** Можно добиться вывода в очень специфическом стиле. Эта техника помогает модели справляться с задачами, где нужно следовать шаблону или монотонно применять какую-то концепцию.
 
-        return n * factorial(n-1)
+## Контекстное окно (Context Window)
+Термин "контекстное окно" означает максимальный объем текста (в токенах), который языковая модель может переварить за один заход — включая и твой промпт, и ее ответ. Это жесткое ограничение текущих ИИ: как только перевалишь за порог, модель перестает воспринимать новую инфу или забывает начало. Когда крафтишь промпты, всё, что ты туда пихаешь (инструкции, примеры, данные и место под ответ), должно влезать в эту емкость.
 
-## Instruction: "Find the largest number in a list"
+**Минусы:** Фью-шот промптинг, в частности, раздувает промпт (что жрет контекстное окно). Если примеры жирные и сложные, они могут сожрать кучу места. Но обычно пары небольших примеров вполне достаточно.
 
-Pseudocode:
-You’ve provided one example (factorial) and the format you want. Now the model is more likely to produce pseudocode for the “largest number” instruction in a similar format (with a function, with if/else or loop logic as needed).
+**Совет:** Если хочешь, чтобы модель строго придерживалась определенной структуры вывода, пример почти гарантирует, что она попадет в формат, вместо того чтобы выдавать отсебятину, которую тебе потом придется парсить руками.
 
-Example (few shot): Let’s say you want the AI to use a specific algorithm. You might give it a smaller example of that algorithm in action as a hint. Or if the task has multiple correct answers but you prefer a certain one, an example can push it toward that.
+## Цепочка мыслей (Chain-of-Thought Prompting)
+Chain-of-thought (CoT) — это когда ты просишь модель думать пошагово или показать ход рассуждений перед тем, как выдать финальный ответ. Другими словами, ты заставляешь модель декомпозировать проблему.
 
-Few-shot prompting is powerful for formatting; for instance:
+**Когда юзать:** Полезно для сложных задач, требующих логики и многоступенчатых вычислений, или когда есть подозрение, что модель налажает, если попытается прыгнуть сразу к ответу. Также полезно, если тебе нужно объяснение в выводе.
 
-Convert The Following English Statements To SQL Queries.\N1."Get All Employees Hired After 2020” → Select * From Employees Where Hire_Date > ’2020-01-01’;\N2. “List Customer Names Who Made A Purchase In The Last Month” → Select Name From Customers Join Purchases On ... Where Purchase_Date > ...;\N3. “Count Of Products That Are Out Of Stock” →
+## Комбинаторика
+Комбинаторика занимается подсчетом, расстановкой и выбором объектов по определенным правилам. Типичные задачи включают перестановки (порядок важен), сочетания (порядок пофиг) и прочие принципы счета. Ключевая нотация — "n по k" (записывается как C(n,k) или nCk), что означает количество способов выбрать k предметов из n, по формуле n!/(k!(n-k)!). Эти расчеты постоянно всплывают в вероятности, статистике и дискретной математике.
 
-Here, once you give two examples of English-to-SQL, the AI is likely to answer the third query correctly by following the pattern. Few-shot examples can be applied to coding too: show the AI the style you want in a small sample and then ask for more. It’s like giving it a minitraining dataset within your prompt.
+**Пример:** Вместо того чтобы просто спросить комбинаторную задачу типа "Сколько будет 12 по 4?" и получить голую цифру, ты можешь сказать:
 
-Pros: You can achieve outputs in very specific styles. This technique also helps the model handle tasks that involve following a pattern or applying a concept repetitively.
+> Реши "12 по 4" пошагово.
 
-## Context Window
-The term context window refers to the maximum amount of text (measured in tokens) that a language model can process in a single interaction, including both the input prompt and the generated response. This represents a limitation of current AI models—once you reach this threshold, the model cannot process additional information. When you’re crafting prompts, everything you include (instructions, examples, data, and the space needed for the response) must fit within this fixed capacity.
+Модель может расписать:
 
-Cons: Few-shot prompting in particular makes the prompt longer (which uses up context window). For very large/complex examples, it might “eat” a lot of the model’s capacity. But usually a small example or two is fine.
+> 12 по 4 = 12!/(4!*8!) = ... = 495
 
-Tip: If you want the model to strictly adhere to a certain output structure, giving an example can nearly guarantee it matches that structure rather than offering a free-form reply that you have to parse.
+В кодинге CoT полезна для хитрых алгоритмических задач. Попробуй такой промпт:
 
-## Chain-of-Thought Prompting
-Chain-of-thought (CoT) prompting involves asking the model to think step-by-step or show its reasoning before giving the final answer. In other words, you encourage the model to break down the problem.
+> Объясни пошагово, как слить два отсортированных списка, а затем предоставь код на Python.
 
-When to use: This is useful for complex problems that involve reasoning and multistep computations, or when you suspect the model might make a mistake if it jumps straight to the answer. It’s also useful if you want an explanation in the output.
+Модель сначала накидает план типа:
 
-## Combinatorial Math
-Combinatorial math deals with counting, arranging, and selecting objects according to specific rules or constraints. Common problems include calculating permutations (arrangements where order matters), combinations (selections where order does not matter), and other counting principles. Key notation includes “n choose k” (written as C(n,k) or nCk), which represents the number of ways to choose k items from n total items, calculated using the formula n!/(k!(n-k)!). These calculations frequently appear in probability, statistics, and discrete mathematics applications.
+> Мы будем использовать два указателя, начиная с голов каждого списка, сравнивать элементы, добавлять меньший в результирующий список, двигать указатель и так далее…
 
-Example: Instead of just asking a combinatorial math problem like “What is 12 choose 4?” and getting an answer, you might say:
+А потом выдаст код. Это гарантирует, что она нормально структурировала решение перед тем, как кодить.
 
-Solve 12 choose 4 step-by-step.
+Еще один юзкейс — отладка или понимание вывода:
 
-The model might then outline:
+> Пройдись по логике, чтобы определить, является ли число 19 простым, затем дай результат.
 
-12 choose 4 = 12!/(4!*8!) = ... = 495
-In coding, CoT can be useful for tricky algorithmic tasks. You might try the following prompt:
+Модель перечислит деления на простые числа, а потом заключит:
 
-Explain step-by-step how to merge two sorted lists, then provide the Python code.
+> 19 — простое число.
 
-The model would first outline something like:
+**Плюсы:** Повышает правильность на задачах, требующих рассуждений. Есть научные пруфы, что если заставить модель "думать вслух", результаты по математике и логике становятся лучше. Плюс ты видишь процесс, что может быть поучительно или поможет больше доверять ответу.
 
-We will use two pointers starting at the heads of each list, compare the elements, append the smaller to a result list, and move that pointer, and so on…
+**Минусы:** Вывод становится длиннее (что может быть некстати, если нужен только код). Также некоторые интерфейсы (типа автодополнения кода) не заточены под показ рассуждений отдельно от кода. Эта техника чаще встречается в чатах. Однако ты можешь попросить модель включить рассуждения в виде комментариев в коде — отличный способ получить шикарно задокументированный код.
 
-Then it might give the code. This ensures it has structured the solution correctly before coding.
+## Ролевой промптинг (Role Prompting)
+Ролевой промптинг — это когда ты просишь ИИ примерить на себя определенную личину или роль, которая повлияет на то, как он отвечает.
 
-Another use is debugging or understanding output:
+**Когда юзать:** Полезно, когда хочешь повлиять на стиль, детализацию ответа или получить определенную точку зрения. Например, ИИ в роли "эксперта" может выдать более продвинутое решение или глубокое объяснение, а в роли "новичка" — разжевать базовые концепции.
 
-Walk through the logic to determine if the number 19 is prime, then give the result.
+**Примеры:**
 
-The model might list divisions by primes, then conclude:
+> Ты — инструктор по Python. Объясни следующий код, а затем модифицируй его, чтобы он был более "питоничным" (Pythonic).
 
-19 is prime.
+> Действуй как аналитик по безопасности. Вот код. Найди любые уязвимости.
 
-Pros: Improves correctness on tasks requiring reasoning. There’s research evidence that prompting the model to “think out loud” can lead to better results on math and logic tasks. It also gives you insight into the model’s process, which can be instructive or help you trust the answer more.
+> Притворись, что ты линтер, который проверяет код на проблемы со стилем.
 
-Cons: The output is longer (which might not be what you want in final code). Also, some interfaces (like typical code completions) aren’t set up to show reasoning separate from code. This technique is more common in Q&A or chat scenarios. However, you can instruct the model to include the reasoning as comments in the code, which is a neat way to get thoroughly commented code.
+Это может кардинально изменить ответ. Назначение роли "безопасника" заставит ИИ сфокусироваться на вещах, о которых он иначе бы промолчал (валидация данных, безопасные практики, потенциальные дыры). Роль "инструктора" заставит давать более четкие объяснения и не полагаться на то, что ты и так всё знаешь.
 
-## Role Prompting
-Role prompting means you ask the AI to assume a certain identity or role that might influence how it responds.
+В кодинге ты можешь сказать перед запросом кода:
 
-When to use: This is useful when you want to influence the style or detail of the answer or get a certain perspective. For instance, an AI taking on an “expert” role might give a more advanced solution or more explanation, while a “beginner” role might make it explain more basic concepts.
+> Ты эксперт по C++, хорошо разбирающийся в оптимизации, инструктирующий младшего разработчика.
 
-Examples:
+Результат, скорее всего, будет использовать продвинутые фичи C++ и объяснять, почему были сделаны те или иные выборы, балансируя между технической крутостью и понятностью для обучения.
 
-You are a Python instructor. Explain the following code and then modify it to be more Pythonic.
+**Плюсы:** Эта техника рулит тоном и глубиной ответа. Можно заточить решение под определенный уровень сложности. Полезно, если нужно либо очень простое решение (скажи ему действовать как новичок, и он, возможно, избежит сложных трюков), либо очень оптимизированное (скажи действовать как гуру перформанса).
 
-Act as a security analyst. Here’s some code. Identify any security vulnerabilities.
+**Минусы:** Иногда модель может слишком увлечься персоной (типа "инструктор" начнет объяснять банальщину). Также некоторые системы безопасности ИИ нервно реагируют на определенные описания ролей — особенно те, что намекают на обман, выдачу себя за авторитетов или вредоносные действия — хотя обычные технические роли типа "аналитик данных" или "разработчик ПО" обычно заходят без проблем.
 
-Pretend you are a linter that checks code for style issues.
+## Контекстный промптинг (Contextual Prompting)
+Контекстный промптинг — это когда ты даешь ИИ дополнительный контекст или инфу помимо описания задачи. У моделей нет постоянной памяти о твоем проекте, пока ты не запихнешь это в промпт (или через интеграции в IDE с умным контекстом). Так что, если хочешь, чтобы ИИ писал код, который впишется в твою кодовую базу — дай ему этот контекст. Грубо говоря, ты скармливаешь релевантные данные или бэкграунд прямо в запросе.
 
-This can significantly affect the response. Assigning the AI a security analyst role might make it focus on things it otherwise wouldn’t mention (like data validation, secure coding practices, or potential vulnerabilities). An instructor role might make it provide clearer explanations and perhaps not assume prior knowledge.
+**Когда юзать:** Когда решение задачи требует знания определенных данных или определений, которые модель может не знать или помнить криво. Или когда нужно обеспечить согласованность с внешней инфой (типа спецификации API или предыдущей части разговора).
 
-In coding, you might say before asking for code:
+**Примеры:**
 
-You are an expert C++ programmer well-versed in optimization, instructing a junior developer.
+Если у тебя есть структура данных и ты хочешь код, который с ней работает, просто вставь ее определение:
 
-The result will likely use more advanced C++ features and explain why certain choices were made, balancing technical sophistication with educational clarity.
+> Учитывая класс ниже, реализуй функцию X.
+>
+> ```python
+> class Node:
+>
+>     def __init__(self, value, next=None):
+>
+>         self.value = value
+>
+>         self.next = next
+> ```
+>
+> \# А теперь напиши функцию для подсчета узлов в связном списке, начиная с head.
 
-Pros: This technique steers the tone and depth of the answer. This can tailor the solution to a certain level of complexity or thoroughness. It’s useful if you want either a very simple solution (tell it to act as a novice and maybe it’ll avoid complex tricks) or a very optimized one (tell it to act as a performance guru).
+Включив определение класса, ты делаешь так, что ИИ с гораздо большей вероятностью будет правильно использовать `Node.value` и `Node.next` в своем коде.
 
-Cons: Sometimes the model might focus more on the persona than needed (an “instructor” might start explaining things you already know). Also, some AI safety systems are more sensitive to certain role descriptions—particularly those that might suggest deception, authority impersonation, or potentially harmful activities—though straightforward technical and professional roles like “data analyst” or “software engineer” typically work without issues.
+Если хочешь использовать конкретный API, включи сниппет из документации в промпт:
 
-## Contextual Prompting
-Contextual prompting means giving the AI additional context or information beyond the immediate task description. AI models don’t have persistent memory of your entire project unless you provide it in the prompt (or through some integrated context window in advanced IDE integrations). So if you want the AI to write code that fits into your existing codebase, give it that context. Basically, you supply relevant data or background as part of the prompt.
+> Используя библиотеку requests, получи данные из API. (API возвращает JSON в формате: {...})
 
-When to use: Use when solving a problem requires knowing certain data or definitions that the model might not know or might not recall correctly from training. Or use when you want to ensure consistency with some external info (like an API spec or previous part of conversation).
+Если ты покажешь даже короткий пример использования API из доков, ИИ сможет его сымитировать.
 
-Examples:
+Для устранения неоднозначности:
 
-If you have a data structure and you want code that works with it, you might paste its definition:
+> Используя термин "студент" для обозначения учеников старших классов, напиши функцию, которая…
 
-Given the class below, implement the function X.
+Если слово "студент" может быть понято двояко в контексте, ты это прояснил.
 
-class Node:
+**Плюсы:** Ты "заземляешь" ИИ в контексте, который тебе важен. Меньше шансов, что он сделает неверные предположения, если ты дашь ему факты. Это мега-полезно, если ИИ иначе не мог бы знать детали твоего конкретного юзкейса.
 
-    def __init__(self, value, next=None):
+**Минусы:** Эта техника делает промпты длиннее. Также модель может иногда тупо срыгнуть предоставленный контекст обратно в ответе (например, скопипастить строки из сниппета доков в код, если не быть осторожным). Но обычно она юзает это адекватно.
 
-        self.value = value
+**Совет:** Если контекст огромный (типа здоровенной схемы или кучи строк кода), иногда лучше скормить модели саммари ключевых элементов, а не всё дословно. Это поможет остаться в лимитах контекста, при этом дав модели самую суть. Но если контент небольшой — кидай сырым.
 
-        self.next = next
+Ограничения (Constraints) тоже полезно упоминать: требования к производительности ("Оптимизируй под O(n log n) или лучше"), совместимости ("Должно работать на Python 3.8") или выбор библиотек ("Используй только стандартную библиотеку, никаких внешних зависимостей"). Это работает как отбойники на трассе и гарантирует, что ИИ не предложит что-то за рамками дозволенного.
 
-# Now write a function to count the nodes in a linked list starting at head.
-By including the class definition, you make the AI much more likely to use Node.value and Node.next properly in its code.
+## Метапромптинг (Metaprompting)
+Метапромптинг — это инструкции касательно самого вывода, а не только того, что должно делать решение. Это как указывать ИИ, как отформатировать или подойти к решению.
 
-If you want to use a specific API, include a snippet of the documentation in the prompt:
+**Когда юзать:** Полезно, когда нужен ответ в конкретном формате или стиле, или когда хочешь контролировать, как ИИ прорабатывает проблему.
 
-Using the requests library, fetch the data from the API. (The API returns JSON with format: {...})
+**Примеры:**
 
-If you include even a short example of API usage from docs, the AI can mimic it.
+> Сначала объясни подход в двух предложениях, затем предоставь код.
 
-For disambiguation:
+Это гарантирует, что ИИ не бросится сразу писать код.
 
-Using the term student to refer to high school students, write a function that…
+> Не используй никакие библиотеки в решении.
 
-If student could be ambiguous in context, you’ve clarified it.
+Это ставит ограничение на решение.
 
-Pros: You’re grounding the AI in the context you care about. It’s less likely to make wrong assumptions if you supply the facts. This is extremely helpful if the AI otherwise might not remember or know your specific use-case details.
+> Отформатируй вывод как JSON.
 
-Cons: This technique makes prompts longer. Also, the model might occasionally regurgitate the provided context into the answer (like copying lines from a documentation snippet into the code if not careful). But usually it uses it appropriately.
+Полезно, если ты используешь ИИ для генерации данных, а не кода.
 
-Tip: If you have a large context (like a big schema or many lines of code), sometimes it’s better to summarize the key elements for the model rather than including everything verbatim. This approach helps you stay within context limits while ensuring the model receives the most relevant information. However, if the content is small enough, just include it raw.
+> Предоставь только тело функции, без строки определения.
 
-Constraints are also useful to mention: performance constraints (“Optimize for O(n log n) or better”), compatibility constraints (“Must run on Python 3.8”), or library choices (“Use standard library only, no external dependencies”). These act like guardrails and ensure the AI doesn’t suggest something outside acceptable bounds.
+Удобно, если хочешь вставить функцию в существующий код.
 
-## Metaprompting
-Metaprompting is giving instructions about the output itself, not just what the solution should do. It’s like telling the AI how to format or approach the solution.
+> Если ввод невалиден, вместо ошибки верни None.
 
-When to use: Useful when you need the answer in a specific format or style or when you want to control how the AI works through the problem.
+Это не совсем формат вывода, но инструкция ИИ, как вести себя в определенных кейсах.
 
-Examples:
+**Плюсы:** Ты получаешь именно то, что нужно, и так, как нужно, без лишнего редактирования. Это критично для некоторых сценариев. Если планируешь автоматически скармливать вывод ИИ в пайплайн, тебе реально нужно стабильное форматирование.
 
-First, explain the approach in two sentences, then provide the code.
+**Минусы:** Если инструкции конфликтуют с дефолтным стилем модели, иногда она может следовать им лишь частично, или придется их подчеркивать. Например, даже если скажешь "только код, никаких объяснений", иногда модель может вставить крошечный коммент. Обычно помогает прямая императивная фраза:
 
-This ensures the AI doesn’t launch straight into code:
+> Не включай никаких объяснений; выводи только код внутри одного блока кода.
 
-Do not use any libraries in the solution.
+Модели типа GPT следуют этому довольно четко.
 
-This places a constraint on the solution:
+## Самосогласованность (Multiple Outputs and Majority Voting)
+Самосогласованность (Self-consistency) — это скорее стратегия, чем стиль промпта. Идея в том, чтобы получить несколько вариантов ответа на один и тот же промпт, а потом выбрать лучший или самый частый. Как отмечает Сандер Шульхофф из Learn Prompting, самосогласованность опирается на идею, что если спросить модель несколько раз (с легкой рандомизацией) и многие ответы совпадут, то этот консенсус, скорее всего, верен.
 
-Format the output as JSON.
+**Когда юзать:** Полезно для сложных проблем, где ты не уверен, что первый ответ модели правильный, особенно если сам не можешь легко проверить, или если хочешь чекнуть уверенность ИИ, посмотрев, выдаст ли он тот же ответ повторно.
 
-This is useful if you’re using the AI to produce data, not code:
+**Как юзать вручную:** На некоторых платформах (типа ChatGPT) можно нажать "Regenerate answer". Или скопировать промпт в новую сессию и посмотреть, даст ли тот же результат. Если получишь три ответа, и два из них одинаковые, а один отличается — можно довериться тем двум (при условии, что у задачи один правильный ответ).
 
-Only provide the function body, without the definition line.
+В контексте программирования, если генерится код для чего-то детерминированного, обычно он будет очень похож каждый раз (с мелкими вариациями в именах переменных или стиле). Но если это алгоритмический вопрос (типа "Какой будет вывод этого кода?"), можно прогнать несколько раз.
 
-This is handy if you want to insert the function into existing code:
+Эта техника мощнее в некодинговых задачах (типа логических пазлов), но знать о ней стоит.
 
-If the input is invalid, instead of error, return None.
+Другой угол — ансамблевый промптинг: Ты можешь попросить модель прямо в одном промпте рассмотреть несколько вариантов:
 
-This is not exactly the output format, but it’s instructing the AI how to behave for certain cases.
+> Дай два разных решения этой задачи.
 
-Pros: You get exactly what you need, how you need it, without extra editing. This is crucial for some scenarios. If you plan to automatically use the AI’s output in a pipeline, then you really want consistent formatting.
+Потом выберешь, какое больше нравится, или протестишь оба. Это как самосогласованность за один проход, потому что получаешь несколько ответов.
 
-Cons: If the instructions conflict with the model’s default style, sometimes it might partially follow them or you have to emphasize them. For instance, even if you say “only code, no explanation,” occasionally the model might include a tiny comment or so. Usually, phrasing it as a direct imperative helps:
+**Плюсы:** Эта техника может повысить уверенность в решении, если несколько попыток сходятся. Плюс, получаешь разнообразие (что хорошо, если хочешь выбрать самое элегантное решение из многих).
 
-Do not include any explanation; output only code inside a single code block.
+**Минусы:** Жрет время на генерацию и сравнение.
 
-Models like GPT follow that quite well.
+На практике, если я не уверен в ответе, я часто переформулирую вопрос по-другому, чтобы увидеть, получу ли я тот же ответ. Если да — уверенности больше.
 
-## Self-Consistency (Multiple Outputs and Majority Voting)
-Self-consistency is more of a strategy than a prompt style. The idea is to get multiple outputs for the same prompt and then decide on the best or most common one. As Sander Schulhoff of Learn Prompting notes, self-consistency leverages the notion that if you ask the model multiple times (with slight randomness) and many of its answers agree, that consensus is likely correct.
+## ReAct (Reason + Act) Промптинг
+ReAct — это более продвинутая техника, объединяющая рассуждения (Reasoning) и действия (Acting). Она заставляет модель не просто думать, как CoT, но и совершать действия: делать расчеты, дергать API или юзать инструменты. (См. гайд по ReAct Prompt Engineering для подробностей). В современной практике это часто используется с фреймворками типа LangChain, где ИИ может выдавать спецформат, который программа интерпретирует как действие (команда на выполнение или запрос), а потом скармливает результат обратно.
 
-When to use: This is useful for complex problems where you’re unsure the model’s first answer is correct, especially if you can’t verify it easily yourself, or if you want a confidence check from the AI by seeing whether it gives the same answer repeatedly.
+Для наших целей (без среды выполнения в цикле) ты все равно можешь использовать форму ReAct, инструктируя ИИ сначала набросать план, а потом выдать результат. Это похоже на CoT, но заточено конкретно под использование инструментов или выполнение подзадач.
 
-How to use manually: On some platforms (like ChatGPT), you can click “Regenerate answer.” Or you can copy the prompt into a new session and see if it gives the same result. If you get three answers and two are the same and one is different, you might trust the two (assuming the problem has a single correct answer).
+**Пример:**
 
-In programming context, if it’s generating code for something deterministic, usually it will give very similar code each time (with small variations in variable names or style). But if it’s an algorithmic question (like “What’s the output of this code?”), you could check multiple runs.
+> Используя Python, определи текущую погоду в Париже и выведи её.
 
-This technique is more powerful in noncoding tasks (like logic puzzles) but worth noting.
+Если у ИИ нет доступа в инет, он не сможет реально узнать погоду. Подход ReAct заставил бы ИИ сначала порассуждать:
 
-Another angle—ensemble prompting: You can actually ask the model within one prompt to consider multiple possibilities:
+> Мне нужно получить данные о текущей погоде в Париже, для чего требуется вызов погодного API.
 
-Give two different solutions to this problem.
+Затем ИИ попытался бы использовать доступный инструмент для вызова API. Если успешно — получил бы реальные данные; если инструмента нет — признал бы ограничение или работал с гипотетическими данными. В конце ИИ написал бы код на Python для отображения погоды, используя данные, полученные в процессе этого рассуждения и действия.
 
-Then perhaps you can see which one you like or test both. This is like self-consistency in one shot because you get multiple answers.
+Без доступа к внешним инструментам ReAct может быть не особо актуален для простых задач. Однако при оценке ИИ-тулзов для твоей конторы, способность лазить в инет за свежей инфой — критический критерий. У многих моделей есть "дата отсечения" знаний, так что они могут выдавать протухшую инфу по быстро меняющимся темам.
 
-Pros: This technique can increase confidence in the solution if multiple attempts converge. Also, you might get variety (which is good if you want to choose the most elegant solution among many).
+Если ты сидишь в среде, где ИИ может исполнять код (типа интеграций с Jupyter), ты мог бы реализовать ReAct, скомандовав:
 
-Cons: It’s time-consuming to do multiple calls and compare outputs.
+> Сначала напиши тест для этой функции, запусти его, а затем поправь код соответственно.
 
-In practice, if I’m unsure about an answer, I’ll often repose the question differently to see if I get the same answer. If I do, I’m more confident it’s correct.
+Это демонстрирует паттерн ReAct через шаг рассуждения (написание теста), за которым следует действие (запуск теста) и правка кода по результатам. Но дирижировать такими воркфлоу чисто через промпты требует продвинутых техник и соответствующей инфраструктуры.
 
-## ReAct (Reason + Act) Prompting
-ReAct is a more advanced prompting technique that combines reasoning and acting. It gets the model not only to think, like CoT does, but also to take actions like making a calculation, calling an API, or using a tool. (See the ReAct Prompt Engineering Guide for more). In current practice, this is often used with frameworks like LangChain, where the AI can output a special format that a program interprets as an action (like a command to execute or a query to run), then feed the result back.
+Вариант попроще: Можешь симулировать Q&A, где у ИИ есть промежуточные шаги, имитирующие действия:
 
-For our scope (without such an execution environment in the loop), you can still do a form of ReAct by instructing the AI to first outline a plan, then output the result. It’s similar to CoT but specifically oriented to using tools or performing subtasks.
+> Думай пошагово и, если нужно, делай вычисления.
 
-Example:
+Это, по сути, CoT, но с более императивным тоном.
 
-Using Python, determine the current weather in Paris and print it.
+**Плюсы:** Когда доступно, может решать задачи, требующие внешней инфы или итеративных проб (типа ИИ сам себя правит, реально запуская код). В отладке ИИ, который может запустить код для проверки — это фантастика.
 
-Unless the AI has browsing capabilities, it cannot truly get the current weather. A ReAct approach would have the AI first reason through the problem by stating:
+**Минусы:** Эта техника малодоступна без спец-тулзов. А если просто промптить так в голом ChatGPT, он будет либо галлюцинировать действия, либо просто делать CoT.
 
-I need to access current weather data for Paris, which requires calling a weather API.
+Для наших целей в написании промптов держи в голове, что некоторые системы (типа агентов OpenAI с инструментами) существуют, но в "ванильном" промптинге мы в основном юзаем CoT, а действия типа запуска кода или тестов делаем сами ручками.
+## Продвинутый промптинг: Миксуем техники и разгребаем сложность
 
-The AI would then attempt to use an available tool to make this API call. If successful, it would receive actual weather data; if no such tool is available, it might acknowledge the limitation or work with hypothetical data. Finally, the AI would write the Python code to display the weather information, incorporating whatever data it was able to obtain through this reasoning and action process.
+Техники промптинга можно и нужно комбинировать. Например, ты можешь закинуть **few-shot** промпт, где в примерах уже зашита логика **CoT** (цепочки рассуждений). Или объединить ролевую модель с CoT:
 
-Without external tool access, ReAct might not be particularly relevant for simple prompting tasks. However, when evaluating AI tools for your organization, determining whether they can access current information from the internet represents a critical capability assessment. Many AI models operate with knowledge cutoffs, meaning their training data only extends to a specific date, which can result in outdated information for rapidly changing topics.
+> Как сеньор-разработчик, продумай решение проблемы шаг за шагом, а затем выдай готовый код.
 
-If you are using an environment where the AI can execute code (such as Jupyter integrations or similar platforms), you could implement ReAct by instructing the system:
+Теперь, когда мы разобрали разные техники, давай глянем на них в бою на паре сценариев, а потом обсудим, как ревьюить и допиливать то, что выплюнул AI (это плавно подведет нас к следующей главе про понимание и владение сгенерированным кодом).
 
-First write a test for this function, run it, then adjust the code accordingly.
+Представь, что у тебя есть функция, которая ни хрена не работает. Тут идеально зайдет комбо из роли и CoT:
 
-This demonstrates the ReAct pattern through a reasoning step (writing the test), followed by an action (executing the test), and then code adjustment based on the results. However, orchestrating such workflows through pure prompts requires advanced prompting techniques and appropriate technical infrastructure.
+> Ты — Python-дебаггер. Давай шаг за шагом проанализируем следующий код, чтобы найти баг.
 
-Simpler use: You can simulate a Q&A where the AI has intermediate steps that mimic actions:
+Следом кидаешь сам код. В ответ сетка, скорее всего, разберет каждую строчку и ткнет пальцем в ошибку.
 
-Think step-by-step and if you need to, do calculations.
+Или, допустим, тебе нужно сгенерировать код для довольно сложного алгоритма, убедиться, что он нормально закомментирован, да еще и тесты к нему получить. Комбинированный промпт будет выглядеть примерно так:
 
-It’s effectively CoT but with a more imperative tone.
+> Ты — эксперт-разработчик на Python. Давай решим задачу пошагово. Нам нужна функция `merge_sorted_lists(list1, list2)`, которая сливает два отсортированных списка в один. Сначала объясни подход, затем предоставь код на Python с комментариями. После этого напиши 2–3 примера тестов в коде, чтобы показать, что всё работает.
 
-Pros: When available, it can solve problems that require external info or iterative trial (like the AI can correct itself by actually running code). In debugging contexts, an AI that can execute code to test it is fantastic.
+Этот единственный промпт охватывает всё. Первое предложение задает роль. Второе требует пошагового мышления. Третье ставит основную задачу. Четвертое просит код с пояснениями, а пятое даже требует тесты.
 
-Cons: This technique is not widely accessible without specific tooling. And if you just prompt that way in plain ChatGPT, it will either imagine the actions or just do CoT.
+AI, скорее всего, выдаст объяснение, затем код с инлайн-комментами, а в конце прилепит тест-кейсы. Это продвинутый уровень, но он показывает, как можно дирижировать нейронкой, чтобы получить многогранный ответ.
 
-For our purposes in prompt writing, keep in mind that some systems (like OpenAI’s tool-using agents or others) exist, but in vanilla prompting we mostly do CoT, and we ourselves handle actions like running the code or tests.
+## Знай лимиты своей железяки
 
-## Advanced Prompting: Combining Techniques and Handling Complexity
-Prompting techniques can be combined. For instance, you might do a few-shot prompt that also demonstrates CoT in the examples. Or you might combine a role with CoT:
+Промпт-инжиниринг — это еще и умение понимать, чего просить **не** стоит и как не наступить на грабли. Если промпт раздувается до неприличия или содержит слишком много инструкций, модель может поплыть или обрезать часть выхлопа. Если видишь, что она начинает игнорить куски твоего задания — упрощай или скармливай частями.
 
-As a senior engineer, think step-by-step through the problem, then give the code.
+Если AI начинает гнать пургу (фактические ошибки или битый код, он же "галлюцинирует"), учись перепроверять всё и не используй его как истину в последней инстанции. Если он любит писать "Войну и мир" вместо кода — пресекай это фразой "Сделай решение максимально кратким". Если использует функции, которых в природе не существует — дай команду: "Используй только API функции из списка ниже" и приложи список. Чем лучше ты выкупаешь поведение AI, тем легче тебе лепить промпты, обходящие его слабости.
 
-Now that we’ve explored various prompting techniques, let’s see them in action with a scenario or two, then discuss how to review and refine the AI’s output (which leads into the next chapter about understanding and owning the generated code).
+Если задача реально сложная, разбей ее на подзадачи. Например, сначала спроси:
 
-Imagine you have a function that isn’t working. You might use a combination of role and CoT prompting:
+> Перечисли шаги для реализации базового компилятора для простого языка арифметических выражений.
 
-You are a Python debugger. Let’s think step-by-step to find the bug in the following code.
+Как только AI выдаст шаги, атакуй каждый пункт отдельным промптом, можно даже в разных файлах или сессиях:
 
-This would be followed by the code. The AI might respond with an analysis of each line and pinpoint the bug.
+> Теперь реализуй шаг 1: токенизация.
 
-Or let’s say you want to generate code for a somewhat complex algorithm, ensure it’s well commented, and also get test cases for it. A combined prompt might look like this:
+Это как системный дизайн, только с AI: ты набрасываешь структуру, а потом детализируешь каждый кусок. Это задействует способность нейронки помогать в планировании (а не только в кодинге).
 
-You are an expert Python developer. Let’s solve this step-by-step. We need a function merge_sorted_lists(list1, list2) that merges two sorted lists into one sorted list. First, explain the approach, then provide the Python code with comments. After that, give 2–3 example tests in code to demonstrate it works.
+## Диалог с контекстом (Stateful) vs. Ваншот-промптинг
 
-This single prompt is quite comprehensive. The first sentence sets a role. The second requests step-by-step reasoning. The third gives the main task. The fourth sentence asks for code with explanatory comments, and the fifth even asks for tests.
+В чате у тебя есть история переписки, то есть **состояние** (state). Ты можешь накапливать контекст, общаясь с AI. В IDE при автодополнении контекст — это в основном содержимое твоего файла и комменты. Оба варианта позволяют накапливать информацию, но по-разному.
 
-The AI might then output an explanation, then the code with inline comments, then some test cases at the end. This is an advanced use, but it shows how you can direct the AI through a multifaceted response.
+Используй **диалог**, если нужно, чтобы AI помнил, о чем вы говорили раньше (например, для уточнения ответа).
+Используй **свежие промпты** или контекст файла, если хочешь, чтобы он сфокусировался только на том, что важно прямо сейчас. Иногда полный сброс контекста помогает вылечить модель от зацикливания на какой-то ошибочной идее, которую она подцепила раньше.
 
-## Know the Model’s Limits
-Prompt engineering also involves knowing what not to ask and how to avoid pitfalls. If a prompt is getting too large or includes too many instructions, the model might get confused or truncate some output. If you find it starts ignoring parts of your prompt, you might need to simplify or do it in parts. If an AI model sometimes produces incorrect facts or code (it “hallucinates”), you learn to double-check and not use it as a factual oracle. If you find it tends to give overly verbose code, you can preempt that with “Make the solution as concise as possible.” If it sometimes uses functions that don’t exist, you might instruct, “Use only the API functions listed below” and list them. The better you understand the AI’s behavior, the more you can mold your prompts to get around any weaknesses.
+Практикуясь с этими техниками, ты набьешь руку и поймешь, когда и что юзать:
 
-If a task is very complex, you can also break it into subtasks for the AI. For example, you might first prompt:
+*   Если важен **формат вывода** — давай примеры (few-shot) или четкие инструкции по форматированию.
+*   Если **логика хитрая** — юзай CoT или "step-by-step".
+*   Если **качество решения плавает** — задай роль (типа "бывалый инженер"), чтобы подтянуть стиль.
+*   Если модель **тупит и не слушается** — разбей промпт на куски, упрости или используй более жесткие формулировки ограничений.
 
-List the steps to implement a basic compiler for a simple arithmetic expression language.
+## Типичные антипаттерны промптинга и как их не словить
 
-Once the AI gives the steps, you tackle each step with separate prompts, maybe even in separate files or sessions:
+Не все промпты одинаково полезны. Мы уже видели кучу примеров, как надо, но не менее полезно знать антипаттерны — типичные косяки, которые ведут к убогим ответам. В этом разделе разберем частые факапы и как их лечить.
 
-Now implement step 1: tokenization.
+### Мутный промпт (The vague prompt)
 
-This is like doing system design with the AI: you can outline then refine each piece. It leverages the AI’s ability to assist in planning (not just coding).
+Классика жанра: "Оно не работает, почини" или "Напиши что-нибудь, что делает X", без деталей. Вопрос "Почему моя функция не пашет?" обычно вызывает бесполезный ответ. Мутные промпты заставляют AI гадать о контексте, и на выходе ты получаешь либо общие советы, либо код не в тему.
 
-## Stateful Conversation Versus One-Shot Prompting
-In a chat setting, you have a conversation history, known as state. You can build up context by discussing with the AI. In an IDE completion setting, the context is mostly your file content and comments. Both allow cumulative context in different ways. Use conversation if you need the AI to remember what was said (like refining an answer). Use fresh prompts or file context if you want to ensure it’s focusing only on what’s relevant now. Sometimes wiping away the context prevents the model from sticking to a potentially wrong earlier assumption.
+Лечится просто: добавь контекста и конкретики. Если ты задаешь вопрос, а ответ похож на предсказание Магического шара ("А вы пробовали проверить X?"), остановись и перепиши запрос с деталями (текст ошибки, кусок кода, ожидаемый vs реальный результат). Хорошая практика — прочитать свой промпт и спросить себя: "Может ли этот вопрос относиться к десятку разных сценариев?". Если ответ "да" — промпт слишком размыт. Сделай его таким специфичным, чтобы он подходил только к твоей ситуации.
 
-By practicing with these techniques on various examples, you’ll become adept at knowing which approach to use and when:
+### Перегруженный промпт (The overloaded prompt)
 
-If output format is important, give examples (few shot) or explicit formatting instructions.
+Обратная проблема: просить AI сделать всё и сразу. Например:
 
-If logic is tricky, use CoT or step-by-step.
+> Сгенерируй полноценное Node.js приложение с аутентификацией, фронтендом на React и скриптами деплоя.
 
-If the solution can vary in quality, set a role (like “seasoned engineer”) to get a better style.
+Или даже в меньшем масштабе:
 
-If the model isn’t complying, maybe break your prompts into pieces, simplify them, or use stronger wording for constraints.
+> Пофикси эти 5 багов, а заодно добавь вот эти 3 фичи за один заход.
 
-## Common Prompt Antipatterns and How to Avoid Them
-Not all prompts are created equal. By now, we’ve seen numerous examples of effective prompts, but it’s equally instructive to recognize antipatterns—common mistakes that lead to poor AI responses. This section covers some frequent prompt failures and how to fix them.
+AI может попытаться, но, скорее всего, ты получишь кашу, недоделку или игнор части запроса. Даже если он сделает всё, простыню кода будет сложно проверить.
 
-## The vague prompt
-This is the classic “It doesn’t work, please fix it” or “Write something that does X” without enough detail. The question “Why isn’t my function working?” will generally get a useless answer. Vague prompts force the AI to guess the context and often result in generic advice or irrelevant code.
+Лекарство — декомпозиция. Расставь приоритеты: делай одну вещь за раз, как мы говорили ранее. Так проще ловить ошибки и держать модель в фокусе. Если видишь, что в твоем промпте слишком много союзов "и", разбей его на отдельные шаги.
 
-The fix is straightforward: add context and specifics. If you find yourself asking a question and the answer feels like a Magic 8–Ball response (“Have you tried checking X?”), stop and reframe your query with more details (error messages, code excerpt, expected versus actual outcome, etc.). A good practice is to read your prompt and ask, “Could this question apply to dozens of different scenarios?” If the answer is yes, it’s too vague. Make it so specific that it could only apply to your scenario.
+### Потерянный вопрос (Missing the question)
 
-## The overloaded prompt
-This is the opposite issue: asking the AI to do too many things at once. For instance:
+Иногда юзеры вываливают кучу инфы, но забывают задать вопрос или сказать, что им нужно. Просто кидают кусок кода и пишут: "Вот мой код". Это сбивает AI с толку — он не знает, чего ты хочешь.
 
-Generate a complete Node.js app with authentication, a frontend in React, and deployment scripts.
+Всегда добавляй четкий призыв к действию:
 
-Or even, on a smaller scale:
+*   "Найди баги в коде выше."
+*   "Объясни, что делает этот код."
+*   "Заполни TODO в этом коде."
 
-Fix these 5 bugs and also add these 3 features in one go.
+У промпта должна быть цель. Если просто кинуть текст без вопроса, AI начнет строить догадки (например, саммари кода вместо фикса). Убедись, что AI понимает, *зачем* ты показал ему этот код. Даже простое "Что тут не так?" или "Продолжай реализацию функции" дает направление.
 
-The AI might attempt it, but you’ll likely get a jumbled or incomplete result, or it might ignore some parts of the request. Even if it addresses everything, the response will be long and harder to verify.
+### Размытые критерии успеха (Vague success criteria)
 
-The remedy is to split the tasks. Prioritize: do one thing at a time, as we emphasized earlier. This makes it easier to catch mistakes and ensures the model stays focused. If you catch yourself writing a paragraph that uses “and” multiple times in the instructions, consider breaking it into separate prompts or sequential steps.
+Это тонкий момент. Ты можешь попросить оптимизацию, но не определить, что такое "успех". Например, "Сделай эту функцию быстрее". Быстрее по какой метрике? Если AI не знает твоих ограничений, он может заняться микро-оптимизацией, которая не важна, или выбрать подход, который теоретически быстрее, но на практике — пшик. Или "Сделай код чище". "Чище" — понятие субъективное. Мы решали это, явно указывая цели: "убери дублирование", "улучши имена переменных" и т.д.
 
-## Missing the question
-Sometimes users will present a lot of information but never clearly ask a question or specify what they need, like dumping a large code snippet and just saying, “Here’s my code.” This can confuse the AI—it doesn’t know what you want.
+Фикс: квалифицируй или квантифицируй улучшение:
 
-Always include a clear ask:
+*   "Оптимизируй функцию, чтобы она работала за линейное время (сейчас квадратичное)."
+*   "Отрефактори это, чтобы убрать глобальные переменные и использовать класс."
 
-Identify any bugs in the above code.
+Короче, будь конкретен насчет того, какую проблему ты решаешь рефакторингом или фичей. Если оставишь слишком много свободы, AI может решить совсем не ту проблему, которая тебя парит.
 
-Explain what this code does.
+### Игнор уточнений от AI
 
-Complete the to-dos in the code.
+Иногда AI отвечает вопросом или предположением:
 
-A prompt should have a purpose. If you just provide text without a question or instruction, the AI might make incorrect assumptions (like summarizing the code instead of fixing it, etc.). Make sure the AI knows why you showed it some code. Even a simple addition like “What’s wrong with this code?” or “Please continue implementing this function” gives it direction.
+> Вы используете классовые компоненты React или функциональные?
 
-## Vague success criteria
-This is a subtle one. Sometimes you might ask for an optimization or improvement, but you don’t define what success looks like—for example, “Make this function faster.” Faster by what metric? If the AI doesn’t know your performance constraints, it might micro-optimize something that doesn’t matter or use an approach that’s theoretically faster but practically negligible. Or “Make this code cleaner”: “cleaner” is subjective. We dealt with this by explicitly stating goals like “reduce duplication” or “improve variable names,” etc.
+> Я предполагаю, что входные данные — это строка. Подтвердите, пожалуйста.
 
-The fix: quantify or qualify the improvement:
+Если ты проигноришь это и просто повторишь свой запрос, ты упустишь шанс улучшить промпт. AI сигнализирует, что ему не хватает инфы. Всегда отвечай на вопросы или уточняй промпт.
 
-Optimize this function to run in linear time (current version is quadratic).
+Кроме того, если ответ AI явно мимо (не так понял вопрос), не долби его тем же самым промптом. Остановись и перефразируй. Может, у тебя там двусмысленность или ты забыл что-то важное. Общайся как с человеком: если собеседник не понял, ты объясняешь по-другому. Делай так же с AI.
 
-Refactor this to remove global variables and use a class instead.
+### Непоследовательность (Inconsistency)
 
-Basically, be explicit about what problem you’re solving with the refactor or feature. If you leave it too open, the AI might solve a different problem than the one you care about.
+Если ты постоянно меняешь стиль запросов или мешаешь форматы в кучу, модель может запутаться. Примеры: прыжки от первого лица к третьему в инструкциях или дикая смесь псевдокода с реальным кодом.
 
-## Ignoring AI’s clarification or output
-Sometimes the AI might respond with a clarifying question or an assumption:
+Старайся держать единый стиль внутри одного промпта. Если даешь примеры, четко их выделяй (используй тройные кавычки для кода, цитаты для ввода/вывода). Последовательность помогает модели правильно парсить твои намерения. И если у тебя есть предпочтительный стиль (скажем, ES6 против ES5), упоминай его постоянно, иначе в одном ответе получишь одно, а в следующем — другое.
 
-Are you using React class components or functional components?
+### Мутные отсылки типа "код выше"
 
-I assume the input is a string—please confirm.
+В чате, если ты пишешь "функция выше" или "предыдущий вывод", убедись, что ссылка понятна. Если диалог длинный и ты пишешь "Отрефактори код выше", AI может потерять нить или выбрать не тот кусок.
 
-If you ignore these and just reiterate your request, you’re missing an opportunity to improve the prompt. The AI is signaling that it needs more info. Always answer its questions or refine your prompt to include those details.
+Надежнее либо снова процитировать код, либо явно назвать функцию, которую хочешь переделать. У моделей ограниченное окно внимания, и хотя многие LLM могут ссылаться на старые части разговора, явное указание контекста спасает от путаницы. Особенно если прошло время (или куча сообщений) с момента, когда код был показан.
 
-Additionally, if the AI’s output is clearly off (like it misunderstood the question), don’t just retry the same prompt verbatim. Take a moment to adjust your wording. Maybe your prompt had an ambiguous phrase or omitted something essential. Treat it like a conversation: if a human misunderstood, you’d explain differently; do the same for the AI.
+## Итого и что дальше
 
-## Inconsistency
-If you keep changing how you ask or mixing different formats in one go, the model can get confused. Two examples include switching between first person and third person in instructions or mixing pseudocode with actual code in a confusing way.
+Искусство промптинга — это итеративный и творческий процесс. Модели развиваются, бест-практис могут меняться (будущие модели, возможно, будут лучше понимать намерения с полуслова). Но фундаментальный принцип остается: общайся эффективно, и AI будет служить тебе лучше.
 
-Try to maintain a consistent style within a single prompt. If you provide examples, ensure they are clearly delineated (use Markdown triple backticks for code, quotes for input/output examples, etc.). Consistency helps the model parse your intent correctly. Also, if you have a preferred style (say, ES6 versus ES5 syntax), consistently mention it; otherwise, the model might suggest one way in one prompt and another way later.
+По сути, освоение промпт-инжиниринга похоже на изучение нового языка программирования — языка инструкций для AI. Это смесь технического писательства, дальновидности и интерактивной отладки самого вопроса. Но как только ты набьешь руку, AI реально начнет ощущаться как продолжение твоего мозга. Ты сможешь надежно вытаскивать решения, которые задумал (или даже те, которые еще не до конца придумал, но можешь направить AI на их открытие), с минимальным трением. Этот навык станет таким же базовым, как умение гуглить или юзать дебаггер — это часть скиллсета современного разработчика в эру вайб-кодинга.
 
-## Vague references like “the above code”
-When using chat, if you say “the above function” or “the previous output,” be sure the reference is clear. If the conversation is long and you say, “Refactor the above code,” the AI might lose track or pick the wrong code snippet to refactor.
-
-It’s safer to either quote the code again or specifically name the function you want refactored. Models have a limited attention window, and although many LLMs can refer to prior parts of the conversation, giving it explicit context again can help avoid confusion. This is especially true if some time (or several messages) passed since the code was shown.
-
-## Summary and Next Steps
-The art of prompting is iterative and creative. As models evolve, prompt best practices might change (for instance, future models might better understand intent with less wording). But the underlying principle remains: communicate effectively, and the AI will serve you better.
-
-In essence, mastering prompt engineering is like mastering a new programming language—the language of instructions for AI. It’s a blend of technical writing, foresight, and interactive debugging of the prompt itself. But once you get good at it, the AI truly starts to feel like an extension of your own mind, because you can reliably extract the solutions you envision (or even those you don’t fully envision yet but can guide the AI to discover) with minimal friction. This skill will likely become as fundamental as knowing how to google things or how to use a debugger—it’s part of the modern developer’s skill set in the age of vibe coding.
-
-If AI can solve about 70% of a problem, how do you approach it as a partner in coding? Chapter 3 looks at how developers really use AI and sets out some “golden rules” for vibe coding.
+Если AI может решить около 70% проблемы, как подходить к этому как к партнерству в кодинге? Глава 3 рассмотрит, как разработчики реально используют AI, и установит "золотые правила" вайб-кодинга.

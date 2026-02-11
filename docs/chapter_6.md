@@ -1,20 +1,20 @@
-# Chapter 6. AI-Driven Prototyping: Tools and Techniques
+# Глава 6. Прототипирование с ИИ: Инструменты и техники
 
+В этой главе мы разберем, как вайб-кодинг на движке ИИ разгоняет фазу прототипирования разработки софта. Суть прототипирования — максимально быстро превратить идею в рабочую модель. С ИИ-ассистентами разрабы могут за часы сделать то, на что обычно уходят дни, стремительно итерируя концепции. Я расскажу о техниках перехода от "хотелки" к прототипу с помощью ИИ, сравню популярные инструменты (включая Vercel v0 и утилиты типа «скриншот-в-код») и покажу, как итеративно допиливать прототипы под чутким руководством нейронки. Мы также затронем критически важный этап: как превратить этот черновой, сгенерированный ИИ прототип в качественный код для продакшена. По ходу главы я буду приводить кейсы, где прототипирование с ИИ привело к успеху, и подсвечу как потенциал, так и грабли этого подхода.
 
-This chapter explores how AI-driven vibe coding accelerates the prototyping phase of software development. Prototyping is all about rapidly turning an idea into a working model. With AI assistants, developers can achieve in hours what might normally take days, quickly iterating on concepts. I’ll discuss techniques for going from concept to prototype with AI, compare popular AI prototyping tools (including Vercel v0 and screenshot-to-code utilities), and examine how to refine prototypes iteratively under AI guidance. I also address the crucial step of transitioning a rough AI-generated prototype into production-quality code. Throughout the chapter, I’ll also look at case studies where AI-driven prototyping led to successful outcomes and demonstrate both the potential and the pitfalls of this approach.
+## Быстрое прототипирование с ИИ-ассистентами
 
-## Rapid Prototyping with AI Assistants
-Prototyping benefits greatly from the speed of AI-generated code. The goal in prototyping is not polished, production-ready code but a proof of concept that you can evaluate and refine. AI coding assistants shine here by producing functioning code quickly from minimal input. For example, instead of manually coding a UI mockup, a developer can describe the desired interface in natural language and let the AI generate the HTML/CSS or React components. This allows for a very fast idea-to-implementation cycle.
+Прототипирование выигрывает от скорости генерации кода ИИ как никто другой. Цель здесь — не вылизанный, готовый к проду код, а Proof of Concept (PoC), который можно потыкать палкой, оценить и доработать. ИИ-ассистенты здесь раскрываются во всей красе, выдавая рабочий код из минимальных вводных. Например, вместо того чтобы вручную верстать макет UI, разраб может описать желаемый интерфейс на естественном языке и позволить ИИ сгенерировать HTML/CSS или React-компоненты. Это обеспечивает дико быстрый цикл «идея — реализация».
 
-One UX engineer describes how using a generative AI tool has completely transformed his workflow: “The speed at which I could generate functional prototypes with Generative AI was amazing. I built prototypes in a few hours [that] would normally take days.” The AI handles routine boilerplate and repetitive patterns automatically, freeing him to focus on higher-level design decisions. In prototyping, this means you can try out more ideas in the same amount of time. Another benefit is that AI can fill in the tedious parts of a prototype (basic UI components, form handling, sample data) almost instantly, allowing the human developer to concentrate on the core concept or unique feature being tested.
+Один UX-инженер так описывает, как генеративный ИИ перевернул его рабочий процесс: «Скорость, с которой я клепал рабочие прототипы на GenAI, просто взрывала мозг. Я собирал за пару часов прототипы, на которые обычно уходили дни». ИИ берет на себя рутинный бойлерплейт и повторяющиеся паттерны, освобождая инженера для принятия архитектурных и дизайнерских решений высокого уровня. В прототипировании это значит, что ты можешь проверить больше идей за то же время. Еще один плюс: ИИ может почти мгновенно заполнить скучные части прототипа (базовые UI-компоненты, обработку форм, тестовые данные), позволяя человеку сосредоточиться на ключевой концепции или уникальной фиче, которую нужно протестировать.
 
-However, it’s important to remember that a prototype’s code is often throwaway code. An AI may generate a working solution quickly, but that code might not be structured for maintainability or scale. This is acceptable in prototypes, where speed and experimentation matter more than elegance—as long as you plan to refactor or rewrite critical parts for production (I’ll discuss this process later in the chapter). As Chapters 3 and 4 explored, the AI can confidently handle about 70% of the coding for a prototype, while you guide the overall architecture and correct any critical flaws.
+Однако, братан, важно помнить: код прототипа — это часто код на выброс. ИИ может быстро выдать рабочее решение, но этот код вряд ли будет структурирован для поддержки или масштабирования. Для прототипов это норм: здесь скорость и эксперименты важнее элегантности — при условии, что ты планируешь отрефакторить или переписать критические части для прода (об этом процессе я расскажу позже в этой главе). Как мы обсуждали в Главах 3 и 4, ИИ может уверенно взять на себя около 70% кодинга для прототипа, пока ты рулишь общей архитектурой и исправляешь критические косяки.
 
-Programming with intent, a concept introduced in Chapter 1, is essential here. You provide high-level instructions (the intent of what you want the prototype to do or look like) and let the AI fill in the implementation. To illustrate, let’s walk through a very simple prototyping example using an AI assistant. Suppose you have an idea for a sign-up page for a new service. You want to prototype the frontend quickly, so you start with the following developer prompt:
+Здесь на сцену выходит концепция «программирования намерениями», введенная в Главе 1. Ты даешь высокоуровневые инструкции (намерение того, что прототип должен делать или как выглядеть) и позволяешь ИИ заполнить реализацию. Чтобы проиллюстрировать, давай пробежимся по очень простому примеру прототипирования с ИИ-ассистентом. Допустим, у тебя есть идея страницы регистрации для нового сервиса. Ты хочешь быстро накидать фронтенд, поэтому начинаешь со следующего промта:
 
-Create a simple HTML page for a sign-up form with fields for Name, Email, and Password, and a Submit button. Make it look presentable with basic styling.
+> Создай простую HTML-страницу для формы регистрации с полями Имя, Email и Пароль, а также кнопкой Отправить. Сделай так, чтобы это выглядело презентабельно с базовыми стилями.
 
-A modern code assistant like Cline might provide a complete HTML/CSS example:
+Современный кодинг-ассистент типа Cline может выдать готовый HTML/CSS пример:
 
 ```html
 <!DOCTYPE html>
@@ -42,186 +42,185 @@ A modern code assistant like Cline might provide a complete HTML/CSS example:
 </body>
 </html>
 ```
-This AI-generated code is a decent starting point for a prototype of the sign-up form. It includes a basic layout and some inline CSS for styling. As a developer, you didn’t have to write any HTML/CSS by hand—you simply described the outcome, and the AI provided an implementation. This demonstrates programming by intent: you focus on what the UI should do, and the AI figures out how to do it.
 
-Of course, this is a trivial example. In practice, prototypes can be more complex and involve multiple files, frameworks, or data. But the principle is the same: You use the AI to create a first draft swiftly. You might then open this prototype in a browser, see how it looks, and refine it further. That leads me to the next topic: using specialized AI prototyping tools that go beyond plain-language prompts.
+Этот сгенерированный ИИ код — вполне сносная отправная точка для прототипа формы регистрации. Тут есть базовая разметка и немного встроенного CSS для стиля. Тебе, как разрабу, не пришлось писать ни строчки HTML/CSS руками — ты просто описал результат, и ИИ выдал реализацию. Это и есть программирование намерениями: ты фокусируешься на том, *что* должен делать UI, а ИИ разбирается, *как* это сделать.
 
-## AI Prototyping Tools
-While general-purpose assistants like Gemini, ChatGPT, and Claude can generate prototype code from prompts, the landscape of specialized AI-assisted prototyping tools continues to evolve rapidly. As I write this, the available tools offer different approaches to the fundamental trade-off between fidelity and control in AI-generated prototypes.
+Конечно, это примитивный пример. На практике прототипы могут быть сложнее, включать кучу файлов, фреймворков или данных. Но принцип тот же: ты используешь ИИ, чтобы стремительно создать черновик. Потом ты открываешь этот прототип в браузере, смотришь, как оно выглядит, и допиливаешь. Это подводит меня к следующей теме: использование специализированных инструментов для ИИ-прототипирования, которые умеют больше, чем просто понимать текстовые промты.
 
-The ecosystem has matured to serve distinct prototyping needs. Some tools excel at transforming visual designs into code, allowing designers to upload screenshots or sketches and receive working HTML, CSS, or React components within seconds. This “screenshot-to-code” capability dramatically accelerates the design-to-code process, particularly valuable when you have hand-drawn sketches or Figma designs that need rapid implementation. Tools like Vercel v0 exemplify this approach, offering high fidelity to the original design while trading off some control over code structure.
+## Инструменты для ИИ-прототипирования
 
-Other platforms focus on generating complete applications through conversational interfaces. These allow users to describe functionality in natural language and receive full stack implementations. For instance, a designer wanting a quick app without coding might use tools like Lovable or Bolt.new, which offer high-level prompt interfaces that can scaffold entire applications. Some designers report building functional prototypes in hours that would traditionally take days, with the AI automatically handling tedious components and patterns.
+Хотя универсальные ассистенты типа Gemini, ChatGPT и Claude могут генерить код прототипа по промтам, ландшафт специализированных инструментов для ИИ-прототипирования меняется с бешеной скоростью. На момент написания эти тулзы предлагают разные подходы к фундаментальному компромиссу между точностью (fidelity) и контролем в сгенерированных ИИ прототипах.
 
-A third category integrates AI directly into development environments, functioning as intelligent pair programmers during the prototyping phase. These AI-augmented IDEs like Cursor, Windsurf, and Cline allow developers to maintain more control over the code generation process while still benefiting from AI acceleration. The distinction often lies in workflow philosophy: some prioritize automated application of changes for rapid experimentation, while others require explicit acceptance of modifications for more careful iteration.
+Экосистема созрела для решения конкретных задач прототипирования. Некоторые инструменты заточены на превращение визуального дизайна в код, позволяя дизайнерам загружать скриншоты или наброски и получать рабочие HTML, CSS или React компоненты за секунды. Эта фича «скриншот-в-код» (screenshot-to-code) драматически ускоряет процесс «дизайн-код», что особенно ценно, когда у тебя есть эскизы от руки или макеты в Figma, которые нужно быстро оживить. Инструменты вроде Vercel v0 — яркий пример такого подхода: они обеспечивают высокую точность соответствия оригиналу, но жертвуют некоторым контролем над структурой кода.
 
-The common thread across all these approaches is their ability to compress the journey from concept to working prototype. However, they differ significantly in two key dimensions that shape their utility for different users and use cases.
+Другие платформы фокусируются на генерации полноценных приложений через диалоговые интерфейсы. Они позволяют юзерам описывать функционал на естественном языке и получать реализацию всего стека. Например, дизайнер, которому нужно быстрое приложение без кодинга, может использовать тулзы типа Lovable или Bolt.new, предлагающие высокоуровневые интерфейсы промтов, способные накидать скелет целого приложения. Некоторые дизайнеры говорят, что собирают функциональные прототипы за часы, хотя раньше на это уходили дни, при этом ИИ автоматически разруливает нудные компоненты и паттерны.
 
-Fidelity refers to how closely the generated output matches your input or intention. Screenshot-to-code tools typically offer high fidelity to visual designs but may produce code that doesn’t align with your architectural preferences. Conversational tools might interpret your requirements more loosely, generating functional but generic implementations that require refinement.
+Третья категория интегрирует ИИ прямо в среду разработки, работая как интеллектуальный парный программист на этапе прототипирования. Эти ИИ-прокачанные IDE, такие как Cursor, Windsurf и Cline, позволяют разрабам сохранять больше контроля над процессом генерации кода, при этом получая ускорение от ИИ. Различие часто кроется в философии рабочего процесса: одни ставят в приоритет автоматическое применение изменений для быстрых экспериментов, другие требуют явного подтверждения правок для более осторожной итерации.
 
-Control encompasses your ability to guide and modify the generation process. Some tools operate as black boxes that produce complete outputs, while others allow iterative refinement through continued dialogue or direct code editing. This dimension becomes crucial when you need specific architectural patterns, performance optimizations, or integration with existing codebases.
+Общая черта всех этих подходов — способность сжать путь от концепта до рабочего прототипа. Однако они значительно различаются по двум ключевым измерениям, определяющим их полезность для разных юзеров и кейсов.
 
-Understanding these trade-offs helps in selecting the right tool for your prototyping needs. A designer validating a new interaction pattern might prioritize fidelity and speed, accepting less control over implementation details. A developer exploring technical feasibility might value control and transparency, even if it means more manual intervention in the generation process.
+**Точность (Fidelity)** — это то, насколько сгенерированный результат соответствует твоим вводным или намерению. Инструменты «скриншот-в-код» обычно выдают высокую визуальную точность, но могут нагенерить код, который не бьется с твоими архитектурными предпочтениями. Разговорные инструменты могут интерпретировать твои требования более вольно, создавая рабочие, но шаблонные реализации, требующие доработки.
 
-None of these tools produces production-quality code without human oversight. They typically deliver what I call the “80% prototype”—functional enough to test concepts and demonstrate to stakeholders but requiring additional work for production deployment. The remaining 20% often involves security hardening, performance optimization, error handling, and architectural refinement.
+**Контроль (Control)** — это твоя возможность направлять и изменять процесс генерации. Некоторые инструменты работают как «черные ящики», выдающие готовый результат, другие позволяют итеративно улучшать код через диалог или прямое редактирование. Это измерение становится критичным, когда тебе нужны специфические архитектурные паттерны, оптимизация производительности или интеграция с существующей кодовой базой.
 
-Even during rapid prototyping, a quick code review remains essential. While you might not polish every detail in a prototype, scanning for obvious issues like exposed API keys or insecure data handling prevents problems from propagating into later development stages. Most modern tools provide transparency into their generated code, allowing you to inspect and understand what’s being created.
+Понимание этих компромиссов помогает выбрать правильный инструмент. Дизайнер, проверяющий новый паттерн взаимодействия, может выбрать точность и скорость, забив на контроль над деталями реализации. Разработчик, исследующий техническую осуществимость, скорее выберет контроль и прозрачность, даже если это потребует больше ручного вмешательства в процесс генерации.
 
-As the AI prototyping landscape continues to evolve, the specific tools will undoubtedly change, but these fundamental considerations of fidelity versus control, and the need for human oversight, will remain constant. The key is understanding your prototyping goals and selecting approaches that align with your specific needs, whether that’s rapid visual implementation, functional demonstration, or technical exploration.
+Ни один из этих инструментов не выдает код уровня продакшена без присмотра человека. Обычно они доставляют то, что я называю «80%-й прототип» — достаточно функциональный, чтобы протестировать концепцию и показать стейкхолдерам, но требующий дополнительной работы для деплоя в прод. Оставшиеся 20% часто включают усиление безопасности, оптимизацию производительности, обработку ошибок и архитектурную шлифовку.
 
-## From Concept to Prototype: Iterative Refinement
-One of the strengths of AI-driven prototyping is the iterative loop: you can generate an initial version and then refine it by interacting with the AI. Instead of manually editing code, you just tell the AI what you want changed (see Figure 6-1). While I advocate a more responsible approach than pure “seat-of-the-pants” vibe coding, the fast feedback cycle is definitely something to embrace in prototypes.
+Даже во время быстрого прототипирования беглый ревью кода остается обязательным. Хоть ты и не будешь вылизывать каждую деталь в прототипе, сканирование на наличие очевидных косяков типа засвеченных API-ключей или небезопасной обработки данных предотвратит перетекание проблем на поздние стадии разработки. Большинство современных инструментов обеспечивают прозрачность сгенерированного кода, позволяя тебе инспектировать и понимать, что там вообще насоздавалось.
 
+Поскольку ландшафт ИИ-прототипирования продолжает эволюционировать, конкретные инструменты, несомненно, будут меняться, но эти фундаментальные соображения — точность против контроля и необходимость человеческого надзора — останутся константами. Ключ в том, чтобы понимать свои цели прототипирования и выбирать подходы, которые бьются с твоими конкретными нуждами, будь то быстрая визуальная реализация, демонстрация функционала или техническое исследование.
 
+## От концепта к прототипу: Итеративная шлифовка
+
+Одна из сильных сторон прототипирования с ИИ — это цикл итераций: ты можешь сгенерировать начальную версию, а затем допиливать её, общаясь с ИИ. Вместо того чтобы править код руками, ты просто говоришь ИИ, что нужно изменить (см. Рисунок 6-1). Хотя я топлю за более ответственный подход, чем чистый вайб-кодинг «на шару», быстрый цикл обратной связи — это определенно то, что нужно использовать в прототипах на полную катушку.
 
 > [!NOTE]
 > **Image Missing**
-> *Figure 6-1. Iterative prototype refinement process: initial prompts generate baseline prototypes, and developer feedback drives successive improvements, creating increasingly refined solutions through AI collaboration.*
+> *Рисунок 6-1. Процесс итеративной доработки прототипа: начальные промты генерируют базовые прототипы, а фидбек разработчика драйвит последующие улучшения, создавая все более отточенные решения через коллаборацию с ИИ.*
 
-Most AI prototyping tools keep a history or context of your requests, which is extremely useful. It means the AI remembers the purpose of your app and previous instructions, so you don’t have to re-explain everything each time. This context persistence is a hallmark of vibe-coding environments: the conversation with the AI becomes the development log.
+Большинство инструментов для ИИ-прототипирования хранят историю или контекст твоих запросов, и это чертовски полезно. Это значит, что ИИ помнит цель твоего приложения и предыдущие инструкции, так что тебе не нужно каждый раз объяснять всё заново. Сохранение контекста — это визитная карточка среды вайб-кодинга: разговор с ИИ становится логом разработки.
 
-Here’s how a typical iterative refinement might go:
+Вот как может выглядеть типичная итеративная шлифовка:
 
-Step 1: Initial generation
-You provide a prompt or input to create the prototype:
+**Шаг 1: Начальная генерация**
+Ты даешь промт или вводные данные для создания прототипа:
 
-Generate a basic expense-tracker app with a form to add expenses and a table to list them.
+> Сгенерируй базовое приложение для трекинга расходов с формой для добавления трат и таблицей для их отображения.
 
-Step 2: Review and run the code
-You get the generated code and run it. Maybe it works, but you notice some things that could be improved. For example, the UI is functional but plain, or the table doesn’t sort the expenses.
+**Шаг 2: Ревью и запуск кода**
+Ты получаешь сгенерированный код и запускаешь его. Может, он работает, но ты замечаешь вещи, которые можно улучшить. Например, UI функционален, но скучен, или таблица не сортирует расходы.
 
-Step 3: Refine your prompts
-You go back to the AI and provide additional instructions. For instance:
+**Шаг 3: Уточни свои промты**
+Ты возвращаешься к ИИ и даешь дополнительные инструкции. Например:
 
-Make the expense list sortable by amount or date.
+> Сделай список расходов сортируемым по сумме или дате.
 
-The AI might modify the code to include sorting logic or use a library for sortable tables:
+ИИ может модифицировать код, добавив логику сортировки или использовав библиотеку для сортируемых таблиц:
 
-Add some color styling, maybe use a modern CSS framework.
+> Добавь немного цвета, может, используй современный CSS-фреймворк.
 
-The AI could integrate a CSS library (like Tailwind or Bootstrap) or just add custom styles to make it look nicer:
+ИИ может интегрировать CSS-библиотеку (типа Tailwind или Bootstrap) или просто добавить кастомные стили, чтобы всё выглядело посимпатичнее:
 
-Validate the form so you can’t add an expense without a name and amount.
+> Добавь валидацию формы, чтобы нельзя было добавить расход без названия и суммы.
 
-The AI might add simple frontend validation.
+ИИ может добавить простую валидацию на фронтенде.
 
-Each of these prompts modifies the prototype. Because the AI understands the context (tools like Cursor and ongoing chat tools will keep the code state), it can often apply changes in the right places—for example, inserting validation code in the form or rewriting the table rendering to include sortable columns.
+Каждый из этих промтов модифицирует прототип. Поскольку ИИ понимает контекст (инструменты вроде Cursor и чат-тулзы сохраняют состояние кода), он часто может применить изменения в правильных местах — например, вставить код валидации в форму или переписать рендеринг таблицы, чтобы включить сортируемые колонки.
 
-Step 4: Rinse and repeat
-After each refinement, you check the result. If the AI introduced a new issue or didn’t do exactly what you intended, you clarify or fix it via prompts:
+**Шаг 4: Повторить до готовности**
+После каждой правки ты проверяешь результат. Если ИИ притащил новый баг или сделал не совсем то, что ты хотел, ты уточняешь или фиксишь это через промты:
 
-The sorting is backward—please sort ascending by default.
+> Сортировка работает наоборот — пожалуйста, сделай по возрастанию по умолчанию.
 
-The new color scheme is good, but make the header dark blue instead of black.
+> Новая цветовая схема норм, но сделай шапку темно-синей вместо черной.
 
-Each iteration cycle is quite fast—often taking just a few seconds of processing—which means you can go through a dozen iterations within an hour. Compared to manually coding and checking all those changes, the AI approach can be significantly faster. That’s especially true for broad changes, like restyling or adding a feature.
+Каждый цикл итерации проходит довольно быстро — часто занимая всего несколько секунд обработки — что означает, что ты можешь прогнать дюжину итераций за час. По сравнению с ручным кодингом и проверкой всех этих изменений, подход с ИИ может быть значительно быстрее. Это особенно верно для масштабных изменений, типа рестайлинга или добавления фичи.
 
-Importantly, iterating with AI requires clear communication. This is where your prompt engineering skills come into play. The more explicit and clear you are about the change you want, the more likely the AI will do it correctly. For example, saying “Make it look nicer” is vague. A more specific prompt gives the assistant a concrete direction:
+Важно понимать: итерации с ИИ требуют четкой коммуникации. Вот тут-то и вступают в игру твои скиллы промт-инжиниринга. Чем более явно и четко ты опишешь изменение, которое хочешь, тем вероятнее, что ИИ сделает это правильно. Например, фраза «Сделай покрасивее» — это туман. Более конкретный промт дает ассистенту четкое направление:
 
-Apply a light theme with a blue header and increase the font sizes for readability.
+> Примени светлую тему с синей шапкой и увеличь размер шрифта для читабельности.
 
-If you’re using a tool like Vercel v0 or Lovable, you might even point to a part of the UI using its interface and say, “Change this to X.”
+Если ты используешь инструмент типа Vercel v0 или Lovable, ты можешь даже ткнуть в часть UI через их интерфейс и сказать: «Измени это на X».
 
-Let’s look at a short conversational iteration process between a developer and an AI coding assistant:
+Давай посмотрим на короткий диалог итеративного процесса между разработчиком и ИИ-ассистентом:
 
-Generate a React component for a to-do list. It should display a list of tasks and a text input to add a new task.
+> Сгенерируй React-компонент для списка дел (to-do list). Он должен отображать список задач и текстовое поле для добавления новой задачи.
 
-The AI produces a React component with state for tasks and renders a list, an input, and a button to add tasks:
+ИИ выдает React-компонент со стейтом для задач и рендерит список, инпут и кнопку добавления:
 
-Great. Now make each task editable and add a checkbox to mark it complete.
+> Отлично. Теперь сделай каждую задачу редактируемой и добавь чекбокс, чтобы отмечать выполнение.
 
-The AI updates the code, rendering each task with a checkbox and an edit function and modifying state accordingly. The developer runs the app and finds that editing works, but there’s no delete button:
+ИИ обновляет код, рендерит каждую задачу с чекбоксом и функцией редактирования, соответственно модифицируя стейт. Разработчик запускает аппку и видит, что редактирование работает, но кнопки удаления нет:
 
-Add a delete button for each task.
+> Добавь кнопку удаления для каждой задачи.
 
-The AI adds a delete feature in the code:
+ИИ добавляет фичу удаления в код:
 
-The layout is a bit cramped. Add some basic CSS to space out the list items and make the font a bit larger.
+> Макет немного тесноват. Добавь базовый CSS, чтобы добавить воздуха между элементами списка и сделать шрифт чуть крупнее.
 
-The AI outputs CSS styling, possibly as a `<style>` in the component or a separate CSS snippet:
+ИИ выдает CSS-стили, возможно, как `<style>` в компоненте или отдельный CSS-сниппет:
 
-Looks better!
+> Выглядит лучше!
 
-This kind of back-and-forth could continue until the prototype meets the vision. In the end, the developer gets a working prototype for a to-do list app, with create, edit, complete, and delete functionalities—all built via natural-language requests and quick AI code outputs.
+Такой пинг-понг может продолжаться, пока прототип не совпадет с твоим видением. В конце концов, разработчик получает рабочий прототип тудушки с функционалом создания, редактирования, завершения и удаления — и всё это построено через запросы на естественном языке и быстрые выдачи кода от ИИ.
 
-Throughout this process, remember that the developer remains the director of what happens. The AI might propose a way to implement a feature, but you decide if that fits your needs. Sometimes the AI’s implementation is correct but not what you expected (maybe it uses a different UI approach than what you had in mind). You can either accept it (if it doesn’t harm the prototype goals) or instruct the AI to change to your preferred approach.
+На протяжении всего этого процесса помни, что разработчик остается режиссером происходящего. ИИ может предложить способ реализации фичи, но ты решаешь, подходит ли это под твои нужды. Иногда реализация от ИИ технически верна, но не то, что ты ожидал (может, он использует другой подход к UI, нежели ты задумывал). Ты можешь либо принять это (если это не вредит целям прототипа), либо дать инструкцию ИИ переделать под твой предпочтительный подход.
+## Эволюция прототипа в сторону продакшена
 
-## Evolving a Prototype Toward Production
-A prototype is meant to be a proof of concept and a tool for learning what works. Once it has served that purpose—say, you’ve validated the design with users or proven that a certain feature is feasible—the next step is often to turn it into a production application. This transition is a critical juncture. AI can still help, but human developers must sand down the rough edges of the prototype. This section looks at some key considerations when moving from prototype to production code.
+Прототип — это, по сути, Proof of Concept (PoC) и инструмент, чтобы понять, что вообще работает, а что нет. Как только он выполнил свою задачу — скажем, вы валидировали дизайн на юзерах или доказали, что фича технически реализуема, — следующим шагом обычно становится превращение этой поделки в боевое приложение. И это критически важный момент. ИИ всё еще может помочь, но теперь кожаным мешкам (разработчикам) придется взять напильник и сгладить все острые углы прототипа. В этом разделе мы разберем ключевые моменты переезда кода из состояния "я его слепила из того что было" в продакшен.
 
-First, review the architecture and code structure carefully. Prototypes can be messy under the hood. Perhaps all your code ended up in one file or you bypassed certain best practices for speed. Now is the time to introduce a proper structure. For example, if the prototype was a single-page script, you might separate it into multiple modules; for a web UI, you might introduce a proper component structure; for a backend, you might set up a formal model–view–controller (MVC) architectural pattern.
+Для начала внимательно пересмотри архитектуру и структуру кода. Под капотом прототипов часто творится сущий ад. Возможно, весь твой код свалился в один файл, или ради скорости ты забил на все мыслимые best practices. Самое время навести порядок. Например, если прототип был скриптом-портянкой, разбей его на модули; для веб-интерфейса внедри нормальную структуру компонентов; для бэкенда — настрой формальный паттерн MVC (Model–View–Controller).
 
-While AI wrote much of the prototype, you, as the developer, understand the architecture goals best. You might even start a fresh project and use the prototype as a reference or as scaffolding, perhaps reusing some of the prototype code but generally treating it as throwaway code. Others might incrementally refactor the prototype codebase into shape, with AI suggesting refactorings or generating tests to ensure nothing breaks during cleanup.
+Хотя большую часть прототипа написал ИИ, ты, как разработчик, лучше понимаешь архитектурные цели. Ты можешь даже стартовать проект с чистого листа, используя прототип как референс или как "строительные леса", возможно, переиспользуя куски кода, но в целом относясь к нему как к коду на выброс. Другие могут предпочесть инкрементальный рефакторинг, заставляя ИИ предлагать улучшения или писать тесты, чтобы ничего не отвалилось во время уборки.
 
-Next, add error handling and edge cases. Prototype code often focuses on the sunny-day scenario, but what if the API call fails? What if the input is empty? Go through each feature systematically and consider potential failure modes.
+Далее — добавь обработку ошибок и edge cases (граничные случаи). Код прототипа обычно заточен под "солнечный денек", когда всё работает идеально. Но что, если API отвалится? Что, если инпут пустой? Системно пройдись по каждой фиче и подумай, где она может навернуться.
 
-AI can help you brainstorm edge cases, given a prompt like this:
+ИИ может помочь тебе пробштормить эти граничные случаи с таким промптом:
 
-What are potential error cases for this feature and how to handle them?
+> Какие есть потенциальные сценарии ошибок для этой фичи и как их обработать?
 
-The assistant will likely list some scenarios (network errors, bad input, concurrency issues) for which you can implement handling (or ask AI to help implement it). Ensuring your code’s robustness is part of making it production-ready.
+Ассистент, скорее всего, выкатит список сценариев (ошибки сети, кривой ввод, проблемы с конкурентностью), для которых ты сможешь запилить обработку (или попросить ИИ помочь с реализацией). Обеспечение надежности кода — это часть процесса подготовки к проду.
 
-Your prototype code probably isn’t optimized, so check for any parts that are inefficient or could pose security issues. For instance, maybe the AI in the prototype used a naive algorithm that works on small test datasets but would be slow with real data. Identify such spots and optimize them. (I’ll cover common AI-generated code flaws in Chapter 8.)
+Твой прототип наверняка не оптимизирован, так что чекни его на предмет неэффективных кусков или дыр в безопасности. Например, ИИ мог засунуть туда наивный алгоритм, который летает на тестовых данных, но на реальных объемах повесит всё к чертям. Найди такие места и оптимизируй. (Подробнее о типичных косяках AI-кода я расскажу в Главе 8).
 
-One strategy is to run performance tests or use profilers on the prototype to see bottlenecks, then ask AI to help optimize that function. Definitely review security features like authentication and data handling too—it’s not uncommon for AI prototypes to use SQL queries without proper parameterization (risking SQL injection attacks) or to include sensitive information. These problems must be fixed. A 2021 study found that about 40% of AI-generated code had potential vulnerabilities. So part of productionizing is staying vigilant. Run static analysis and/or security tests on the code manually, or prompt the AI to “scan this code for security issues.”
+Одна из стратегий — прогнать тесты производительности или профилировщики на прототипе, найти бутылочные горлышки, а потом попросить ИИ оптимизировать эту функцию. И обязательно проверь безопасность: аутентификацию, обработку данных. Нередко AI-прототипы используют SQL-запросы без параметризации (привет, SQL-инъекции) или хардкодят чувствительную инфу. Это дерьмо нужно фиксить. Исследование 2021 года показало, что около 40% сгенерированного ИИ кода содержало потенциальные уязвимости. Так что бдительность терять нельзя. Запусти статический анализ и/или тесты безопасности вручную, или скажи ИИ: "Просканируй этот код на проблемы с безопасностью".
 
-Prototypes often lack documentation, which you’ll need to add as you formalize the code: a clear, human-reviewed explanation of each module will help future team members, as well as you, when you revisit the code months later. Once you’ve cleaned up your code, you might prompt an AI tool to produce a Markdown API document or README based on the code that describes how the system works. Chapter 1 discussed how AI can produce explanations of code; this is a great moment to leverage that.
+У прототипов часто нет документации, которую тебе придется добавить по мере формализации кода: внятное, проверенное человеком объяснение каждого модуля спасет жизнь будущим членам команды (и тебе самому, когда ты вернешься к этому коду через пару месяцев). Как только причешешь код, можешь попросить ИИ сгенерить Markdown-документацию к API или README, описывающий работу системы. В Главе 1 мы обсуждали, как ИИ умеет объяснять код — сейчас самое время этим воспользоваться.
 
-It’s crucial to test your prototype thoroughly, as you learned in Chapter 5. You might write unit tests for core logic, integration tests for major flows, etc. You can accelerate this by asking the AI to generate test cases:
+Критически важно тщательно протестировать прототип, как мы учили в Главе 5. Напиши юнит-тесты для основной логики, интеграционные тесты для главных флоу и т.д. Ускорить процесс можно, попросив ИИ накидать тест-кейсы:
 
-Write Jest tests for the to-do list component covering adding, editing, completing, deleting tasks.
+> Напиши тесты на Jest для компонента туду-листа, покрывающие добавление, редактирование, выполнение и удаление задач.
 
-Then run and adjust the tests it generates. Having a good test suite gives you confidence as you refactor the prototype code.
+Затем запусти и подправь то, что он сгенерировал. Наличие хорошего набора тестов даст тебе уверенность во время рефакторинга этого франкенштейна.
 
-Sometimes you might decide to replace certain sections of your code entirely—such as if the prototype used some quick-and-dirty library or a hack that isn’t suitable in the long term. AI can speed this up as well. Suppose your prototype code uses local arrays for data, but now you need a proper database integration. Your prompt might be something like this:
+Иногда ты можешь решить полностью заменить определенные куски кода — например, если в прототипе использовалась какая-то "тяп-ляп" библиотека или хак, непригодный для долгой жизни. ИИ ускорит и это. Допустим, твой прототип хранит данные в локальных массивах, но теперь тебе нужна нормальная БД. Промпт может быть таким:
 
-Integrate an SQLite database for storing the tasks instead of an in-memory array.
+> Интегрируй базу данных SQLite для хранения задач вместо массива в памяти.
 
-The AI can provide a starting point for this integration, which you should then refine.
+ИИ даст стартовую точку для интеграции, которую ты уже допилишь.
 
-In making these changes, it’s wise to switch your mindset from “rapid prototyping mode” to a more disciplined engineering approach. The AI is now your assistant in improving code quality—it’s no longer just spitting out quick features. The dynamic is a bit different: you might evaluate each AI suggestion more critically now that stability and quality are your top priorities. As I mentioned back in Chapter 4, senior developers can derive enormous benefit from AI because they know what to accept and what to fix. At this stage, you’ll be exercising that senior mindset heavily: you have a vision of the final system, so you task the AI with specific improvements or implementations.
+Внося эти изменения, разумно переключить тумблер в голове с режима "быстрого прототипирования" на "инженерную дисциплину". ИИ теперь твой ассистент по улучшению качества кода, а не просто генератор фич на скорость. Динамика меняется: теперь ты оцениваешь каждое предложение ИИ более критично, потому что стабильность и качество выходят на первый план. Как я упоминал в Главе 4, сеньоры могут извлечь огромную пользу из ИИ, потому что знают, что принять, а что исправить. На этом этапе ты будешь включать "сеньора" на полную катушку: у тебя есть видение финальной системы, и ты ставишь ИИ задачи на конкретные улучшения.
 
-To ground this discussion, let’s consider a brief example. Imagine a solo developer, Jane, who wants to build a small web app that converts data from CSV files into charts. She uses an AI assistant to get a quick prototype done in just one weekend: a basic Node.js script with an API, plus a simple frontend to upload CSVs and render charts using a JavaScript chart library.
+Чтобы приземлить теорию, давай рассмотрим пример. Представь соло-разработчицу Джейн, которая хочет запилить небольшое веб-приложение для конвертации CSV-файлов в графики. Она использует ИИ-ассистента, чтобы накидать быстрый прототип за одни выходные: базовый скрипт на Node.js с API плюс простой фронтенд для загрузки CSV и отрисовки графиков через JS-библиотеку.
 
-She demonstrates this prototype to a few potential users and gets positive feedback, so Jane decides to turn it into a real product (a web service). Here’s how she navigates the transition:
+Она показывает прототип паре потенциальных юзеров, получает позитивный фидбек и решает превратить это в реальный продукт (веб-сервис). Вот как она проходит этот путь:
 
-## Hardening the backend
-The prototype’s Node.js API had no  authentication (anyone could upload data). For production, she needs user accounts and auth. She uses the AI to integrate an authentication system (maybe JWT-based). The AI provides a scaffold, but she carefully reviews it to ensure passwords are hashed properly and tokens are secure. She also adds input validation to the upload endpoint (the AI had not done that), using a combination of AI-suggested code and her own tweaks.
+## Укрепляем бэкенд
+В API прототипа на Node.js не было аутентификации (кто угодно мог лить данные). Для продакшена нужны аккаунты юзеров и авторизация. Она просит ИИ интегрировать систему аутентификации (возможно, на JWT). ИИ выдает заготовку, но Джейн внимательно проверяет её, чтобы убедиться, что пароли нормально хешируются, а токены безопасны. Она также добавляет валидацию входных данных на эндпоинт загрузки (ИИ этого не сделал), используя микс из предложений ИИ и своих правок.
 
-## Refactoring the frontend
-The initial frontend was a single HTML file with script  tags pointing at a CDN for dependencies. Jane decides to refactor into a structured React app for maintainability. She first asks the AI to refactor her project to be more production-ready by using a build system and npm rather than script tags. She then asks the AI to help integrate them as React components. For example, it turns the chart-rendering code from the prototype into a `<Chart>` component. Jane uses the AI to expedite writing these components, but she ensures that the state management and component hierarchy follow best practices (something the prototype didn’t consider deeply).
+## Рефакторинг фронтенда
+Изначальный фронт был одним HTML-файлом со скрипт-тегами, тянущими зависимости с CDN. Джейн решает отрефакторить это в структурированное React-приложение для поддерживаемости. Сначала она просит ИИ переделать проект под продакшен-стандарты, используя систему сборки и npm вместо скрипт-тегов. Затем просит помочь интегрировать всё это как React-компоненты. Например, код отрисовки графиков из прототипа превращается в компонент `<Chart>`. Джейн юзает ИИ, чтобы ускорить написание компонентов, но следит, чтобы управление состоянием (state management) и иерархия компонентов соответствовали лучшим практикам (о чем прототип особо не парился).
 
-## Testing and checking performance
-Jane writes unit tests for critical functions (CSV parsing, data transformation). When she’s unsure about edge cases, she queries the AI:
+## Тестирование и проверка производительности
+Джейн пишет юнит-тесты для критических функций (парсинг CSV, трансформация данных). Когда она не уверена насчет граничных случаев, она пингует ИИ:
 
-What edge cases should I test for CSV parsing?
+> Какие edge cases мне стоит протестировать для парсинга CSV?
 
-It suggests scenarios like empty fields and irregular columns, which she incorporates into her tests. She also notices that the prototype loaded entire CSV files into memory; for large files, this could crash. She modifies the code to stream the processing and uses AI to double-check her stream logic. Now the app can handle bigger files more reliably.
+Он предлагает сценарии типа пустых полей и кривых колонок, которые она добавляет в тесты. Она также замечает, что прототип грузил CSV-файлы в память целиком; на больших файлах это положит сервер. Она переписывает код на потоковую обработку (stream processing) и просит ИИ перепроверить логику стримов. Теперь аппка переваривает большие файлы надежнее.
 
-## Polishing the UI
-The prototype UI was utilitarian. For her product, Jane spends a bit more time on user experience. She asks the AI to recommend a responsive layout and perhaps integrate a CSS framework. The AI adds Bootstrap, which she then uses to improve the look (forms, buttons, layout). She manually fine-tunes some CSS afterward. This polishing stage is less about heavy coding and more about design choices, but AI still helps by providing quick code for standard UI patterns (like a navigation bar and a loading spinner).
+## Полировка UI
+UI прототипа был утилитарным. Для продукта Джейн тратит немного больше времени на UX. Она просит ИИ порекомендовать адаптивный лейаут и, возможно, интегрировать CSS-фреймворк. ИИ добавляет Bootstrap, который она использует для улучшения визуала (формы, кнопки, верстка). После этого она вручную допиливает некоторые стили. Этот этап полировки меньше про хардкорный кодинг и больше про дизайнерские решения, но ИИ всё равно помогает, выдавая готовый код для стандартных паттернов UI (типа навбара или спиннера загрузки).
 
-After these efforts, the once-rough prototype is a far cleaner, more secure, and more scalable application ready for real users. Jane deploys it, feeling confident because she added tests and reviewed the AI-generated code. This process from prototype to production might have taken her a couple of weeks, whereas writing the entire product from scratch would have taken much longer. The AI accelerated the initial prototype and continued to assist in the transition, but Jane’s human oversight and restructuring were indispensable in reaching production quality.
+После всех усилий бывший кривой прототип превращается в куда более чистое, безопасное и масштабируемое приложение, готовое к реальным юзерам. Джейн деплоит его с уверенностью, потому что добавила тесты и проверила сгенерированный код. Весь процесс от прототипа до прода занял у неё пару недель, тогда как написание всего продукта с нуля заняло бы гораздо больше времени. ИИ ускорил создание начального прототипа и продолжил помогать при переходе, но человеческий надзор Джейн и реструктуризация были незаменимы для достижения продакшен-качества.
 
-## Addressing Challenges in AI Prototyping
-While AI-driven prototyping is powerful, it’s not without challenges. As a developer, you should be aware of these and know how to mitigate them. Two areas of particular interest are scope creep and integration.
+## Решаем проблемы AI-прототипирования
+Хотя прототипирование с ИИ — мощная штука, без проблем не обходится. Ты, как разработчик, должен знать о них и уметь их нивелировать. Две зоны особого риска — это раздувание функционала (scope creep) и интеграция.
 
-Because it’s so easy to add features with AI, you might be tempted to keep going and going, adding “one more thing” to the prototype, a phenomenon known as scope creep.  This can lead to an ever-growing prototype that tries to be the final product. Remember the purpose of a prototype: to focus on the key question you want to answer or the core experience to demonstrate. If you find yourself implementing login systems, payment processing, etc., ask if that’s really needed at the prototype stage. It might be better to stub those out (the AI can generate a fake login flow that isn’t real, just to simulate it). Keeping the prototype focused will save you time and make it easier to throw away or rework later.
+Поскольку с ИИ добавлять фичи слишком легко, может возникнуть соблазн пилить и пилить, добавляя "еще одну штучку" в прототип. Это явление называется scope creep. Это может привести к постоянно растущему монстру, который пытается стать финальным продуктом. Помни о цели прототипа: сфокусироваться на ключевом вопросе, на который ты хочешь получить ответ, или на демонстрации основного экспириенса. Если ты обнаруживаешь, что пилишь системы логина, процессинг платежей и т.д. — спроси себя, реально ли это нужно на этапе прототипа? Возможно, лучше поставить заглушки (ИИ может сгенерить фейковый флоу логина, чисто для симуляции). Удержание фокуса сэкономит время и облегчит процесс выбрасывания или переделки кода позже.
 
-## Stay Focused
-Write down the goal of your prototype (“Demonstrate that users can upload a CSV and get a chart to test viability”), and use that as a North Star. Use the AI to get to that goal quickly, and resist the allure of gold-plating the prototype.
+## Держи фокус
+Запиши цель своего прототипа ("Показать, что юзеры могут загрузить CSV и получить график для проверки жизнеспособности идеи") и используй это как Полярную звезду. Используй ИИ, чтобы быстро достичь этой цели, и сопротивляйся соблазну заниматься "позолотой" (gold-plating) прототипа.
 
-Second, there’s the question of integration to real systems. Prototypes often use mock data or simplified subsystems. If your AI prototype uses dummy data or a local file, integrating it with real databases or services in production can be nontrivial. Be mindful when prototyping that some shortcuts were taken. For example, maybe the prototype emails weren’t actually sent but just logged to console. In production, you’ll need a real email service. The AI can help integrate those later, but it’s good to keep track: maintain a list of “things to address if we move forward” while prototyping. That way you won’t forget which parts were temporary. If working in a team, communicate these clearly. For instance, you might leave a comment in code: // TODO: integrate real email service here. Many AI tools actually include such TODO comments themselves when they generate a simplified solution, which is helpful.
+Во-вторых, вопрос интеграции с реальными системами. Прототипы часто используют мок-данные или упрощенные подсистемы. Если твой AI-прототип юзает фейковые данные или локальный файл, интеграция с реальными базами или сервисами в проде может оказаться нетривиальной задачей. Помни при прототипировании, что некоторые углы были срезаны. Например, может быть, имейлы в прототипе реально не отправлялись, а просто логировались в консоль. В проде тебе понадобится реальный почтовый сервис. ИИ поможет интегрировать их позже, но полезно вести учет: держи список "вещей, которые надо решить, если пойдем дальше". Так ты не забудешь, какие части были временными костылями. Если работаешь в команде, четко коммуницируй это. Например, можно оставлять комменты в коде: `// TODO: интегрировать реальный email-сервис здесь`. Многие AI-тулзы сами добавляют такие TODO-комменты, когда генерируют упрощенное решение, что весьма полезно.
 
-By anticipating these challenges, you can use AI prototyping effectively without falling into its traps. When it is used thoughtfully, the result is a robust prototype developed in record time, ready to either be transformed into a final product or set aside after extracting the lessons it offered.
+Предвидя эти челленджи, ты сможешь использовать AI-прототипирование эффективно, не попадая в его ловушки. При вдумчивом подходе результатом станет надежный прототип, разработанный в рекордные сроки, готовый либо трансформироваться в финальный продукт, либо быть отложенным в сторону после извлечения уроков.
 
-## Summary and Next Steps
-In this chapter, you saw how AI-assisted vibe coding turbocharges the prototyping process. By letting AI handle the heavy lifting of code generation, developers can move from concept to working model with unprecedented speed. I covered tools like Vercel v0 for UI generation, Lovable for full stack prototypes, and AI-augmented IDEs like Cursor and Windsurf—each enabling different aspects of rapid prototyping. I also emphasized the iterative nature of AI prototyping: generating, testing, and refining in quick cycles, with natural-language prompts guiding the changes.
+## Итоги и следующие шаги
+В этой главе вы увидели, как вайб-кодинг с поддержкой ИИ турбирует процесс прототипирования. Позволяя ИИ брать на себя тяжелую работу по генерации кода, разработчики могут переходить от концепта к рабочей модели с беспрецедентной скоростью. Я рассказал про инструменты вроде Vercel v0 для генерации UI, Lovable для фуллстек-прототипов и усиленные ИИ IDE, такие как Cursor и Windsurf — каждый из них закрывает разные аспекты быстрого прототипирования. Я также подчеркнул итеративную природу процесса: генерация, тест и доработка в быстрых циклах, где промпты на естественном языке направляют изменения.
 
-While AI-driven prototyping can produce a functional demo in hours, we also discussed the critical transition to production. The message is clear: a prototype is not a final product. It’s the first draft. Human developers must refactor and harden the code, with AI continuing to assist in that journey (suggesting improvements, generating tests, etc.). Case studies of individuals and teams using these techniques highlight the real productivity gains—prototypes built in days instead of weeks, enabling faster user feedback and business decisions.
+Хотя прототипирование с ИИ может выдать функциональное демо за часы, мы также обсудили критически важный переход к продакшену. Посыл ясен: прототип — это не финальный продукт. Это черновик. Разработчики должны рефакторить и укреплять код, при этом ИИ продолжает ассистировать в этом путешествии (предлагая улучшения, генерируя тесты и т.д.). Кейсы людей и команд, использующих эти техники, подсвечивают реальный буст продуктивности — прототипы строятся за дни вместо недель, что позволяет быстрее получать фидбек от юзеров и принимать бизнес-решения.
 
-By now, you should appreciate how vibe coding makes prototyping feel more like brainstorming with an assistant rather than grinding out boilerplate. It’s a fundamentally different vibe: more conversational, more high-level, and a lot faster. However, you’ve also seen the importance of maintaining code quality awareness even in a quick prototype—and definitely when evolving it beyond the prototype stage.
+К этому моменту ты должен осознать, как вайб-кодинг превращает прототипирование в мозговой штурм с ассистентом, а не в унылое набивание бойлерплейта. Это фундаментально другой вайб: более разговорный, более высокоуровневый и гораздо более быстрый. Однако ты также увидел важность сохранения фокуса на качестве кода даже в быстром прототипе — и уж точно при его эволюции за пределы стадии прототипа.
 
-In Chapter 7, I’ll shift focus from rapid prototyping to comprehensive web application development with AI assistance. While prototyping explores possibilities, full-scale development demands systematic approaches to architecture, implementation, and deployment.
-
-
+В Главе 7 я смещу фокус с быстрого прототипирования на полноценную разработку веб-приложений с помощью ИИ. В то время как прототипирование исследует возможности, полномасштабная разработка требует системных подходов к архитектуре, реализации и деплою.

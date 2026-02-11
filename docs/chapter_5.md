@@ -1,230 +1,209 @@
-# Chapter 5. Understanding Generated Code: Review, Refine, Own
+# Глава 5. Понимание сгенерированного кода: Ревью, Допил, Оунершип
 
+Ты уже научился уламывать AI генерировать код, и к этому моменту наверняка уже что-то накодил с помощью этих техник. Теперь наступает критическая фаза: убедиться, что этот код корректен, безопасен и пригоден для поддержки.
 
-You’ve learned how to prompt an AI to generate code, and by this point you’ve likely produced some code using these techniques. Now comes a critical phase: making sure that code is correct, safe, and maintainable.
+Как разработчик, ты не можешь просто взять выхлоп AI и с тупой лыбой катить его в прод. Тебе нужно его отрецензировать, протестировать, возможно, улучшить и интегрировать с остальной кодовой базой. Эта глава посвящена тому, как вдуплить в то, что тебе выдал AI, итеративно отредактировать и отладить это, и полностью взять на себя ответственность за этот код как часть твоего проекта.
 
-As a developer, you can’t just take the AI’s output and blithely ship it. You need to review it, test it, possibly improve it, and integrate it with the rest of your codebase. This chapter focuses on how to understand what the AI gave you, iteratively edit and debug it, and fully take ownership of the code as part of your project.
+В этой главе мы разберем:
+## Интерпретация кода AI с точки зрения твоего изначального замысла
 
-This chapter covers:
+Феномен «решения большинства», или почему сгенерированный код часто выглядит как самая попсовая копипаста.
+## Техники ревью кода на предмет ясности и скрытых косяков
+## Отладка кода, написанного AI, когда он работает не так, как ожидалось
+## Рефакторинг кода ради стиля или эффективности
+## Написание тестов для валидации поведения кода
 
-## Interpreting the AI’s code in terms of your original intent
+Освоив эти навыки, ты сможешь уверенно вливать вклад AI в свои проекты.
 
-The “majority solution” phenomenon, or why AI-generated code often looks like a common solution
+## От замысла к реализации: Понимание интерпретации AI
+Когда ты получаешь код от AI, твой первый шаг — сравнить его с твоим замыслом (промтом, который ты скормил). Выполняет ли код требования, которые ты поставил? Иногда AI может слегка не так понять задачу или реализовать её лишь частично.
 
-## Techniques to review code for clarity and potential issues
+Внимательно прочти код. Прокрути его в голове или на бумажке:
 
-## Debugging AI-written code when it doesn’t work as expected
+Протрекай, что он делает для типичного ввода.
 
-## Refactoring the code for style or efficiency
+Если в твоем промте было несколько частей («сделай X и Y»), проверь, что AI выполнил их все.
 
-## Writing tests to validate the code’s behavior
+Убедись, что AI не добавил функциональность, которую ты не просил — иногда он лепит фичи, которые «считает» полезными, типа лишнего логирования или левого параметра. Это может быть ок, а может и нет.
 
-By mastering these skills, you’ll be able to integrate AI contributions into your projects with confidence.
+Так же, как ты бы поступил с кодом коллеги: если что-то непонятно, сделай пометку. Если ты найдешь вескую причину для этого куска — отлично. Если нет — задай вопрос или подумай о том, чтобы выпилить это.
 
-## From Intent to Implementation: Understanding the AI’s Interpretation
-When you get the AI’s code, your first step should be to compare it to your intent (the prompt you gave). Does the code fulfill the requirements you set out? Sometimes the AI might slightly misinterpret or only partially implement what you asked.
+Например, если ты просишь чекер простых чисел, а код AI также печатает что-то вроде «Проверяю 7…» для каждого числа, это может быть артефактом того, как ты составил промт, или паттерном из обучающих данных (в некоторых туториалах код печатает прогресс). Если тебе этот мусор в консоли не нужен, планируй его удалить или попроси AI убрать это.
 
-Read through the code carefully. Step through it in your mind or on paper:
+Также убедись, что граничные случаи (edge cases) обрабатываются так, как ты ожидаешь. Если ты хотел, чтобы код переваривал пустой ввод, делает ли он это? Если ввод может быть `None` или отрицательным числом, учел ли это AI?
 
-Trace what it does for a typical input.
+Если что-то в твоем промте было двусмысленным, и AI пришлось выбирать интерпретацию, найди это место. Возможно, ты не указал формат вывода, и он решил печатать результаты вместо того, чтобы возвращать их. Теперь тебе решать: принять это как есть или переписать код.
 
-If your prompt had multiple parts (“do X and Y”), verify that the AI has done them all.
+Эта фаза понимания критически важна; не скипай её. Даже если ты собираешься тестировать код, понимание через чтение важно, потому что тесты могут не покрыть всё (а чтение быстрее выявляет очевидные ляпы).
 
-Ensure that the AI didn’t add functionality you didn’t ask for—sometimes it will add an extra feature it “thinks” is useful, like adding logging or a parameter, which could be OK or not.
+И последнее: учитывай допущения AI. Искусственный интеллект часто стремится к «большинству» или самой распространенной интерпретации (что подводит нас к следующему разделу).
 
-Just as you would with a colleague’s code, if something is unclear, note it. If you look for a good reason for it to be there, you might find one. If you don’t, query it or consider removing it.
+## Проблема «Большинства»: Самое популярное — не значит самое подходящее
+Модели AI, обученные на тоннах кода, часто выдают решение, которое наиболее широко представлено в этих обучающих данных (или самое простое решение, которое подходит). Я называю это эффектом решения большинства. Оно корректно в общих случаях, но может быть не лучшим вариантом для твоей конкретной ситуации.
 
-For example, if you ask for a prime-number checker and the AI code also prints something like “Checking 7…” for each number, that may be an artifact of how you prompted it or a pattern from its training data (some tutorial code prints its progress). If you don’t want that, plan to remove it or prompt the AI to remove it.
+Например, если ты попросишь алгоритм поиска без дополнительного контекста, AI может выдать базовый линейный поиск, потому что это прямолинейно и популярно. Возможно, тебе на самом деле нужен был бинарный поиск, но AI не знал, что эффективность критична, потому что ты об этом промолчал. Линейный поиск прокатит во многих средних случаях, но не там, где перформанс — это наше всё.
 
-Also make sure the edge cases are handled as you expect. If you intended it to handle empty input, does it? If the input could be None or negative, did the AI consider that?
+Точно так же AI может использовать глобальную переменную, потому что во многих простых примерах так делают, но, возможно, в твоем проекте это считается говнокодом.
 
-If something about your prompt was ambiguous and the AI had to choose an interpretation, identify where that happened. Perhaps you didn’t specify an output format, and it chose to print results instead of returning them. Now you have to decide if you want to accept that or modify the code.
+Помни, что решение AI может быть оптимизировано под сферический сценарий в вакууме. Как живой разработчик, ты обладаешь пониманием контекста, которого нет у AI.
 
-This understanding phase is crucial; don’t skip it. Even if you’re going to test the code, understanding it by reading is important because tests might not cover everything (and reading is faster for some obvious things).
+Чтобы с этим бороться:
 
-Last, consider the AI’s assumptions. AI often goes for the “majority” or most common interpretation (which leads us to the next section).
+Идентифицируй допущения в коде. Если код предполагает, что список отсортирован или ввод валиден, было ли это допущение ок? Ты это указывал? Если нет, возможно, стоило добавить проверку.
 
-## The “Majority” Problem: Most Common Doesn’t Mean Most Appropriate
-AI models trained on lots of code will often produce the solution that’s most represented in that training data (or the simplest solution that fits). I call this the majority solution effect. It’s correct in general cases, but it might not be the best for your specific situation.
+Рассмотри альтернативы: Если ты знаешь несколько способов решения задачи (например, разные алгоритмы), выбрал ли AI тот самый? Тот ли это, который тебе нужен? Если нет, можешь запросить альтернативу или просто поменять сам.
 
-For example, if you ask for a search algorithm without further context, the AI might output a basic linear search, because that’s straightforward and common. Maybe you actually needed a binary search, but the AI didn’t know that efficiency was critical, because you didn’t say so. Linear search works for many moderate cases but not if performance is key.
+Если код AI работает для «обычного» случая, но не для граничных условий, которые важны для тебя — это надо фиксить. Например, может, он не учел переполнение целого числа в какой-то математике. Во многих обучающих примерах на это забивали болт, но в твоем контексте это может быть фатально.
 
-Similarly, the AI might use a global variable because many simple examples do, but perhaps in your project, that’s not acceptable practice.
+Понимание того, что AI тяготеет к дженерик-решениям, сделает тебя лучше в ревью его кода. Это не магия и не индпошив; это очень обоснованная догадка о решении. Подгонка по фигуре — это твоя работа.
 
-Be mindful that the AI’s solution might optimize for a generic scenario. As a human developer, you have insight into context that the AI lacks.
+## Читаемость кода и структура: Паттерны и потенциальные проблемы
+Сгенерированный AI код часто имеет палевные паттерны. Он может:
 
-To address this:
+Включать больше комментов, чем обычно, или странно сформулированные комменты (так как он учился на коде из туториалов, который обычно закомментирован до смерти).
 
-Identify assumptions in the code. If it assumes a list is sorted or an input is valid, was that assumption OK? Did you specify it? If not, maybe it should have included a check.
+Использовать определенные имена переменных постоянно (типа `i`, `j`, `k` для циклов).
+## Раскладывать код в несколько многословном стиле (чтобы покрыть общие случаи)
 
-Consider alternatives: If you know multiple ways to solve the problem (like different algorithms), did the AI pick one? Is it the one you want? If not, you can prompt for the alternative or just change it.
+Чекай эти моменты и смотри, соответствуют ли они стилю твоего проекта. Код может быть функционально рабочим, но требовать прохода на читаемость. В этом проходе ты, возможно, захочешь:
 
-If the AI code works for the “usual” case but not for edge conditions that matter to you, that’s something to fix. For instance, maybe it didn’t consider integer overflow in some math. In many training examples, that might not have been addressed, but in your context, it could be important.
+Переименовать переменные, чтобы они были более описательными или соответствовали твоему кодстайлу.
 
-Understanding that the AI tends toward generic solutions will make you better at reviewing its code. It’s not magic or tailor-made; it’s a very educated guess at a solution. The tailoring is your job.
+Удалить или причесать комменты. Если он добавил коммент типа `# проверить, является ли число простым` над самоочевидным `if`, можешь смело это сносить. Но если там коммент, объясняющий сложный кусок логики, это гуд — оставь или улучши.
 
-## Code Readability and Structure: Patterns and Potential Issues
-AI-generated code often has some telltale patterns. It might:
+Обеспечить консистентное форматирование, прогнав код через линтер или форматтер (типа Black для Python или gofmt для Go), чтобы подогнать отступы и скобки под ваши стандарты.
 
-Include more comments than usual or oddly phrased comments (since it learned from tutorial code, which tends to be heavily commented)
+Также ищи любую необычную структуру. Определил ли AI несколько классов или функций, когда ты ожидал одну? Иногда он может разбить задачу на несколько функций, потому что так было в обучающем примере. Если это оверкилл, можешь заинлайнить их (или наоборот). Код слишком умный или слишком наивный? AI иногда выдает очень прямолинейное решение или, изредка, вычурный однострочник. Совпадает ли это с предпочтениями твоей команды? Если нет — правь.
 
-Use certain variable names consistently (like i, j, k for loops)
+Другие потенциальные проблемы, за которыми надо следить:
+## Ошибки на единицу (Off-by-one errors)
+Да, AI тоже может лажать в этом. Например, границы циклов могут быть хитрыми. Если есть время, ментально прогони простой кейс через цикл.
+## Необработанные исключения
+Предполагает ли код, что файл откроется успешно или что весь ввод в правильном формате? Добавь обработку ошибок, если нужно.
+## Ловушки производительности
+Может быть, AI использует вложенный цикл на большом датасете для проверки принадлежности, хотя существует лучший подход, например, использование множества (`set`). Решение AI может быть правильным, но не оптимальным.
+## Использование библиотек
+Если код использует библиотеку, убедись, что это та, которую ты хочешь использовать (и что она вообще доступна). Иногда он может заюзать, скажем, `numpy` для простой суммы (потому что видел это в примерах в своих обучающих данных). Если тащить эту зависимость не стоит свеч, переключись на чистый Python или библиотеку, которую ты планировал.
+## Несоответствия
+Иногда код AI может иметь мелкие несоответствия, например, докстринг функции говорит одно, а код делает другое (если он переписал логику, но не коммент, например). Пофикси это.
+## Мелкие синтаксические проблемы
+Это редкость с хорошо протестированными моделями, но не невозможно в языках, где что-то может запутать.
+## Использование устаревших API
+AI может использовать старую версию библиотечной функции, которая изменилась. Если видишь вызов функции, который не узнаешь, быстро чекни доки библиотеки, чтобы убедиться, что он корректен для твоей версии.
+## Плейсхолдеры
+Если выхлоп AI использует заглушки типа «Ваш код здесь» (редко, но бывает в дженерик-шаблонах), заполни их.
 
-## Lay out code in a somewhat verbose style (to cover general cases)
+Короче говоря, относись к коду AI так, будто его написал стажер и свалил домой на выходные. Тебе нужно отрецензировать его на качество и правильно интегрировать.
 
-Check for these and consider whether they match your project’s style. The code might be functionally fine but need a readability pass. In that pass, you may want to:
-
-Rename variables to be more descriptive or consistent with your codebase.
-
-Remove or refine comments. If it added a comment like # check if number is prime above a self-explanatory if statement, you could remove that. But if it has a comment explaining a complex bit of logic, that’s good—keep or improve it.
-
-Ensure consistent formatting by running the code through a linter or formatter (like Black for Python or gofmt for Go) to match the spacing and bracket styles you want.
-
-Also look for any unusual structure. Did the AI define multiple classes or functions when you expected one? Sometimes it might break a problem into multiple functions because that’s how a training example did it. If that’s overkill, you can inline them (or vice versa). Is the code too clever or too naive? AI sometimes produces a very straightforward solution or, occasionally, a fancy one-liner. Does that align with your team’s preferences? If not, adjust accordingly.
-
-Other potential issues to watch out for include:
-
-## Off-by-one errors
-Yes, AI can make those, too. For example, loop boundaries can be tricky. If you have time, mentally test a simple case through the loop.
-
-## Unhandled exceptions
-Does the code assume that a file opens successfully or that all input is in the correct format? Add error handling if it’s needed.
-
-## Performance pitfalls
-Maybe the AI is using an inner loop on a large dataset for membership checks, even though a better approach exists, like using a set. The AI solution might be correct but not optimal.
-
-## Library usage
-If the code uses a library, ensure it’s one you want to use (and that it’s available). Sometimes it might use, say, numpy for a simple sum (because it saw that in examples in its training data). If dragging in that dependency isn’t worth it, you can switch to pure Python or the library you intended.
-
-## Inconsistencies
-Occasionally, the AI code might have minor inconsistencies, like a function docstring saying one thing but the code doing another (if it revised the logic but not the comment, for instance). Fix those.
-
-## Minor syntax issues
-This is rare with well-tested models but not impossible in languages where it might confuse something.
-
-## Using outdated APIs
-The AI might use an old version of a library’s function that has changed, for instance. If you see a function call you don’t recognize, quickly check the library docs to ensure it’s correct for the version you use.
-
-## Placeholders
-If the AI output uses placeholders like “Your code here” (rare, but it can happen in a generic template), fill those in.
-
-In short, treat the AI code as if an intern wrote it and left for the day. You need to review it for quality and integrate it properly.
-
-## Debugging Strategies: Finding and Fixing Errors
-Let’s say you run the code (or write tests for it, which we’ll cover soon) and something’s not working. Debugging AI-generated code is no different than debugging your own or someone else’s code—except you didn’t write it, so you might be less familiar. But because you’ve carefully read it already, you’re in good shape (see Figure 5-1).
-
-
+## Стратегии отладки: Поиск и исправление ошибок
+Допустим, ты запустил код (или написал тесты для него, что мы скоро обсудим), и что-то не работает. Отладка кода от AI ничем не отличается от отладки твоего собственного или чужого кода — за исключением того, что не ты его писал, поэтому ты можешь быть менее знаком с ним. Но поскольку ты его уже внимательно прочитал, ты в хорошей форме (см. Рисунок 5-1).
 
 > [!NOTE]
-> **Image Missing**
-> *Figure 5-1. The AI code debugging cycle: execute AI-generated code, capture errors, provide error context back to AI for analysis, implement suggested fixes, and iterate until resolution.*
+> **Изображение отсутствует**
+> *Рисунок 5-1. Цикл отладки кода AI: выполнение сгенерированного AI кода, отлов ошибок, предоставление контекста ошибки обратно AI для анализа, внедрение предложенных исправлений и итерации до победного.*
 
-Here’s a six-step approach to debugging:
+Вот шестишаговый подход к отладке:
 
-Reproduce the issue.
+Воспроизведи проблему.
 
-Run the function or code with inputs that fail. Observe the output or error.
+Запусти функцию или код с входными данными, которые вызывают сбой. Понаблюдай за выводом или ошибкой.
 
-Locate the source of the issue.
+Локализуй источник проблемы.
 
-Use typical debugging techniques like print statements, or use a debugger to step through. If it’s a logical error (wrong output), trace the logic manually or with prints to see where it diverges from your expectations.
+Используй типичные техники отладки, типа `print`-ов, или используй дебаггер, чтобы пройтись пошагово. Если это логическая ошибка (неверный вывод), протрекай логику вручную или с принтами, чтобы увидеть, где она расходится с твоими ожиданиями.
 
-Check the prompt against the code.
+Проверь промт относительно кода.
 
-Sometimes the bug is simply that the code didn’t fully implement the requirement, like if you asked for something to be sorted but it isn’t sorting properly. That might mean the AI’s logic is flawed or that an edge case (like an empty list) isn’t handled.
+Иногда баг просто в том, что код не полностью реализовал требование, например, если ты просил отсортировать что-то, а оно не сортируется нормально. Это может означать, что логика AI ошибочна или что граничный случай (типа пустого списка) не обрабатывается.
 
-Leverage the AI to debug!
+Используй AI для дебага!
 
-You can actually feed the problematic code back into the AI and say, “This code is giving the wrong result for X. Can you help find the bug?” Often, it will analyze it (like a code review) and point out issues. For example, maybe it sees that a loop should go to len(arr) but goes to len(arr)-1. It might catch that quicker. (Be mindful to not fully trust it either—but it’s like asking a colleague to help debug.)
+Ты реально можешь скормить проблемный код обратно в AI и сказать: «Этот код выдает неверный результат для X. Можешь помочь найти баг?» Часто он проанализирует это (как на код-ревью) и укажет на проблемы. Например, может заметить, что цикл должен идти до `len(arr)`, а идет до `len(arr)-1`. Он может отловить это быстрее. (Будь осторожен и не доверяй ему полностью — но это как попросить коллегу помочь с дебагом).
 
-Fix the code.
+Пофикси код.
 
-Now you have a choice: fix it manually or prompt the AI for a corrected version. If the fix is obvious, just do it. If it’s not, you can try something like “The above function fails on input X (expected Y, got Z). Please correct it.” The AI might then adjust the code accordingly.
+Теперь у тебя есть выбор: пофиксить вручную или попросить AI выдать исправленную версию. Если фикс очевиден, просто сделай это. Если нет, можешь попробовать что-то вроде «Функция выше падает на вводе X (ожидалось Y, получено Z). Пожалуйста, исправь это». AI может скорректировать код соответствующим образом.
 
-Test again.
+Протестируй снова.
 
-Ensure the bug is resolved and that no new issues have been introduced.
+Убедись, что баг устранен и новые проблемы не вылезли.
 
-I recommend using test-driven debugging. If possible, write a few tests for critical functions (more on that in the testing section later in this chapter). Any failing tests will directly show what’s wrong. This can be faster than manual checking, for anything but the simplest functions.
+Я рекомендую использовать отладку через тесты (test-driven debugging). Если возможно, напиши несколько тестов для критических функций (подробнее об этом в разделе про тестирование позже в этой главе). Любые упавшие тесты прямо укажут, что не так. Это может быть быстрее ручной проверки для всего, кроме самых простейших функций.
 
-Finally, when debugging, be sure you ask why, not just what. Try to understand why the AI made the mistake. Was the prompt unclear on that point? This can inform how you prompt next time or whether you need to always double-check that aspect in AI outputs. For example, if you notice the AI often doesn’t handle empty inputs unless told, you’ll start always specifying that in prompts and reviewing for it.
+Наконец, при отладке убедись, что ты спрашиваешь «почему», а не только «что». Постарайся понять, почему AI совершил ошибку. Был ли промт неясным в этом моменте? Это может подсказать, как промтить в следующий раз или нужно ли всегда перепроверять этот аспект в выхлопах AI. Например, если ты заметишь, что AI часто не обрабатывает пустой ввод, пока ему не скажешь, ты начнешь всегда указывать это в промтах и проверять при ревью.
 
-## Refactoring for Maintainability: Making AI Code Your Code
-Once the code is functionally correct, consider refactoring it to align with your project’s standards and to make it easier to work with in the future. The AI’s job was to get you code quickly; your job is to polish it.
+## Рефакторинг для поддерживаемости: Делаем код AI своим кодом
+Как только код функционально корректен, рассмотри его рефакторинг, чтобы подогнать под стандарты твоего проекта и облегчить работу с ним в будущем. Работа AI заключалась в том, чтобы дать тебе код быстро; твоя работа — отполировать его.
 
-Here is another six-step process, this time for refactoring:
+Вот еще один шестишаговый процесс, на этот раз для рефакторинга:
 
-Align with style guidelines.
+Выровняй со стайлгайдом.
 
-Run the code through your formatter or linter. Fix any warnings like “Variable name should be lowercase” or “Line too long.” This instantly makes the code look like the rest of your codebase. Many AI tools do a decent job at style, but slight adjustments might be needed.
+Прогони код через свой форматтер или линтер. Исправь любые варнинги типа «Имя переменной должно быть в нижнем регистре» или «Строка слишком длинная». Это мгновенно заставит код выглядеть как остальная часть твоей кодовой базы. Многие инструменты AI делают неплохую работу со стилем, но легкие корректировки могут понадобиться.
 
-Improve naming and structure.
+Улучши нейминг и структуру.
 
-If the AI named functions _helper1 and _helper2 in a class, and you prefer meaningful names, rename them. If it created a bunch of small functions that are only used once, maybe inline them, unless they add clarity.
+Если AI назвал функции `_helper1` и `_helper2` в классе, а ты предпочитаешь осмысленные имена, переименуй их. Если он создал кучу мелких функций, которые используются только один раз, может, стоит их заинлайнить, если только они не добавляют ясности.
 
-Remove any unnecessary parts.
+Удали любые ненужные части.
 
-For example, perhaps the AI included a main block or test code in the output that you didn’t ask for. If you don’t need that, remove it. Conversely, maybe it wrote everything in one function but you want to split it into smaller pieces for clarity; if so, do that split now.
+Например, возможно, AI включил блок `main` или тестовый код в вывод, который ты не просил. Если тебе это не нужно, удаляй. И наоборот, может быть, он написал всё в одной функции, но ты хочешь разбить это на более мелкие куски для ясности; если так, делай сплит сейчас.
 
-Add documentation.
+Добавь документацию.
 
-If this code is intended to be part of a library or a module that others will use, add docstrings or comments where appropriate. The AI might have commented some, but ensure it meets your standards. For example, maybe your project requires a certain docstring format with parameters and returns documented.
+Если этот код предназначен стать частью библиотеки или модуля, который будут использовать другие, добавь докстринги или комменты, где уместно. AI мог что-то прокомментировать, но убедись, что это соответствует твоим стандартам. Например, может, твой проект требует определенного формата докстринга с документированием параметров и возвращаемых значений.
 
-Optimize if needed.
+Оптимизируй, если нужно.
 
-Now that the code works, is it efficient enough? If this code might be called in a tight loop or on large data, check its complexity. The AI might not have used the most optimal approach (again, the “majority solution” might be a simple loop, not a more optimized approach). If performance is a concern, refactor to a better algorithm. You can again involve the AI:
+Теперь, когда код работает, достаточно ли он эффективен? Если этот код будет вызываться в жестком цикле или на больших данных, проверь его сложность. AI мог не использовать самый оптимальный подход (опять же, «решение большинства» может быть простым циклом, а не более оптимизированным подходом). Если производительность вызывает беспокойство, отрефактори на лучший алгоритм. Ты снова можешь привлечь AI:
 
-Optimize this code to run faster by using a set instead of a list for lookups.
+Оптимизируй этот код, чтобы он работал быстрее, используя `set` вместо `list` для лукапов.
 
-But you, as a developer, often know what pattern you want, so you might just implement that change.
+Но ты, как разработчик, часто знаешь, какой паттерн тебе нужен, так что можешь просто реализовать это изменение сам.
 
-Simplify if needed.
+Упрости, если нужно.
 
-Sometimes AI code can be overly verbose. For instance, it might use an if-else with returns where a single return with a condition would suffice. While explicit code is not necessarily bad, you might want to simplify it to fewer lines to improve readability without losing clarity.
+Иногда код AI может быть чрезмерно многословным. Например, он может использовать `if-else` с `return`-ами там, где хватило бы одного `return` с условием. Хотя явный код — это не обязательно плохо, ты можешь захотеть упростить его до меньшего количества строк, чтобы улучшить читаемость без потери ясности.
 
-The goal of refactoring is that if another developer pulls up this code later, it shouldn’t be obvious that “an AI wrote this.” It should just look like good code. That often means giving it the small human touches that make code clean.
+Цель рефакторинга в том, чтобы, если другой разработчик откроет этот код позже, не было очевидно, что «это написал AI». Это должно просто выглядеть как хороший код. Это часто означает добавление тех небольших человеческих штрихов, которые делают код чистым.
 
-When you refactor, you need to verify you didn’t break anything. So let’s segue into testing.
+Когда ты рефакторишь, тебе нужно убедиться, что ты ничего не сломал. Так что давай перейдем к тестированию.
 
-The Importance of Testing: Unit, Integration, and End to End
-Testing is always important, but it’s especially important for AI-generated code for two reasons.  First, since you didn’t write it from scratch, you want assurance that it will work in all cases. Second, if you prompt the AI for changes later or integrate more AI code, tests help you ensure that any new changes don’t break the existing functionality. Let’s look quickly at different kinds of tests:
+## Важность тестирования: Юнит, Интеграционные и E2E
+Тестирование всегда важно, но для кода, сгенерированного AI, оно особенно важно по двум причинам. Во-первых, поскольку не ты писал его с нуля, тебе нужны гарантии, что он сработает во всех случаях. Во-вторых, если ты позже попросишь AI внести изменения или интегрируешь больше AI-кода, тесты помогут убедиться, что любые новые изменения не сломают существующую функциональность. Давай быстро глянем на разные виды тестов:
+## Юнит-тесты
+Пиши тесты для каждой функции или модуля, полученного от AI, особенно покрывая граничные случаи (edge cases). Для нашего примера с простыми числами ты можешь протестировать простое число, непростое, 1 (граничный случай), 0 или отрицательное (возможно, определив ожидаемое поведение), большое простое число и так далее. Если код проходит все эти тесты, он, скорее всего, корректен.
 
-## Unit tests
-Write tests for each function or module you got from the AI, particularly covering edge cases. For our prime example, you might test with a prime number, a nonprime, 1 (an edge case), 0 or negative (maybe defining the expected behavior), a large prime, and so on. If the code passes all those tests, it’s likely correct.
+Ты даже можешь попросить AI сгенерировать эти тесты:
 
-You can even ask the AI to generate these tests:
+Напиши юнит-тесты на PyTest для функции выше, покрывая граничные случаи.
 
-Write PyTest unit tests for the above function, covering edge cases.
+Он часто справляется неплохо. Тем не менее, проверь их, чтобы убедиться, что они валидны и покрывают то, что ты считаешь необходимым.
+## Интеграционные тесты
+Если код AI взаимодействует с другими частями кодовой базы, например, с функцией, использующей базу данных, напиши тест, который вызывает его в контексте. Реально ли он сохраняет в базу то, что должен? Если он производит вывод, потребляемый другой функцией, свяжи их в тесте.
+## E2E тесты (End-to-end)
+Если этот код — часть большого воркфлоу, прогони сценарий от начала до конца. Например, если код AI был частью веб-роута, сделай тестовый запрос к этому роуту в тестовом окружении и посмотри, выдерживают ли проверку формат, обработка ошибок и всё остальное.
 
-It often does a decent job. Still, review them to ensure they’re valid and cover what you think is necessary.
+Уровень тестирования, который тебе нужен, зависит от того, насколько критичен и сложен код. Но даже быстрый ручной прогон или простые `assert`-ы в скрипте лучше, чем ничего для верификации. Помни, тестирование не просто находит баги; оно фиксирует поведение гвоздями. Если ты изменишь что-то позже (или это сделает AI), тестирование поможет убедиться, что функциональность кода не деградировала.
 
-## Integration tests
-If the AI code interacts with other parts of the codebase, like a function that uses a database, write a test that calls it in context. Does it actually store to the database what it should? If it produces output consumed by another function, chain them in a test.
+Тестирование — это также хороший способ заявить права на владение (ownership). Как только ты протестировал и исправил все проблемы, ты можешь быть уверен в коде. В этот момент справедливо сказать, что код «твой», так же как и любой другой код в проекте. Ты его понимаешь, ты ему доверяешь, и у тебя есть тесты, чтобы его охранять.
+## Заметка про AI и тестирование
+Some AI coding tools начинают интегрировать предложения по тестированию. Например, CodeWhisperer иногда предлагает `assert` после куска кода. Используй эти предложения как отправную точку, но не думай, что они на 100% исчерпывающие. Думай о креативных граничных случаях — это то место, где человеческая интуиция всё еще очень ценна.
+## Итоги и следующие шаги
+Мы прошли полный цикл: генерация, осмысление, отладка и рефакторинг. Этот луп может пролететь за считанные минуты (если функция мелкая) или растянуться на часы и дни (для жирных модулей, где ИИ подключается набегами).
 
-## End-to-end tests
-If this code is part of a larger workflow, run a scenario from start to finish. For example, if the AI code was part of a web route, do a test request to that route in a test environment and see if the format, error handling, and everything else holds up.
+Важно зарубить себе на носу: **за итоговый код отвечаешь ты, девелопер**. ИИ — это просто инструмент, чтобы ты кодил быстрее, но он не возьмет вину на себя, если на проде всё накроется медным тазом. Тут есть и риски по лицензиям и авторским правам: некоторые провайдеры ИИ честно предупреждают, что длинные куски кода могут статистически совпадать с чьим-то копирайтом. Это случается редко, и провайдеры сильно пофиксили эту проблему, но, как ты сканируешь ответы со Stack Overflow на предмет чужих лицензий, так же делай быстрый чек и тут — особенно если выхлоп большой или подозрительно чистый.
 
-The level of testing you need to do depends on how critical and complex the code is. But even a quick manual test run or simple assert statements in a script are better than nothing for verification. Remember, testing doesn’t just find bugs; it locks down behavior. If you change something later (or an AI does), testing helps you ensure the code’s functionality doesn’t regress.
+Например, если ты пишешь промт "реализуй quicksort" и нейронка выдает тебе 20 строк стерильного кода — это, скорее всего, ок, это "общее знание". Но если ты просишь какую-то мутную специфику и получаешь огромный кусок кода — не поленись, выдерни уникальную строку и пробей её в поисковике. Не выдрано ли это откуда-то под копирку? Эта проблема всплыла недавно, когда ИИ спалили на воспроизведении текста из научных статей и других защищенных источников. Часть твоего ответственного владения кодом — проверять, откуда растут ноги у любого сгенерированного контента, который выглядит сложнее шаблонных паттернов или кажется слишком уж специфичным.
 
-Testing is also a good way to assert ownership. Once you’ve tested for and fixed any issues, you can be confident in the code. At this point, it’s fair to say the code is “yours,” just like any other code in the codebase. You understand it, you trust it, and you have tests to guard it.
+И наконец, интегрируй этот код в проект: закинь в систему контроля версий (VCS), может, даже черкани в коммит-месседже, что тут помогал ИИ. Никто не заставляет, но некоторые команды любят вести такую статистику.
 
-## A Note on AI and Testing
-Some AI coding tools are starting to integrate testing suggestions. For example, CodeWhisperer will sometimes suggest an assert after a piece of code. Use those suggestions as a starting point, but don’t assume they’re 100% comprehensive. Think of creative edge cases⁠—that’s one place where human intuition is still very valuable.
+Со временем требования поменяются, и тебе придется этот код править. Относись к нему как к любому другому коду: не надо думать "Ой, это код робота, попрошу-ка я робота его пофиксить". Хочешь — проси, но можешь спокойно переписать всё руками. Делай так, как быстрее и проще поддерживать.
 
-## Summary and Next Steps
-We’ve gone through generating, understanding, debugging, and refactoring the code. This loop might happen in a short span (within minutes, for a small function) or take longer (for a complex module, over hours or days, with intermittent AI assistance).
+После тщательного код-ревью и тестов сгенерированный код становится просто *ещё одним куском кода* в твоем проекте. В этот момент абсолютно фиолетово, кто написал 10-ю строчку — ты или алгоритм. Главное, что она работает и соответствует стандартам проекта.
 
-It’s important to acknowledge that you, the developer, are responsible for the final code. AI is a tool to accelerate creation, but it won’t take the blame if something fails. There’s also a licensing or copyright risk: some AI providers say that outputs over a certain length might be statistically likely to contain copied material. It’s rare, and the providers mitigated the problem a lot, but just as you scan Stack Overflow answers for any obviously licensed text or attributions, do a quick check—especially if the output is big or too clean. For instance, if you prompt “implement quicksort” and the AI gives you 20 lines of pristine code, that’s probably fine and common knowledge. But if you ask for something obscure and get a large chunk of code, try searching a unique string from it online to see if it was pulled verbatim from somewhere. This issue has become more apparent recently, with documented cases of AI systems reproducing text from journal articles and other copyrighted sources. As part of responsible code ownership, developers should verify the provenance of any AI-generated content that appears to go beyond generic patterns or seems unusually specific to particular sources.
+Следуя этим практикам, ты оседлаешь скорость ИИ-кодинга, не жертвуя качеством. Ты избегаешь ловушки слепой веры в "магию" и вместо этого встраиваешь её в профессиональный рабочий процесс.
 
-Finally, integrate the code into your project: add it to your version control system, perhaps mentioning in your commit message that AI helped. There’s no requirement to do this, but some teams like to track it.
+Дальше, **Глава 6** рассмотрит, как ИИ-инструменты могут фундаментально перевернуть фазу прототипирования. Я расскажу про практические техники, как запрячь ИИ-ассистентов, чтобы пролететь путь от "есть идейка" до "рабочий прототип" за часы, а не за дни. Обсудим конкретные тулзы для прототипирования, включая Vercel v0 и утилиты типа "из скриншота в код", а также стратегии итеративной допилки под присмотром ИИ.
 
-Over time, you’ll likely modify this AI-generated code as requirements change. Treat it like any other code: don’t think, “Oh, that’s the AI’s code; I’ll ask the AI to change it.” You can, if you want, but you can also freely modify it by hand. Do whatever is most efficient and maintainable.
-
-Through careful review and testing, AI-generated code becomes just more code in your project. At that point, whether an AI wrote line 10 or you did is irrelevant—what matters is that it meets the project’s needs and standards.
-
-By following these practices, you harness the speed of AI coding while ensuring quality. You avoid the pitfalls of unquestioningly trusting AI output and instead integrate it into a professional development workflow.
-
-Next, Chapter 6 examines how AI tools can fundamentally transform the prototyping phase of software development. I will explore practical techniques for leveraging AI assistants to accelerate the journey from initial concept to working prototype, often reducing development time from days to hours. The discussion covers specific AI-powered prototyping tools, including Vercel v0 and screenshot-to-code utilities, along with strategies for iterative refinement under AI guidance.
-
-I will also address the critical transition process from AI-generated prototypes to production-ready code, examining both the opportunities and potential challenges that arise when AI becomes a central part of the development workflow. Through real-world case studies, I will demonstrate how developers are successfully using AI to test ideas rapidly while maintaining code quality—and avoiding common pitfalls that can emerge when moving too quickly from concept to implementation.
-
+Я также разберу тот самый критический момент перехода от "слепленного нейронкой прототипа" к коду, готовому для продакшена. Посмотрим и на возможности, и на грабли, на которые можно наступить, когда ИИ становится ядром твоего воркфлоу. На реальных кейсах я покажу, как разрабы успешно юзают ИИ для быстрого теста гипотез, сохраняя при этом качество кода — и как не облажаться, пытаясь слишком быстро перепрыгнуть от концепта к реализации.

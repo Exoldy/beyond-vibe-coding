@@ -2,22 +2,22 @@
 layout: home
 
 hero:
-  name: Beyond Vibe Coding
-  text: AI-Assisted Software Development
-  tagline: Mastering the art of coding with AI assistants
+  name: За гранью вайб-кодинга
+  text: Разработка софта с ИИ-саппортом
+  tagline: Осваиваем искусство кодинга с цифровыми ассистентами
   actions:
     - theme: brand
-      text: Start Reading
+      text: Начать чтение
       link: /Preface
     - theme: alt
-      text: About Author
+      text: Об авторе
       link: /about
 
 features:
-  - title: Vibe Coding
-    details: Exploratory, prompt-first programming.
-  - title: AI-Assisted Engineering
-    details: Structured, disciplined development with AI.
-  - title: Future of Coding
-    details: How AI is reshaping the developer role.
+  - title: Вайб-кодинг
+    details: Исследовательский угар и подход prompt-first.
+  - title: ИИ-инжиниринг
+    details: Структурированная, дисциплинированная разработка с ИИ.
+  - title: Будущее кодинга
+    details: Как ИИ перекраивает роль разраба.
 ---

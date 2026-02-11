@@ -1,320 +1,289 @@
-# Chapter 4. Beyond the 70%: Maximizing Human Contribution
+# Глава 4. За пределами 70%: Как выжать максимум из человеческого фактора
 
+Вы уже видели, как ИИ-ассистенты вроде Cursor, Cline, Copilot и Windsurf перевернули процесс разработки, взяв на себя большую часть грязной работы и бойлерплейта — где-то 70%. Но что насчет оставшихся «30%», которые отделяют игрушечную поделку от боевой системы, готовой к проду? В эту брешь попадает всё самое сложное: понимание мутных требований, архитектура поддерживаемых систем, обработка граничных случаев (edge cases) и гарантия того, что код вообще работает правильно. Короче говоря, ИИ может генерить код, но с *инженерией* у него часто лапки.
 
-You’ve seen how AI coding assistants like Cursor, Cline, Copilot, and Windsurf have transformed how software is built, shouldering much of the grunt work and boilerplate—about 70%.1 But what about that last “30%” of the job that separates a toy solution from a production-ready system? This gap includes the hard parts: understanding complex requirements, architecting maintainable systems, handling edge cases, and ensuring code correctness. In other words, while AI can generate code, it often struggles with engineering.
+Тим О’Райли, оглядываясь на десятилетия технологических сдвигов, напоминает: каждый скачок автоматизации менял то, *как* мы программируем, но не отменял нужду в толковых программистах. Мы не стоим на пороге смерти программирования, скорее это «конец программирования в том виде, в каком мы его знаем сегодня». Роли разрабов эволюционируют, а не испаряются.
 
-Tim O’Reilly, reflecting on decades of technology shifts, reminds us that each leap in automation has changed how we program but not why we need skilled programmers. We’re not facing the end of programming but rather “the end of programming as we know it today,” meaning developers’ roles are evolving, not evaporating.
+Задача нынешних инженеров — принять ИИ там, где он хорош (те самые первые 70%), и упороться в прокачку вечных скиллов и инсайтов, нужных для оставшихся 30%. В этой статье мы копнем экспертные мнения и выясним, какие человеческие навыки всё ещё рулят. Разберем, на что давить сеньорам и мидлам, и во что вкладываться джунам, чтобы выжить и преуспеть рядом с ИИ.
 
-The challenge for today’s engineers is to embrace AI for what it does best (the first 70%) while doubling down on the durable skills and insights needed for the remaining 30%. This article dives into expert insights to identify which human skills remain crucial. We’ll explore what senior and midlevel developers should continue to leverage and what junior developers must invest in to thrive alongside AI.
+Цель этой главы — дать вам прагматичный гайд, как максимизировать ценность этих незаменимых 30%, с конкретными советами для инженеров любого уровня.
 
-This chapter’s goal, then, is to offer you pragmatic guidance for maximizing the value of that irreplaceable 30%, with actionable takeaways for engineers at every level.
+## Сеньоры и ведущие разработчики: Юзайте опыт в связке с ИИ
+Если ты сеньор, смотри на пришествие ИИ-тулзов как на шанс бустануть свой импакт — если, конечно, правильно применишь опыт. У сеньоров обычно есть глубокое понимание домена, чуйка на то, где всё может навернуться, и способность принимать высокоуровневые технические решения.
 
-## Senior Engineers and Developers: Leverage Your Experience with AI
-If you’re a senior engineer, you should see the advent of AI coding tools as an opportunity to amplify your impact—if you leverage your experience in the right ways. Senior developers typically possess deep domain knowledge, intuition for what could go wrong, and the ability to make high-level technical decisions.
+Эти сильные стороны — как раз часть тех 30%, которые ИИ в соло не вывезет. В этом разделе посмотрим, как матерые разрабы могут максимизировать свою ценность.
 
-These strengths are part of the 30% that AI can’t handle alone. This section looks at how seasoned developers can maximize their value.
+## Будь Архитектором и Главредом
+Пусть ИИ пишет черновик кода, а ты фокусируйся на архитектуре решения и полировке результата. Стив Йегге пишет, что во многих организациях мы идем к сдвигу, где командам нужны «только старшие сотрудники», которые «(а) описывают задачи, то есть пишут промты, и (б) ревьюят результат на точность и корректность». Прими эту модель. Как сеньор, ты можешь транслировать сложные требования в эффективные промты или спеки для ИИ-ассистента, а потом своим критическим взглядом проверять каждую строчку. По сути, ты занимаешься парным программированием с ИИ: он — скоростной наборщик текста, но мозг — это ты.
 
-## Be the Architect and the Editor in Chief
-Let AI handle the first draft of code while you focus on architecting the solution and then refining the AI’s output. In many organizations, Steve Yegge writes that we may see a shift where teams need “only senior associates” who “(a) describe the tasks to be done; i.e., create the prompts, and (b) review the resulting work for accuracy and correctness.” Embrace that model. As a senior dev, you can translate complex requirements into effective prompts or specifications for an AI assistant, then use your critical eye to vet every line produced. You are effectively pair programming with the AI—it’s the fast typer, but you’re the brain.
+Держи планку качества при ревью: убедись, что код соответствует стандартам твоей организации по качеству, безопасности и производительности. Выступая в роли архитектора и редактора, ты не даешь «бремени ревью» раздавить тебя. (Предупреждение: если джуны просто перекидывают тебе через забор сырой выхлоп нейронки, бей по рукам — внедряй процесс, где они обязаны сами верифицировать работу ИИ, чтобы ты не был единственным предохранителем).
 
-Maintain high standards during review: ensure the code meets your organization’s quality, security, and performance benchmarks. By acting as architect and editor, you prevent the “high review burden” from overwhelming you. (A cautionary note: if junior staff simply throw raw AI output over the wall to you, push back—instill a process where they must verify AI-generated work first, so you’re not the sole safety net.)
+## Используй ИИ как мультипликатор силы для больших инициатив
+Сеньоры часто тащат большие проекты или разгребают геморройный рефакторинг, к которому джуны боятся подступиться. ИИ может турбировать эти усилия, взяв на себя кучу механических изменений или перебирая альтернативы под твоим чутким руководством. Йегге ввел термин *чат-ориентированное программирование* (CHOP) для такого стиля работы — «кодинг через итеративное уточнение промтов», где ИИ выступает коллаборатором. Юзай CHOP, чтобы брать на себя более амбициозные задачи.
 
-## Use AI as a Force Multiplier for Big Initiatives
-Senior engineers often drive large projects or tackle hairy refactors that juniors can’t approach alone. AI can supercharge these efforts by handling a lot of mechanical changes or exploring alternatives under your guidance. Yegge introduced the term chat-oriented programming (CHOP) for this style of working—“coding via iterative prompt refinement,” with the AI as a collaborator. Leverage CHOP to be more ambitious in what you take on.
+Наличие ИИ-помощника снижает планку входа, когда проект вообще стоит свеч: то, на что раньше уходили дни, теперь делается за часы. Сеньоры могут наконец взяться за проекты из серии «Было бы круто, если бы...», которые вечно казались слегка недосягаемыми.
 
-Having AI assistance lowers the bar for when a project is worth investing time in at all since what might have taken days can now be done in hours. Senior devs can thus attempt those “Wouldn’t it be nice if…?” projects that always seemed slightly out of reach.
+Ключ в том, чтобы оставаться рулевым: ты решаешь, какие инструменты или подходы использовать, и собираешь куски в единое целое. Твой опыт позволяет просеивать предложения ИИ — принимая те, что подходят, и отвергая шлак.
 
-The key is to remain the guiding mind: you decide which tools or approaches to pursue, and you integrate the pieces into a cohesive whole. Your experience allows you to sift the AI’s suggestions—accepting those that fit, rejecting those that don’t.
+## Ментори и задавай стандарты
+Еще одна важнейшая роль сеньора — коучить менее опытных членов команды по эффективному использованию ИИ и вечным бест-практис. У тебя наверняка есть выстраданное знание о граблях, которые джуны не видят: утечки памяти, ошибки на единицу (off-by-one errors) и проблемы с конкурентностью.
 
-## Mentor and Set Standards
-Another crucial role for senior engineers is to coach less-experienced team members on effective use of AI and on the timeless best practices. You likely have hard-won knowledge of pitfalls that juniors may not see, like memory leaks, off-by-one errors, and concurrency hazards.
+Раз джуны теперь потенциально генерят код через ИИ, важно научить их самопроверке и тестированию этого кода. Покажи пример, продемонстрировав, как дотошно тестить вклад ИИ, и поощряй культуру сомнения и верификации машинного выхлопа. Некоторые организации (включая даже юридические фирмы) ввели правила: если кто-то использует ИИ для генерации кода или текста, он обязан заявить об этом и лично проверить результаты — а не просто надеяться, что старший коллега выловит ошибки.
 
-With juniors now potentially generating code via AI, it’s important to teach them how to self-review and test that code. Set an example by demonstrating how to thoroughly test AI contributions, and encourage a culture of questioning and verifying machine output. Some organizations (including even law firms) have instituted rules that if someone uses an AI to generate code or writing, they must disclose it and verify the results themselves—not just assume a senior colleague will catch mistakes.
+Как сеньор, топи за такие нормы в команде: ИИ — велком, но бдительность обязательна. Менторя джунов в таком ключе, ты снимаешь с себя часть надзорной нагрузки и помогаешь им быстрее дорасти до того самого набора навыков из «30%».
 
-As a senior engineer, champion such norms on your team: AI is welcome, but diligence is required. By mentoring juniors in this way, you offload some of the oversight burden and help them grow into that 30% skill set more quickly.
+## Продолжай качать доменную экспертизу и дальновидность
+Твой широкий опыт и контекст важны как никогда. Сеньоры часто обладают историческим знанием: почему в компании всё сделано именно так, или как работает индустрия в целом. Это мастерство в домене позволяет ловить косяки ИИ, которые новичок пропустит.
 
-## Continue to Cultivate Domain Mastery and Foresight
-Your broad experience and context are more important than ever. Senior developers often have historical knowledge of why things in the company are built a certain way or how an industry operates. This domain mastery lets you catch AI’s missteps that a newcomer wouldn’t.
+Продолжай инвестировать в глубокое понимание предметной области. Это может означать быть в курсе потребностей бизнеса, фидбека юзеров или новых регуляций, влияющих на софт. ИИ не учтет эти нюансы автоматически, пока ты ему не скажешь. Когда ты комбинируешь свой доменный инсайт со скоростью ИИ, получаются лучшие результаты.
 
-Continue investing in understanding the problem domain deeply. That might mean staying up-to-date with the business’s needs, user feedback, or new regulations that affect the software. AI won’t automatically incorporate these considerations unless you tell it to. When you combine your domain insight with AI’s speed, you get the best outcomes.
+Также используй свою дальновидность, чтобы рулить ИИ. Например, если ты знаешь, что быстрый фикс (костыль) создаст боль при поддержке в будущем, ты можешь проинструктировать ИИ запилить более устойчивое решение. Доверяй инстинктам, отточенным годами — если кусок кода выглядит «странно» или слишком уж идеально, копай глубже. В 9 из 10 случаев твоя интуиция нащупала то, что ИИ не учел. Способность предвидеть последствия второго и третьего порядка — визитная карточка сеньора; не дай удобству ИИ притупить этот навык. Наоборот, применяй его ко всему, что выдает ИИ.
 
-Also, use your foresight to steer AI. For instance, if you know that a quick fix will create maintenance pain down the line, you can instruct the AI to implement a more sustainable solution. Trust the instincts you’ve honed over the years—if a code snippet looks “off” or too good to be true, dig in. Nine times out of ten, your intuition has spotted something that the AI didn’t account for. Being able to foresee the second- and third-order effects of code is a hallmark of senior engineers; don’t let the convenience of AI blunt that habit. Instead, apply it to whatever the AI produces.
+## Прокачивай софт-скиллы и лидерство
+Пока ИИ берет на себя часть кодинга, сеньоры могут тратить больше энергии на человеческую сторону инженерии: общение со стейкхолдерами, ведение дизайн-митингов и принятие волевых решений, которые связывают технологии с бизнес-стратегией. Тим О’Райли и другие предполагают, что по мере того, как рутинный кодинг становится проще, ценность смещается к решению *что* строить и *как* дирижировать сложными системами.
 
-## Hone Your Soft Skills and Leadership
-With AI shouldering some coding, senior developers can spend more energy on the human side of engineering: communicating with stakeholders, leading design meetings, and making judgment calls that align technology with business strategy. Tim O’Reilly and others suggest that as rote coding becomes easier, the value shifts to deciding what to build and how to orchestrate complex systems.
+Сеньоры — это часто те, кто дирижирует процессом и видит полную картину. Возьми эту роль на себя. Вызовись написать роадмап архитектуры, оценить, какие инструменты (ИИ или нет) внедрять, или определить гайдлайны по ИИ-кодингу в твоей организации. Это задачи, которые ИИ не сделает — тут нужен опыт, человеческое усмотрение и, часто, умение договариваться с разными командами. Усиливая свое лидерское присутствие, ты гарантируешь, что ты не просто генератор кода (заменяемый другим инструментом), а незаменимый технический лидер, ведущий команду.
 
-Senior engineers are often the ones orchestrating and seeing the big picture. Step up to that role. Volunteer to write that architecture roadmap, to evaluate which tools (AI or otherwise) to adopt, or to define your org’s AI coding guidelines. These are tasks AI can’t do—they require experience, human discretion, and, often, cross-team consensus building. By amplifying your leadership presence, you ensure that you’re not just a code generator (replaceable by another tool) but an indispensable technical leader guiding the team.
+Короче, продолжай делать то, что опытные разрабы делают лучше всего: видеть лес за деревьями. ИИ поможет тебе нарубить гораздо больше деревьев, но кто-то все еще должен решать, какие деревья валить и как построить из этих бревен надежный дом. Твое суждение, стратегическое мышление и менторство теперь еще критичнее. Сеньор, эффективно использующий ИИ, может быть драматически продуктивнее того, кто его игнорирует — но по-настоящему преуспеют те, кто применяет свои человеческие сильные стороны для усиления выхлопа ИИ, а не просто дает ему работать без присмотра.
 
-In short, continue doing what seasoned developers do best: seeing the forest for the trees. AI will help you chop a lot more trees, but someone still needs to decide which trees to cut and how to build a stable house from the lumber. Your judgment, strategic thinking, and mentorship are now even more critical. A senior developer who harnesses AI effectively can be dramatically more productive than one who doesn’t—but the ones who truly excel will be those who apply their human strengths to amplify the AI’s output, not just let it run wild.
+Как заметил один реддитор, «ИИ — это мультипликатор силы программирования», который «значительно повышает продуктивность сеньор-программистов». Эффект мультипликатора реален, но умножается именно твоя экспертиза. Держи эту экспертизу острой и в центре процесса разработки.
 
-As one Redditor observed, “AI is a programming force multiplier” that “greatly increases the productivity of senior programmers.” The multiplier effect is real, but it’s your expertise that’s being multiplied. Keep that expertise sharp and at the center of the development process.
+## Мидлы (Midlevel Engineers): Адаптируйтесь и специализируйтесь
+Мидлы сталкиваются, пожалуй, с самым жестким давлением к эволюции. Многие задачи, которые традиционно занимали ваше время — реализация фич, написание тестов, отладка простых проблем — становятся все более автоматизируемыми.
 
-## Midlevel Engineers: Adapt and Specialize
-Midlevel engineers face perhaps the most significant pressure to evolve. Many of the tasks that traditionally occupied your time—implementing features, writing tests, debugging straightforward issues—are becoming increasingly automatable.
+Это не означает устаревание; это означает повышение уровня. Фокус смещается с написания кода на построение более специализированных знаний, которые мы разберем в следующих разделах.
 
-This doesn’t mean obsolescence; it means elevation. The focus shifts from writing code to more building specialized knowledge, which the following sections explore.
+## Учитесь управлять системной интеграцией и границами
+По мере усложнения систем понимание и управление границами между компонентами становится критичным. Сюда входят дизайн API, схемы событий и модели данных — всё это требует тщательного учета бизнес-требований и будущей гибкости. Углубляйте свои фундаментальные знания в Computer Science, включая продвинутое понимание таких дисциплин, как:
+*   Структуры данных и алгоритмы
+*   Принципы распределенных систем
+*   Внутреннее устройство баз данных и оптимизация запросов
+*   Сетевые протоколы и безопасность
 
-## Learn to Manage Systems Integration and Boundaries
-As systems become more complex, understanding and managing the boundaries between components becomes crucial. This includes API design, event schemas, and data models—all requiring careful consideration of business requirements and future flexibility. Deepen your computer science fundamentals, including gaining an advanced understanding of disciplines like:
+Эти знания помогут вам понимать последствия кода, сгенерированного ИИ, и принимать лучшие архитектурные решения.
 
-## Data structures and algorithms
+Учитесь также обрабатывать граничные случаи и неопределенность. Реальный софт кишит упоротыми сценариями и меняющимися требованиями. ИИ по дефолту склонен решать «общий случай». Задача разработчика — спросить «А что если...?» и прощупать слабые места.
 
-## Distributed-systems principles
+Вечные навыки здесь — это критическое мышление и дальновидность: перечисление граничных случаев, предвидение сбоев и их решение в коде или дизайне. Это может означать мысли о null на входе, падениях сети, необычных действиях юзера или интеграции с другими системами.
 
-## Database internals and query optimization
+## Наращивайте доменную экспертизу
+Понимание бизнес-контекста или окружения пользователя вскроет граничные случаи, о которых дженерик-ИИ просто не знает. Опытные инженеры на автомате учитывают эти сценарии. Практикуйтесь в систематическом тестировании границ и ставьте под сомнение предположения. Специализируйтесь в сложных доменах, где человеческое понимание остается критичным. Общие домены включают:
+*   Финансовые системы с регуляторными требованиями
+*   Здравоохранение с вопросами приватности
+*   Реал-тайм системы с жесткими требованиями к производительности
+*   Инфраструктура машинного обучения
 
-## Network protocols and security
+Специфичные для софт-инжиниринга домены включают фронтенд и бэкенд, мобильную разработку, DevOps и безопасность, и это лишь некоторые из них. Доменная экспертиза дает контекст, которого не хватает текущим ИИ-инструментам, и помогает принимать лучшие решения о том, где и как их применять.
 
-This knowledge helps you understand the implications of AI-generated code and make better architectural decisions.
+## Освойте оптимизацию производительности и DevOps
+Хотя LLM могут подсказать базовые оптимизации, выявление и устранение общесистемных проблем с производительностью требует глубокого понимания всего стека, от паттернов запросов к БД до стратегий рендеринга на фронтенде. Понимание того, как системы работают в продакшене, становится все более ценным по мере автоматизации генерации кода.
 
-Learn to handle edge cases and ambiguity too. Real-world software is rife with oddball scenarios and changing requirements. AI tends to solve the general case by default. It’s up to the developer to ask “What if…?” and probe for weaknesses.
+Фокусируйтесь на таких областях:
+*   Мониторинг и наблюдаемость (observability)
+*   Профилирование производительности и оптимизация
+*   Практики безопасности и комплаенс
+*   Управление затратами и оптимизация (Cost management)
 
-The durable skills here are critical thinking and foresight—enumerating edge cases, anticipating failures, and addressing them in code or design. This might mean thinking of null input, network outages, unusual user actions, or integration with other systems.
+## Фокус на код-ревью и QA (Обеспечение качества)
+С ИИ, пишущим тонны кода, способность жестко ревьюить и тестировать этот код становится еще более критичной. «Всем придется стать намного серьезнее в плане тестирования и ревью кода», — подчеркивает Йегге. Относитесь к коду от ИИ как к выхлопу живого джуна: вы — ревьюер, ответственный за отлов багов, дыр в безопасности или кривых реализаций. Это означает усиление ваших навыков в юнит-тестировании, интеграционном тестировании и отладке.
 
-## Build Your Domain Expertise
-Understanding the business context or the user’s environment will reveal edge cases that a generic AI simply doesn’t know about. Experienced engineers habitually consider these scenarios. Practice systematically testing boundaries and questioning assumptions. Specialize in complex domains where human understanding remains crucial. Generic domains include:
+Написание хороших тестов — это вечный навык, который заставляет вас понимать спеку и верифицировать корректность. Мудро считать, что ничего не работает, пока не доказано обратное. ИИ часто выдает рабочий, но неоптимизированный код, пока вы не проведете его через итеративное улучшение. Причин тому масса, включая то, что обучающие данные для моделей кодинга не отражают все лучшие практики так полно, как могли бы.
 
-## Financial systems with regulatory requirements
+Культивируйте майндсет тестировщика: верифицируйте каждый критический логический путь, используйте статический анализ или линтеры, и не стесняйтесь переписывать код от ИИ, если он не дотягивает до вашей планки качества. Даже если вы следуете паттерну «ИИ как валидатор», описанному в прошлой главе, QA — это не та область, которую можно просто отдать на аутсорс ИИ. Здесь сияет человеческая дотошность. Когда софт работает не так, как ожидалось, нужны реальные скиллы решения проблем, чтобы диагностировать и исправить это. ИИ может помочь с дебаггингом (например, подсказав возможные причины), но ему не хватает истинного понимания конкретного контекста, в котором крутится ваше приложение. Человеческие тестировщики обладают специфичными для домена знаниями и пониманием ожиданий пользователя, чего у ИИ пока нет. Этот инсайт жизненно важен при оценке релевантности и влияния потенциальных проблем. Диагностика сложных багов часто требует творческого подхода к решению проблем и способности учитывать широкий спектр факторов — навыков, которые присущи человеку. А оценка этических последствий поведения софта, таких как справедливость и доступность, требует человеческой чуткости и суждения.
 
-## Healthcare systems with privacy concerns
+Способность проанализировать сложный баг — воспроизвести его, изолировать причину, понять лежащие в основе системы (ОС, базы данных, библиотеки) — это вневременной инженерный навык. Это часто требует крепкого понимания основ (как работает память и состояние, конкурентность и т.д.), которые джуны должны учить через практику. Используйте ИИ как помощника (он может объяснить ошибки или предложить фиксы), но не полагайтесь на него бездумно. Умение методично траблшутить и применять «первые принципы» при отладке отличает крутых разработчиков. Это также петля обратной связи: отладка кода, написанного ИИ, научит вас лучше писать промты в следующий раз или избегать определенных паттернов.
 
-## Real-time systems with strict performance requirements
+## Учитесь системному мышлению
+Программные проекты — это не просто изолированные задачи по кодингу; они существуют в большом контексте потребностей пользователей, сроков, легаси-кода и командных процессов. У ИИ нет врожденного чувства «общей картины», вроде истории вашего проекта или причин определенных решений (если только вы явно не скормите всё это в промт, что часто непрактично). Люди должны держать этот контекст.
 
-## Machine learning infrastructure
+Вечный навык здесь — системное мышление: понимание того, как изменение в одной части системы может повлиять на другую, как софт служит бизнес-целям, и как все движущиеся части соединяются. Эта целостная перспектива позволяет вам использовать выхлоп ИИ уместно. Например, если ИИ предлагает хитрый шорткат, который противоречит регуляторным требованиям или конвенциям компании, вы это поймаете, потому что знаете контекст. Возьмите за правило изучать бэкграунд своих проектов и читать дизайн-доки, чтобы развить свое суждение о том, что подходит, а что нет.
 
-Software-engineering-specific domains include frontend and backend engineering, mobile development, DevOps, and security engineering, to name a few. Domain expertise provides context that current AI tools lack and helps you make better decisions about where and how to apply them.
+## Будьте адаптивными — и никогда не переставайте учиться
+Наконец, мета-скилл: способность осваивать новые инструменты и адаптироваться к изменениям. Поле ИИ-разработки меняется стремительно. Инженеры, которые сохраняют открытый ум и учатся эффективно использовать новые фичи ИИ, останутся впереди планеты всей — Тим О’Райли предполагает, что разработчики, которые «жаждут изучать новые навыки», получат самый большой буст продуктивности от ИИ. Инвестируйте в глубокое изучение основ и оставайтесь любопытными к новым техникам. Эта комбинация позволит вам обуздать ИИ как инструмент, не становясь зависимым от него.
 
-## Master Performance Optimization and DevOps
-While LLMs can suggest basic optimizations, identifying and resolving system-wide performance issues requires a deep understanding of the entire stack, from database query patterns to frontend rendering strategies. Understanding how systems run in production becomes more valuable as code generation becomes more automated.
+Это балансирование: используйте ИИ для ускорения своего роста, но также периодически практикуйтесь без него, чтобы убедиться, что вы не пропускаете базовое обучение (некоторые разработчики устраивают «ИИ-детокс» время от времени, чтобы держать свои навыки «сырого» кодинга в тонусе). Короче, будьте инженером, который учится постоянно — это навык, защищающий карьеру в любую эпоху.
 
-Focus on fields like the following:
+## Качайте кросс-функциональную коммуникацию
+Способность переводить бизнес-требования в технические решения становится все ценнее по мере сокращения времени реализации. Инженеры, которые могут эффективно общаться с продакт-менеджерами, дизайнерами и другими стейкхолдерами, станут все более ценными. Хорошие области для фокуса здесь:
+*   Сбор и анализ требований
+*   Техническое писательство и документация
+*   Планирование проектов и оценка сроков
+*   Лидерство в команде и менторство
 
-## Monitoring and observability
+## Изучайте системный дизайн и архитектуру
+Вместо того чтобы тратить дни на реализацию новой фичи, мидлы могут потратить это время на проектирование надежных систем, которые изящно справляются с масштабированием и сбоями. Это требует глубокого понимания принципов распределенных систем, внутренностей баз данных и облачной инфраструктуры — областей, где LLM пока дают ограниченную пользу.
 
-## Performance profiling and optimization
+Практикуйтесь в проектировании систем, решающих проблемы реального мира на масштабе. Эти навыки остаются ценными независимо от того, как генерируется код, так как они требуют понимания бизнес-требований и инженерных компромиссов (trade-offs).
 
-## Security practices and compliance
+Проектирование связной системы требует понимания компромиссов, ограничений и «большой картины» за пределами написания пары функций. ИИ может сгенерить код, но не выберет автоматически лучшую архитектуру для сложной проблемы.
 
-## Cost management and optimization
+Общий дизайн — как компоненты взаимодействуют, как текут данные, как обеспечить масштабируемость и безопасность — это часть тех 30%, которые требуют человеческого инсайта; сюда входят:
+*   Стратегии балансировки нагрузки и кэширования
+*   Партиционирование данных и репликация
+*   Режимы отказа и процедуры восстановления
+*   Оптимизация затрат и управление ресурсами
 
-## Focus on Code Review and Quality Assurance
-With AI writing lots of code, the ability to rigorously review and test that code becomes even more critical. “Everyone will need to get a lot more serious about testing and reviewing code,” Yegge emphasizes. Treat AI-generated code as you would a human junior developer’s output: you are the code reviewer responsible for catching bugs, security flaws, or sloppy implementations. This means strengthening your skills in unit testing, integration testing, and debugging.
+Сеньоры давно отточили этот навык, а мидлам и джунам стоит активно его культивировать. Думайте в терминах паттернов и принципов (типа разделения ответственности и модульности) — они направляют решение от ИИ в сторону поддерживаемости. Помните, солидная архитектура не рождается случайно; нужна опытная человеческая рука на штурвале.
 
-Writing good tests is a durable skill that forces you to understand the spec and verify correctness. It’s wise to assume nothing works until proven otherwise. AI often yields functional but unoptimized code until you guide it through iterative improvement. This can be due to a number of reasons, including that the training data coding models are trained on don’t reflect all best practices as completely as they could.
+Используй ИИ!
+Помни, что ИИ должен быть неотъемлемой частью твоего рабочего процесса — это не то, чему стоит сопротивляться. Практические способы внедрить ИИ в ежедневную работу:
+*   Накидывание начальных структур кода (скаффолдинг)
+*   Быстрые прототипы и Proof of Concepts (PoC)
+*   Парное программирование для быстрого дебага и решения проблем
+*   Предложение оптимизаций и альтернативных подходов
+*   Обработка повторяющихся паттернов кода, пока ты фокусируешься на архитектуре и дизайн-решениях
 
-Cultivate a testing mindset: verify every critical logic path, use static analysis or linters, and don’t shy away from rewriting AI-given code if it doesn’t meet your quality bar. Even if you’re following the “AI as validator” pattern discussed in the previous chapter, quality assurance is not an area to simply outsource to AI—it’s where human diligence shines. When software doesn’t work as expected, you need real problem-solving chops to diagnose and fix it. AI can assist with debugging (for example, by suggesting possible causes), but it lacks true understanding of the specific context in which your application runs. Human testers possess domain-specific knowledge and an understanding of user expectations that AI currently lacks. This insight is vital when assessing the relevance and impact of potential issues. Diagnosing complex bugs often requires creative problem solving and the ability to consider a broad range of factors—skills that are inherently human. And evaluating the ethical implications of software behavior, such as fairness and accessibility, requires human sensitivity and judgment.
+## Погружайтесь в UI и UX дизайн
+Растет нарратив, что мидлам пора «просто увольняться» — мол, навыки чистого инжиниринга устареют, так как ИИ возьмет на себя детали реализации. Хотя этот вывод преувеличен, дискуссия о важности навыков за пределами инженерии (например, дизайна) заслуживает внимания. В показательном обмене мнениями в X (бывший Твиттер) в декабре 2024 года, @fchollet написал:
 
-Being able to reason through a complex bug—reproducing it, isolating the cause, understanding the underlying systems (OS, databases, libraries)—is a timeless engineering skill. This often requires a strong grasp of fundamentals (how memory and state work, concurrency, etc.) that junior developers must learn through practice. Use AI as a helper (it might explain error messages or suggest fixes), but don’t rely on it thoughtlessly. The skill to methodically troubleshoot and apply first principles when debugging sets great developers apart. It’s also a feedback loop: debugging AI-written code will teach you to prompt the AI better next time or avoid certain patterns.
+> Скоро мы окажемся в мире, где можно превратить вычислительную мощность во время тестирования (test-time compute) в компетентность — впервые в истории софта предельная стоимость станет критической.
 
-## Learn Systems Thinking
-Software projects are not just isolated coding tasks; they exist within a larger context of user needs, timelines, legacy code, and team processes. AI has no innate sense of the big picture, like your project’s history or the rationale behind certain decisions (unless you explicitly feed all that into the prompt, which is often impractical). Humans need to carry that context.
+На что @garrytan ответил:
 
-The durable skill here is systems thinking—understanding how a change in one part of the system might impact another, how the software serves the business objectives, and how all the moving pieces connect.2 This holistic perspective lets you use AI outputs appropriately. For example, if an AI suggests a clever shortcut that contradicts a regulatory requirement or company convention, you’ll catch it because you know the context. Make it a point to learn the background of your projects and read design docs, so you can develop your judgment about what fits and what doesn’t.
+> UX, дизайн и реальная преданность ремеслу выйдут на первый план в этот следующий момент.
+>
+> Реально делать то, что люди хотят. Софт и кодинг перестанут быть сдерживающим фактором. Способность быть полиматом (универсалом) и быть умным/эффективным во многих доменах сразу — вот что создает великий софт.
 
-## Be Adaptable—and Never Stop Learning
-Finally, a metaskill: the ability to learn new tools and adapt to change. The field of AI-assisted development is evolving rapidly. Engineers who keep an open mind and learn how to effectively use new AI features will remain ahead of the curve—Tim O’Reilly suggests that developers who are “eager to learn new skills” will see the biggest productivity boosts from AI. Invest in learning the fundamentals deeply and staying curious about new techniques. This combination enables you to harness AI as a tool without becoming dependent on it.
+Успешное создание софта всегда требовало большего, чем просто умение кодить. Меняется не смерть инженерии, а снижение барьеров чистой реализации. Этот сдвиг на самом деле делает инженерное суждение и дизайн-мышление более важными, а не менее.
 
-It’s a balancing act: use AI to accelerate your growth, but also occasionally practice without it to ensure you’re not skipping core learning (some developers do an “AI detox” periodically to keep their raw coding skills sharp). In short, be the engineer who learns constantly—that’s a career-proof skill in any era.
+Подумайте, что делает приложения вроде Figma, Notion или VSCode успешными. Это не только техническое совершенство — это глубокое понимание потребностей пользователя, его рабочих процессов и болей. Это понимание приходит из:
+*   Дизайн-мышления в области пользовательского опыта (UX)
+*   Глубоких знаний домена
+## Понимание человеческой психологии и поведения
 
-## Get Good at Cross-Functional Communication
-The ability to translate between business requirements and technical solutions becomes more valuable as implementation time decreases. Engineers who can effectively communicate with product managers, designers, and other stakeholders will become increasingly valuable. Good areas of focus here include:
+Системный дизайн, который учитывает производительность, надежность и масштабируемость.
 
-## Requirements gathering and analysis
+## Синхронизация с бизнес-моделью
 
-## Technical writing and documentation
+Лучшие инженеры всегда были чем-то большим, чем просто кодерами. Они были решателями проблем (problem solvers), которые вкуривали и технические ограничения, и человеческие хотелки. Поскольку ИИ-инструменты снижают трение при реализации, это целостное понимание становится еще более ценным активом.
 
-## Project planning and estimation
+Но это не значит, что каждый инженер должен переквалифицироваться в UX-дизайнера. Это значит, что нужно качать продуктовое мышление и учиться нормально взаимодействовать с дизайнерами и продактами. Это значит думать о юзерах, понимать их психологию и паттерны поведения, и принимать технические решения, которые не ломают пользовательский опыт об колено. Ты уже достиг точки технической элегантности: теперь уравновесь это вниманием к реальным нуждам людей.
 
-## Team leadership and mentoring
+Тан продолжил свой пост:
 
-## Learn System Design and Architecture
-Instead of spending days implementing a new feature, midlevel engineers might spend that time designing robust systems that gracefully handle scale and failure modes. This requires deep understanding of distributed systems principles, database internals, and cloud infrastructure—areas where LLMs currently provide limited value.
+> UX, дизайн и настоящая преданность ремеслу займут центральное место в этот момент.
+>
+> Реально делайте то, что нужно людям. Софт и кодинг больше не будут узким горлышком. Способность быть эрудитом и быть умным/эффективным сразу в нескольких доменах — вот что создает крутой софт.
 
-Practice designing systems that solve real-world problems at scale. These skills remain valuable regardless of how code is generated, as they require understanding business requirements and engineering trade-offs.
+Будущее принадлежит инженерам, которые могут перекинуть мост между человеческими потребностями и техническими решениями — будь то через развитие собственного чувства прекрасного или через более плотную работу с профильными дизайнерами.
 
-Designing a coherent system requires understanding trade-offs, constraints, and the “big picture” beyond writing a few functions. AI can generate code but won’t automatically choose the best architecture for a complex problem.
+## Джунам: Как не сдохнуть, а процветать рядом с AI
 
-The overall design—how components interact, how data flows, how to ensure scalability and security—is part of that 30% that demands human insight; this includes the following:
+Если ты джун или просто не особо опытный разраб, у тебя внутри, скорее всего, адский коктейль из восторга и паники по поводу ИИ. Ассистенты могут писать код, который ты сам бы рожал неделю, и это вроде как ускоряет обучение. Но заголовки орут про «смерть джуниора», намекая, что вход в профессию заколочен досками. Вопреки популярным спекуляциям, хоть ИИ и меняет старт карьеры до неузнаваемости, джуны не устарели.
 
-## Load balancing and caching strategies
+Тебе нужно быть проактивным и качать скиллы, которые дают ценность *поверх* того, что может высрать нейронка. Традиционный путь обучения через клепание базовых CRUD-приложений и простеньких фич будет эволюционировать, так как эти задачи автоматизируются на раз-два.
 
-## Data partitioning and replication
+Возьми типичную задачу джуна: запилить новый API-эндпоинт по существующим паттернам. Раньше это занимало день кодинга и тестов. С ИИ-помощником время реализации падает до часа, но критически важными становятся другие навыки:
 
-## Failure modes and recovery procedures
+## Понимание архитектуры существующей системы достаточно глубоко, чтобы правильно сформулировать требования
+## Ревью сгенерированного кода на предмет дыр в безопасности и граничных случаев (edge cases)
+## Гарантия того, что реализация не ломает консистентность существующих паттернов
+## Написание исчерпывающих тестов, которые проверяют бизнес-логику
 
-## Cost optimization and resource management
+Этому дерьму нельзя научиться, просто следуя туториалам или промптя нейронку — тут нужен реальный опыт работы с продакшеном и менторство от сеньоров.
 
-Senior developers have long honed this skill, and midlevel and junior devs should actively cultivate it. Think in terms of patterns and principles (like separation of concerns and modularity)—these guide an AI-generated solution toward maintainability. Remember, solid architecture doesn’t emerge by accident; it needs an experienced human hand on the wheel.
+Эта эволюция несет и челленджи, и возможности. Планка для входа в профессию может подняться, требуя более крепких фундаментальных знаний, чтобы эффективно проверять и валидировать код от ИИ. Однако этот сдвиг также означает, что джуны смогут браться за более интересные задачи гораздо раньше в своей карьере.
 
-Use AI!
-Remember that AI should be an integral part of your workflow—it’s not something to resist. Practical ways to incorporate AI into your daily work include:
+Вот как инвестировать в себя, чтобы эффективно закрывать этот 30%-ный разрыв.
 
-## Scaffolding initial code structures
+## Учи матчасть — и не забивай на «Почему»
 
-## Quick prototypes and proof of concepts
+Соблазн велик: спросить у ИИ ответ на любой вопрос («Как мне сделать X на Python?») и никогда по-настоящему не вникать в суть. Сопротивляйся этому желанию. Используй ИИ как репетитора, а не как автомат с готовыми ответами. Например, когда ИИ выплевывает кусок кода, спроси, *почему* он выбрал этот подход, или попроси объяснить код построчно.
 
-## Pair programming for faster debugging and problem solving
+Убедись, что ты понимаешь такие концепции, как структуры данных, алгоритмы, управление памятью и конкурентность, не бегая каждый раз к "мамочке" ИИ. Причина проста: когда вывод ИИ будет ошибочным или неполным (а он будет), тебе нужна собственная ментальная модель, чтобы это заметить и пофиксить. Если ты не врубаешься, почему ИИ генерит именно такой код, ты рискуешь деградировать, а не расти. Так что найди время почитать документацию, написать маленькие программы с нуля и зацементировать базу. Эти фундаментальные знания долговечны; они будут служить тебе, даже когда инструменты вокруг поменяются сто раз.
 
-## Suggesting optimizations and alternative approaches
+## Тренируй мозги и дебаг без страховочной сетки AI
 
-## Handling repetitive code patterns while you focus on architecture and design decisions
+Чтобы обрести настоящую уверенность, иногда нужно летать соло. Многие разрабы советуют устраивать «день без ИИ» или периодически ограничивать помощь ассистентов. Это гарантирует, что ты всё ещё можешь решать проблемы *своими* скиллами, что важно для предотвращения атрофии мозга. Ты обнаружишь, что это заставляет тебя реально продумывать логику задачи, что, в свою очередь, делает тебя лучше в использовании ИИ (потому что ты сможешь направлять его более грамотно).
 
-## Venture into UI and UX Design
-There’s a growing narrative that midlevel software engineers should “just quit”—that pure engineering skills will become obsolete as AI handles the implementation details. While the conclusion is overstated, the discourse about the importance of skills beyond engineering (like design) deserves examination. In a representative exchange on X in December 2024, @fchollet wrote:
+Кроме того, всякий раз, когда ты натыкаешься на баг или ошибку в сгенерированном коде, лезь и дебажь это сам, прежде чем просить ИИ исправить. Ты узнаешь гораздо больше, проходясь по коду отладчиком или расставляя принты, чтобы увидеть, где всё пошло не так.
 
-We’ll soon be in a world where you can turn test-time compute into competence—for the first time in the history of software, marginal cost will become critical.
+Считай предложения ИИ подсказками, а не истиной в последней инстанции. Со временем, разгрызание этих последних сложных кусочков задачи прокачает твои скиллы именно в тех областях, где ИИ буксует — и именно это делает тебя ценным кадром.
 
-To which @garrytan replied:
+## Упорись в тестирование и верификацию
 
-UX, design, actual dedication to the craft will take center stage in this next moment.
+Как джун, одна из лучших привычек, которую ты можешь выработать — это писать тесты для своего кода. Это вдвойне верно, если ты используешь ИИ для генерации.
 
-Actually make something people want. Software and coding won’t be the gating factor. It is the ability to be a polymath and smart/effective in many domains together that creates great software.
+Когда ты получаешь кусок кода от LLM, не думай, что он правильный — ставь его под сомнение. Пиши юнит-тесты (или используй ручные тесты), чтобы убедиться, что он реально обрабатывает требования и граничные случаи. Это убивает двух зайцев: ловит косяки в выводе ИИ и тренирует тебя думать об ожидаемом поведении *до* того, как довериться реализации.
 
-Successful software creation has always required more than just coding ability. What’s changing is not the death of engineering but rather the lowering of pure implementation barriers. This shift actually makes engineering judgment and design thinking more crucial, not less.
+Ты можешь даже использовать ИИ, чтобы помочь написать тесты, но *ты* определяешь, *что* тестировать. Совет Йегге о том, чтобы серьезно относиться к тестированию и код-ревью, применим на всех уровнях. Если ты заработаешь репутацию человека, который тщательно проверяет свою работу (с ИИ или без), сеньоры будут доверять тебе больше, и ты избежишь сценария, где они чувствуют, что ты просто «дампишь» на них сомнительный код.
 
-Consider what makes applications like Figma, Notion, or VSCode successful. It’s not just technical excellence—it’s the deep understanding of user needs, workflows, and pain points. This understanding comes from the following:
+На практике: начни относиться к тестированию как к неотъемлемой части разработки, а не как к чему-то, что делается «на отвали» в конце. Изучи фреймворки, научись исследовательскому ручному тестированию и систематическому воспроизведению багов. Эти навыки не только делают тебя лучше в тех самых 30% работы, но и ускоряют твое понимание того, как код работает на самом деле.
 
-## User experience design thinking
+Запомни: если ты поймал баг, который внес ИИ, ты только что сделал то, что ИИ не смог — это и есть добавленная ценность.
 
-## Deep domain knowledge
+## Набивай глаз на поддерживаемость
 
-## Understanding of human psychology and behavior
+Джуны часто фокусируются на том, чтобы «просто заработало». Но в эпоху ИИ получить базовую рабочую версию легко — ИИ это сделает за секунду. Более сложная часть (и то, на чем тебе стоит сфокусироваться) — это сделать код читаемым, поддерживаемым и чистым.
 
-System design that considers performance, reliability, and scalability
+Начни развивать вкус к хорошей структуре и стилю кода. Сравнивай вывод ИИ с лучшими практиками, которые ты знаешь; если код от ИИ грязный или переусложненный, прояви инициативу и отрефактори его. Например, если LLM выдает тебе функцию на 50 строк, которая делает всё подряд, разбей её на мелкие функции. Если имена переменных мутные — переименуй.
 
-## Business model alignment
+По сути, представь, что ты ревьюишь код коллеги, и улучшай код ИИ так, будто его написал этот коллега. Это поможет тебе интернализировать принципы хорошего дизайна. Со временем ты начнешь промптить ИИ так, чтобы он сразу выдавал более чистый код (потому что ты будешь указывать нужный стиль). Те, кто будет поддерживать этот софт (часто спустя месяцы или годы), скажут тебе спасибо, а ты докажешь, что думаешь не только категориями «лишь бы запустилось» — ты думаешь как инженер. Сохранение поддерживаемости находится как раз в этих человеческих 30%, так что сделай это своей заботой с самого начала карьеры.
 
-The best engineers have always been more than just coders. They’ve been problem solvers who understand both technical constraints and human needs. As AI tools reduce the friction of implementation, this holistic understanding becomes even more valuable.
+## Качай скилл промптинга и владения инструментами (с умом)
 
-However, this doesn’t mean every engineer needs to become a UX designer. Instead, it means developing stronger product thinking abilities and building better collaboration skills with designers and product managers. It means thinking more about users, understanding their psychology and behavior patterns, and learning to make technical decisions that support user experience goals. You’re at the point of achieving technical elegance: now balance it out with close attention to practical user needs.
+Бессмысленно отрицать, что «промпт-инжиниринг» — навык эффективного взаимодействия с ИИ-инструментами — полезен. Как джун, ты абсолютно точно должен научиться формулировать вопросы к ИИ, давать ему правильный контекст и итерировать промпты для улучшения результата (Глава 2 этой книги — хорошее место для старта). Это новые скиллы, которые могут выделить тебя из толпы (многие опытные разрабы тоже всё еще в этом разбираются!). Однако помни, что хороший промптинг — это часто просто прокси для хорошего понимания проблемы. Если ты не можешь заставить ИИ сделать то, что ты хочешь, возможно, тебе нужно сначала прояснить свое собственное понимание задачи. Используй это как сигнал.
 
-Tan went on to post:
+Одна из стратегий — набросать решение простым языком самостоятельно, прежде чем просить ИИ реализовать его. Также экспериментируй с разными инструментами (Copilot, Claude и т.д.), чтобы увидеть их сильные и слабые стороны. Чем свободнее ты владеешь этими ассистентами, тем продуктивнее ты можешь быть — но никогда не относись к их выводу как к истине в последней инстанции. Думай об ИИ как о стероидном Stack Overflow: это помощь, а не авторитет.
 
-UX, design, actual dedication to the craft will take center stage in this next moment.
+Ты можешь даже пилить небольшие пет-проекты с использованием ИИ, чтобы проверить свои пределы («Смогу ли я запилить простую веб-приложуху с помощью ИИ?»). Это научит тебя интегрировать ИИ в рабочий процесс, что является отличным навыком для работы в команде. Просто балансируй это периодами работы без страховки, как упоминалось ранее.
 
-Actually make something people want. Software and coding won’t be the gating factor. It is the ability to be a polymath and smart/effective in many domains together that creates great software.
+## Ищи фидбек и менторство
 
-The future belongs to engineers who can bridge the gap between human needs and technical solutions—whether that’s through developing better design sensibilities themselves or through more effective collaboration with dedicated designers.
+И последнее: один из самых долговечных навыков, который ускорит твой рост — это способность искать обратную связь и учиться у других. ИИ не обидится, если ты проигнорируешь его совет, но твои живые коллеги и менторы бесценны для твоего развития — особенно когда речь идет о софт-скиллах, лидерстве, коммуникации и навигации в офисной политике.
 
-## Junior Developers: Thrive Alongside AI
-If you’re a junior or less-experienced developer, you might feel a mix of excitement and anxiety about AI. AI assistants can write code that you might not know how to write yourself, potentially accelerating your learning. Yet there are headlines about the “death of the junior developer”, suggesting entry-level coding jobs are at risk. Contrary to popular speculation, while AI is significantly changing the early-career experience, junior developers are not obsolete.
+Не стесняйся спрашивать сеньора, почему он предпочитает одно решение другому, особенно если оно отличается от того, что предложил ИИ. Обсуждай архитектурные решения и компромиссы (trade-offs) с более опытными коллегами — эти разговоры показывают, как мыслят матерые инженеры, и это чистое золото для тебя. На код-ревью будь экстра-восприимчив к комментам по поводу твоего кода, написанного ИИ. Если ревьюер указывает, что «эта функция не потокобезопасна» или «этот подход вызовет проблемы с масштабированием», потрать время, чтобы понять корень проблемы. Это именно те вещи, которые ИИ может пропустить, и ты должен научиться их ловить. Со временем ты соберешь ментальный чеклист таких нюансов.
 
-You need to be proactive in developing skills that ensure you’re contributing value beyond what an AI can churn out. The traditional path of learning through implementing basic CRUD applications and simple features will evolve as these tasks become increasingly automated.
+Кроме того, ищи возможности для парного программирования (даже удаленно). Возможно, ты сможешь «попарить» с сеньором, который использует ИИ в своем рабочем процессе — ты увидишь, как он промптит ИИ и как исправляет его. Но что еще важнее, ты увидишь, как они общаются, ведут обсуждения и разруливают тонкие командные моменты. Открытость к фидбеку и активный запрос наставничества помогут тебе созреть от выполнения задач, которые мог бы сделать ИИ, до выполнения высокоценных задач, которые под силу только людям. В каком-то смысле, ты пытаешься приобрести мудрость, которая обычно приходит с опытом, максимально эффективно. Это делает тебя большим, чем просто очередной кодер в комнате — это делает тебя тем инженером, которого команды хотят удержать и повысить.
 
-Consider a typical junior task: implementing a new API endpoint following existing patterns. Previously, this might have taken a day of coding and testing. With AI assistance, the implementation time might drop to an hour, but the crucial skills become:
+## Общайся и коллаборируй
 
-## Understanding the existing system architecture well enough to specify the requirement correctly
+Разработка софта — это командный вид спорта. ИИ не ходит на митинги (слава богу) — люди всё еще должны говорить с другими людьми, чтобы прояснить требования, обсудить компромиссы и скоординировать работу. Сильные навыки коммуникации ценны как никогда. Практикуйся задавать хорошие вопросы и четко описывать проблемы (как коллегам, так и ИИ).
 
-## Reviewing the generated code for security implications and edge cases
+Интересно, что промптинг ИИ сам по себе является формой коммуникации; он требует от тебя точно выразить, чего ты хочешь. Это пересекается с ключевым инженерным навыком: анализом требований.³ Если ты можешь сформулировать четкий промпт или спеку, значит, ты продумал проблему.
 
-## Ensuring the implementation maintains consistency with existing patterns
+Кроме того, обмен знаниями, написание документации и ревью чужого кода — это коллаборативные навыки, которые ИИ заменить не может. В будущем, когда разработчики будут работать «вместе» с ИИ, взаимодействие человек-человек в команде — гарантия того, что решаются *правильные* проблемы — останется жизненно важным. Один из новых трендов заключается в том, что разработчики могут больше фокусироваться на высокоуровневых архитектурных обсуждениях (часто с ИИ как участником) и на координации задач, по сути, беря на себя роль дирижера. Навыки коммуникации и лидерства сослужат тебе хорошую службу на этом дирижерском месте.
 
-## Writing comprehensive tests that verify business logic
+## Меняй прошивку: от потребления к созиданию
 
-These skills can’t be learned purely through tutorial following or AI prompting—they require hands-on experience with production systems and mentorship from senior engineers.
+Стоит отметить сдвиг в майндсете для джунов в эпоху ИИ: вам нужно перейти от простого потребления решений к созданию понимания. В прошлом вы могли продираться сквозь документацию, чтобы в итоге написать фичу; теперь ИИ может преподнести решение на блюдечке с голубой каемочкой. Если ты просто потребишь его (ctrl+c, ctrl+v и погнали), ты ни хрена не вырос.
 
-This evolution presents both challenges and opportunities for early-career developers. The bar for entry-level positions may rise, requiring stronger fundamental knowledge to effectively review and validate AI-generated code. However, this shift also means junior engineers can potentially tackle more interesting problems earlier in their careers.
+Вместо этого используй каждое решение от ИИ как учебный кейс. Препарируй его, экспериментируй с ним и думай, как бы ты пришел к нему сам. Относясь к выводам ИИ не как к ответам, закрывающим все вопросы, а как к интерактивному учебному материалу, ты гарантируешь, что ты — человек — постоянно левелишься. Таким образом, вместо того чтобы заменять твой рост, ИИ ускоряет его.
 
-Here’s how to invest in yourself to handle that 30% gap effectively.
+Многие эксперты считают, что, хотя ИИ может снизить потребность в больших командах джунов-«кодошлеперов», он также поднимает планку того, что значит быть джуниор-разработчиком. Роль смещается к тому, кто может эффективно работать с ИИ и быстро подниматься по цепочке создания ценности. Если ты переймешь привычки, обсуждаемые в этом разделе, ты выделишься как джун, который не просто приносит то, что мог бы принести ИИ (любая компания может получить это по подписке), но который приносит инсайты, надежность и постоянное улучшение — черты будущего сеньора.
 
-## Learn the Fundamentals—Don’t Skip the “Why”
-It’s tempting to lean on AI for answers to every question (“How do I do X in Python?”) and never truly absorb the underlying concepts. Resist that urge. Use AI as a tutor, not just an answer vending machine. For example, when AI gives you a piece of code, ask why it chose that approach, or have it explain the code line by line.
+## Итого и что делать дальше
 
-Make sure you understand concepts like data structures, algorithms, memory management, and concurrency without always deferring to AI. The reason is simple: when the AI’s output is wrong or incomplete, you need your own mental model to recognize and fix it. If you’re not actively engaging with why the AI is generating certain code, you might actually learn less, hindering your growth. So take time to read documentation, write small programs from scratch, and solidify your core knowledge. These fundamentals are durable; they’ll serve you even as the tools around you change.
+Чтобы процветать в мире разработки, усиленном ИИ, инженеры всех уровней должны удвоить усилия в развитии долговечных навыков и практик, которые ИИ (пока) не может воспроизвести. Эти способности останутся критически важными, какими бы продвинутыми ни стали наши инструменты. В частности, сфокусируйся на этих областях:
 
-## Practice Problem Solving and Debugging Without the AI Safety Net
-To build real confidence, sometimes you have to fly solo. Many developers advocate doing an “AI-free day” or otherwise limiting AI assistance periodically. This ensures you can still solve problems with just your own skills, which is important for avoiding skill atrophy. You’ll find it forces you to truly think through a problem’s logic, which in turn makes you better at using AI (since you can direct it more intelligently).
+## Усиление экспертизы в системном дизайне и архитектуре
+## Практика системного мышления и поддержание контекстуального понимания общей картины (big picture)
+## Оттачивание навыков критического мышления, решения проблем и предвидения
+## Наращивание экспертизы в специализированных доменах
+## Ревью кода, тестирование, дебаг и QA
+## Улучшение навыков коммуникации и коллаборации
+## Адаптация к изменениям
+## Непрерывное обучение, поддержание крепкой базы при одновременном освоении новых навыков и обновлении знаний
+## Использование ИИ
 
-Additionally, whenever you encounter a bug or error in AI-generated code, jump in and debug it yourself before asking the AI to fix it. You’ll learn much more by stepping through a debugger or adding print statements to see what’s going wrong.
+Эти навыки формируют человеческое преимущество в софтварной инженерии. Они долговечны, потому что не протухают со сменой очередного фреймворка или инструмента; если уж на то пошло, подъем ИИ делает их еще более выраженными. Саймон Уиллисон утверждал, что помощь ИИ на самом деле делает сильные навыки программирования *более* ценными, а не менее, потому что люди с экспертизой могут использовать инструменты с гораздо большим эффектом.
 
-Consider AI suggestions as hints, not final answers. Over time, tackling those last tricky bits of a task will build your skill in the very areas AI struggles—exactly what makes you valuable.
+Мощная машина в неумелых руках может быть опасной или бесполезной, но в умелых руках она трансформирует реальность. В эпоху ИИ опытный инженер похож на бывалого пилота с новым продвинутым вторым пилотом: путешествие может пройти быстрее и дальше, но пилот всё еще должен навигировать сквозь штормы и обеспечить безопасную посадку.
 
-## Focus on Testing and Verification
-As a junior dev, one of the best habits you can develop is writing tests for your code. This is doubly true if you use AI to generate code.
+Разработка ПО всегда была полем непрерывных изменений — от ассемблера к языкам высокого уровня, от собственных серверов к облакам, и теперь от ручного кодинга к разработке с помощью ИИ. Каждый скачок автоматизировал какой-то аспект программирования, и все же каждый раз разработчики адаптировались и находили еще больше работы. В ответ на заметку Тима О'Райли один комментатор на HN заметил, что прошлые инновации «почти всегда приводили к большему количеству работы, большему росту, большим возможностям» для разработчиков. Подъем ИИ ничем не отличается. Вместо того чтобы делать разработчиков ненужными, он перекраивает набор навыков, необходимых для успеха. Скучные 70% кодинга становятся легче; сложные 30% становятся еще большей частью нашей ценности.
 
-When you get a chunk of code from an LLM, don’t assume it’s correct—challenge it. Write unit tests (or use manual tests) to see if it truly handles the requirements and edge cases. This accomplishes two things: it catches issues in the AI’s output, and it trains you to think about expected behavior before trusting an implementation.
+Чтобы максимизировать эти человеческие 30%, сфокусируйся на вневременных инженерных навыках: глубоком понимании проблем, проектировании чистых решений, тщательной проверке качества кода и учете пользователей и контекста. Опытные программисты получают больше от ИИ, потому что они знают, как направлять его и что делать, когда он лажает. Те, кто скомбинирует эти навыки с инструментами ИИ, порвут тех, у кого есть только что-то одно. Фактически, среди экспертов формируется консенсус, что ИИ — это инструмент для квалифицированных спецов: что «LLM — это электроинструменты, предназначенные для power user'ов». Это значит, что ответственность лежит на каждом из нас — стать этим самым «power user'ом», взрастить экспертизу, которая позволит нам эффективно орудовать этими новыми игрушками.
 
-You might even use the AI to help write tests, but you define what to test. Yegge’s advice about taking testing and code review seriously applies at all levels. If you cultivate a reputation for carefully verifying your work (AI-assisted or not), senior colleagues will trust you more, and you’ll avoid the scenario where they feel you’re just “dumping” questionable code on them.
+В конечном счете, ремесло создания ПО — это больше, чем написание кода, который работает. Это про написание кода, который работает *хорошо* — в реальной среде, на протяжении времени и при меняющихся требованиях. Сегодняшние модели ИИ могут помочь с написанием кода, но пока не могут гарантировать, что код будет работать хорошо во всех этих измерениях. Это работа разработчика.
 
-In practical terms, start treating testing as an integral part of development, not an afterthought. Learn how to use testing frameworks, how to do exploratory manual testing, and how to systematically reproduce bugs. These skills not only make you better at the 30% work, but they also accelerate your understanding of how the code really works.
+Упирая на навыки, описанные выше, сеньоры могут продолжать лидировать и внедрять инновации, мидлы могут углублять свою экспертизу, а джуны могут ускорить свой путь к мастерству. ИИ будет брать на себя всё больше и больше рутины, но твоя креативность, интуиция и вдумчивая инженерия превратят этот сырой "вылоп" во что-то действительно ценное. ИИ — мощный инструмент, но всё зависит от того, как мы его используем. Хорошие инженерные практики, человеческое суждение и готовность учиться останутся незаменимыми.
 
-Remember: if you catch a bug that the AI introduced, you just did something the AI couldn’t—that’s added value.
+На практике, паришь ли ты с «энергичным джуниором» ИИ, который пишет твои функции, или ревьюишь дифф, полный сгенерированного кода, никогда не забывай применять свою уникальную человеческую оптику. Спрашивай: Решает ли это правильную проблему? Смогут ли другие понять и поддерживать это? Каковы риски и граничные случаи? Эти вопросы — твоя ответственность. Будущее программирования действительно будет включать меньше ручного набивания каждой точки с запятой и больше режиссуры и курирования — но оно всё еще будет требовать разработчиков у штурвала, у которых хватит мудрости делать это правильно.
 
-## Build an Eye for Maintainability
-Junior devs often focus on “getting it to work.” But in the AI era, getting a basic working version is easy—the AI can do that. The harder part (and what you should focus on) is making code that’s readable, maintainable, and clean.
+В конце концов, великая софтварная инженерия всегда была про решение проблем, а не про кодошлепство. ИИ этого не меняет: он просто бросает нам вызов поднять наше решение проблем на следующий уровень. Прими этот вызов, и ты будешь процветать в этой новой главе нашей индустрии.
 
-Start developing an eye for good code structure and style. Compare the AI’s output with best practices you know of; if the AI code is messy or overly complex, take the initiative to refactor it. For instance, if an LLM gives you a 50-line function that does too many things, you can split it into smaller functions. If variable names are unclear, rename them.
+¹ Эта глава основана на двух эссе, которые я впервые опубликовал в своей рассылке на Substack: Addy Osmani, "Beyond the 70%: Maximizing the Human 30% of AI-Assisted Coding", Elevate with Addy Osmani, 13 марта 2025; и Addy Osmani, "Future-Proofing Your Software Engineering Career", Elevate with Addy Osmani, 23 декабря 2024.
 
-Essentially, pretend you’re reviewing a peer’s code, and improve the AI’s code as if a peer wrote it. This will help you internalize good design principles. Over time, you’ll start prompting the AI in ways that yield cleaner code to begin with (because you’ll specify the style you want). Software maintainers (often working months or years later) will thank you, and you’ll prove that you’re thinking beyond just “make it run”⁠—you’re thinking like an engineer. Keeping things maintainable is exactly in that human-driven 30%, so make it your concern from the start of your career.
+² Чтобы узнать больше о системном мышлении, зацени Donella H. Meadows, *Thinking in Systems: A Primer*, 2nd edition (Rizzoli, 2008); и Peter M. Senge, *The Fifth Discipline: The Art and Practice of the Learning Organization* (Crown, 2010).
 
-## Develop Your Prompting and Tooling Skills (Wisely)
-There’s no denying that “prompt engineering”—the skill of interacting with AI tools effectively—is useful. As a junior dev, you should absolutely learn how to phrase questions to AI, how to give it proper context, and how to iterate on prompts to improve the output (Chapter 2 of this book is a good place to start). These are new skills that can set you apart (many experienced devs are still figuring this out too!). However, remember that prompting well is often a proxy for understanding the problem well. If you find you can’t get the AI to do what you want, it might be because you need to clarify your own understanding first. Use that as a signal.
-
-One strategy is to outline a solution in plain English yourself before asking the AI to implement it. Also, experiment with different AI tools (Copilot, Claude, etc.) to see their strengths and weaknesses. The more fluent you are with these assistants, the more productive you can be—but never treat their output as infallible. Think of AI like a super-charged Stack Overflow: an aid, not an authority.
-
-You might even build small personal projects using AI to push your limits (“Can I build a simple web app with AI’s help?”). Doing so will teach you how to integrate AI into a development workflow, which is a great skill to bring into a team. Just balance it with periods of working without the net, as mentioned earlier.
-
-## Seek Feedback and Mentorship
-Lastly, one durable skill that will accelerate your growth is the ability to seek out feedback and learn from others. An AI won’t get offended if you ignore its advice, but your human teammates and mentors are invaluable for your development—especially when it comes to soft skills, leadership, communication, and navigating office politics.
-
-Don’t hesitate to ask a senior developer why they prefer one solution over another, especially if it differs from what an AI suggested. Discuss design decisions and trade-offs with more experienced colleagues—these conversations reveal how seasoned engineers think, and that’s gold for you. In code reviews, be extra receptive to comments about your AI-written code. If a reviewer points out that “this function isn’t thread-safe” or “this approach will have scaling issues,” take the time to understand the root issue. These are exactly the kinds of things an AI might miss, and you want to learn to catch them. Over time, you’ll build a mental checklist of considerations.
-
-Additionally, find opportunities to pair program (even if remotely). Perhaps you can “pair” with a senior who uses AI in their workflow—you’ll observe how they prompt the AI and how they correct it. But even more important, you’ll see how they communicate, lead discussions, and handle delicate team dynamics. Being open to feedback and actively asking for guidance will help you mature from doing tasks that an AI could do to performing the high-value tasks that only humans can do. In a sense, you’re trying to acquire the wisdom that usually comes with experience, as efficiently as you can. That makes you more than just another coder in the room—it makes you the kind of engineer teams are eager to keep and promote.
-
-## Communicate and Collaborate
-Building software is a team sport. AI doesn’t attend meetings (thank goodness)—humans still must talk to other humans to clarify requirements, discuss trade-offs, and coordinate work. Strong communication skills are as valuable as ever. Practice asking good questions and describing problems clearly (both to colleagues and to AI).
-
-Interestingly, prompting an AI is itself a form of communication; it requires you to precisely express what you want. This overlaps with a core engineering skill: requirements analysis.3 If you can formulate a clear prompt or spec, it means you’ve thought through the problem.
-
-Additionally, sharing knowledge, writing documentation, and reviewing others’ code are collaborative skills that AI cannot replace. In the future, as developers work “with” AI, the human-to-human collaboration in a team—making sure the right problems are being solved—stays vital. One emerging trend is that developers may focus more on high-level design discussions (often with AI as a participant) and on coordinating tasks, essentially taking on more of a conductor role. Communication and leadership skills will serve you well in that conductor’s seat.
-
-## Shift Your Mindset: From Consuming to Creating
-It’s worth noting a mindset shift for juniors in the AI era: you need to move from just consuming solutions to creating understanding. In the past, you might have struggled through documentation to eventually write a feature; now an AI can hand you a solution on a platter. If you simply consume it (copy-paste and move on), you haven’t grown much.
-
-Instead, use each AI-given solution as a learning case. Dissect it, experiment with it, and consider how you might have arrived at it yourself. By treating AI outputs not as answers to end all questions but as interactive learning material, you ensure that you⁠—the human—are continuously leveling up. This way, rather than replacing your growth, AI accelerates it.
-
-Many experts believe that while AI might reduce the need for large teams of junior “coder-grinders,” it also raises the bar for what it means to be a junior developer. The role is shifting to someone who can work effectively with AI and quickly climb the value chain. If you adopt the habits discussed in this section, you’ll distinguish yourself as a junior developer who doesn’t just bring what an AI could bring (any company can get that via a subscription) but who brings insight, reliability, and continuous improvement—traits of a future senior developer.
-
-## Summary and Next Steps
-To thrive in an AI-enhanced development world, engineers at all levels should double down on the enduring skills and practices that AI cannot (yet) replicate. These capabilities will remain crucial no matter how advanced our tools become. In particular, focus on these areas:
-
-## Strengthening your system design and architecture expertise
-
-## Practicing systems thinking and maintaining a contextual understanding of the big picture
-
-Honing your skills in critical thinking, problem solving, and foresight
-
-## Building expertise in specialized domains
-
-Reviewing code, testing, debugging, and quality assurance
-
-## Improving your communication and collaboration skills
-
-## Adapting to change
-
-Continuously learning, keeping your fundamentals strong while gaining new skills and updating your knowledge
-
-## Using AI
-
-These skills form the human advantage in software engineering. They are durable because they don’t expire with the next framework or tooling change; if anything, AI’s rise makes them more pronounced. Simon Willison has argued that AI assistance actually makes strong programming skills more valuable, not less, because those with expertise can leverage the tools to far greater effect.
-
-A powerful machine in unskilled hands can be dangerous or wasted, but in capable hands it’s transformative. In the AI era, an experienced engineer is like a seasoned pilot with a new advanced copilot: the journey can go faster and farther, but the pilot must still navigate the storms and ensure a safe landing.
-
-Software engineering has always been a field of continuous change—from assembly language to high-level programming, from on-prem servers to the cloud, and now from manual coding to AI-assisted development. Each leap has automated some aspect of programming, yet each time, developers have adapted and found even more to do. In response to a Tim O’Reilly note, one HN commenter remarked that past innovations “almost always resulted in more work, more growth, more opportunities” for developers. The rise of AI is no different. Rather than making developers irrelevant, it is reshaping the skill set needed to succeed. The mundane 70% of coding is getting easier; the challenging 30% becomes an even larger part of our value.
-
-To maximize that human 30%, focus on the timeless engineering skills: understanding problems deeply, designing clean solutions, scrutinizing code for quality, and considering the users and context. Experienced programmers are gaining more from AI because they know how to guide it and what to do when it falters. Those who combine these skills with AI tools will outperform those who have only one or the other. In fact, the consensus emerging among experts is that AI is a tool for the skilled: that “LLMs are power tools meant for power users.” This means the onus is on each of us to become that “power user”—to cultivate the expertise that lets us wield these new tools effectively.
-
-Ultimately, the craft of software engineering is more than writing code that works. It’s about writing code that works well—in a real-world environment, over time, and under evolving requirements. Today’s AI models can assist with writing code but cannot yet ensure the code works well in all those dimensions. That’s the developer’s job.
-
-By doubling down on the skills just outlined, senior developers can continue to lead and innovate, midlevel developers can deepen their expertise, and junior developers can accelerate their journey to mastery. AI will handle more and more of the routine, but your creativity, intuition, and thoughtful engineering will turn that raw output into something truly valuable. AI is a powerful tool, but it’s all about how we use it. Good engineering practices, human judgment, and a willingness to learn will remain essential.
-
-In practical terms, whether you are pair programming with an “eager junior” AI that writes your functions or reviewing a diff full of AI-generated code, never forget to apply your uniquely human lens. Ask, Does this solve the right problem? Will others be able to understand and maintain this? What are the risks and edge cases? Those questions are your responsibility. The future of programming will indeed involve less typing every semicolon by hand and more directing and curating—but it will still require developers at the helm who have the wisdom to do it right.
-
-In the end, great software engineering has always been about problem solving, not just code slinging. AI doesn’t change that: it simply challenges us to elevate our problem solving to the next level. Embrace that challenge, and you’ll thrive in this new chapter of our industry.
-
-1 This chapter is based on two essays I first published on my Substack newsletter: Addy Osmani, “Beyond the 70%: Maximizing the Human 30% of AI-Assisted Coding”, Elevate with Addy Osmani, March 13, 2025; and Addy Osmani, “Future-Proofing Your Software Engineering Career”, Elevate with Addy Osmani, December 23, 2024.
-
-2 To learn more about systems thinking, check out Donella H. Meadows, Thinking in Systems: A Primer, 2nd edition (Rizzoli, 2008); and Peter M. Senge, The Fifth Discipline: The Art and Practice of the Learning Organization (Crown, 2010).
-
-3 For more on this topic, see Mark Richards and Neal Ford, Fundamentals of Software Architecture, 2nd edition (O’Reilly, 2025); and Mark Richards, Neal Ford, and Raju Gandhi, Head First Software Architecture (O’Reilly, 2024).
-
+³ Подробнее об этой теме см. Mark Richards и Neal Ford, *Fundamentals of Software Architecture*, 2nd edition (O’Reilly, 2025); и Mark Richards, Neal Ford, и Raju Gandhi, *Head First Software Architecture* (O’Reilly, 2024).

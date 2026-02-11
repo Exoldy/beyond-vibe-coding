@@ -1,218 +1,213 @@
-# Chapter 7. Building Web Applications with AI
+# Глава 7. Строим веб-приложения с ИИ
 
+В этой главе мы смещаем фокус с клепания быстрых прототипов на разработку полноценных веб-приложений с помощью ИИ. Веб-аппы обычно состоят из фронтенда (чаще всего на React, Angular или Vue), бэкенда (API, базы данных, сервера) и "клея", который всё это держит вместе. Вайб-кодинг может ускорить работу на каждом из этих слоев.
 
-This chapter shifts the focus from prompting quick prototypes to developing complete web applications using AI assistance. Web apps typically involve a frontend (often written in frameworks like React, Angular, or Vue), a backend (APIs, databases, servers), and glue to connect everything. Vibe coding can accelerate each of these layers.
+Я проведу тебя через полный цикл создания веб-приложения с ИИ-напарником, включая:
+## Настройку проекта и скаффолдинг (создание скелета)
+## Кодинг UI фронтенда
+## Реализацию логики бэкенда
+## Интеграцию с базой данных
+## Тестирование и валидацию всего стека
 
-I’ll walk you through an end-to-end workflow for building a web application with an AI pair programmer, including:
+По ходу дела я подсвечу паттерны разработки с ИИ для фронта (например, генерация компонентов React или Vue по описанию) и бэка (написание роутов, бизнес-логики и запросов к БД через промты на естественном языке). Также расскажу, как оптимизировать коллаборацию между кожаным мешком и машиной в фуллстек-проекте, чтобы каждый делал то, что умеет лучше всего. К концу главы у тебя будет четкая дорожная карта: как юзать ИИ не просто для точечных задач, а для эффективного руления всем процессом веб-разработки.
 
-## Setting up the project and its scaffolding
+## Настройка проекта: Скаффолдинг с ИИ
+Любое веб-приложение начинается со скаффолдинга — первичной настройки сборщиков, структуры файлов, зависимостей и прочей мути. ИИ может автоматизировать создание кучи этого бойлерплейта. Современные фреймворки часто идут с CLI-тулзами, которые генерируют базу, но тебе всё равно придется настраивать конфиги или прикручивать лишние либы. ИИ-ассистент поможет либо продраться через эти CLI, либо настроит кастомную структуру по запросу.
 
-## Coding the frontend UI
+Допустим, ты хочешь запустить новый проект: React на фронте, Express на бэке. Раньше (в до-ИИ эпоху) рабочий процесс выглядел бы примерно так:
 
-## Implementing backend logic
+Запустил CLI или Vite для настройки React-проекта.
 
-## Integrating with a database
+Инициализировал Express-приложение (через `npm init` и установку Express).
 
-## Testing and validating the whole stack
+Настроил прокси для dev-режима или CORS, чтобы React-фронт мог нормально "базарить" с Express-бэком.
 
-Along the way, I’ll highlight AI development patterns for frontends (for example, having AI generate React or Vue components from descriptions) and backends (writing routes, business logic, and database queries through natural-language prompts). I’ll also cover how to optimize collaboration between humans and AI in a full stack project, ensuring that each side contributes its strongest work. By the end of this chapter, you should have a clear roadmap for using AI not just for isolated coding tasks but for managing entire web development workflow efficiently and effectively.
+Возможно, прикрутил базу типа MongoDB или создал файл SQLite для простоты.
 
-## Setting Up the Project: Scaffolding with AI
-Every web application starts with some scaffolding—the initial setup of build tools, file structure, dependencies, etc. AI can automate the creation of a lot of the boilerplate. Modern web frameworks often come with command-line interface (CLI) tools that can generate a base project, but you might still need to configure certain things or integrate additional libraries. An AI assistant can help by either guiding you through these CLI tools or setting up custom project structures on demand.
+Используя ИИ-среду типа Cursor или Cline, ты можешь просто описать хотелку за один заход:
 
-For example, suppose you want to start a new application project using React for the frontend and Express for the backend. A pre-AI workflow for this task would probably look something like this:
+> Настрой новый проект с React-фронтендом (используй Vite) и Express-бэкендом. Бэк должен отдавать REST API для ту-ду листа и использовать массив в памяти для старта. Настрой фронтенд так, чтобы он проксировал API-запросы на бэкенд в режиме разработки.
 
-Run a CLI tool or Vite to set up the React project.
+Продвинутая ИИ-IDE возьмет эту инструкцию и сделает следующее:
 
-Initialize an Express app (perhaps with npm init and installing Express).
+Создаст две директории (`frontend` и `backend`).
 
-Set up a proxy for development or configure Cross-Origin Resource Sharing (CORS) so the React frontend can talk to the Express backend.
+Запустит `npm create vite@latest` (если у неё есть доступ к шеллу) или накидает шаблон базового React-приложения.
 
-Maybe integrate a database like MongoDB or set up an SQLite file for simple usage.
+Инициализирует базовый файл сервера Express на бэке с эндпоинтом типа `/api/to-dos` (возвращающим какие-нибудь тестовые данные).
 
-Using an AI coding environment like Cursor or Cline, you can instead describe your desired setup in one go:
+Закинет `package.json` в каждую папку с нужными скриптами (типа "запустить всё сразу").
 
-Set up a new project with a React frontend (using Vite) and an Express backend. The backend should serve a REST API for a to-do list and use an in-memory array to start. Configure the frontend to proxy API requests to the backend in development.
+Настроит связь между фронтом и бэком: либо через конфиг прокси в dev-сервере React, либо выдав инструкции по настройке заголовков CORS.
 
-An advanced AI IDE can take this instruction and do the following:
+Через пару минут у тебя будет скелет фуллстек-приложения. Даже если ИИ не сделает всё на полном автомате, он вывалит код и инструкции, как допилить (например: "Добавь эту настройку прокси в свой `package.json`"). Это экономит кучу времени на тупую настройку и позволяет сразу сфокусироваться на фичах.
 
-Create two directories (frontend and backend).
+Если ты не юзаешь ИИ-IDE, можно использовать ChatGPT или другого ассистента пошагово:
 
-Run npm create vite@latest (if it has shell access) or template out a basic React app.
+> Я хочу создать новое React-приложение. Какие команды мне запустить?
 
-Initialize a basic Express server file in the backend, with an endpoint like /api/to-dos (returning some sample data).
+ИИ проведет тебя по шагам или порекомендует современные альтернативы типа Vite или Next.js:
 
-Include a package.json in each directory with relevant scripts (like start both).
+> Теперь настрой сервер Express с роутом `/api/to-dos`.
 
-Set up communication between frontend and backend by either configuring a proxy in the React development server or providing instructions for implementing CORS headers.
+Он сгенерит код для сервера Express, который ты просто копипастишь в файл:
 
-Within a couple of minutes, you’ll have the skeleton of a full stack web app. Even if the AI doesn’t do everything automatically, it might present you with code and the instructions you need to finalize it (for example, “Add this proxy setting to your React package.json file”). This saves a lot of mindless setup time and allows you to focus immediately on features.
+> Как мне соединить мое React-приложение с этим API во время разработки?
 
-If you aren’t using an AI IDE, you can still use ChatGPT or another assistant step-by-step as you go; for example:
+Он предложит либо настройку прокси, либо расскажет, как вызывать API (включая полный URL, если без прокси).
 
-I want to create a new React app. What commands should I run?
+Таким образом, даже настройка базовой "сантехники" превращается в диалог, а не в рысканье по документации. Как уже говорилось в прошлых главах, программирование намерениями (programming by intent) означает, что ты говоришь ИИ, какой результат нужен, а он разбирается с шагами. Настройка проекта — идеальный сценарий для этого.
 
-The AI can guide you through steps or recommend newer alternatives like Vite or Next.js:
+На этом этапе важно **продавить свои архитектурные решения**. ИИ пойдет за тобой. Люди всё ещё незаменимы для архитектуры и высокоуровневых решений, так что выбирай стек и основные паттерны сам: хочешь монорепозиторий или разные репы для фронта и бэка? Будешь юзать REST или GraphQL? Какую базу данных?
 
-Now set up an Express server with a /api/to-dos route.
+Как только определишься, давай инструкции ИИ:
 
-It can generate the code for the Express server, which you copy into a file:
+> Также настрой базовую схему Prisma для базы данных SQLite.
 
-How do I connect my React app to this API during development?
+Или:
 
-It might suggest either a proxy configuration or tell you how to call the API (including the full URL, if not proxying).
+> Включи GraphQL сервер вместо REST.
 
-This way, even setting up the basic plumbing becomes a conversation rather than a hunt through documentation. As noted in earlier chapters, programming by intent means you tell the AI what outcome you want, and it figures out the steps. Setting up a project is a perfect scenario for that.
+Нейронка может и не вывезет сложные сетапы идеально с первого раза, но большую часть грязной работы сделает, а ты уже дошлифуешь.
 
-At this stage, it’s important to assert your architectural decisions. The AI will follow your lead. Humans are essential for architectural and high-level decisions, so decide on the stack and major patterns yourself: Do you want a monorepo or separate repos for front and back? Will you use REST or GraphQL? Which database?
+Многие опытные сеньоры запихивают эти шаги в шаблоны проектов или генераторы бойлерплейта, но ИИ дает гибкость: ты можешь кастомизировать всё на лету обычным языком. Если твой проект немного нестандартный (скажем, тебе нужно три сервиса вместо обычных двух, или ты хочешь преднастроить конкретную либу типа Tailwind CSS), просто попроси ИИ добавить это.
 
-Once you have these in mind, you can instruct the AI accordingly:
+## Паттерны разработки фронтенда с ИИ
+Как только скелет готов, начинается основная возня — разработка фронтенда. В этом разделе посмотрим, как запрячь ИИ-напарника писать фронтенд-код.
 
-Also set up a basic Prisma schema for the SQLite database.
+## Реализация компонентов по описанию
+Ты можешь просить ИИ создавать компоненты, просто описывая их функционал и внешний вид. Например:
 
-Or:
+> Создай React-компонент `TodoList`, который принимает список задач и отображает их. У каждого айтема должен быть заголовок и чекбокс, чтобы отметить его как выполненный.
 
-Include a GraphQL server instead of REST.
+ИИ выдаст код функционального компонента с пропами и стейтом, как положено:
 
-The AI might not perfectly execute complex setups, but it will get the bulk of the work done, and you can refine from there.
+> Создай Vue-компонент для формы логина с инпутами для юзернейма и пароля, и чтобы он эмитил событие с данными формы при сабмите.
 
-Many experienced developers integrate these steps into project templates or use boilerplate generators, but AI offers a more flexible approach: you can customize on the fly using natural language. This means if your project is slightly unusual (maybe you need three services instead of the usual two tiers, or you want to preconfigure a particular library like Tailwind CSS), just ask the AI to include what you want.
+ИИ выплюнет секции `<template>`, `<script>` и `<style>`. Ты, как разработчик, скипаешь написание скучного бойлерплейта и сразу получаешь нужную структуру. Её легко подправить, если что. Часто ИИ даже добавит базовую валидацию или обработку стейта, если твой промт на это намекает.
 
-## Frontend Development Patterns with AI
-Once the scaffolding is ready, developing the frontend of a web app is a major part of the effort. This section explores how you can leverage an AI pair programmer for your frontend code.
+Важно следить за **консистентностью** на этом этапе. Если ты генеришь кучу компонентов по отдельности, возможно, придется подгонять их друг к другу. Например, если `TodoList` ждет данные в определенном формате, убедись, что компонент, который использует `TodoList`, передает именно этот формат. Можно генерить компоненты одним промтом (чтобы ИИ видел всю картину) или просто соединять их самому и просить ИИ пофиксить нестыковки.
 
-## Implementing components from descriptions
-You can ask the AI to create components by describing their functionality and appearance; for example:
+## Стилизация и верстка
+CSS и стилизация — это часто душнилово. Опиши желаемый вид, и пусть ИИ парится с деталями CSS:
 
-Create a React component called TodoList that takes a list of to-do items and displays them. Each item should show its title and a checkbox to mark it complete.
+> Стилизуй компонент списка задач: используй флекс-колонку, добавь отступы, сделай текст выполненных задач серым и зачеркнутым.
 
-The AI should produce the code as a functional component, with props and state as needed:
+> Для формы логина: отцентруй её на странице и сделай поля ввода побольше с скругленными границами.
 
-Create a Vue component for a login form with inputs for username and password, and emit an event with the form data on submit.
+Ассистент может выдать CSS-in-JS, обычный CSS или инлайн-стили, в зависимости от контекста. Если юзаешь фреймворк типа Tailwind CSS, можешь попросить выдать соответствующие классы (но помни, что не все модели знают Tailwind досконально).
 
-The AI will likely output the `<template>`, `<script>`, and `<style>` sections accordingly. You, as the developer, skip writing boilerplate and directly get the structure you need. It’s then easy to tweak if needed. Often the AI will even include basic validation or state handling, if your prompt implies that they’re needed.
+Суть в том, что ты можешь итерировать дизайн, не ковыряясь вручную в значениях CSS. Это держит твой фокус на более высоком уровне абстракции — ты говоришь "сделай красиво", а не пишешь каждый марджин и цвет руками.
 
-It’s important to ensure consistency at this stage. If you generate multiple components in isolation, you might need to adjust them to work together. For instance, if the TodoList expects items as a certain prop shape, make sure any component that uses TodoList provides that. You can either generate components in one prompt (so the AI is aware of everything) or simply wire them up yourself and ask the AI to fix any mismatches.
+## Интеграция API и стейт-менеджмент
+Веб-фронтенды постоянно тянут данные с бэка и рулят стейтом через Redux, Context или просто стейт компонента. ИИ поможет написать эти куски интеграции:
 
-## Styling and layout
-CSS and styling can be tedious. Describe the look you want and let the AI handle the CSS details:
+> Добавь код для фетча списка задач с `/api/to-dos` при маунте компонента `TodoList` и сохрани его в стейт.
 
-Style the to-do list component: use a flex column for the list, add some spacing, and change the text color of completed items to gray and crossed out.
+> Реализуй функцию в `TodoList`, которая при переключении чекбокса шлет POST-запрос на `/api/to-dos/{id}/complete`, а затем обновляет стейт.
 
-For the login form component, center it on the page and make the input fields larger with rounded borders.
+ИИ сгенерит хук `useEffect` в React для фетча или `mounted()` в Vue. Он также накидает заглушки для HTTP-вызовов (используя `fetch` или `Axios`). Тебе нужно будет подтвердить, что эндпоинты и пейлоады совпадают с тем, что ждет твой бэкенд (если ты его уже построил или у тебя есть спека).
 
-The assistant can output CSS-in-JS, plain CSS, or inline styles, depending on context. If you’re using a framework like Tailwind CSS, you could even ask it to output the appropriate classes (though keep in mind that not all models know Tailwind thoroughly).
+Если бэка еще нет, ты можешь пилить его параллельно с помощью того же ИИ — до этого мы скоро доберемся. Фронт и бэк можно разрабатывать параллельно с ИИ, так как каждый слой можно специфицировать и генерить относительно независимо, главное — следить за интерфейсом между ними.
 
-The point is: you can iterate on design without manually fiddling with CSS values. This keeps your focus at a higher level of abstraction—specifying what looks good rather than writing every margin and color.
+## Разруливание сложности с помощью ИИ
+Если на фронте есть сложная логика, типа динамической валидации форм, условного рендеринга или хитрых взаимодействий с юзером, реализуй это пошагово с ИИ. Хорошая практика — декомпозировать проблему:
 
-## Integrating APIs and state management
-Web frontends often need to fetch data from backends and manage state with something like Redux, context, or simple component state. AI can help write these integration pieces; for example:
+> Добавь фичу: когда юзер чекает бокс "выполнено", элемент списка должен плавно исчезнуть (CSS transition), а затем удалиться из списка через 1 секунду.
 
-Add code to fetch the to-do list from /api/to-dos when the TodoList component mounts, and store it in state.
+ИИ может выдать код, который вешает CSS-класс при клике и использует таймаут для удаления элемента, включая нужный CSS для анимации исчезновения:
 
-Implement a function in the TodoList that, when a checkbox is toggled, sends a POST request to /api/to-dos/{id}/complete and then updates the state accordingly.
+> В форме есть опциональное поле 'notes'. Показывай текстовое поле для заметок только если чекбокс 'Add notes' нажат.
 
-The AI can generate the useEffect hook in React to do the fetch or the mounted() hook in Vue. It can also stub out the HTTP calls (using fetch or Axios, etc.). You’ll want to confirm that the API endpoints and payloads match what your backend expects (if you’ve built the backend or have a spec for it).
+ИИ поправит стейт компонента и JSX, чтобы рендерить поле заметок по условию.
 
-If you haven’t built the backend yet, you might simultaneously be using the AI to create it—we’ll get to that soon. But you can work on front and back in parallel with AI assistance, because each can be specified and generated relatively independently, as long as you keep track of the interface between them.
+Каждый такой шаг может быть итеративным промтом. По сути, ты описываешь UX-поведение, а ИИ пишет код. Всегда тестируй после каждого добавления, чтобы убедиться, что оно работает как надо.
 
-## Handling complexity with AI guidance
-If your frontend has complex logic, such as dynamic form validation rules, conditional rendering, or intricate user interactions, you can implement these step-by-step with AI. A good practice is to break the problem down:
+## Советы по фреймворкам
+У разных фреймворков свои приколы:
 
-Add a feature: when the user checks the “complete” box on a to-do, fade out that list item (CSS transition), then remove it from the list after 1 second.
+В **React** ИИ будет использовать хуки (типа `useState`, `useEffect`). Дважды проверь, что он следует бест-практис (например, что массив зависимостей в `useEffect` правильный).
 
-The AI might produce the code to add a CSS class on check and use a timeout to remove the item, including the necessary CSS for fading out:
+В **Vue** ИИ может выдать стиль Options API или Composition API, в зависимости от того, на чем он обучался или что увидел в контексте. Если тебе принципиально, укажи это (например: "Используй Vue 3 Composition API").
 
-The form has an optional field for ‘notes’. Only show the notes text area if an ‘Add notes’ checkbox is checked.
+В **Angular** кривая обучения покруче. ИИ может сгенерить шаблон, класс TypeScript и базовую инъекцию сервисов по запросу, но тебе, скорее всего, придется больше работать руками или юзать Angular CLI для структуры, а потом просить ИИ заполнить конкретные части (типа логики валидации форм).
 
-The AI can modify the component state and JSX to conditionally render the notes field.
+## Паттерны разработки Бэкенда/API с ИИ
+Теперь развернемся к бэкенду. Использование ИИ для серверной части следует тому же принципу: ты описываешь эндпоинты, модели данных и логику, а ИИ выдает код. Типичные компоненты бэка — это обработчики роутов, бизнес-логика, работа с БД и валидации. ИИ поможет со всем этим.
 
-Each of these can be an iterative prompt. Essentially, you describe the UX behavior and AI writes the code. Always test after each addition to ensure it behaves as expected.
+## Реализация эндпоинтов API
+Допустим, ты пилишь RESTful API для своего ту-ду листа. У тебя могут быть эндпоинты типа `GET /to-dos`, `POST /to-dos`, `PUT /to-dos/:id`, `DELETE /to-dos/:id`. Можно идти по одному эндпоинту за раз:
 
-## Framework-specific tips
-Different frameworks have different idioms:
+> В приложении Express добавь роут `GET /api/to-dos`, который возвращает список задач (пока используй просто массив в памяти).
 
-In React, the AI might use hooks (like useState, useEffect). Double-check that it’s following best practices (for instance, that the dependencies array in use​Ef⁠fect is correct).
+> Добавь роут `POST /api/to-dos`, который принимает JSON-тело и добавляет новую задачу в список. Верни новую задачу с ID.
 
-In Vue, the AI might output Options API style or Composition API style depending on what it has seen. If you prefer one, you should specify that (for instance, “Use Vue 3 Composition API”).
+ИИ напишет обработчики роутов Express, скорее всего, используя что-то вроде `app.get('/api/to-dos', ...)`. Если ты указал, что юзаешь Express с JSON, он может добавить нужный мидлвар, если его еще нет:
 
-In Angular, the AI can generate components, but Angular has a steeper learning curve. The AI might be able to produce a template, a TypeScript class, and basic service injection on request, but you’ll likely need to do more manual work or use Angular CLI for structure, then ask AI to fill in specific parts (like form validation logic).
+`app.use(express.json())`
 
-## Backend/API Development Patterns with AI
-Now let’s turn to the backend. Using AI to build the server side of a web application follows a similar paradigm: you describe the endpoints, data models, and logic you want, and the AI produces code. Common backend components include route handlers, business logic, database interactions, and validations. AI can help with all of these.
+Когда бэк разрастется, можешь попросить ИИ сделать рефакторинг:
 
-## Implementing API endpoints
-Suppose you’re building a RESTful API for your to-do list app. You might have endpoints like GET /to-dos, POST /to-dos, PUT /to-dos/:id, DELETE /to-dos/:id.  You can go endpoint by endpoint:
+> Отрифактори роуты Express в отдельный модуль роутера.
 
-In the Express app, add a GET /api/to-dos route that returns the list of to-dos (just use an array stored in memory for now).
+Он вынесет роуты в отдельный файл, что есть гуд для поддерживаемости кода.
 
-Add a POST /api/to-dos route that accepts a JSON body and adds a new to-do to the list. Return the new to-do with an ID.
+## Интеграция с базой данных
+Для прототипа сойдет и память, но для серьезного приложения нужна нормальная база. Скажем, ты выбрал MongoDB или PostgreSQL. Промпт может быть таким:
 
-The AI will write the Express route handlers accordingly, likely using something like app.get('/api/to-dos', ...). If you’ve indicated that you’re using Express with JSON, it might include the necessary middleware if it’s not already present:
+> Интегрируй MongoDB в приложение Express используя Mongoose. Создай модель `Todo` с полями: `title` (string), `completed` (boolean). Измени роуты GET/POST, чтобы они использовали базу данных вместо массива в памяти.
 
-app.use(express.json())
-As your backend grows, you can ask the AI to refactor:
+ИИ выдаст определение модели Mongoose и поправит хендлеры роутов, чтобы они дергали базу (типа `Todo.find()` для GET и `Todo.create()` для POST). Аналогично для SQL, ты можешь попросить настроить ORM типа Prisma или Sequelize. Имей в виду, тебе, возможно, придется предоставить конфиги (типа строки подключения). ИИ может не знать твой URI базы данных, так что подставишь его сам. Но весь дженерик-код он напишет.
 
-Refactor the Express routes into a separate router module.
+## Бизнес-логика и валидация
+Если на бэке есть специфические правила (например, юзеры не могут удалять "важные" задачи или заголовки должны быть уникальными), ты можешь зашить это через ИИ:
 
-It might split the routes out into a separate file, which is a good practice for maintainability.
+> Добавь валидацию в роут `POST /api/to-dos`: отбивай запрос с 400 статусом, если заголовок пустой или длиннее 100 символов.
 
-## Database integration
-You might use in-memory data for a prototype, but for a more complete application, you’ll want a database. Let’s say you choose MongoDB or PostgreSQL. You can prompt:
+ИИ добавит проверки и отправку правильных ответов.
 
-Integrate MongoDB into the Express app using Mongoose. Create a to-do model with fields: title (string), completed (boolean). Modify the GET/POST routes to use the database instead of an in-memory array.
+> Добавь логику: когда задача отмечается выполненной (скажем, через `PUT /api/to-dos/:id`), если все задачи выполнены, пиши в лог сообщение 'All done!'
 
-The AI may output the Mongoose model definition and adjust the route handlers to query the database (like Todo.find() for GET and Todo.create() for POST). Similarly, for SQL, you could ask it to set up an object-relational mapping (ORM) like Prisma or Sequelize. Keep in mind you might need to provide configuration details (like connection strings). The AI might not know your database URI; you’ll have to slot that in. But it will handle the generic code.
+Он вставит эту логику в PUT-хендлер.
 
-## Business logic and validation
-If your backend has specific rules (for example, that users cannot delete a to-do that is marked important or that list titles must be unique), you can encode those via AI:
+Ты описываешь требования простым языком, а ИИ меняет код. Тебе всё равно нужно тестировать, чтобы код делал именно то, что ты ожидаешь.
 
-Add validation to the POST /api/to-dos route: reject if the title is empty or longer than 100 chars, and return 400 status.
+## Использование фреймворков и бойлерплейтов
+Многие бэкенды используют фреймворки покруче "голого" Express (типа NestJS для Node или Django для Python). ИИ умеет работать и с ними, хотя задачи придется дробить сильнее:
 
-The AI will include checks and send proper responses.
+Для **Django** (Python) можно попросить:
 
-Add logic: when a to-do is marked complete (say via PUT /api/to-dos/:id), if all to-dos are complete, log a message ‘All done!’
+> Создай модель Django для todo с полями X, и соответствующие view для списка и создания.
 
-It can insert that logic in the PUT handler.
+ИИ может выдать код модели и дженерик view или сериализатор/viewset для DRF (Django REST Framework), если он знает контекст.
 
-You describe these requirements in plain terms, and the AI modifies the code accordingly. You still need to test that the code does what you expect.
+Для **Ruby on Rails** можно получить помощь в генерации моделей и контроллеров. (Тут ты, скорее всего, просто заюзаешь скаффолдинг Rails, но ИИ может помочь, добавив валидации или подправив роуты).
 
-## Using frameworks or boilerplates
-Many web backends use frameworks beyond raw Express (like NestJS for Node or Django for Python). AI can work with those, too, though you may have to break down more involved tasks:
+ИИ-модели показывают разный уровень скилла в разных языках и стеках, в основном из-за того, насколько часто эти технологии встречались в обучающей выборке. Модели могут работать с любым языком, который видели, но эффективность скачет. Популярные языки типа JavaScript, Python и Java обычно поддерживаются лучше всего из-за тонн кода в опенсорсе, документации и учебных материалов.
 
-For Django (Python), you might prompt:
+Определить, насколько модель шарит в твоем стеке, можно только на практике. Начни с базовых задач на нужном языке, потом усложняй. Смотри, генерит ли модель идиоматичный код (согласно конвенциям языка), узнает ли популярные фреймворки без долгих объяснений и предлагает ли подходящие паттерны. Если шарит — предложит что-то дельное по контексту; если нет — будет выдавать дженерик или устаревший код.
 
-Create a Django model for to-do with fields X, and corresponding views for list and create.
+Многие провайдеры ИИ публикуют доки о возможностях моделей, но там редко бывают детальные бенчмарки по языкам. Самый надежный способ — провести небольшие эксперименты с твоим реальным стеком. Например, если ты на Ruby on Rails, проверь, понимает ли модель конвенции ActiveRecord или может ли сгенерить нормальные тесты на RSpec. Для новых фреймворков или редких языков будь готов к тому, что результаты будут плавать, и придется давать больше контекста в промтах, чтобы компенсировать пробелы в знаниях модели.
 
-The AI might output model code and a generic view or DRF (Django REST Framework) serializer/viewset if it knows that context.
+## Оркестрация многоходовок
+Некоторые эндпоинты могут включать несколько шагов, типа создания записи в одной таблице, потом в другой, или вызова внешнего API. Ты можешь накидать последовательность, а ИИ оформит это в код:
 
-For Ruby on Rails, you can get help generating models and controllers. (At that point, you might just use Rails scaffolding, but the AI could supplement by adding validations or adjusting routes).
+> Когда новый юзер регистрируется (`POST /api/users`), создай запись юзера и также отправь приветственное письмо через SendGrid API.
 
-AI models demonstrate varying levels of proficiency across different programming languages and technology stacks, largely determined by the prevalence of those technologies in their training data. While models can work with any language they’ve encountered during training, their effectiveness varies significantly. Popular languages like JavaScript, Python, and Java typically receive stronger support due to their abundant representation in open source repositories, documentation, and educational materials that form part of the training corpus.
+ИИ напишет код для сохранения юзера (возможно, через ORM) и затем HTTP-запрос к API SendGrid с нужным пейлоадом. Тебе останется вставить реальные API-ключи или подправить контент, но основной бойлерплейт готов.
 
-Determining a model’s proficiency with your chosen stack requires practical evaluation. Start by testing the model with basic tasks in your target language, then progressively increase complexity to gauge its capabilities. Pay attention to whether the model generates idiomatic code that follows language-specific conventions, recognizes common frameworks and libraries without extensive explanation, and suggests appropriate design patterns for that ecosystem. Strong proficiency manifests as contextually appropriate suggestions, while weaker support often results in generic or outdated code patterns.
+> Реализуй транзакцию: при переводе денег (`POST /api/transfer`) сними со счета А и добавь на счет Б, убедись, что это атомарно (всё или ничего).
 
-Many AI providers publish documentation about their models’ capabilities, though these rarely include detailed language-specific benchmarks. The most reliable approach involves running small experiments with your actual technology stack. For instance, if you’re working with Ruby on Rails, test whether the model understands Rails conventions like ActiveRecord patterns or can generate proper RSpec tests. Similarly, for newer frameworks or less common languages, expect more variable results, and be prepared to provide additional context in your prompts to compensate for potential gaps in the model’s training.
+Если ты используешь ORM или БД с поддержкой транзакций, ИИ может заюзать эти фичи (типа блока транзакции в SQL или метода транзакции в ORM). Проверяй такой код с осторожностью — логика транзакций, особенно, штука хитрая. Но ИИ может знать типичные подводные камни и включить проверки. Например, получив промт на обработку перевода денег, ИИ сгенерировал вот такую структуру:
 
-## Orchestrating multistep operations
-Some endpoints might involve multiple steps, like creating an entry in one table and then another, or calling an external API. You can outline the sequence and let the AI draft it:
-
-When a new user signs up (POST /api/users), create a user record and also send a welcome email via SendGrid API.
-
-The AI can write code to save the user (maybe using an object-relational mapper, or ORM) and then an HTTP request to SendGrid’s API with appropriate payload. You’d fill in actual API keys or tweak content, but most of the boilerplate is done:
-
-Implement a transaction: when transferring money (POST /api/transfer), deduct from account A and add to account B, ensure it’s atomic (all-or-nothing).
-
-If you’re using an ORM or database that supports transactions, the AI might use those features (like an SQL transaction block or an ORM’s transaction method). Review such code cautiously for correctness—transaction logic, especially, can be tricky. But the AI might know common pitfalls and include checks. For instance, when prompted to handle a money transfer endpoint, an AI generated the following code structure:
-
-```
+```javascript
 async function transferMoney(fromAccountId, toAccountId, amount) {
   const session = await db.startSession();
   
   try {
     await session.startTransaction();
     
-    // Deduct from source account
+    // Снимаем с исходного счета
     const sourceAccount = await Account.findByIdAndUpdate(
       fromAccountId,
       { $inc: { balance: -amount } },
@@ -220,10 +215,10 @@ async function transferMoney(fromAccountId, toAccountId, amount) {
     );
     
     if (sourceAccount.balance < 0) {
-      throw new Error('Insufficient funds');
+      throw new Error('Insufficient funds'); // Недостаточно средств
     }
     
-    // Add to destination account
+    // Добавляем на счет назначения
     await Account.findByIdAndUpdate(
       toAccountId,
       { $inc: { balance: amount } },
@@ -241,233 +236,236 @@ async function transferMoney(fromAccountId, toAccountId, amount) {
   }
 }
 ```
-The AI correctly wrapped both database operations in a transaction, included validation for insufficient funds, and properly handled rollback on any error. While you’d still need to review edge cases and add appropriate logging, the fundamental transaction structure demonstrates understanding of atomic operations.
 
-## API documentation and testing
-When building APIs, you can also have the AI produce documentation. For instance, “Write a brief documentation for the /api/to-dos endpoints.” It may generate something like this:
+ИИ правильно обернул обе операции с базой в транзакцию, включил валидацию на недостаточность средств и корректно обработал откат (rollback) при любой ошибке. Хотя тебе всё равно нужно будет проверить эдж-кейсы (граничные случаи) и добавить нормальное логирование, фундаментальная структура транзакции показывает понимание атомарных операций.
 
-GET /api/to-dos - returns list of to-dos.
-POST /api/to-dos - create a new to-do. Expects JSON: {title: string}. Returns the created to-do.
+## Документация API и тестирование
+Когда пилишь API, можно заодно заставить ИИ писать документацию. Например: "Напиши краткую доку для эндпоинтов `/api/to-dos`". Он может выдать что-то типа:
+
+`GET /api/to-dos` - возвращает список задач.
+`POST /api/to-dos` - создает новую задачу. Ожидает JSON: `{title: string}`. Возвращает созданную задачу.
 ...
-This is handy for quick reference and also to share with frontend developers (if you’re working in a team). Additionally, you can use AI to write tests for your API endpoints, using a testing framework like Jest or Mocha for Node, or PyTest for a Python API. With a prompt like “Generate tests for the to-dos API (one test for listing, one for creating, one for validation error),” the AI will output test code that you can run and verify. 
 
-## Database Design and Integration
-Human knowledge of the business domain is crucial in designing a database schema, but AI can assist in translating that design into code (like migration scripts or ORM models). Also, if you’re unsure about your schema, you can brainstorm with the AI.
+Это удобно для быстрой справки и чтобы кинуть фронтендерам (если работаешь в команде). Кроме того, можно юзать ИИ для написания тестов API, используя фреймворки типа Jest или Mocha для Node, или PyTest для Python. С промтом типа "Сгенери тесты для API задач (один тест на листинг, один на создание, один на ошибку валидации)", ИИ выдаст код тестов, который можно запустить и проверить, всё ли ок.
+## Проектирование базы данных и интеграция
+Твоё понимание бизнеса и предметной области — это база, но AI может помочь перегнать эту базу в код (скрипты миграции или ORM-модели). А если ты сам плаваешь в схеме данных, можно поштурмить прямо с нейронкой.
 
-For example, say your app is expanding beyond to-do lists to become a full project-management tool. You need to design several tables: Projects, Tasks, Users, and so on. You could ask, “What data models would I need for a simple project management app with users, projects, and tasks? Include relationships.” The AI might respond with something like this:
+Допустим, твоя приложенька переросла обычный список дел и мутирует в полноценный таск-трекер. Тебе нужно спроектировать несколько таблиц: Проекты, Задачи, Пользователи и так далее. Ты можешь спросить: «Какие модели данных нужны для простого приложения по управлению проектами с юзерами, проектами и задачами? Пропиши связи». AI может выдать что-то в таком духе:
 
-User (id, name, email, etc.)
+User (id, name, email, и т.д.)
 
-Project (id, name, owner_id referencing User)
+Project (id, name, owner_id со ссылкой на User)
 
-Task (id, description, project_id, assigned_to (User), status, etc.)
+Task (id, description, project_id, assigned_to (User), status, и т.д.)
 
-It might not be exactly what you want, but it gives you a starting point. You confirm or tweak these design ideas, then implement them.
+Это может быть не совсем то, что ты хотел, но как «рыба» для старта пойдет. Ты подтверждаешь или допиливаешь эти идеи, а потом внедряешь.
 
-## Using an ORM
-If you use an ORM like Prisma, Entity Framework, or SQLAlchemy, you can have the AI generate model classes or schema definitions:
+## Использование ORM
+Если ты сидишь на ORM типа Prisma, Entity Framework или SQLAlchemy, можно заставить AI генерировать классы моделей или определения схем:
 
-Using Sequelize (for Node), define models for User, Project, Task with associations: One User has many Projects, Project belongs to User; Project has many Tasks, Task belongs to Project; Task can be assigned to a User (many-to-one).
+Используя Sequelize (для Node), определи модели для User, Project, Task со связями: Один User имеет много Projects, Project принадлежит User; Project имеет много Tasks, Task принадлежит Project; Task может быть назначен на User (many-to-one).
 
-The AI would then write JS/TS code to define those Sequelize models and associations, which you can then integrate into your codebase. It might also suggest foreign keys or cascade rules if it’s familiar with them.
+AI напишет JS/TS код для определения этих моделей Sequelize и их ассоциаций, который ты просто вставишь в свой проект. Он может даже предложить внешние ключи или правила каскадного удаления, если шарит за контекст.
 
-If you aren’t using an ORM and you’re writing raw SQL migrations, you could even have the AI draft migration scripts:
+Если ты олдскул, не юзаешь ORM и пишешь миграции на чистом SQL, можно попросить AI набросать и их:
 
-Write an SQL script to create tables for users, projects, tasks with appropriate foreign keys.
+Напиши SQL-скрипт для создания таблиц users, projects, tasks с соответствующими внешними ключами.
 
-It will output an SQL DDL script, which you can review for correctness and run.
+На выходе получишь DDL-скрипт. Проверяешь глазами на адекватность и накатываешь.
 
-## Database Queries
-When integrating the database in your code, you might need queries more complex than simple CRUD. Suppose you want to get all projects, along with their tasks and the user assigned to each task—that’s a join across Project, Task, User. You could prompt:
+## Запросы к базе данных
+Когда дело доходит до интеграции базы в код, тебе могут понадобиться запросы посложнее тупого CRUD. Допустим, ты хочешь получить все проекты вместе с их задачами и юзером, назначенным на каждую задачу — это уже JOIN через Project, Task и User. Промпт может быть таким:
 
-Write an SQL query to retrieve projects with their tasks and each task’s assigned user name.
+Напиши SQL-запрос для получения проектов с их задачами и именем назначенного пользователя для каждой задачи.
 
-The AI could produce an SQL join query for you.
+AI выплюнет тебе готовый SQL JOIN.
 
-Or if you’re using an ORM:
+Или, если ты на ORM:
 
-Using Sequelize, fetch all projects with associated tasks and the user for each task.
+Используя Sequelize, выбери все проекты со связанными задачами и пользователем для каждой задачи.
 
-You could expect the code to come with something to load related data, like:
+Ожидай, что код придет с чем-то для подгрузки связанных данных, типа:
 
 include: [Task, { model: User, as: 'assignedUser' }]
-## Checking AI-Generated Queries
-Database operations require careful verification to ensure the AI-generated code aligns with your actual schema and maintains data integrity. The AI cannot automatically know your specific table names, field names, or relationships unless you provide this information explicitly in your prompt. Even when models have conversation memory, you should include schema details in each complex database-related prompt to ensure accuracy. This explicit approach prevents the common issue of AI-generated queries that reference generic field names like user_id when your schema actually uses userId or customer_ref.
 
-Performance considerations often require human oversight. While AI models understand basic database concepts like primary keys and joins, they may not automatically suggest performance optimizations such as adding indexes on frequently queried fields or considering query execution plans. Review generated queries for efficiency, particularly for operations that will run frequently or against large datasets.
+## Проверка сгенерированных AI запросов
+Операции с базой требуют тщательной проверки, чтобы убедиться, что код от AI совпадает с твоей реальной схемой и не херит целостность данных. AI не телепат, он не знает твои специфические названия таблиц, полей или связей, пока ты ему прямо об этом не скажешь. Даже если у модели есть память контекста, лучше в каждом сложном промпте про базу напоминать детали схемы. Этот явный подход спасает от классической проблемы, когда AI генерит запросы с дефолтными именами типа `user_id`, а у тебя в базе `userId` или вообще `customer_ref`.
 
-Data consistency rules represent another critical area requiring explicit specification. When implementing delete operations, clearly define the cascading behavior you expect. For example, when deleting a Project record, you must decide whether the database should automatically delete associated Task records through cascading deletes or whether your application logic should handle this cleanup. Communicate these business rules clearly to the AI:
+Вопросы производительности тоже требуют твоего кожаного надзора. Хотя модели понимают базовые концепции БД типа первичных ключей и джойнов, они могут не предложить оптимизации, вроде добавления индексов на часто запрашиваемые поля, и не будут думать о планах выполнения запросов. Ревьювь сгенерированные запросы на предмет эффективности, особенно те, что будут дергаться часто или на больших объемах данных.
 
-When a project is deleted, configure the database to cascade delete all related tasks.
+Правила согласованности данных — еще одна зона риска, где нужна четкость. Когда реализуешь удаление, ясно определи ожидаемое каскадное поведение. Например, при удалении записи Project ты должен решить: база сама выкосит связанные Task через каскадное удаление, или твое приложение должно сначала почистить хвосты логикой. Объясни эти бизнес-правила AI максимально прозрачно:
 
-Or alternatively:
+Когда проект удаляется, настрой базу данных на каскадное удаление всех связанных задач.
 
-When deleting a project, first check for existing tasks and prevent deletion if any exist.
+Или наоборот:
 
-The AI can implement either approach effectively when given clear direction. For cascade deletes, it might generate foreign key constraints with ON DELETE CASCADE.  For application-level handling, it could produce code that queries for related records before permitting deletion. The key lies in explicitly stating your data-integrity requirements rather than assuming the AI will infer the appropriate behavior for your specific domain.
+При удалении проекта сначала проверь наличие задач и запрети удаление, если они есть.
 
-## Full Stack Integration: Marrying Frontend and Backend
-Now that you’ve built both your frontend and backend with AI help, the next challenge is integrating them into a seamless web application. This involves making sure that the API endpoints are called correctly from the frontend, the data flows properly, and the overall system is coherent.
+AI может эффективно реализовать любой подход, если дать ему четкое ТЗ. Для каскадов он может сгенерить ограничения внешнего ключа с `ON DELETE CASCADE`. Для обработки на уровне приложения — код, который проверяет наличие связанных записей перед удалением. Ключ к успеху — явно проговаривать требования к целостности данных, а не надеяться, что AI сам догадается, как принято в твоем домене.
 
-## Aligning Frontend and Backend Contracts
-This is crucial: the frontend expects to receive data in a certain shape, so what the backend sends should match that expectation. If you let AI work on each end in isolation, small mismatches can occur (maybe the backend returns { success: true, data: [...] }, but the frontend expects to receive the array directly). To avoid this, you can explicitly instruct the AI on the response format to use when coding both sides. Alternately, once both are done, test an end-to-end call: for instance, open the web app and see if the list loads. If it doesn’t, check the browser console against the server logs.
+## Full Stack интеграция: Женим Фронт с Бэком
+Теперь, когда ты с помощью AI собрал и фронтенд, и бэкенд, следующий челлендж — сшить их в бесшовное веб-приложение. Нужно убедиться, что эндпоинты API дергаются с фронта правильно, данные текут куда надо, и система в целом не разваливается.
 
-I often use the AI to adjust one side to match the other:
+## Выравнивание контрактов Фронтенда и Бэкенда
+Это критично: фронтенд ожидает получить данные в определенной форме, поэтому то, что отправляет бэкенд, должно соответствовать этим ожиданиям. Если позволишь AI пилить каждую часть в изоляции, начнутся мелкие нестыковки (например, бэк возвращает `{ success: true, data: [...] }`, а фронт ждет массив напрямую). Чтобы избежать этого факапа, можешь явно инструктировать AI о формате ответа при кодинге обеих сторон. Либо, когда всё готово, проведи end-to-end тест: открой веб-приложение и посмотри, грузится ли список. Если нет — сверяй консоль браузера с логами сервера.
 
-If the backend returns slightly different JSON key names than what the frontend expects and you notice a bug, you can say to the AI (on either side):
+Я часто использую AI, чтобы подогнать одну сторону под другую:
 
-Modify the code to use ‘tasks’ (plural) instead of ‘taskList’ (singular) in the JSON.
+Если бэкенд возвращает JSON с ключами, которые немного отличаются от того, что ждет фронт, и ты поймал баг, скажи AI (для любой из сторон):
 
-If the frontend is sending form data as form-encoded but the backend expects JSON, you can ask the AI to convert that, maybe by using JSON.stringify on the frontend or adding body-parser on the backend.
+Измени код, чтобы использовать ‘tasks’ (множественное число) вместо ‘taskList’ (единственное) в JSON.
 
-## Real-Time Collaboration with AI
-AI-augmented IDEs that hold the context of the whole project, like Cline or Cursor, can be especially helpful during this integration phase. You could open the frontend and backend files side by side in your IDE-based tool and prompt:
+Если фронт шлет данные формы как `form-encoded`, а бэк ждет JSON, попроси AI конвертировать это — например, через `JSON.stringify` на фронте или добавив `body-parser` на бэке.
 
-Ensure that the frontend fetch from /api/to-dos matches the Express route’s expected request/response. Fix any discrepancies.
+## Коллаборация с AI в реальном времени
+IDE с поддержкой AI, которые держат контекст всего проекта (типа Cline или Cursor), особенно полезны на этапе интеграции. Ты можешь открыть файлы фронта и бэка рядом в редакторе и запромптить:
 
-The AI might then harmonize the content (like adding await response.json() in the frontend if it was missing or adjusting the JSON structure).
+Убедись, что фетч на фронтенде из /api/to-dos совпадает с ожидаемым запросом/ответом в маршруте Express. Исправь любые расхождения.
 
-## State management and sync
-In a full stack app, consider implementing things like loading states and error handling on the frontend for failed API calls for a professional result. You might use prompts like:
+AI синхронизирует контент (например, добавит `await response.json()` на фронте, если его не было, или поправит структуру JSON).
 
-Add loading indicators: when the React component is fetching tasks, show a ‘Loading...’ text until data is loaded.
+## Управление состоянием и синхронизация
+В фуллстек-приложении, чтобы результат выглядел профессионально, не забудь про состояния загрузки и обработку ошибок на фронте при фейлах API. Используй промпты вроде:
 
-Or:
+Добавь индикаторы загрузки: когда React-компонент фечит задачи, показывай текст ‘Загрузка...’, пока данные не придут.
 
-Handle errors: if the API call fails (non-200 response), show an error message on the UI.
+Или:
 
-It will add the isLoading state and conditional rendering or implement a try/catch around fetch to catch errors and display a message. This kind of polish makes your app feel robust.
+Обработай ошибки: если вызов API падает (ответ не 200), покажи сообщение об ошибке в UI.
 
-## WebSockets and advanced integrations
-If your app requires real-time updates (like using WebSockets or SSE), you might prompt something like this:
+Он добавит стейт `isLoading` и условный рендеринг, или обернет фетч в `try/catch`, чтобы поймать ошибки и вывести месседж. Такой лоск делает твое приложение надежным и приятным в использовании.
 
-Set up a WebSocket using Socket.io. When a new task is created on the server, broadcast it to all connected clients. Modify the frontend to listen for new tasks and add them to the list in real time.
+## WebSockets и продвинутые интеграции
+Если твоему приложению нужен реалтайм (через WebSockets или SSE), промпт может выглядеть так:
 
-This is complex, but an AI might generate the server-side Socket.io setup (like adding io.on('connection', ...) and emitting an event upon creation of a new task), as well as client-side code to connect and listen for that event. You would need to integrate this carefully, but it’s quite astonishing that these descriptions can lead to working real-time code. If it doesn’t work perfectly off the bat, iterative prompting and testing can get it there.
+Настрой WebSocket с использованием Socket.io. Когда на сервере создается новая задача, транслируй её всем подключенным клиентам. Модифицируй фронтенд, чтобы он слушал новые задачи и добавлял их в список в реальном времени.
 
-## Example: full stack flow with AI
-To illustrate, let’s imagine you’re building a simple contact-manager web app:
+Это сложно, но AI может сгенерить настройку Socket.io на сервере (типа добавления `io.on('connection', ...)` и эмита события при создании задачи), а также клиентский код для подключения и прослушивания. Интегрировать это придется аккуратно, но сам факт, что описание задачи превращается в рабочий реалтайм-код — это просто отвал башки. Если с первого раза не взлетит идеально — итеративные промпты и тесты допинают его до результата.
 
-You scaffold a React frontend and a Node/Express backend, as you did earlier in the chapter.
+## Пример: Full Stack поток с AI
+Для иллюстрации, представим, что ты пилишь простой веб-менеджер контактов:
 
-First, for the frontend, prompt for a ContactList and a ContactForm component. Then prompt to add API calls:
+Ты скаффолдишь React-фронтенд и Node/Express-бэкенд, как делал ранее.
 
-In ContactList, fetch contacts from /api/contacts on mount.
+Сначала для фронта просишь компоненты `ContactList` и `ContactForm`. Затем просишь добавить вызовы API:
 
-In ContactForm, on submit, send a POST to /api/contacts with the form data, then update the list of contacts on success.
+В ContactList запрашивай контакты с /api/contacts при маунте.
 
-For the backend, you may want to use an in-memory array or integrate a database first. Then prompt for Express routes GET /api/contacts (to return a list) and POST /api/contacts (to add a contact to the database or memory).
+В ContactForm при сабмите отправляй POST на /api/contacts с данными формы, затем обновляй список контактов при успехе.
 
-Try adding a contact via the UI. If it shows up in the list, great. If not, debug. Maybe the POST route didn’t return the new contact properly or the form code didn’t refresh the list. Identify the gap and prompt the AI to fix it:
+Для бэкенда можешь сначала использовать массив в памяти или сразу прикрутить базу. Потом просишь роуты Express: `GET /api/contacts` (вернуть список) и `POST /api/contacts` (добавить контакт в базу или память).
 
-After adding a contact, the backend should return the new contact object in the response, and the frontend should append it to the list without requiring a full reload.
+Попробуй добавить контакт через UI. Если появился в списке — красавчик. Если нет — дебажь. Может, POST-роут не вернул новый контакт правильно, или код формы не обновил список. Найди дыру и попроси AI пофиксить:
 
-This might lead the AI to adjust the backend response and frontend state logic to push the new contact (maybe using React state update).
+После добавления контакта бэкенд должен возвращать объект нового контакта в ответе, а фронтенд должен добавлять его в список без полной перезагрузки страницы.
 
-Implement edit and delete functions similarly, each time letting AI handle the routine parts and focusing your input on what the feature should do.
+Это приведет к тому, что AI поправит ответ бэка и логику стейта на фронте, чтобы пушить новый контакт (возможно, через апдейт React-стейта).
 
-Doing all this manually could easily amount to a week or two of work for a junior dev but could be done in a day or two with an AI codeveloper, given that a lot of template code and wiring is automated.
+Реализуй функции редактирования и удаления аналогично, каждый раз отдавая AI рутину и фокусируя свой ввод на том, что фича *должна делать*.
 
-## Optimizing AI-human collaboration in full stack development
-When working through an entire stack, it’s useful to establish a productive rhythm with your AI assistant. Here are some strategies to optimize your collaboration:
+Вручную на это легко ушла бы неделя-две работы джуна, но с AI-кодевелопером можно управиться за день-два, учитывая, что куча шаблонного кода и "проводов" автоматизирована.
 
-Use the AI for boilerplate; write any custom logic yourself
-Identify which parts of the code are mundane and which are the unique core logic. Let the AI generate a CRUD API or a standard component—but if there’s a particularly tricky piece of logic, maybe a proprietary algorithm or a specific business rule that is easier to implement directly, do that part manually, then ask the AI to review or test it. Think of it as delegating repetitive tasks to the AI, while you handle the novel ones.
+## Оптимизация сотрудничества человека и AI в фуллстек-разработке
+Когда работаешь над всем стеком, полезно поймать продуктивный ритм с твоим AI-ассистентом. Вот стратегии для оптимизации:
 
-## Use AI to tackle your to-do list one item at a time
-As you develop, keep track of tasks (like features to add and bugs to fix). Then explain each task to the AI, one by one, and let it propose a solution. For example, let’s say you have a note that reads “Implement password hashing on user registration.” Try a prompt like this:
+**Используй AI для бойлерплейта; кастомную логику пиши сам**
+Определи, какие части кода — скучная рутина, а какие — уникальное ядро. Пусть AI генерит CRUD API или стандартные компоненты. Но если есть хитрая логика, проприетарный алгоритм или специфическое бизнес-правило, которое проще реализовать самому — пиши руками, а потом проси AI проверить или протестировать. Думай об этом как о делегировании: AI тащит повторяющиеся задачи, ты занимаешься новыми.
 
-Add password hashing using bcrypt in the POST /api/register route before saving the user.
+## Используй AI, чтобы разгребать бэклог по одной задаче за раз
+В процессе разработки веди список задач (фичи, баги). Потом объясняй каждую задачу AI, по одной, и давай ему предлагать решение. Например, у тебя записано: «Реализовать хеширование паролей при регистрации». Попробуй такой промпт:
 
-This targeted, systematic approach helps ensure you don’t forget anything.
+Добавь хеширование паролей через bcrypt в роуте POST /api/register перед сохранением пользователя.
 
-## Prompt AI to improve code quality as you go
-After achieving functionality, you might prompt, “Refactor this code for better readability” or “Optimize this function.” The AI can often make the code cleaner or suggest performance improvements, like an assistant doing a second pass for polish under your supervision. Be sure to verify that any changes still pass your tests.
+Такой прицельный, систематический подход гарантирует, что ты ничего не забудешь.
 
-## Use AI for cross-checking
-If you’re uncertain about your design approach, ask the AI:
+## Промпти AI улучшать качество кода по ходу дела
+Когда функционал готов, можно попросить: «Отрефактори этот код для лучшей читаемости» или «Оптимизируй эту функцию». AI часто может сделать код чище или предложить улучшения производительности, как ассистент, делающий второй проход для лоска под твоим присмотром. Только убедись, что изменения всё ещё проходят твои тесты.
 
-Is using an array to store contacts in memory fine or should I use a database? What are the pros and cons?
+## Используй AI для перекрестной проверки
+Если сомневаешься в архитектурном решении, спроси AI:
 
-While you likely know the answer (use a database for persistence), it’s like bouncing ideas off a colleague. Sometimes the AI might mention a consideration you hadn’t thought of:
+Нормально ли использовать массив для хранения контактов в памяти или стоит взять базу данных? Каковы плюсы и минусы?
 
-If there are multiple server instances, an in-memory store won’t sync across them.
+Хотя ты наверняка знаешь ответ (юзай базу для персистентности), это как перетереть с коллегой. Иногда AI может подкинуть соображение, о котором ты не подумал:
 
-## Use AI to coordinate with your team
-If you’re working in a team, not everyone may be using the AI directly. In that case, make sure to ask the AI to document what you did. Also, it’s good to communicate your approach to the team: “I used an AI to generate these controllers quickly. I’ve checked them, but keep an eye out for any unconventional patterns.” Encourage a code-review culture in which everyone reviews AI-written code just like they would any other code to catch any quirks.
+Если будет несколько инстансов сервера, хранилище в памяти не будет синхронизироваться между ними.
 
-Real-world teams that adopt AI (like those at Snyk) report that it can boost productivity, but they also stress keeping a human in the loop for validation. In one 2024 survey by GitHub, 97% of developers reported using AI coding tools at work in some capacity.
+## Используй AI для координации с командой
+Если работаешь в команде, не все могут использовать AI напрямую. В таком случае проси AI документировать то, что ты сделал. Также полезно сообщать команде о своем подходе: «Я использовал AI, чтобы быстро накидать эти контроллеры. Я их проверил, но поглядывайте на предмет нестандартных паттернов». Поощряй культуру код-ревью, где все проверяют написанный AI код так же, как и любой другой, чтобы отловить любые странности.
 
-## Testing and Validation for AI-Generated Web Applications
-After building your web app with AI help, test thoroughly to ensure everything works as intended and to catch issues that you or the AI might have introduced. Here’s how you can approach testing in this AI-assisted context:
+Реальные команды, внедряющие AI (как в Snyk), сообщают о росте продуктивности, но подчеркивают необходимость валидации человеком. В опросе GitHub 2024 года 97% разработчиков сообщили, что используют инструменты AI-кодинга в работе в том или ином виде.
 
-## Unit tests
-For backend logic, write unit tests for critical functions (like a function that calculates something or validates input). If the AI wrote the function, writing a test for it can reveal any hidden bugs. You can even have the AI generate these tests, as mentioned. Be cautious, though: AI-generated tests are sometimes trivial or assume an implementation, so you may need to guide it to test edge cases:
+## Тестирование и Валидация Веб-приложений, созданных AI
+После сборки веб-приложения с помощью AI тестируй тщательно, чтобы убедиться, что всё работает как задумано, и отловить косяки, которые могли внести ты или AI. Вот как можно подойти к тестированию в контексте AI-ассистентов:
 
-Write tests for the password strength function, including edge cases like empty password, very long password, password with special chars, etc.
+## Юнит-тесты
+Для бэкенд-логики пиши юнит-тесты на критические функции (расчеты, валидация ввода). Если функцию писал AI, написание теста для неё может вскрыть скрытые баги. Можно даже заставить AI сгенерировать эти тесты. Но будь осторожен: тесты от AI иногда бывают тривиальными или подгоняются под реализацию, так что направляй его на проверку эдж-кейсов:
 
-## Integration tests
-Test the API endpoints with something like Supertest (for Node) or direct HTTP calls. Check that each endpoint returns the expected results. AI can help you scaffold these:
+Напиши тесты для функции проверки сложности пароля, включая эдж-кейсы: пустой пароль, очень длинный пароль, пароль со спецсимволами и т.д.
 
-Write integration tests for the /api/to-dos endpoints using Jest and Supertest.
+## Интеграционные тесты
+Проверь эндпоинты API чем-то вроде Supertest (для Node) или прямыми HTTP-вызовами. Убедись, что каждый эндпоинт возвращает ожидаемое. AI поможет набросать скелет:
 
-It might produce tests that start the app, hit the endpoints, and assert on responses.
+Напиши интеграционные тесты для эндпоинтов /api/to-dos используя Jest и Supertest.
 
-## Frontend tests
-Web UI testing can be done with tools like Jest (for component logic) and Cypress or Playwright for end-to-end UI tests. You can certainly ask AI to generate a Cypress test scenario:
+Он выдаст тесты, которые запускают приложение, долбятся в эндпоинты и проверяют ответы.
 
-Write a Cypress test that loads the app, adds a new to-do via the form, and checks that it appears in the list.
+## Фронтенд-тесты
+Тестирование веб-интерфейса можно делать инструментами типа Jest (для логики компонентов) и Cypress или Playwright для end-to-end тестов UI. Ты вполне можешь попросить AI сгенерировать сценарий теста Cypress:
 
-You’ll get a test script, which you can run. This is quite powerful—you quickly get end-to-end test coverage by leveraging the AI to script user interactions.
+Напиши тест Cypress, который загружает приложение, добавляет новую задачу через форму и проверяет, что она появилась в списке.
 
-## Manual tests
-Whatever automated tests you run, always do some manual exploratory testing, too. Click around the web app yourself (or have QA do it, if you’re working in a team). The AI might not anticipate every real-world scenario: for example, maybe using the browser Back button breaks some state, or a particular sequence of actions causes a glitch. As you find bugs, fix them or ask the AI to help fix them. Manual testing is also important for UI/UX judgment—does the app feel good to use? Are there any awkward flows? The AI won’t know how to judge these subjective UX issues, so human feedback is key.
+Получишь скрипт теста, который можно запускать. Это мощная штука — ты быстро получаешь покрытие end-to-end тестами, используя AI для скриптования пользовательских действий.
 
-## Code review
-If you’re working with others, have them review the AI-generated code. Fresh eyes can catch things you might have glossed over—they might spot a security oversight or simply suggest a more idiomatic way to write something. Teams using AI often maintain normal code-review processes, just with more focus on reviewing for subtle bugs or security issues that an AI might inadvertently introduce.
+## Ручное тестирование
+Какие бы автотесты ты ни гонял, всегда делай ручное исследовательское тестирование. Потыкай приложение сам (или отдай QA, если ты в команде). AI может не предусмотреть каждый сценарий реального мира: например, кнопка "Назад" в браузере ломает какой-то стейт, или определенная последовательность действий вызывает глюк. Находишь баги — фикси сам или проси AI помочь. Ручное тестирование также важно для оценки UI/UX — приятно ли пользоваться приложением? Нет ли кривых флоу? AI не умеет оценивать эти субъективные UX-моменты, тут нужен фидбек от человека.
 
-## Security audit
-Chapter 8 will dive into security, but even at development time, it’s worth scanning your code for known vulnerability patterns.  There are automated tools you can run, like linters and Static Application Security Testing (SAST) tools, or you can prompt the AI:
+## Код-ревью
+Если работаешь с другими, пусть они ревьювят код от AI. Свежий взгляд поймает то, что ты мог пропустить — дыру в безопасности или просто подскажет более идиоматичный способ написания. Команды с AI часто сохраняют обычные процессы ревью, просто с большим фокусом на поиск тонких багов или проблем безопасности, которые AI мог случайно внести.
 
-Review the Express app code and list any potential security vulnerabilities or best practice violations.
+## Аудит безопасности
+Глава 8 углубится в безопасность, но даже на этапе разработки стоит сканить код на известные паттерны уязвимостей. Есть автоматические тулзы (линтеры, SAST), или можно запромптить AI:
 
-The AI might flag some surprising things, like “You are not sanitizing user input here” or “You should set up CORS properly.” Use that as a checklist for hardening the app.
+Проверь код Express-приложения и перечисли потенциальные уязвимости безопасности или нарушения лучших практик.
 
-One interesting effect of using AI is that you may write tests you wouldn’t have otherwise, because the AI makes it so easy to create them. This can actually lead to more robust code in the end. If you adopt a practice of generating tests immediately after generating features (essentially AI-assisted test-driven development, or at least post hoc tests), you ensure that the rapid development doesn’t compromise quality. Think of it like this: since the AI saved you time writing code, invest some of that saved time into writing and running tests.
+AI может подсветить удивительные вещи, типа «Ты тут не санитайзишь пользовательский ввод» или «Тебе стоит нормально настроить CORS». Используй это как чек-лист для "закаливания" приложения.
 
-AI can suggest insecure code if the user isn’t careful. For example, earlier AI versions might generate SQL queries that are vulnerable to injection attacks if not specifically prompted to avoid that. By testing and reviewing, you catch these issues. One study found that developers using AI assistance tended to be overconfident in their code’s security, even when it was worse than it would’ve been if written manually.
+Интересный побочный эффект использования AI: ты можешь начать писать тесты, которые раньше бы не писал, просто потому что AI делает их создание элементарным. Это реально ведет к более надежному коду в итоге. Если возьмешь за правило генерить тесты сразу после фич (по сути, AI-assisted TDD или хотя бы тесты постфактум), ты гарантируешь, что быстрая разработка не убьет качество. Думай об этом так: раз AI сэкономил тебе время на написании кода, инвестируй часть этого времени в написание и прогон тестов.
 
-Never skip validation just because an AI wrote the code. Assume it can have bugs, just like any human-written code.
+AI может предложить небезопасный код, если юзер не бдит. Например, ранние версии AI могли генерить SQL-запросы, уязвимые к инъекциям, если их специально не просили этого избежать. Тестируя и ревьювя, ты ловишь эти проблемы. Одно исследование показало, что разрабы с AI-ассистентами склонны быть самоуверенными насчет безопасности своего кода, даже когда он хуже написанного вручную.
 
-## Examples of Successful AI-Built Web Projects
-Let’s highlight a couple of examples (composites drawn from various reports) where AI assistance played a significant role in delivering real web applications.
+Никогда не забивай на валидацию только потому, что код написал AI. Считай, что там могут быть баги, как и в любом коде, написанном человеком.
 
-## Ecommerce site by a solo developer
-A solo developer wanted to create a small ecommerce web app to sell custom T-shirts but had limited time. He used GPT, through an IDE extension, to build the entire stack. He prompted the AI to generate a React frontend with product listings, a cart, and checkout pages, as well as a Node.js backend with endpoints for products and orders. He used Stripe for payments, integrating it by asking the AI to help with Stripe’s API. After working on it in the evenings for two weeks, he had a functioning site.
+## Примеры успешных веб-проектов, созданных с AI
+Давай подсветим пару примеров (сборные образы из разных отчетов), где помощь AI сыграла ключевую роль в релизе реальных веб-приложений.
 
-This developer reported that AI had done probably 70% of the coding, especially the repetitive UI parts and form handling, while he focused on configuring Stripe correctly and fine-tuning the UI for branding. In the end, customers could browse products, add them to the cart, and purchase them—all in a system built largely via vibe coding. It also highlights that external service integration (like Stripe) is feasible with AI guidance, as long as documentation is available for the model to draw from or you provide it.
+## E-commerce сайт от соло-разработчика
+Один соло-разраб хотел запилить небольшой магазин для продажи кастомных футболок, но был ограничен во времени. Он использовал GPT через расширение в IDE, чтобы построить весь стек. Он промптил AI генерировать React-фронтенд со списком товаров, корзиной и страницами чекаута, а также Node.js бэкенд с эндпоинтами для продуктов и заказов. Для платежей взял Stripe, интегрировав его с помощью подсказок AI по Stripe API. Поработав вечерами две недели, он получил рабочий сайт.
 
-## Internal company dashboard
-A product manager with some coding skills used an AI pair programmer to create an internal analytics dashboard for her team. Normally, she would have had to wait for engineering resources, but using a tool like Replit’s Ghostwriter or GitHub Copilot in a web project, she managed to build a basic web app herself. The AI helped with setting up a simple Flask backend to query their database (with safe read-only credentials) and a Vue.js frontend to display graphs (using a charting library). She described what each chart should show (“total sign-ups over time,” “active users by region”), and the AI wrote the SQL queries and chart code.
+Этот разраб сообщил, что AI сделал, наверное, 70% кодинга, особенно повторяющиеся части UI и обработку форм, пока он сам фокусировался на правильной настройке Stripe и доводке UI под бренд. В итоге клиенты могли смотреть товары, кидать в корзину и покупать — и всё это в системе, построенной по большей части через вайб-кодинг. Это также показывает, что интеграция внешних сервисов (как Stripe) вполне реальна с руководством AI, если доступна документация или ты скармливаешь её модели.
 
-The whole process took a couple of weeks of tinkering and testing, but eventually she delivered a working dashboard. The code quality wasn’t enterprise grade, but since it was internal, it was fine. More importantly, she empowered her team with a tool in a fraction of the time. This example illustrates how AI tools can enable nonspecialist programmers to produce useful web apps, unblocking tasks that might otherwise sit in a backlog. It’s an example of the “unbundling of the programmer” that I’ll discuss in Chapter 10, which is all about how individuals can create personal or team-specific software more easily now.
+## Внутренний дашборд компании
+Продакт-менеджер с навыками кодинга использовала AI-парного программиста для создания внутреннего аналитического дашборда для своей команды. Обычно ей пришлось бы ждать ресурсы инженеров, но с инструментом типа Ghostwriter от Replit или GitHub Copilot она смогла собрать базовое веб-приложение сама. AI помог настроить простой бэкенд на Flask для запросов к базе (с безопасными правами только на чтение) и фронтенд на Vue.js для отображения графиков (используя библиотеку чартов). Она описывала, что должен показывать каждый график («всего регистраций по времени», «активные юзеры по регионам»), а AI писал SQL-запросы и код графиков.
 
-## Startup minimum viable product (MVP)
-A small startup (just two cofounders: one business, one technical) needed an MVP web application to show to investors. The technical cofounder used vibe coding extensively to build an MVP in record time. Using an AI assistant, he scaffolded a modern web app using Next.js for the SSR React frontend and a simple Node API. He leveraged AI to implement features like social login (the AI wrote the OAuth flows), image uploads (the AI integrated with a cloud-storage API), and an AI-based feature within the product itself. They even used the AI to help integrate an NLP model from an API. In a few months, one developer achieved what might normally take a small team four to six months. The result was a somewhat hacky but functioning product that they could demo, and they could even onboard beta users onto the platform.
+Весь процесс занял пару недель ковыряния и тестов, но в итоге она выкатила рабочий дашборд. Качество кода было не энтерпрайз-уровня, но для внутреннего пользования — сойдет. Что важнее, она дала команде инструмент за долю времени. Этот пример иллюстрирует, как AI-тулзы позволяют неспециалистам пилить полезные веб-приложения, разблокируя задачи, которые иначе пылились бы в бэклоге. Это пример «разбандлинга программиста» (unbundling of the programmer), о котором я расскажу в Главе 10 — о том, как люди могут создавать личный или командный софт гораздо проще.
+## MVP стартапа (Минимально жизнеспособный продукт)
 
-When the cofounders later hired more devs to polish the product, the new devs found the AI-written code to be mostly understandable, though they did refactor significant portions for scalability. This underlines that AI can get you to the first stage quickly, but you might need to invest in quality as you move to the next stages.
+Один маленький стартап (всего два отца-основателя: один про бизнес, второй — технарь) нуждался в MVP веб-приложения, чтобы пустить пыль в глаза инвесторам. Технарь врубил режим вайб-кодинга на полную катушку, чтобы запилить MVP в рекордные сроки. С помощью ИИ-ассистента он накидал скелет современного веб-приложения на Next.js (для SSR React фронтенда) и простенький Node API. Он запряг ИИ пилить такие фичи, как вход через соцсети (ИИ сам написал флоу OAuth), загрузку картинок (ИИ подружился с API облачного хранилища) и даже какую-то ИИ-фичу внутри самого продукта. Они даже использовали ИИ, чтобы прикрутить NLP-модель через сторонний API. За пару месяцев один разраб сделал то, на что у небольшой команды обычно уходит от четырех до шести месяцев. Результат получился, конечно, костыльным, но рабочим — его можно было демонить и даже загонять на платформу бета-юзеров.
 
-These stories, while anecdotal, align with emerging patterns in the industry. In web development specifically, which often involves wiring many components together, the productivity boost is very tangible. Microsoft and others reported studies finding that developers with AI could complete tasks significantly faster than those without.
+Когда позже фаундеры наняли еще разрабов, чтобы навести лоск на продукт, новички обнаружили, что код, написанный нейронкой, в принципе понятен, хотя им и пришлось переписать (отрефакторить) значительные куски ради масштабируемости. Это подчеркивает суть: ИИ может быстро доставить тебя на первый уровень, но чтобы двигаться дальше, придется вложиться в качество.
 
-However, there have also been cautionary tales. For instance, a developer might deploy an AI-generated web app with a security flaw because they don’t fully understand the code. This risk reinforces why testing and review are crucial.
+Эти истории, хоть и звучат как байки из курилки, вполне укладываются в новые тренды индустрии. Особенно в веб-разработке, где часто нужно просто скручивать кучу компонентов вместе, буст производительности очень ощутим. Microsoft и прочие ребята отчитываются об исследованиях, где разрабы с ИИ закрывали таски значительно быстрее тех, кто кодил по-старинке.
 
-In conclusion, building web applications with AI assistance is becoming a mainstream approach. It doesn’t remove the need for skilled developers; rather, it augments them. The developers still plan the architecture, ensure correctness, and handle the complex or novel aspects of the code, while the AI handles the repetitive boilerplate code that glues everything together. The end-to-end workflow we walked through—from scaffolding to frontend to backend to testing—demonstrates that practically every step of web development can be accelerated with AI, as long as you apply your human judgment and expertise along the way.
+Однако есть и истории про эпичные провалы. Например, разраб может выкатить в прод сгенерированное ИИ приложение с дырой в безопасности просто потому, что ни хрена не понимает, что там внутри написано. Этот риск лишний раз напоминает, почему тестирование и код-ревью — это святое.
 
-## Summary and Next Steps
-In this chapter, you’ve seen how vibe coding extends to full-scale web application development. By treating the AI as an always available pair programmer, you can tackle frontend and backend tasks in parallel, generate components and APIs from natural descriptions, and iteratively refine a prototype application to production quality. The keys to success include clearly communicating your intent (so the AI knows what you want at each step), carefully verifying (to catch issues in the AI output), and leveraging the AI not just to generate code but for things like brainstorming schema designs and writing tests.
+Короче говоря, создание веб-приложений с помощью ИИ становится мейнстримом. Это не отменяет нужду в скилловых разрабах, скорее наоборот — прокачивает их. Разрабы по-прежнему планируют архитектуру, следят за корректностью и разгребают сложные или нестандартные куски кода, пока ИИ берет на себя унылый бойлерплейт, который склеивает всё это воедино. Тот сквозной воркфлоу, который мы разобрали — от скаффолдинга до фронта, бэка и тестов — доказывает, что практически каждый этап веб-разработки можно ускорить с помощью ИИ, если не отключать голову и применять свой опыт.
 
-This chapter also explored how a developer can effectively be a full stack engineer, augmented by AI bridging gaps in their knowledge by suggesting code in areas they are less familiar with. This greatly reduces development time for common features and democratizes development in some ways, enabling people to create custom web solutions without large teams (a theme I’ll revisit in Chapter 10).
+## Итоги и следующие шаги
 
-AI doesn’t replace understanding the requirements or ensuring quality; it accelerates execution.
+В этой главе вы увидели, как вайб-кодинг масштабируется до разработки полноценных веб-приложений. Относясь к ИИ как к всегда доступному напарнику, вы можете параллельно раскидывать задачи по фронтенду и бэкенду, генерить компоненты и API из обычных описаний и итеративно доводить прототип до продакшн-качества. Ключи к успеху: четко доносить свои хотелки (чтобы ИИ понимал контекст на каждом шаге), внимательно проверять результат (чтобы ловить баги в выхлопе нейронки) и юзать ИИ не только для генерации кода, но и для таких вещей, как брейншторминг схем БД и написание тестов.
 
-Now that your web application is up and running, the next concern is making sure it is secure, reliable, and maintainable. Chapter 8 dives into the challenges of security and reliability in AI-generated codebases, identifying common vulnerabilities that might slip in, how to audit for and fix them, and best practices (like the ones we’ve started applying here with tests and reviews) to ensure that moving fast with AI doesn’t break things. Essentially, we’ll shift from building to hardening—making sure your vibe-coded software stands up to real-world conditions and threats.
+Эта глава также показала, как разработчик может эффективно стать фуллстек-инженером, усиленным ИИ, который затыкает дыры в его знаниях, подсказывая код в тех областях, где он плавает. Это дико сокращает время разработки типовых фич и в каком-то смысле демократизирует процесс, позволяя людям пилить кастомные веб-решения без огромных команд (к этой теме я еще вернусь в Главе 10).
+
+ИИ не заменяет понимание требований и контроль качества; он просто ускоряет исполнение.
+
+Теперь, когда ваше веб-приложение запущено и шуршит вентиляторами, следующая головная боль — сделать его безопасным, надежным и поддерживаемым. Глава 8 погружает в дебри безопасности и надежности кодовых баз, сгенерированных ИИ. Мы разберем типичные уязвимости, которые могут проскользнуть незамеченными, как их аудить и фиксить, и какие лучшие практики (вроде тех, что мы уже начали применять с тестами и ревью) использовать, чтобы быстрая езда с ИИ не привела к аварии. По сути, мы перейдем от строительства к укреплению позиций — сделаем так, чтобы ваш вайб-код выдержал столкновение с суровой реальностью и угрозами.

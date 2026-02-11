@@ -1,8 +1,7 @@
-# About the Author
+# Об авторе
+## Об авторе
+Эдди Османи — это не какой-то хрен с горы, а серьезный инженерный лид в Google. Он там отвечает за то, чтобы разрабам жилось не так больно (Developer Experience), за перформанс и за всякие навороченные тулзы с прикрученным ИИ. У мужика за плечами четвертак (25 лет!) стажа в индустрии — он пилил веб-технологии и накатал целую стопку книг про то, как писать код по уму и соблюдать инженерные бест-практис.
 
-## About the Author
-Addy Osmani is a senior engineering leader at Google, where he works on developer experience, performance, and AI-powered software development tools. He has 25 years of industry experience building web technologies and has authored multiple books on software engineering best practices.
+Эдди плотно угорел по теме ИИ-инструментов. Он лично щупал, тестил и гонял в хвост и в гриву весь этот новомодный зоопарк: Cursor, Cline, Copilot, Bolt, v0, Lovable и Claude Code. Его телеги про разработку с ИИ-ассистентами уже вправили мозги тысячам кодеров, а его руководство в команде Google Chrome реально определило будущее веб-производительности и то, как мы теперь внедряем нейронки в свои рабочие процессы.
 
-Addy has worked extensively with AI-driven developer tools, testing and evaluating emerging platforms like Cursor, Cline, Copilot, Bolt, v0, Lovable, and Claude Code. His writing on AI-assisted software development has influenced thousands of developers, and his leadership at Google Chrome has helped shape the future of web performance and AI-augmented developer workflows.
-
-This book distills his deep expertise in software engineering and his hands-on experience with AI-powered coding assistants, offering developers practical strategies to integrate AI into their daily workflow and adapt to the rapidly changing landscape of software development.
+Эта книга — чистейший концентрат его хардкорной инженерной экспертизы и реального опыта работы ручками с ИИ-кодерами. Здесь ты найдешь конкретные стратегии, как встроить ИИ в свою повседневную рутину, чтобы выжить и адаптироваться, пока ландшафт разработки меняется быстрее, чем падает прод в пятницу вечером.
