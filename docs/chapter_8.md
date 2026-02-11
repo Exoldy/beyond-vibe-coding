@@ -31,7 +31,7 @@ This is susceptible to injection attacks. An AI might produce this if you don’
 
 Modify this query to use parameters to prevent SQL injection.
 ## Cross-site scripting (XSS) in web apps
-When generating web code, AI tools don’t always automatically escape user input in outputs. For example, your AI might produce a templating snippet that directly inserts {{comment.text}} into HTML without escaping, which could allow a malicious script placed in a comment to run. If using frameworks, AIs often escape by default, but if they’re handling raw HTML construction, be careful. Implement output encoding or sanitization routines. You can prompt the AI:
+When generating web code, AI tools don’t always automatically escape user input in outputs. For example, your AI might produce a templating snippet that directly inserts `&#123;&#123;comment.text&#125;&#125;` into HTML without escaping, which could allow a malicious script placed in a comment to run. If using frameworks, AIs often escape by default, but if they’re handling raw HTML construction, be careful. Implement output encoding or sanitization routines. You can prompt the AI:
 
 Add sanitization for user inputs to prevent XSS.
 Many modern frameworks have built-in mechanisms, so ensure that the AI uses them, like innerText versus innerHTML in Document Object Model (DOM) manipulation.
@@ -188,7 +188,7 @@ Running penetration-testing tools like OWASP’s ZAP against your AI-made web ap
 If you’re building an API, tools like Postman or custom scripts can try sending ill-formed data to see how the system behaves: does it throw a 500 error or handle errors gracefully?
 
 ## Add Security-Focused Unit Tests
-For critical pieces of code, write tests that assert security properties. For instance, you might test that your login rate limiter triggers after X bad attempts, or that certain inputs (like "<script>alert(1)</script>") come out escaped in the response. To test that unauthorized users cannot access a protected resource, simulate both authorized and unauthorized calls and ensure the app behaves correctly.
+For critical pieces of code, write tests that assert security properties. For instance, you might test that your login rate limiter triggers after X bad attempts, or that certain inputs (like `<script>alert(1)</script>`) come out escaped in the response. To test that unauthorized users cannot access a protected resource, simulate both authorized and unauthorized calls and ensure the app behaves correctly.
 
 You can ask the AI to help generate these tests:
 

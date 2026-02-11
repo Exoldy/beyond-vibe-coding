@@ -11,7 +11,7 @@ hero:
       link: /Preface
     - theme: alt
       text: About Author
-      link: /about
+      link: /About_the_Author
 
 features:
   - title: Vibe Coding

@@ -240,17 +240,14 @@ Even if they don’t go all the way to full natural language, AI’s influence w
 
 Another possibility is hybrid languages that blend natural language and code. For example, a future language might allow code like this:
 
+```java
 // Create a list of customer names from the orders, excluding duplicates
-
 // and sorted alphabetically, then print it.
-
 list<Customer> customers = orders -> map(order -> order.customerName)
-
                                    -> unique()
-
                                    -> sort()
-
                                    -> print();
+```
 In this pseudo example, the comment in English is almost executable by the AI. Maybe, in the actual environment, you wouldn’t even need the lambda syntax; the AI could infer from the comment what you intend and fill it out. Or maybe the language would have constructs that look like English but are formal enough for the AI to parse. Think of it as an evolution of comments and pseudocode into actual code, with AI interpreting the intent behind them.
 
 Coding is already becoming more conversational. Instead of writing a complete program, you start a dialogue with the AI:

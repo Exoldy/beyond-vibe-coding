@@ -90,7 +90,7 @@ The AI should produce the code as a functional component, with props and state a
 
 Create a Vue component for a login form with inputs for username and password, and emit an event with the form data on submit.
 
-The AI will likely output the <template>, <script>, and <style> sections accordingly. You, as the developer, skip writing boilerplate and directly get the structure you need. It’s then easy to tweak if needed. Often the AI will even include basic validation or state handling, if your prompt implies that they’re needed.
+The AI will likely output the `<template>`, `<script>`, and `<style>` sections accordingly. You, as the developer, skip writing boilerplate and directly get the structure you need. It’s then easy to tweak if needed. Often the AI will even include basic validation or state handling, if your prompt implies that they’re needed.
 
 It’s important to ensure consistency at this stage. If you generate multiple components in isolation, you might need to adjust them to work together. For instance, if the TodoList expects items as a certain prop shape, make sure any component that uses TodoList provides that. You can either generate components in one prompt (so the AI is aware of everything) or simply wire them up yourself and ask the AI to fix any mismatches.
 

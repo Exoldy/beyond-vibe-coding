@@ -16,6 +16,7 @@ Create a simple HTML page for a sign-up form with fields for Name, Email, and Pa
 
 A modern code assistant like Cline might provide a complete HTML/CSS example:
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +41,7 @@ A modern code assistant like Cline might provide a complete HTML/CSS example:
   </form>
 </body>
 </html>
+```
 This AI-generated code is a decent starting point for a prototype of the sign-up form. It includes a basic layout and some inline CSS for styling. As a developer, you didn’t have to write any HTML/CSS by hand—you simply described the outcome, and the AI provided an implementation. This demonstrates programming by intent: you focus on what the UI should do, and the AI figures out how to do it.
 
 Of course, this is a trivial example. In practice, prototypes can be more complex and involve multiple files, frameworks, or data. But the principle is the same: You use the AI to create a first draft swiftly. You might then open this prototype in a browser, see how it looks, and refine it further. That leads me to the next topic: using specialized AI prototyping tools that go beyond plain-language prompts.
@@ -136,7 +138,7 @@ The AI adds a delete feature in the code:
 
 The layout is a bit cramped. Add some basic CSS to space out the list items and make the font a bit larger.
 
-The AI outputs CSS styling, possibly as a <style> in the component or a separate CSS snippet:
+The AI outputs CSS styling, possibly as a `<style>` in the component or a separate CSS snippet:
 
 Looks better!
 
@@ -187,7 +189,7 @@ She demonstrates this prototype to a few potential users and gets positive feedb
 The prototype’s Node.js API had no  authentication (anyone could upload data). For production, she needs user accounts and auth. She uses the AI to integrate an authentication system (maybe JWT-based). The AI provides a scaffold, but she carefully reviews it to ensure passwords are hashed properly and tokens are secure. She also adds input validation to the upload endpoint (the AI had not done that), using a combination of AI-suggested code and her own tweaks.
 
 ## Refactoring the frontend
-The initial frontend was a single HTML file with script  tags pointing at a CDN for dependencies. Jane decides to refactor into a structured React app for maintainability. She first asks the AI to refactor her project to be more production-ready by using a build system and npm rather than script tags. She then asks the AI to help integrate them as React components. For example, it turns the chart-rendering code from the prototype into a <Chart> component. Jane uses the AI to expedite writing these components, but she ensures that the state management and component hierarchy follow best practices (something the prototype didn’t consider deeply).
+The initial frontend was a single HTML file with script  tags pointing at a CDN for dependencies. Jane decides to refactor into a structured React app for maintainability. She first asks the AI to refactor her project to be more production-ready by using a build system and npm rather than script tags. She then asks the AI to help integrate them as React components. For example, it turns the chart-rendering code from the prototype into a `<Chart>` component. Jane uses the AI to expedite writing these components, but she ensures that the state management and component hierarchy follow best practices (something the prototype didn’t consider deeply).
 
 ## Testing and checking performance
 Jane writes unit tests for critical functions (CSV parsing, data transformation). When she’s unsure about edge cases, she queries the AI:
