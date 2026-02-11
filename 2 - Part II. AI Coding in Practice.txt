@@ -1,0 +1,1473 @@
+Chapter 3. The 70% Problem: AI-Assisted Workflows That Actually Work
+AI-based coding tools are astonishingly good at certain tasks.1 They excel at producing boilerplate, writing routine functions, and getting projects most of the way to completion. In fact, many developers find that an AI assistant can implement an initial solution that covers roughly 70% of the requirements.
+
+Peter Yang perfectly captured what I’ve been observing in the field in a post on X:
+
+Honest reflections from coding with AI so far as a non-engineer:
+
+It can get you 70% of the way there, but that last 30% is frustrating. It keeps taking one step forward and two steps backward with new bugs, issues, etc.
+
+If I knew how the code worked I could probably fix it myself. But since I don’t, I question if I’m actually learning that much.
+
+Nonengineers using AI for coding find themselves hitting a frustrating wall. They can get 70% of the way there surprisingly quickly, but that final 30% becomes an exercise in diminishing returns.
+
+This “70% problem” reveals something crucial about the current state of AI-assisted development. The initial progress feels magical: you can describe what you want, and AI tools like v0 or Bolt will generate a working prototype that looks impressive. But then reality sets in.
+
+The 70% is often the straightforward, patterned part of the work—the kind of code that follows well-trod paths or common frameworks. As one Hacker News commenter observed, AI is superb at handling the “accidental complexity” of software (the repetitive, mechanical stuff), while the “essential complexity”⁠—understanding and managing the inherent complexity of a problem—remains on human shoulders. In Fred Brooks’s classic terms, AI tackles the incidental but not the intrinsic difficulties of development.
+
+Where do these tools struggle? Experienced engineers consistently report a “last mile” gap. AI can generate a plausible solution, but the final 30%—covering edge cases, refining the architecture, and ensuring maintainability—“needs serious human expertise.”
+
+For example, an AI might give you a function that technically works for the basic scenario, but it won’t automatically account for unusual inputs, race conditions, performance constraints, or future requirements unless explicitly told. AI can get you most of the way there, but that final crucial 30% (edge cases, keeping things maintainable, and solid architecture) needs serious human expertise.
+
+Moreover, AI has a known tendency to generate convincing but incorrect output. It may introduce subtle bugs or “hallucinate” nonexistent functions and libraries. Steve Yegge wryly likens today’s LLMs to “wildly productive junior developers”—incredibly fast and enthusiastic but “potentially whacked out on mind-altering drugs,” prone to concocting crazy or unworkable approaches.
+
+In Yegge’s words, an LLM can spew out code that looks polished at first glance, yet if a less-experienced developer naively says, “Looks good to me!” and runs with it, hilarity (or disaster) ensues in the following weeks. The AI doesn’t truly understand the problem; it stitches together patterns that usually make sense. Only a human can discern whether a seemingly fine solution hides long-term landmines. Simon Willison echoed this after seeing an AI propose a bewitchingly clever design that only a senior engineer with deep understanding of the problem could recognize as flawed. The lesson: AI’s confidence far exceeds its reliability.
+
+Crucially, current AIs do not create fundamentally new abstractions or strategies beyond their training data. They won’t invent a novel algorithm or an innovative architecture for you—they remix what’s known. They also won’t take responsibility for decisions. As one engineer noted, “AIs don’t have ‘better ideas’ than what their training data contains. They don’t take responsibility for their work.”
+
+All of this means that creative and analytical thinking—deciding what to build, how to structure it, and why—firmly remains a human domain. In summary, AI is a force multiplier for developers, handling the repetitive 70% and giving us a “turbo boost” in productivity. But it is not a silver bullet that can replace human judgment. The remaining 30% of software engineering—the hard parts—still requires skills that only trained, thoughtful developers can bring. Those are the durable skills to focus on, and Chapter 4 is dedicated to them. As one discussion put it: “AI is a powerful tool, but it’s not a magic bullet.…Human judgment and good software engineering practices are still essential.”
+
+How Developers Are Actually Using AI
+I’ve observed two distinct patterns in how teams are leveraging AI for development. Let’s call them the “bootstrappers” and the “iterators.” Both are helping engineers (and even nontechnical users) reduce the gap from idea to execution (or MVP).
+
+First, there are the bootstrappers, who are generally taking a new project from zero to MVP. Tools like Bolt, v0, and screenshot-to-code AI are revolutionizing how these teams bootstrap new projects. These teams typically:
+
+Start with a design or rough concept
+
+Use AI to generate a complete initial codebase
+
+Get a working prototype in hours or days instead of weeks
+
+Focus on rapid validation and iteration
+
+The results can be impressive. I recently watched a solo developer use Bolt to turn a Figma design into a working web app in next to no time. It wasn’t production-ready, but it was good enough to get very initial user feedback.
+
+The second camp, the iterators, uses tools like Cursor, Cline, Copilot, and Windsurf for their daily development workflow. This is less flashy but potentially more transformative. These developers are:
+
+Using AI for code completion and suggestions
+
+Leveraging AI for complex refactoring tasks
+
+Generating tests and documentation
+
+Using AI as a “pair programmer” for problem solving
+
+But here’s the catch: while both approaches can dramatically accelerate development, they come with hidden costs that aren’t immediately obvious.
+
+When you watch a senior engineer work with AI tools like Cursor or Copilot, it looks like magic. They can scaffold entire features in minutes, complete with tests and documentation. But watch carefully, and you’ll notice something crucial: they’re not just accepting what the AI suggests. They’re constantly refactoring the generated code into smaller, focused modules. They’re adding comprehensive error handling and edge-case handling the AI missed, strengthening its type definitions and interfaces, and questioning its architectural decisions. In other words, they’re applying years of hard-won engineering wisdom to shape and constrain the AI’s output. The AI is accelerating their implementation, but their expertise is what keeps the code maintainable.
+
+Common Failure Patterns
+Junior engineers often miss these crucial steps.  They accept the AI’s output more readily, leading to what I call “house of cards code”—it looks complete but collapses under real-world pressure.
+
+Two steps back
+What typically happens next follows a predictable antipattern I call the “two steps back” pattern (shown in Figure 3-1):
+
+You try to fix a small bug.
+
+The AI suggests a change that seems reasonable.
+
+This fix breaks something else.
+
+You ask AI to fix the new issue.
+
+This creates two more problems.
+
+Rinse and repeat.
+
+
+Figure 3-1. The “two steps back” antipattern.
+This cycle is particularly painful for nonengineers because they lack the mental models to understand what’s actually going wrong. When an experienced developer encounters a bug, they can reason about potential causes and solutions based on years of pattern recognition. Without this background, you’re essentially playing whack-a-mole with code you don’t fully understand. This is the “knowledge paradox” I mentioned back in this book’s preface: senior engineers and developers use AI to accelerate what they already know how to do, while juniors try to use it to learn what to do.
+
+This cycle is particularly painful for nonengineers using AI in a “bootstrapper” pattern, because they lack the mental models needed to address these issues building their MVP. However, even experienced “iterators” can fall into this whack-a-mole trap if they overly rely on AI suggestions without deep validation.
+
+There’s a deeper issue here: the very thing that makes AI coding tools accessible to nonengineers—their ability to handle complexity on your behalf—can actually impede learning. When code just “appears” without you understanding the underlying principles, you don’t develop debugging skills. You miss learning fundamental patterns. You can’t reason about architectural decisions, and so you struggle to maintain and evolve the code. This creates a dependency where you need to keep going back to the AI model to fix issues rather than developing the expertise to handle them yourself.
+
+This dependency risk enters a new dimension with the emergence of autonomous AI coding agents—a topic I explore in depth in Chapter 10.  Unlike current tools that suggest code snippets, these agents represent a fundamental shift in how software can be developed. As I write this, we’re witnessing the early deployment of systems that can independently plan, execute, and iterate on entire development tasks with minimal human oversight.
+
+This evolution from assistive to autonomous AI introduces profound questions about developer expertise and control. When an AI system can handle complete development workflows, from initial implementation through testing and deployment, the risk of skill atrophy becomes acute. Developers who rely heavily on these agents without maintaining their foundational knowledge may find themselves unable to effectively audit, guide, or intervene when the AI’s decisions diverge from intended outcomes.
+
+The challenge compounds when we consider how these autonomous systems make cascading decisions throughout a project. Each individual choice might appear reasonable in isolation, yet the cumulative effect could steer development in unintended directions. Without the expertise to recognize and correct these trajectory shifts early, teams risk building increasingly complex systems on foundations they don’t fully understand.
+
+As we’ll examine more thoroughly later, the advent of autonomous coding agents doesn’t diminish the importance of software engineering fundamentals—it amplifies it. The more powerful our AI tools become, the more critical it is that we maintain the expertise to remain architects of our systems rather than mere operators. Only through deep understanding of software principles can we ensure these remarkable tools enhance our capabilities rather than erode them.
+
+The demo-quality trap
+It’s becoming a pattern: teams use AI to rapidly build impressive demos. The happy path works beautifully. Investors and social networks are wowed. But when real users start clicking around? That’s when things fall apart.
+
+I’ve seen this firsthand: error messages that make no sense to normal users, edge cases that crash the application, confusing UI states that never got cleaned up, accessibility completely overlooked, and performance issues on slower devices. These aren’t just low-priority bugs—they’re the difference between software people tolerate and software people love.
+
+Creating truly self-serve software—the kind where users never need to contact support—requires a different mindset, one that’s all about the lost art of polish. You need to be obsessing over error messages; testing on slow connections and with real, nontechnical users; making features discoverable; and handling every edge case gracefully. This kind of attention to detail (perhaps) can’t be AI-generated. It comes from empathy, experience, and caring deeply about craft.
+
+What Actually Works: Practical Workflow Patterns
+Before we dive into coding in Part II of this book, we need to talk about modern development practices and how AI-assisted coding fits within a team workflow. Software development is more than writing code, after all—it’s a whole workflow that includes planning, collaboration, testing, deployment, and maintenance. And vibe coding isn’t a standalone novelty—it can be woven into agile methodologies and DevOps practices, augmenting the team’s productivity while preserving quality and reliability.
+
+In this section, we’ll explore how team members can collectively use vibe-coding tools without stepping on each other’s toes, how to balance AI suggestions with human insight, and how continuous integration/continuous delivery (CI/CD) pipelines can incorporate AI or adapt to AI-generated code. I’ll also touch on important considerations like version-control strategies.
+
+After observing dozens of teams, here are three patterns I’ve seen work consistently in both solo and team workflows:
+
+AI as first drafter
+The AI model generates the initial code and developers then refine, refactor, and test it
+
+AI as pair programmer
+Developer and AI are in constant conversation, with tight feedback loops, frequent code review, and minimal context provided
+
+AI as validator
+Developers still write the initial code and then use AI to validate, test, and improve it (see Figure 3-2)
+
+
+Figure 3-2. AI validation workflow: developers write initial code; AI systems analyze for bugs and security issues, then suggest improvements; and developers review and apply recommended changes.
+In this section, I’ll walk you through each pattern in turn, discussing workflows and tips for success.
+
+AI as first drafter
+It’s important to ensure everyone on the team is on the same page before you ask your AI model to draft any code. Communication is key so that developers don’t ask their AI assistants to do redundant tasks or generate conflicting implementations.
+
+In daily stand-ups (a staple of agile workflows), it’s worth discussing not just what you’re working on but also whether you plan to use AI for certain tasks. For example, two developers might be working on different features that both involve a utility function for date formatting. If both ask the AI to create a formatDate helper, you might end up with two similar functions. Coordinating up front (“I’ll generate a date utility we can both use”) can prevent duplication.
+
+Teams that successfully integrate AI tools often start by agreeing on coding standards and prompting practices. For example, the team might decide on a consistent style (linting rules, project conventions) and even feed those guidelines into their AI tools (some assistants allow providing style preferences or example code to steer outputs). As noted in Codacy’s blog, by familiarizing the AI with the team’s coding standards, you get generated code that is more uniform and easier for everyone to work with. On a practical level, this could mean having a section in your project README for “AI Usage Tips,” where you note things like “We use functional components only” or “Prefer using Fetch API over Axios,” which developers can keep in mind when prompting AI.
+
+Another practice is to use your tools’ collaboration features, if available. Some AI-assisted IDEs allow users to share their AI sessions or at least the prompts they use. If Developer A got a great result with a prompt for a complex component, sharing that prompt with Developer B (perhaps via the issue tracker or a team chat) can save time and ensure consistency.
+
+As for using version control, the fundamentals remain—with a twist. Using Git (or another version control system) is nonnegotiable in modern development, and that doesn’t change with vibe coding. In fact, version control becomes even more crucial when AI is generating code rapidly. Commits act as the safety net to catch AI missteps; if an AI-generated change breaks something, you can revert to a previous commit.
+
+One strategy is to commit more frequently when using AI assistance. Each time the AI produces a significant chunk of code (like generating a feature or doing some major refactoring) that you accept, consider making a commit with a clear message. Frequent commits ensure that if you need to bisect issues or undo a portion of AI-introduced code, the history is granular enough.
+
+Also, try to isolate different AI-introduced changes. If you let the AI make many changes across different areas and commit them all together, it’s harder to disentangle if something goes wrong. For example, if you use an agent to optimize performance and it also tweaks some UI texts, commit those separately. (Your two commit messages might be “Optimize list rendering performance [AI-assisted]” and “Update UI copy for workout completion message [AI-assisted]”). Descriptive commit messages are important; some teams even tag commits that had heavy AI involvement, just for traceability. It’s not about blame but about understanding the origin of code—a commit tagged with “[AI]” might signal to a reviewer that the code could use an extra thorough review for edge cases.
+
+Essentially, the team should treat AI usage as a normal part of the development conversation: share experiences, successful techniques, and warnings about what not to do (like “Copilot suggests using an outdated library for X, so be careful with that”).
+
+Review and refinement are crucial to this pattern. Developers should manually review and refactor the code for modularity, add comprehensive error handling, write thorough tests, and document key decisions as they refine the code. The next chapter goes into detail about these processes.
+
+AI as pair programmer
+Traditional pair programming involves two humans collaborating at one workstation. With the advent of AI, a hybrid approach has emerged: one human developer working alongside an AI assistant. This setup can be particularly effective, offering a blend of human intuition and machine efficiency.
+
+In a human-AI pairing, the developer interacts with the AI to generate code suggestions while also reviewing and refining the output. This dynamic allows the human to leverage the AI’s speed in handling repetitive tasks, such as writing boilerplate code or generating test cases, while maintaining oversight to ensure code quality and relevance.
+
+For instance, when integrating a new library, a developer might prompt the AI to draft the initial integration code. The developer then reviews the AI’s suggestions, cross-referencing with official documentation to verify accuracy. This process not only accelerates development but also facilitates knowledge acquisition, as the developer engages deeply with both the AI’s output and the library’s intricacies. 
+
+Let’s compare this to traditional human-human pair programming:
+
+Human-AI pairing offers rapid code generation and can handle mundane tasks efficiently. It’s particularly beneficial for solo developers or when team resources are limited.
+
+Human-human pairing excels in complex problem-solving scenarios, where nuanced understanding and collaborative brainstorming are essential. It fosters shared ownership and collective code comprehension.
+
+Both approaches have their merits, and your choice between them can be guided by the project’s complexity, resource availability, and the specific goals of the development process.
+
+Best practices for AI pair programming
+To maximize the benefits of AI-assisted development, consider the following practices:
+
+Initiate new AI sessions for distinct tasks
+This helps maintain context clarity and ensures the AI’s suggestions are relevant to the specific task at hand.
+
+Keep prompts focused and concise
+Providing clear and specific instructions enhances the quality of the AI’s output.
+
+Review and commit changes frequently
+Regularly integrating and testing AI-generated code helps catch issues early and maintains project momentum.
+
+Maintain tight feedback loops
+Continuously assess the AI’s contributions, providing corrections or refinements as needed to guide its learning and improve future suggestions.
+
+AI as validator
+Beyond code generation, AI can serve as a valuable validator, assisting in code review and quality assurance. AI tools can analyze code for potential bugs, security vulnerabilities, and adherence to best practices. For example, platforms like DeepCode and Snyk’s AI-powered code checker can identify issues such as missing input sanitization or insecure configurations, providing actionable insights directly within the development environment. Platforms such as Qodo and TestGPT can automatically generate test cases, ensuring broader coverage and reducing manual effort. And many AI tools can assist in monitoring application performance, detecting anomalies that might indicate underlying issues.
+
+By integrating AI validators into the development workflow, teams can enhance code quality, reduce the likelihood of defects, and ensure compliance with security standards. This proactive approach to validation complements human oversight, leading to more robust and reliable software. These tools enhance the efficiency and effectiveness of the quality assurance (QA) process by handling repetitive and time-consuming tasks, allowing human testers to focus on more complex and nuanced aspects of QA.
+
+Incorporating AI into the development process, whether as a pair programmer or validator, offers opportunities to enhance productivity and code quality. By thoughtfully integrating these tools, developers can harness the strengths of both human and artificial intelligence.
+
+To maximize the benefits of both AI and human capabilities in QA, I recommend a few best practices:
+
+Use AI for initial assessments and preliminary scans to identify obvious issues.
+
+Prioritize human review for critical areas, such as complex functionalities, user experience, and AI limitations.
+
+Foster an environment of continuous collaboration, where AI tools and human testers work in tandem, with ongoing feedback loops to improve both AI performance and human decision making.
+
+The Golden Rules of Vibe Coding
+While vibe coding offers unprecedented speed and creative freedom in software development, its very flexibility demands a structured approach to ensure consistent quality and team cohesion. The rapid, intuitive nature of AI-assisted development can quickly lead to chaos without clear guidelines that balance creative exploration with engineering discipline.
+
+These golden rules emerged from collective experience across teams who have successfully integrated vibe coding into their workflows. They represent hard-won insights about where AI excels, where it stumbles, and how human judgment remains essential throughout the process. Rather than constraining creativity, these principles create a framework within which teams can confidently experiment while maintaining the standards necessary for production-ready software.
+
+The rules address three critical dimensions of vibe coding: the interaction between human and AI, the integration of AI-generated code into existing systems, and the cultivation of team practices that support sustainable AI-assisted development. By following these guidelines, teams can harness the transformative power of vibe coding while avoiding common pitfalls that lead to technical debt, security vulnerabilities, or unmaintainable codebases:
+
+Be specific and clear about what you want
+Clearly articulate your requirements, tasks, and outcomes when interacting with AI. Precise prompts yield precise results.
+
+Always validate AI output against your intent
+AI-generated code must always be checked against your original goal. Verify functionality, logic, and relevance before accepting.
+
+Treat AI as a junior developer (with supervision)
+Consider AI outputs as drafts that require your careful oversight. Provide feedback, refine, and ensure quality and correctness.
+
+Use AI to expand your capabilities, not replace your thinking
+Leverage AI to automate routine or complex tasks, but always remain actively engaged in problem solving and decision making.
+
+Coordinate up front among the team before generating code
+Align with your team on AI usage standards, code expectations, and practices before starting AI-driven development.
+
+Treat AI usage as a normal part of the development conversation
+Regularly discuss AI experiences, techniques, successes, and pitfalls with your team. Normalize AI as another tool for collective improvement.
+
+Isolate AI changes in Git by doing separate commits
+Clearly identify and separate AI-generated changes within version control to simplify reviews, rollbacks, and tracking.
+
+Ensure that all code, whether human or AI-written, undergoes code review
+Maintain consistent standards by subjecting all contributions to the same rigorous review processes, enhancing code quality and team understanding.
+
+Don’t merge code you don’t understand
+Never integrate AI-generated code unless you thoroughly comprehend its functionality and implications. Understanding is critical to maintainability and security.
+
+Prioritize documentation, comments, and ADRs
+Clearly document the rationale, functionality, and context for AI-generated code. Good documentation ensures long-term clarity and reduces future technical debt.
+
+Share and reuse effective prompts
+Document prompts that lead to high-quality AI outputs. Maintain a repository of proven prompts to streamline future interactions and enhance consistency.
+
+Regularly reflect and iterate
+Periodically review and refine your AI development workflow. Use insights from past experiences to continuously enhance your team’s approach.
+
+By adhering to these golden rules, your team can harness AI effectively, enhancing productivity while maintaining clarity, quality, and control.
+
+Summary and Next Steps
+The 70% problem defines the current state of AI-assisted development: these tools excel at generating boilerplate and routine functions but struggle with the final 30% that includes edge cases, architectural decisions, and production readiness. We’ve identified two main usage patterns—bootstrappers who rapidly build MVPs, and iterators who integrate AI into daily workflows—along with common failure patterns like the “two steps back” antipattern and the “demo-quality trap” where impressive prototypes fail under real-world pressure.
+
+Three proven workflow patterns have emerged: AI as first drafter (generate then refine), AI as pair programmer (continuous collaboration), and AI as validator (human-written code with AI analysis). The golden rules of vibe coding provide essential guardrails, emphasizing clear communication, thorough validation, team coordination, and the nonnegotiable requirement to understand all code before merging it.
+
+Individual developers should choose one workflow pattern to experiment with systematically while implementing the golden rules in daily practice. Focus on developing the durable skills covered in Chapter 4: system design, debugging, and architecture—rather than competing with AI on code generation.
+
+Teams need to establish standards for AI usage, create shared repositories of effective prompts, and integrate AI considerations into existing agile practices. Regular knowledge sharing about successes and pitfalls will help teams avoid common traps while maximizing AI’s benefits.
+
+As autonomous AI coding agents emerge, the human role will shift toward architectural oversight and strategic decision making. The next chapter explores how to maximize this irreplaceable human contribution, helping engineers at every level thrive as partners to increasingly capable AI systems rather than competitors.
+
+1 This chapter is based on an essay originally published on my Substack newsletter. See Addy Osmani, “The 70% Problem: Hard Truths About AI-Assisted Coding”, Elevate with Addy Osmani, December 4, 2024.
+
+Chapter 4. Beyond the 70%: Maximizing Human Contribution
+You’ve seen how AI coding assistants like Cursor, Cline, Copilot, and Windsurf have transformed how software is built, shouldering much of the grunt work and boilerplate—about 70%.1 But what about that last “30%” of the job that separates a toy solution from a production-ready system? This gap includes the hard parts: understanding complex requirements, architecting maintainable systems, handling edge cases, and ensuring code correctness. In other words, while AI can generate code, it often struggles with engineering.
+
+Tim O’Reilly, reflecting on decades of technology shifts, reminds us that each leap in automation has changed how we program but not why we need skilled programmers. We’re not facing the end of programming but rather “the end of programming as we know it today,” meaning developers’ roles are evolving, not evaporating.
+
+The challenge for today’s engineers is to embrace AI for what it does best (the first 70%) while doubling down on the durable skills and insights needed for the remaining 30%. This article dives into expert insights to identify which human skills remain crucial. We’ll explore what senior and midlevel developers should continue to leverage and what junior developers must invest in to thrive alongside AI.
+
+This chapter’s goal, then, is to offer you pragmatic guidance for maximizing the value of that irreplaceable 30%, with actionable takeaways for engineers at every level.
+
+Senior Engineers and Developers: Leverage Your Experience with AI
+If you’re a senior engineer, you should see the advent of AI coding tools as an opportunity to amplify your impact—if you leverage your experience in the right ways. Senior developers typically possess deep domain knowledge, intuition for what could go wrong, and the ability to make high-level technical decisions.
+
+These strengths are part of the 30% that AI can’t handle alone. This section looks at how seasoned developers can maximize their value.
+
+Be the Architect and the Editor in Chief
+Let AI handle the first draft of code while you focus on architecting the solution and then refining the AI’s output. In many organizations, Steve Yegge writes that we may see a shift where teams need “only senior associates” who “(a) describe the tasks to be done; i.e., create the prompts, and (b) review the resulting work for accuracy and correctness.” Embrace that model. As a senior dev, you can translate complex requirements into effective prompts or specifications for an AI assistant, then use your critical eye to vet every line produced. You are effectively pair programming with the AI—it’s the fast typer, but you’re the brain.
+
+Maintain high standards during review: ensure the code meets your organization’s quality, security, and performance benchmarks. By acting as architect and editor, you prevent the “high review burden” from overwhelming you. (A cautionary note: if junior staff simply throw raw AI output over the wall to you, push back—instill a process where they must verify AI-generated work first, so you’re not the sole safety net.)
+
+Use AI as a Force Multiplier for Big Initiatives
+Senior engineers often drive large projects or tackle hairy refactors that juniors can’t approach alone. AI can supercharge these efforts by handling a lot of mechanical changes or exploring alternatives under your guidance. Yegge introduced the term chat-oriented programming (CHOP) for this style of working—“coding via iterative prompt refinement,” with the AI as a collaborator. Leverage CHOP to be more ambitious in what you take on.
+
+Having AI assistance lowers the bar for when a project is worth investing time in at all since what might have taken days can now be done in hours. Senior devs can thus attempt those “Wouldn’t it be nice if…?” projects that always seemed slightly out of reach.
+
+The key is to remain the guiding mind: you decide which tools or approaches to pursue, and you integrate the pieces into a cohesive whole. Your experience allows you to sift the AI’s suggestions—accepting those that fit, rejecting those that don’t.
+
+Mentor and Set Standards
+Another crucial role for senior engineers is to coach less-experienced team members on effective use of AI and on the timeless best practices. You likely have hard-won knowledge of pitfalls that juniors may not see, like memory leaks, off-by-one errors, and concurrency hazards.
+
+With juniors now potentially generating code via AI, it’s important to teach them how to self-review and test that code. Set an example by demonstrating how to thoroughly test AI contributions, and encourage a culture of questioning and verifying machine output. Some organizations (including even law firms) have instituted rules that if someone uses an AI to generate code or writing, they must disclose it and verify the results themselves—not just assume a senior colleague will catch mistakes.
+
+As a senior engineer, champion such norms on your team: AI is welcome, but diligence is required. By mentoring juniors in this way, you offload some of the oversight burden and help them grow into that 30% skill set more quickly.
+
+Continue to Cultivate Domain Mastery and Foresight
+Your broad experience and context are more important than ever. Senior developers often have historical knowledge of why things in the company are built a certain way or how an industry operates. This domain mastery lets you catch AI’s missteps that a newcomer wouldn’t.
+
+Continue investing in understanding the problem domain deeply. That might mean staying up-to-date with the business’s needs, user feedback, or new regulations that affect the software. AI won’t automatically incorporate these considerations unless you tell it to. When you combine your domain insight with AI’s speed, you get the best outcomes.
+
+Also, use your foresight to steer AI. For instance, if you know that a quick fix will create maintenance pain down the line, you can instruct the AI to implement a more sustainable solution. Trust the instincts you’ve honed over the years—if a code snippet looks “off” or too good to be true, dig in. Nine times out of ten, your intuition has spotted something that the AI didn’t account for. Being able to foresee the second- and third-order effects of code is a hallmark of senior engineers; don’t let the convenience of AI blunt that habit. Instead, apply it to whatever the AI produces.
+
+Hone Your Soft Skills and Leadership
+With AI shouldering some coding, senior developers can spend more energy on the human side of engineering: communicating with stakeholders, leading design meetings, and making judgment calls that align technology with business strategy. Tim O’Reilly and others suggest that as rote coding becomes easier, the value shifts to deciding what to build and how to orchestrate complex systems.
+
+Senior engineers are often the ones orchestrating and seeing the big picture. Step up to that role. Volunteer to write that architecture roadmap, to evaluate which tools (AI or otherwise) to adopt, or to define your org’s AI coding guidelines. These are tasks AI can’t do—they require experience, human discretion, and, often, cross-team consensus building. By amplifying your leadership presence, you ensure that you’re not just a code generator (replaceable by another tool) but an indispensable technical leader guiding the team.
+
+In short, continue doing what seasoned developers do best: seeing the forest for the trees. AI will help you chop a lot more trees, but someone still needs to decide which trees to cut and how to build a stable house from the lumber. Your judgment, strategic thinking, and mentorship are now even more critical. A senior developer who harnesses AI effectively can be dramatically more productive than one who doesn’t—but the ones who truly excel will be those who apply their human strengths to amplify the AI’s output, not just let it run wild.
+
+As one Redditor observed, “AI is a programming force multiplier” that “greatly increases the productivity of senior programmers.” The multiplier effect is real, but it’s your expertise that’s being multiplied. Keep that expertise sharp and at the center of the development process.
+
+Midlevel Engineers: Adapt and Specialize
+Midlevel engineers face perhaps the most significant pressure to evolve. Many of the tasks that traditionally occupied your time—implementing features, writing tests, debugging straightforward issues—are becoming increasingly automatable.
+
+This doesn’t mean obsolescence; it means elevation. The focus shifts from writing code to more building specialized knowledge, which the following sections explore.
+
+Learn to Manage Systems Integration and Boundaries
+As systems become more complex, understanding and managing the boundaries between components becomes crucial. This includes API design, event schemas, and data models—all requiring careful consideration of business requirements and future flexibility. Deepen your computer science fundamentals, including gaining an advanced understanding of disciplines like:
+
+Data structures and algorithms
+
+Distributed-systems principles
+
+Database internals and query optimization
+
+Network protocols and security
+
+This knowledge helps you understand the implications of AI-generated code and make better architectural decisions.
+
+Learn to handle edge cases and ambiguity too. Real-world software is rife with oddball scenarios and changing requirements. AI tends to solve the general case by default. It’s up to the developer to ask “What if…?” and probe for weaknesses.
+
+The durable skills here are critical thinking and foresight—enumerating edge cases, anticipating failures, and addressing them in code or design. This might mean thinking of null input, network outages, unusual user actions, or integration with other systems.
+
+Build Your Domain Expertise
+Understanding the business context or the user’s environment will reveal edge cases that a generic AI simply doesn’t know about. Experienced engineers habitually consider these scenarios. Practice systematically testing boundaries and questioning assumptions. Specialize in complex domains where human understanding remains crucial. Generic domains include:
+
+Financial systems with regulatory requirements
+
+Healthcare systems with privacy concerns
+
+Real-time systems with strict performance requirements
+
+Machine learning infrastructure
+
+Software-engineering-specific domains include frontend and backend engineering, mobile development, DevOps, and security engineering, to name a few. Domain expertise provides context that current AI tools lack and helps you make better decisions about where and how to apply them.
+
+Master Performance Optimization and DevOps
+While LLMs can suggest basic optimizations, identifying and resolving system-wide performance issues requires a deep understanding of the entire stack, from database query patterns to frontend rendering strategies. Understanding how systems run in production becomes more valuable as code generation becomes more automated.
+
+Focus on fields like the following:
+
+Monitoring and observability
+
+Performance profiling and optimization
+
+Security practices and compliance
+
+Cost management and optimization
+
+Focus on Code Review and Quality Assurance
+With AI writing lots of code, the ability to rigorously review and test that code becomes even more critical. “Everyone will need to get a lot more serious about testing and reviewing code,” Yegge emphasizes. Treat AI-generated code as you would a human junior developer’s output: you are the code reviewer responsible for catching bugs, security flaws, or sloppy implementations. This means strengthening your skills in unit testing, integration testing, and debugging.
+
+Writing good tests is a durable skill that forces you to understand the spec and verify correctness. It’s wise to assume nothing works until proven otherwise. AI often yields functional but unoptimized code until you guide it through iterative improvement. This can be due to a number of reasons, including that the training data coding models are trained on don’t reflect all best practices as completely as they could.
+
+Cultivate a testing mindset: verify every critical logic path, use static analysis or linters, and don’t shy away from rewriting AI-given code if it doesn’t meet your quality bar. Even if you’re following the “AI as validator” pattern discussed in the previous chapter, quality assurance is not an area to simply outsource to AI—it’s where human diligence shines. When software doesn’t work as expected, you need real problem-solving chops to diagnose and fix it. AI can assist with debugging (for example, by suggesting possible causes), but it lacks true understanding of the specific context in which your application runs. Human testers possess domain-specific knowledge and an understanding of user expectations that AI currently lacks. This insight is vital when assessing the relevance and impact of potential issues. Diagnosing complex bugs often requires creative problem solving and the ability to consider a broad range of factors—skills that are inherently human. And evaluating the ethical implications of software behavior, such as fairness and accessibility, requires human sensitivity and judgment.
+
+Being able to reason through a complex bug—reproducing it, isolating the cause, understanding the underlying systems (OS, databases, libraries)—is a timeless engineering skill. This often requires a strong grasp of fundamentals (how memory and state work, concurrency, etc.) that junior developers must learn through practice. Use AI as a helper (it might explain error messages or suggest fixes), but don’t rely on it thoughtlessly. The skill to methodically troubleshoot and apply first principles when debugging sets great developers apart. It’s also a feedback loop: debugging AI-written code will teach you to prompt the AI better next time or avoid certain patterns.
+
+Learn Systems Thinking
+Software projects are not just isolated coding tasks; they exist within a larger context of user needs, timelines, legacy code, and team processes. AI has no innate sense of the big picture, like your project’s history or the rationale behind certain decisions (unless you explicitly feed all that into the prompt, which is often impractical). Humans need to carry that context.
+
+The durable skill here is systems thinking—understanding how a change in one part of the system might impact another, how the software serves the business objectives, and how all the moving pieces connect.2 This holistic perspective lets you use AI outputs appropriately. For example, if an AI suggests a clever shortcut that contradicts a regulatory requirement or company convention, you’ll catch it because you know the context. Make it a point to learn the background of your projects and read design docs, so you can develop your judgment about what fits and what doesn’t.
+
+Be Adaptable—and Never Stop Learning
+Finally, a metaskill: the ability to learn new tools and adapt to change. The field of AI-assisted development is evolving rapidly. Engineers who keep an open mind and learn how to effectively use new AI features will remain ahead of the curve—Tim O’Reilly suggests that developers who are “eager to learn new skills” will see the biggest productivity boosts from AI. Invest in learning the fundamentals deeply and staying curious about new techniques. This combination enables you to harness AI as a tool without becoming dependent on it.
+
+It’s a balancing act: use AI to accelerate your growth, but also occasionally practice without it to ensure you’re not skipping core learning (some developers do an “AI detox” periodically to keep their raw coding skills sharp). In short, be the engineer who learns constantly—that’s a career-proof skill in any era.
+
+Get Good at Cross-Functional Communication
+The ability to translate between business requirements and technical solutions becomes more valuable as implementation time decreases. Engineers who can effectively communicate with product managers, designers, and other stakeholders will become increasingly valuable. Good areas of focus here include:
+
+Requirements gathering and analysis
+
+Technical writing and documentation
+
+Project planning and estimation
+
+Team leadership and mentoring
+
+Learn System Design and Architecture
+Instead of spending days implementing a new feature, midlevel engineers might spend that time designing robust systems that gracefully handle scale and failure modes. This requires deep understanding of distributed systems principles, database internals, and cloud infrastructure—areas where LLMs currently provide limited value.
+
+Practice designing systems that solve real-world problems at scale. These skills remain valuable regardless of how code is generated, as they require understanding business requirements and engineering trade-offs.
+
+Designing a coherent system requires understanding trade-offs, constraints, and the “big picture” beyond writing a few functions. AI can generate code but won’t automatically choose the best architecture for a complex problem.
+
+The overall design—how components interact, how data flows, how to ensure scalability and security—is part of that 30% that demands human insight; this includes the following:
+
+Load balancing and caching strategies
+
+Data partitioning and replication
+
+Failure modes and recovery procedures
+
+Cost optimization and resource management
+
+Senior developers have long honed this skill, and midlevel and junior devs should actively cultivate it. Think in terms of patterns and principles (like separation of concerns and modularity)—these guide an AI-generated solution toward maintainability. Remember, solid architecture doesn’t emerge by accident; it needs an experienced human hand on the wheel.
+
+Use AI!
+Remember that AI should be an integral part of your workflow—it’s not something to resist. Practical ways to incorporate AI into your daily work include:
+
+Scaffolding initial code structures
+
+Quick prototypes and proof of concepts
+
+Pair programming for faster debugging and problem solving
+
+Suggesting optimizations and alternative approaches
+
+Handling repetitive code patterns while you focus on architecture and design decisions
+
+Venture into UI and UX Design
+There’s a growing narrative that midlevel software engineers should “just quit”—that pure engineering skills will become obsolete as AI handles the implementation details. While the conclusion is overstated, the discourse about the importance of skills beyond engineering (like design) deserves examination. In a representative exchange on X in December 2024, @fchollet wrote:
+
+We’ll soon be in a world where you can turn test-time compute into competence—for the first time in the history of software, marginal cost will become critical.
+
+To which @garrytan replied:
+
+UX, design, actual dedication to the craft will take center stage in this next moment.
+
+Actually make something people want. Software and coding won’t be the gating factor. It is the ability to be a polymath and smart/effective in many domains together that creates great software.
+
+Successful software creation has always required more than just coding ability. What’s changing is not the death of engineering but rather the lowering of pure implementation barriers. This shift actually makes engineering judgment and design thinking more crucial, not less.
+
+Consider what makes applications like Figma, Notion, or VSCode successful. It’s not just technical excellence—it’s the deep understanding of user needs, workflows, and pain points. This understanding comes from the following:
+
+User experience design thinking
+
+Deep domain knowledge
+
+Understanding of human psychology and behavior
+
+System design that considers performance, reliability, and scalability
+
+Business model alignment
+
+The best engineers have always been more than just coders. They’ve been problem solvers who understand both technical constraints and human needs. As AI tools reduce the friction of implementation, this holistic understanding becomes even more valuable.
+
+However, this doesn’t mean every engineer needs to become a UX designer. Instead, it means developing stronger product thinking abilities and building better collaboration skills with designers and product managers. It means thinking more about users, understanding their psychology and behavior patterns, and learning to make technical decisions that support user experience goals. You’re at the point of achieving technical elegance: now balance it out with close attention to practical user needs.
+
+Tan went on to post:
+
+UX, design, actual dedication to the craft will take center stage in this next moment.
+
+Actually make something people want. Software and coding won’t be the gating factor. It is the ability to be a polymath and smart/effective in many domains together that creates great software.
+
+The future belongs to engineers who can bridge the gap between human needs and technical solutions—whether that’s through developing better design sensibilities themselves or through more effective collaboration with dedicated designers.
+
+Junior Developers: Thrive Alongside AI
+If you’re a junior or less-experienced developer, you might feel a mix of excitement and anxiety about AI. AI assistants can write code that you might not know how to write yourself, potentially accelerating your learning. Yet there are headlines about the “death of the junior developer”, suggesting entry-level coding jobs are at risk. Contrary to popular speculation, while AI is significantly changing the early-career experience, junior developers are not obsolete.
+
+You need to be proactive in developing skills that ensure you’re contributing value beyond what an AI can churn out. The traditional path of learning through implementing basic CRUD applications and simple features will evolve as these tasks become increasingly automated.
+
+Consider a typical junior task: implementing a new API endpoint following existing patterns. Previously, this might have taken a day of coding and testing. With AI assistance, the implementation time might drop to an hour, but the crucial skills become:
+
+Understanding the existing system architecture well enough to specify the requirement correctly
+
+Reviewing the generated code for security implications and edge cases
+
+Ensuring the implementation maintains consistency with existing patterns
+
+Writing comprehensive tests that verify business logic
+
+These skills can’t be learned purely through tutorial following or AI prompting—they require hands-on experience with production systems and mentorship from senior engineers.
+
+This evolution presents both challenges and opportunities for early-career developers. The bar for entry-level positions may rise, requiring stronger fundamental knowledge to effectively review and validate AI-generated code. However, this shift also means junior engineers can potentially tackle more interesting problems earlier in their careers.
+
+Here’s how to invest in yourself to handle that 30% gap effectively.
+
+Learn the Fundamentals—Don’t Skip the “Why”
+It’s tempting to lean on AI for answers to every question (“How do I do X in Python?”) and never truly absorb the underlying concepts. Resist that urge. Use AI as a tutor, not just an answer vending machine. For example, when AI gives you a piece of code, ask why it chose that approach, or have it explain the code line by line.
+
+Make sure you understand concepts like data structures, algorithms, memory management, and concurrency without always deferring to AI. The reason is simple: when the AI’s output is wrong or incomplete, you need your own mental model to recognize and fix it. If you’re not actively engaging with why the AI is generating certain code, you might actually learn less, hindering your growth. So take time to read documentation, write small programs from scratch, and solidify your core knowledge. These fundamentals are durable; they’ll serve you even as the tools around you change.
+
+Practice Problem Solving and Debugging Without the AI Safety Net
+To build real confidence, sometimes you have to fly solo. Many developers advocate doing an “AI-free day” or otherwise limiting AI assistance periodically. This ensures you can still solve problems with just your own skills, which is important for avoiding skill atrophy. You’ll find it forces you to truly think through a problem’s logic, which in turn makes you better at using AI (since you can direct it more intelligently).
+
+Additionally, whenever you encounter a bug or error in AI-generated code, jump in and debug it yourself before asking the AI to fix it. You’ll learn much more by stepping through a debugger or adding print statements to see what’s going wrong.
+
+Consider AI suggestions as hints, not final answers. Over time, tackling those last tricky bits of a task will build your skill in the very areas AI struggles—exactly what makes you valuable.
+
+Focus on Testing and Verification
+As a junior dev, one of the best habits you can develop is writing tests for your code. This is doubly true if you use AI to generate code.
+
+When you get a chunk of code from an LLM, don’t assume it’s correct—challenge it. Write unit tests (or use manual tests) to see if it truly handles the requirements and edge cases. This accomplishes two things: it catches issues in the AI’s output, and it trains you to think about expected behavior before trusting an implementation.
+
+You might even use the AI to help write tests, but you define what to test. Yegge’s advice about taking testing and code review seriously applies at all levels. If you cultivate a reputation for carefully verifying your work (AI-assisted or not), senior colleagues will trust you more, and you’ll avoid the scenario where they feel you’re just “dumping” questionable code on them.
+
+In practical terms, start treating testing as an integral part of development, not an afterthought. Learn how to use testing frameworks, how to do exploratory manual testing, and how to systematically reproduce bugs. These skills not only make you better at the 30% work, but they also accelerate your understanding of how the code really works.
+
+Remember: if you catch a bug that the AI introduced, you just did something the AI couldn’t—that’s added value.
+
+Build an Eye for Maintainability
+Junior devs often focus on “getting it to work.” But in the AI era, getting a basic working version is easy—the AI can do that. The harder part (and what you should focus on) is making code that’s readable, maintainable, and clean.
+
+Start developing an eye for good code structure and style. Compare the AI’s output with best practices you know of; if the AI code is messy or overly complex, take the initiative to refactor it. For instance, if an LLM gives you a 50-line function that does too many things, you can split it into smaller functions. If variable names are unclear, rename them.
+
+Essentially, pretend you’re reviewing a peer’s code, and improve the AI’s code as if a peer wrote it. This will help you internalize good design principles. Over time, you’ll start prompting the AI in ways that yield cleaner code to begin with (because you’ll specify the style you want). Software maintainers (often working months or years later) will thank you, and you’ll prove that you’re thinking beyond just “make it run”⁠—you’re thinking like an engineer. Keeping things maintainable is exactly in that human-driven 30%, so make it your concern from the start of your career.
+
+Develop Your Prompting and Tooling Skills (Wisely)
+There’s no denying that “prompt engineering”—the skill of interacting with AI tools effectively—is useful. As a junior dev, you should absolutely learn how to phrase questions to AI, how to give it proper context, and how to iterate on prompts to improve the output (Chapter 2 of this book is a good place to start). These are new skills that can set you apart (many experienced devs are still figuring this out too!). However, remember that prompting well is often a proxy for understanding the problem well. If you find you can’t get the AI to do what you want, it might be because you need to clarify your own understanding first. Use that as a signal.
+
+One strategy is to outline a solution in plain English yourself before asking the AI to implement it. Also, experiment with different AI tools (Copilot, Claude, etc.) to see their strengths and weaknesses. The more fluent you are with these assistants, the more productive you can be—but never treat their output as infallible. Think of AI like a super-charged Stack Overflow: an aid, not an authority.
+
+You might even build small personal projects using AI to push your limits (“Can I build a simple web app with AI’s help?”). Doing so will teach you how to integrate AI into a development workflow, which is a great skill to bring into a team. Just balance it with periods of working without the net, as mentioned earlier.
+
+Seek Feedback and Mentorship
+Lastly, one durable skill that will accelerate your growth is the ability to seek out feedback and learn from others. An AI won’t get offended if you ignore its advice, but your human teammates and mentors are invaluable for your development—especially when it comes to soft skills, leadership, communication, and navigating office politics.
+
+Don’t hesitate to ask a senior developer why they prefer one solution over another, especially if it differs from what an AI suggested. Discuss design decisions and trade-offs with more experienced colleagues—these conversations reveal how seasoned engineers think, and that’s gold for you. In code reviews, be extra receptive to comments about your AI-written code. If a reviewer points out that “this function isn’t thread-safe” or “this approach will have scaling issues,” take the time to understand the root issue. These are exactly the kinds of things an AI might miss, and you want to learn to catch them. Over time, you’ll build a mental checklist of considerations.
+
+Additionally, find opportunities to pair program (even if remotely). Perhaps you can “pair” with a senior who uses AI in their workflow—you’ll observe how they prompt the AI and how they correct it. But even more important, you’ll see how they communicate, lead discussions, and handle delicate team dynamics. Being open to feedback and actively asking for guidance will help you mature from doing tasks that an AI could do to performing the high-value tasks that only humans can do. In a sense, you’re trying to acquire the wisdom that usually comes with experience, as efficiently as you can. That makes you more than just another coder in the room—it makes you the kind of engineer teams are eager to keep and promote.
+
+Communicate and Collaborate
+Building software is a team sport. AI doesn’t attend meetings (thank goodness)—humans still must talk to other humans to clarify requirements, discuss trade-offs, and coordinate work. Strong communication skills are as valuable as ever. Practice asking good questions and describing problems clearly (both to colleagues and to AI).
+
+Interestingly, prompting an AI is itself a form of communication; it requires you to precisely express what you want. This overlaps with a core engineering skill: requirements analysis.3 If you can formulate a clear prompt or spec, it means you’ve thought through the problem.
+
+Additionally, sharing knowledge, writing documentation, and reviewing others’ code are collaborative skills that AI cannot replace. In the future, as developers work “with” AI, the human-to-human collaboration in a team—making sure the right problems are being solved—stays vital. One emerging trend is that developers may focus more on high-level design discussions (often with AI as a participant) and on coordinating tasks, essentially taking on more of a conductor role. Communication and leadership skills will serve you well in that conductor’s seat.
+
+Shift Your Mindset: From Consuming to Creating
+It’s worth noting a mindset shift for juniors in the AI era: you need to move from just consuming solutions to creating understanding. In the past, you might have struggled through documentation to eventually write a feature; now an AI can hand you a solution on a platter. If you simply consume it (copy-paste and move on), you haven’t grown much.
+
+Instead, use each AI-given solution as a learning case. Dissect it, experiment with it, and consider how you might have arrived at it yourself. By treating AI outputs not as answers to end all questions but as interactive learning material, you ensure that you⁠—the human—are continuously leveling up. This way, rather than replacing your growth, AI accelerates it.
+
+Many experts believe that while AI might reduce the need for large teams of junior “coder-grinders,” it also raises the bar for what it means to be a junior developer. The role is shifting to someone who can work effectively with AI and quickly climb the value chain. If you adopt the habits discussed in this section, you’ll distinguish yourself as a junior developer who doesn’t just bring what an AI could bring (any company can get that via a subscription) but who brings insight, reliability, and continuous improvement—traits of a future senior developer.
+
+Summary and Next Steps
+To thrive in an AI-enhanced development world, engineers at all levels should double down on the enduring skills and practices that AI cannot (yet) replicate. These capabilities will remain crucial no matter how advanced our tools become. In particular, focus on these areas:
+
+Strengthening your system design and architecture expertise
+
+Practicing systems thinking and maintaining a contextual understanding of the big picture
+
+Honing your skills in critical thinking, problem solving, and foresight
+
+Building expertise in specialized domains
+
+Reviewing code, testing, debugging, and quality assurance
+
+Improving your communication and collaboration skills
+
+Adapting to change
+
+Continuously learning, keeping your fundamentals strong while gaining new skills and updating your knowledge
+
+Using AI
+
+These skills form the human advantage in software engineering. They are durable because they don’t expire with the next framework or tooling change; if anything, AI’s rise makes them more pronounced. Simon Willison has argued that AI assistance actually makes strong programming skills more valuable, not less, because those with expertise can leverage the tools to far greater effect.
+
+A powerful machine in unskilled hands can be dangerous or wasted, but in capable hands it’s transformative. In the AI era, an experienced engineer is like a seasoned pilot with a new advanced copilot: the journey can go faster and farther, but the pilot must still navigate the storms and ensure a safe landing.
+
+Software engineering has always been a field of continuous change—from assembly language to high-level programming, from on-prem servers to the cloud, and now from manual coding to AI-assisted development. Each leap has automated some aspect of programming, yet each time, developers have adapted and found even more to do. In response to a Tim O’Reilly note, one HN commenter remarked that past innovations “almost always resulted in more work, more growth, more opportunities” for developers. The rise of AI is no different. Rather than making developers irrelevant, it is reshaping the skill set needed to succeed. The mundane 70% of coding is getting easier; the challenging 30% becomes an even larger part of our value.
+
+To maximize that human 30%, focus on the timeless engineering skills: understanding problems deeply, designing clean solutions, scrutinizing code for quality, and considering the users and context. Experienced programmers are gaining more from AI because they know how to guide it and what to do when it falters. Those who combine these skills with AI tools will outperform those who have only one or the other. In fact, the consensus emerging among experts is that AI is a tool for the skilled: that “LLMs are power tools meant for power users.” This means the onus is on each of us to become that “power user”—to cultivate the expertise that lets us wield these new tools effectively.
+
+Ultimately, the craft of software engineering is more than writing code that works. It’s about writing code that works well—in a real-world environment, over time, and under evolving requirements. Today’s AI models can assist with writing code but cannot yet ensure the code works well in all those dimensions. That’s the developer’s job.
+
+By doubling down on the skills just outlined, senior developers can continue to lead and innovate, midlevel developers can deepen their expertise, and junior developers can accelerate their journey to mastery. AI will handle more and more of the routine, but your creativity, intuition, and thoughtful engineering will turn that raw output into something truly valuable. AI is a powerful tool, but it’s all about how we use it. Good engineering practices, human judgment, and a willingness to learn will remain essential.
+
+In practical terms, whether you are pair programming with an “eager junior” AI that writes your functions or reviewing a diff full of AI-generated code, never forget to apply your uniquely human lens. Ask, Does this solve the right problem? Will others be able to understand and maintain this? What are the risks and edge cases? Those questions are your responsibility. The future of programming will indeed involve less typing every semicolon by hand and more directing and curating—but it will still require developers at the helm who have the wisdom to do it right.
+
+In the end, great software engineering has always been about problem solving, not just code slinging. AI doesn’t change that: it simply challenges us to elevate our problem solving to the next level. Embrace that challenge, and you’ll thrive in this new chapter of our industry.
+
+1 This chapter is based on two essays I first published on my Substack newsletter: Addy Osmani, “Beyond the 70%: Maximizing the Human 30% of AI-Assisted Coding”, Elevate with Addy Osmani, March 13, 2025; and Addy Osmani, “Future-Proofing Your Software Engineering Career”, Elevate with Addy Osmani, December 23, 2024.
+
+2 To learn more about systems thinking, check out Donella H. Meadows, Thinking in Systems: A Primer, 2nd edition (Rizzoli, 2008); and Peter M. Senge, The Fifth Discipline: The Art and Practice of the Learning Organization (Crown, 2010).
+
+3 For more on this topic, see Mark Richards and Neal Ford, Fundamentals of Software Architecture, 2nd edition (O’Reilly, 2025); and Mark Richards, Neal Ford, and Raju Gandhi, Head First Software Architecture (O’Reilly, 2024).
+
+Chapter 5. Understanding Generated Code: Review, Refine, Own
+You’ve learned how to prompt an AI to generate code, and by this point you’ve likely produced some code using these techniques. Now comes a critical phase: making sure that code is correct, safe, and maintainable.
+
+As a developer, you can’t just take the AI’s output and blithely ship it. You need to review it, test it, possibly improve it, and integrate it with the rest of your codebase. This chapter focuses on how to understand what the AI gave you, iteratively edit and debug it, and fully take ownership of the code as part of your project.
+
+This chapter covers:
+
+Interpreting the AI’s code in terms of your original intent
+
+The “majority solution” phenomenon, or why AI-generated code often looks like a common solution
+
+Techniques to review code for clarity and potential issues
+
+Debugging AI-written code when it doesn’t work as expected
+
+Refactoring the code for style or efficiency
+
+Writing tests to validate the code’s behavior
+
+By mastering these skills, you’ll be able to integrate AI contributions into your projects with confidence.
+
+From Intent to Implementation: Understanding the AI’s Interpretation
+When you get the AI’s code, your first step should be to compare it to your intent (the prompt you gave). Does the code fulfill the requirements you set out? Sometimes the AI might slightly misinterpret or only partially implement what you asked.
+
+Read through the code carefully. Step through it in your mind or on paper:
+
+Trace what it does for a typical input.
+
+If your prompt had multiple parts (“do X and Y”), verify that the AI has done them all.
+
+Ensure that the AI didn’t add functionality you didn’t ask for—sometimes it will add an extra feature it “thinks” is useful, like adding logging or a parameter, which could be OK or not.
+
+Just as you would with a colleague’s code, if something is unclear, note it. If you look for a good reason for it to be there, you might find one. If you don’t, query it or consider removing it.
+
+For example, if you ask for a prime-number checker and the AI code also prints something like “Checking 7…” for each number, that may be an artifact of how you prompted it or a pattern from its training data (some tutorial code prints its progress). If you don’t want that, plan to remove it or prompt the AI to remove it.
+
+Also make sure the edge cases are handled as you expect. If you intended it to handle empty input, does it? If the input could be None or negative, did the AI consider that?
+
+If something about your prompt was ambiguous and the AI had to choose an interpretation, identify where that happened. Perhaps you didn’t specify an output format, and it chose to print results instead of returning them. Now you have to decide if you want to accept that or modify the code.
+
+This understanding phase is crucial; don’t skip it. Even if you’re going to test the code, understanding it by reading is important because tests might not cover everything (and reading is faster for some obvious things).
+
+Last, consider the AI’s assumptions. AI often goes for the “majority” or most common interpretation (which leads us to the next section).
+
+The “Majority” Problem: Most Common Doesn’t Mean Most Appropriate
+AI models trained on lots of code will often produce the solution that’s most represented in that training data (or the simplest solution that fits). I call this the majority solution effect. It’s correct in general cases, but it might not be the best for your specific situation.
+
+For example, if you ask for a search algorithm without further context, the AI might output a basic linear search, because that’s straightforward and common. Maybe you actually needed a binary search, but the AI didn’t know that efficiency was critical, because you didn’t say so. Linear search works for many moderate cases but not if performance is key.
+
+Similarly, the AI might use a global variable because many simple examples do, but perhaps in your project, that’s not acceptable practice.
+
+Be mindful that the AI’s solution might optimize for a generic scenario. As a human developer, you have insight into context that the AI lacks.
+
+To address this:
+
+Identify assumptions in the code. If it assumes a list is sorted or an input is valid, was that assumption OK? Did you specify it? If not, maybe it should have included a check.
+
+Consider alternatives: If you know multiple ways to solve the problem (like different algorithms), did the AI pick one? Is it the one you want? If not, you can prompt for the alternative or just change it.
+
+If the AI code works for the “usual” case but not for edge conditions that matter to you, that’s something to fix. For instance, maybe it didn’t consider integer overflow in some math. In many training examples, that might not have been addressed, but in your context, it could be important.
+
+Understanding that the AI tends toward generic solutions will make you better at reviewing its code. It’s not magic or tailor-made; it’s a very educated guess at a solution. The tailoring is your job.
+
+Code Readability and Structure: Patterns and Potential Issues
+AI-generated code often has some telltale patterns. It might:
+
+Include more comments than usual or oddly phrased comments (since it learned from tutorial code, which tends to be heavily commented)
+
+Use certain variable names consistently (like i, j, k for loops)
+
+Lay out code in a somewhat verbose style (to cover general cases)
+
+Check for these and consider whether they match your project’s style. The code might be functionally fine but need a readability pass. In that pass, you may want to:
+
+Rename variables to be more descriptive or consistent with your codebase.
+
+Remove or refine comments. If it added a comment like # check if number is prime above a self-explanatory if statement, you could remove that. But if it has a comment explaining a complex bit of logic, that’s good—keep or improve it.
+
+Ensure consistent formatting by running the code through a linter or formatter (like Black for Python or gofmt for Go) to match the spacing and bracket styles you want.
+
+Also look for any unusual structure. Did the AI define multiple classes or functions when you expected one? Sometimes it might break a problem into multiple functions because that’s how a training example did it. If that’s overkill, you can inline them (or vice versa). Is the code too clever or too naive? AI sometimes produces a very straightforward solution or, occasionally, a fancy one-liner. Does that align with your team’s preferences? If not, adjust accordingly.
+
+Other potential issues to watch out for include:
+
+Off-by-one errors
+Yes, AI can make those, too. For example, loop boundaries can be tricky. If you have time, mentally test a simple case through the loop.
+
+Unhandled exceptions
+Does the code assume that a file opens successfully or that all input is in the correct format? Add error handling if it’s needed.
+
+Performance pitfalls
+Maybe the AI is using an inner loop on a large dataset for membership checks, even though a better approach exists, like using a set. The AI solution might be correct but not optimal.
+
+Library usage
+If the code uses a library, ensure it’s one you want to use (and that it’s available). Sometimes it might use, say, numpy for a simple sum (because it saw that in examples in its training data). If dragging in that dependency isn’t worth it, you can switch to pure Python or the library you intended.
+
+Inconsistencies
+Occasionally, the AI code might have minor inconsistencies, like a function docstring saying one thing but the code doing another (if it revised the logic but not the comment, for instance). Fix those.
+
+Minor syntax issues
+This is rare with well-tested models but not impossible in languages where it might confuse something.
+
+Using outdated APIs
+The AI might use an old version of a library’s function that has changed, for instance. If you see a function call you don’t recognize, quickly check the library docs to ensure it’s correct for the version you use.
+
+Placeholders
+If the AI output uses placeholders like “Your code here” (rare, but it can happen in a generic template), fill those in.
+
+In short, treat the AI code as if an intern wrote it and left for the day. You need to review it for quality and integrate it properly.
+
+Debugging Strategies: Finding and Fixing Errors
+Let’s say you run the code (or write tests for it, which we’ll cover soon) and something’s not working. Debugging AI-generated code is no different than debugging your own or someone else’s code—except you didn’t write it, so you might be less familiar. But because you’ve carefully read it already, you’re in good shape (see Figure 5-1).
+
+
+Figure 5-1. The AI code debugging cycle: execute AI-generated code, capture errors, provide error context back to AI for analysis, implement suggested fixes, and iterate until resolution.
+Here’s a six-step approach to debugging:
+
+Reproduce the issue.
+
+Run the function or code with inputs that fail. Observe the output or error.
+
+Locate the source of the issue.
+
+Use typical debugging techniques like print statements, or use a debugger to step through. If it’s a logical error (wrong output), trace the logic manually or with prints to see where it diverges from your expectations.
+
+Check the prompt against the code.
+
+Sometimes the bug is simply that the code didn’t fully implement the requirement, like if you asked for something to be sorted but it isn’t sorting properly. That might mean the AI’s logic is flawed or that an edge case (like an empty list) isn’t handled.
+
+Leverage the AI to debug!
+
+You can actually feed the problematic code back into the AI and say, “This code is giving the wrong result for X. Can you help find the bug?” Often, it will analyze it (like a code review) and point out issues. For example, maybe it sees that a loop should go to len(arr) but goes to len(arr)-1. It might catch that quicker. (Be mindful to not fully trust it either—but it’s like asking a colleague to help debug.)
+
+Fix the code.
+
+Now you have a choice: fix it manually or prompt the AI for a corrected version. If the fix is obvious, just do it. If it’s not, you can try something like “The above function fails on input X (expected Y, got Z). Please correct it.” The AI might then adjust the code accordingly.
+
+Test again.
+
+Ensure the bug is resolved and that no new issues have been introduced.
+
+I recommend using test-driven debugging. If possible, write a few tests for critical functions (more on that in the testing section later in this chapter). Any failing tests will directly show what’s wrong. This can be faster than manual checking, for anything but the simplest functions.
+
+Finally, when debugging, be sure you ask why, not just what. Try to understand why the AI made the mistake. Was the prompt unclear on that point? This can inform how you prompt next time or whether you need to always double-check that aspect in AI outputs. For example, if you notice the AI often doesn’t handle empty inputs unless told, you’ll start always specifying that in prompts and reviewing for it.
+
+Refactoring for Maintainability: Making AI Code Your Code
+Once the code is functionally correct, consider refactoring it to align with your project’s standards and to make it easier to work with in the future. The AI’s job was to get you code quickly; your job is to polish it.
+
+Here is another six-step process, this time for refactoring:
+
+Align with style guidelines.
+
+Run the code through your formatter or linter. Fix any warnings like “Variable name should be lowercase” or “Line too long.” This instantly makes the code look like the rest of your codebase. Many AI tools do a decent job at style, but slight adjustments might be needed.
+
+Improve naming and structure.
+
+If the AI named functions _helper1 and _helper2 in a class, and you prefer meaningful names, rename them. If it created a bunch of small functions that are only used once, maybe inline them, unless they add clarity.
+
+Remove any unnecessary parts.
+
+For example, perhaps the AI included a main block or test code in the output that you didn’t ask for. If you don’t need that, remove it. Conversely, maybe it wrote everything in one function but you want to split it into smaller pieces for clarity; if so, do that split now.
+
+Add documentation.
+
+If this code is intended to be part of a library or a module that others will use, add docstrings or comments where appropriate. The AI might have commented some, but ensure it meets your standards. For example, maybe your project requires a certain docstring format with parameters and returns documented.
+
+Optimize if needed.
+
+Now that the code works, is it efficient enough? If this code might be called in a tight loop or on large data, check its complexity. The AI might not have used the most optimal approach (again, the “majority solution” might be a simple loop, not a more optimized approach). If performance is a concern, refactor to a better algorithm. You can again involve the AI:
+
+Optimize this code to run faster by using a set instead of a list for lookups.
+
+But you, as a developer, often know what pattern you want, so you might just implement that change.
+
+Simplify if needed.
+
+Sometimes AI code can be overly verbose. For instance, it might use an if-else with returns where a single return with a condition would suffice. While explicit code is not necessarily bad, you might want to simplify it to fewer lines to improve readability without losing clarity.
+
+The goal of refactoring is that if another developer pulls up this code later, it shouldn’t be obvious that “an AI wrote this.” It should just look like good code. That often means giving it the small human touches that make code clean.
+
+When you refactor, you need to verify you didn’t break anything. So let’s segue into testing.
+
+The Importance of Testing: Unit, Integration, and End to End
+Testing is always important, but it’s especially important for AI-generated code for two reasons.  First, since you didn’t write it from scratch, you want assurance that it will work in all cases. Second, if you prompt the AI for changes later or integrate more AI code, tests help you ensure that any new changes don’t break the existing functionality. Let’s look quickly at different kinds of tests:
+
+Unit tests
+Write tests for each function or module you got from the AI, particularly covering edge cases. For our prime example, you might test with a prime number, a nonprime, 1 (an edge case), 0 or negative (maybe defining the expected behavior), a large prime, and so on. If the code passes all those tests, it’s likely correct.
+
+You can even ask the AI to generate these tests:
+
+Write PyTest unit tests for the above function, covering edge cases.
+
+It often does a decent job. Still, review them to ensure they’re valid and cover what you think is necessary.
+
+Integration tests
+If the AI code interacts with other parts of the codebase, like a function that uses a database, write a test that calls it in context. Does it actually store to the database what it should? If it produces output consumed by another function, chain them in a test.
+
+End-to-end tests
+If this code is part of a larger workflow, run a scenario from start to finish. For example, if the AI code was part of a web route, do a test request to that route in a test environment and see if the format, error handling, and everything else holds up.
+
+The level of testing you need to do depends on how critical and complex the code is. But even a quick manual test run or simple assert statements in a script are better than nothing for verification. Remember, testing doesn’t just find bugs; it locks down behavior. If you change something later (or an AI does), testing helps you ensure the code’s functionality doesn’t regress.
+
+Testing is also a good way to assert ownership. Once you’ve tested for and fixed any issues, you can be confident in the code. At this point, it’s fair to say the code is “yours,” just like any other code in the codebase. You understand it, you trust it, and you have tests to guard it.
+
+A Note on AI and Testing
+Some AI coding tools are starting to integrate testing suggestions. For example, CodeWhisperer will sometimes suggest an assert after a piece of code. Use those suggestions as a starting point, but don’t assume they’re 100% comprehensive. Think of creative edge cases⁠—that’s one place where human intuition is still very valuable.
+
+Summary and Next Steps
+We’ve gone through generating, understanding, debugging, and refactoring the code. This loop might happen in a short span (within minutes, for a small function) or take longer (for a complex module, over hours or days, with intermittent AI assistance).
+
+It’s important to acknowledge that you, the developer, are responsible for the final code. AI is a tool to accelerate creation, but it won’t take the blame if something fails. There’s also a licensing or copyright risk: some AI providers say that outputs over a certain length might be statistically likely to contain copied material. It’s rare, and the providers mitigated the problem a lot, but just as you scan Stack Overflow answers for any obviously licensed text or attributions, do a quick check—especially if the output is big or too clean. For instance, if you prompt “implement quicksort” and the AI gives you 20 lines of pristine code, that’s probably fine and common knowledge. But if you ask for something obscure and get a large chunk of code, try searching a unique string from it online to see if it was pulled verbatim from somewhere. This issue has become more apparent recently, with documented cases of AI systems reproducing text from journal articles and other copyrighted sources. As part of responsible code ownership, developers should verify the provenance of any AI-generated content that appears to go beyond generic patterns or seems unusually specific to particular sources.
+
+Finally, integrate the code into your project: add it to your version control system, perhaps mentioning in your commit message that AI helped. There’s no requirement to do this, but some teams like to track it.
+
+Over time, you’ll likely modify this AI-generated code as requirements change. Treat it like any other code: don’t think, “Oh, that’s the AI’s code; I’ll ask the AI to change it.” You can, if you want, but you can also freely modify it by hand. Do whatever is most efficient and maintainable.
+
+Through careful review and testing, AI-generated code becomes just more code in your project. At that point, whether an AI wrote line 10 or you did is irrelevant—what matters is that it meets the project’s needs and standards.
+
+By following these practices, you harness the speed of AI coding while ensuring quality. You avoid the pitfalls of unquestioningly trusting AI output and instead integrate it into a professional development workflow.
+
+Next, Chapter 6 examines how AI tools can fundamentally transform the prototyping phase of software development. I will explore practical techniques for leveraging AI assistants to accelerate the journey from initial concept to working prototype, often reducing development time from days to hours. The discussion covers specific AI-powered prototyping tools, including Vercel v0 and screenshot-to-code utilities, along with strategies for iterative refinement under AI guidance.
+
+I will also address the critical transition process from AI-generated prototypes to production-ready code, examining both the opportunities and potential challenges that arise when AI becomes a central part of the development workflow. Through real-world case studies, I will demonstrate how developers are successfully using AI to test ideas rapidly while maintaining code quality—and avoiding common pitfalls that can emerge when moving too quickly from concept to implementation.
+
+Chapter 6. AI-Driven Prototyping: Tools and Techniques
+This chapter explores how AI-driven vibe coding accelerates the prototyping phase of software development. Prototyping is all about rapidly turning an idea into a working model. With AI assistants, developers can achieve in hours what might normally take days, quickly iterating on concepts. I’ll discuss techniques for going from concept to prototype with AI, compare popular AI prototyping tools (including Vercel v0 and screenshot-to-code utilities), and examine how to refine prototypes iteratively under AI guidance. I also address the crucial step of transitioning a rough AI-generated prototype into production-quality code. Throughout the chapter, I’ll also look at case studies where AI-driven prototyping led to successful outcomes and demonstrate both the potential and the pitfalls of this approach.
+
+Rapid Prototyping with AI Assistants
+Prototyping benefits greatly from the speed of AI-generated code. The goal in prototyping is not polished, production-ready code but a proof of concept that you can evaluate and refine. AI coding assistants shine here by producing functioning code quickly from minimal input. For example, instead of manually coding a UI mockup, a developer can describe the desired interface in natural language and let the AI generate the HTML/CSS or React components. This allows for a very fast idea-to-implementation cycle.
+
+One UX engineer describes how using a generative AI tool has completely transformed his workflow: “The speed at which I could generate functional prototypes with Generative AI was amazing. I built prototypes in a few hours [that] would normally take days.” The AI handles routine boilerplate and repetitive patterns automatically, freeing him to focus on higher-level design decisions. In prototyping, this means you can try out more ideas in the same amount of time. Another benefit is that AI can fill in the tedious parts of a prototype (basic UI components, form handling, sample data) almost instantly, allowing the human developer to concentrate on the core concept or unique feature being tested.
+
+However, it’s important to remember that a prototype’s code is often throwaway code. An AI may generate a working solution quickly, but that code might not be structured for maintainability or scale. This is acceptable in prototypes, where speed and experimentation matter more than elegance—as long as you plan to refactor or rewrite critical parts for production (I’ll discuss this process later in the chapter). As Chapters 3 and 4 explored, the AI can confidently handle about 70% of the coding for a prototype, while you guide the overall architecture and correct any critical flaws.
+
+Programming with intent, a concept introduced in Chapter 1, is essential here. You provide high-level instructions (the intent of what you want the prototype to do or look like) and let the AI fill in the implementation. To illustrate, let’s walk through a very simple prototyping example using an AI assistant. Suppose you have an idea for a sign-up page for a new service. You want to prototype the frontend quickly, so you start with the following developer prompt:
+
+Create a simple HTML page for a sign-up form with fields for Name, Email, and Password, and a Submit button. Make it look presentable with basic styling.
+
+A modern code assistant like Cline might provide a complete HTML/CSS example:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 400px; margin: 2em auto; }
+    form { display: flex; flex-direction: column; }
+    label { margin-top: 1em; }
+    input, button { padding: 0.5em; font-size: 1em; }
+    button { margin-top: 1em; background: #4CAF50; color: #fff; border: none; }
+  </style>
+</head>
+<body>
+  <h2>Sign Up</h2>
+  <form>
+    <label>Name: <input type="text" name="name" required></label>
+    <label>Email: <input type="email" name="email" required></label>
+    <label>Password: <input type="password" name="password" required></label>
+    <button type="submit">Create Account</button>
+  </form>
+</body>
+</html>
+This AI-generated code is a decent starting point for a prototype of the sign-up form. It includes a basic layout and some inline CSS for styling. As a developer, you didn’t have to write any HTML/CSS by hand—you simply described the outcome, and the AI provided an implementation. This demonstrates programming by intent: you focus on what the UI should do, and the AI figures out how to do it.
+
+Of course, this is a trivial example. In practice, prototypes can be more complex and involve multiple files, frameworks, or data. But the principle is the same: You use the AI to create a first draft swiftly. You might then open this prototype in a browser, see how it looks, and refine it further. That leads me to the next topic: using specialized AI prototyping tools that go beyond plain-language prompts.
+
+AI Prototyping Tools
+While general-purpose assistants like Gemini, ChatGPT, and Claude can generate prototype code from prompts, the landscape of specialized AI-assisted prototyping tools continues to evolve rapidly. As I write this, the available tools offer different approaches to the fundamental trade-off between fidelity and control in AI-generated prototypes.
+
+The ecosystem has matured to serve distinct prototyping needs. Some tools excel at transforming visual designs into code, allowing designers to upload screenshots or sketches and receive working HTML, CSS, or React components within seconds. This “screenshot-to-code” capability dramatically accelerates the design-to-code process, particularly valuable when you have hand-drawn sketches or Figma designs that need rapid implementation. Tools like Vercel v0 exemplify this approach, offering high fidelity to the original design while trading off some control over code structure.
+
+Other platforms focus on generating complete applications through conversational interfaces. These allow users to describe functionality in natural language and receive full stack implementations. For instance, a designer wanting a quick app without coding might use tools like Lovable or Bolt.new, which offer high-level prompt interfaces that can scaffold entire applications. Some designers report building functional prototypes in hours that would traditionally take days, with the AI automatically handling tedious components and patterns.
+
+A third category integrates AI directly into development environments, functioning as intelligent pair programmers during the prototyping phase. These AI-augmented IDEs like Cursor, Windsurf, and Cline allow developers to maintain more control over the code generation process while still benefiting from AI acceleration. The distinction often lies in workflow philosophy: some prioritize automated application of changes for rapid experimentation, while others require explicit acceptance of modifications for more careful iteration.
+
+The common thread across all these approaches is their ability to compress the journey from concept to working prototype. However, they differ significantly in two key dimensions that shape their utility for different users and use cases.
+
+Fidelity refers to how closely the generated output matches your input or intention. Screenshot-to-code tools typically offer high fidelity to visual designs but may produce code that doesn’t align with your architectural preferences. Conversational tools might interpret your requirements more loosely, generating functional but generic implementations that require refinement.
+
+Control encompasses your ability to guide and modify the generation process. Some tools operate as black boxes that produce complete outputs, while others allow iterative refinement through continued dialogue or direct code editing. This dimension becomes crucial when you need specific architectural patterns, performance optimizations, or integration with existing codebases.
+
+Understanding these trade-offs helps in selecting the right tool for your prototyping needs. A designer validating a new interaction pattern might prioritize fidelity and speed, accepting less control over implementation details. A developer exploring technical feasibility might value control and transparency, even if it means more manual intervention in the generation process.
+
+None of these tools produces production-quality code without human oversight. They typically deliver what I call the “80% prototype”—functional enough to test concepts and demonstrate to stakeholders but requiring additional work for production deployment. The remaining 20% often involves security hardening, performance optimization, error handling, and architectural refinement.
+
+Even during rapid prototyping, a quick code review remains essential. While you might not polish every detail in a prototype, scanning for obvious issues like exposed API keys or insecure data handling prevents problems from propagating into later development stages. Most modern tools provide transparency into their generated code, allowing you to inspect and understand what’s being created.
+
+As the AI prototyping landscape continues to evolve, the specific tools will undoubtedly change, but these fundamental considerations of fidelity versus control, and the need for human oversight, will remain constant. The key is understanding your prototyping goals and selecting approaches that align with your specific needs, whether that’s rapid visual implementation, functional demonstration, or technical exploration.
+
+From Concept to Prototype: Iterative Refinement
+One of the strengths of AI-driven prototyping is the iterative loop: you can generate an initial version and then refine it by interacting with the AI. Instead of manually editing code, you just tell the AI what you want changed (see Figure 6-1). While I advocate a more responsible approach than pure “seat-of-the-pants” vibe coding, the fast feedback cycle is definitely something to embrace in prototypes.
+
+
+Figure 6-1. Iterative prototype refinement process: initial prompts generate baseline prototypes, and developer feedback drives successive improvements, creating increasingly refined solutions through AI collaboration.
+Most AI prototyping tools keep a history or context of your requests, which is extremely useful. It means the AI remembers the purpose of your app and previous instructions, so you don’t have to re-explain everything each time. This context persistence is a hallmark of vibe-coding environments: the conversation with the AI becomes the development log.
+
+Here’s how a typical iterative refinement might go:
+
+Step 1: Initial generation
+You provide a prompt or input to create the prototype:
+
+Generate a basic expense-tracker app with a form to add expenses and a table to list them.
+
+Step 2: Review and run the code
+You get the generated code and run it. Maybe it works, but you notice some things that could be improved. For example, the UI is functional but plain, or the table doesn’t sort the expenses.
+
+Step 3: Refine your prompts
+You go back to the AI and provide additional instructions. For instance:
+
+Make the expense list sortable by amount or date.
+
+The AI might modify the code to include sorting logic or use a library for sortable tables:
+
+Add some color styling, maybe use a modern CSS framework.
+
+The AI could integrate a CSS library (like Tailwind or Bootstrap) or just add custom styles to make it look nicer:
+
+Validate the form so you can’t add an expense without a name and amount.
+
+The AI might add simple frontend validation.
+
+Each of these prompts modifies the prototype. Because the AI understands the context (tools like Cursor and ongoing chat tools will keep the code state), it can often apply changes in the right places—for example, inserting validation code in the form or rewriting the table rendering to include sortable columns.
+
+Step 4: Rinse and repeat
+After each refinement, you check the result. If the AI introduced a new issue or didn’t do exactly what you intended, you clarify or fix it via prompts:
+
+The sorting is backward—please sort ascending by default.
+
+The new color scheme is good, but make the header dark blue instead of black.
+
+Each iteration cycle is quite fast—often taking just a few seconds of processing—which means you can go through a dozen iterations within an hour. Compared to manually coding and checking all those changes, the AI approach can be significantly faster. That’s especially true for broad changes, like restyling or adding a feature.
+
+Importantly, iterating with AI requires clear communication. This is where your prompt engineering skills come into play. The more explicit and clear you are about the change you want, the more likely the AI will do it correctly. For example, saying “Make it look nicer” is vague. A more specific prompt gives the assistant a concrete direction:
+
+Apply a light theme with a blue header and increase the font sizes for readability.
+
+If you’re using a tool like Vercel v0 or Lovable, you might even point to a part of the UI using its interface and say, “Change this to X.”
+
+Let’s look at a short conversational iteration process between a developer and an AI coding assistant:
+
+Generate a React component for a to-do list. It should display a list of tasks and a text input to add a new task.
+
+The AI produces a React component with state for tasks and renders a list, an input, and a button to add tasks:
+
+Great. Now make each task editable and add a checkbox to mark it complete.
+
+The AI updates the code, rendering each task with a checkbox and an edit function and modifying state accordingly. The developer runs the app and finds that editing works, but there’s no delete button:
+
+Add a delete button for each task.
+
+The AI adds a delete feature in the code:
+
+The layout is a bit cramped. Add some basic CSS to space out the list items and make the font a bit larger.
+
+The AI outputs CSS styling, possibly as a <style> in the component or a separate CSS snippet:
+
+Looks better!
+
+This kind of back-and-forth could continue until the prototype meets the vision. In the end, the developer gets a working prototype for a to-do list app, with create, edit, complete, and delete functionalities—all built via natural-language requests and quick AI code outputs.
+
+Throughout this process, remember that the developer remains the director of what happens. The AI might propose a way to implement a feature, but you decide if that fits your needs. Sometimes the AI’s implementation is correct but not what you expected (maybe it uses a different UI approach than what you had in mind). You can either accept it (if it doesn’t harm the prototype goals) or instruct the AI to change to your preferred approach.
+
+Evolving a Prototype Toward Production
+A prototype is meant to be a proof of concept and a tool for learning what works. Once it has served that purpose—say, you’ve validated the design with users or proven that a certain feature is feasible—the next step is often to turn it into a production application. This transition is a critical juncture. AI can still help, but human developers must sand down the rough edges of the prototype. This section looks at some key considerations when moving from prototype to production code.
+
+First, review the architecture and code structure carefully. Prototypes can be messy under the hood. Perhaps all your code ended up in one file or you bypassed certain best practices for speed. Now is the time to introduce a proper structure. For example, if the prototype was a single-page script, you might separate it into multiple modules; for a web UI, you might introduce a proper component structure; for a backend, you might set up a formal model–view–controller (MVC) architectural pattern.
+
+While AI wrote much of the prototype, you, as the developer, understand the architecture goals best. You might even start a fresh project and use the prototype as a reference or as scaffolding, perhaps reusing some of the prototype code but generally treating it as throwaway code. Others might incrementally refactor the prototype codebase into shape, with AI suggesting refactorings or generating tests to ensure nothing breaks during cleanup.
+
+Next, add error handling and edge cases. Prototype code often focuses on the sunny-day scenario, but what if the API call fails? What if the input is empty? Go through each feature systematically and consider potential failure modes.
+
+AI can help you brainstorm edge cases, given a prompt like this:
+
+What are potential error cases for this feature and how to handle them?
+
+The assistant will likely list some scenarios (network errors, bad input, concurrency issues) for which you can implement handling (or ask AI to help implement it). Ensuring your code’s robustness is part of making it production-ready.
+
+Your prototype code probably isn’t optimized, so check for any parts that are inefficient or could pose security issues. For instance, maybe the AI in the prototype used a naive algorithm that works on small test datasets but would be slow with real data. Identify such spots and optimize them. (I’ll cover common AI-generated code flaws in Chapter 8.)
+
+One strategy is to run performance tests or use profilers on the prototype to see bottlenecks, then ask AI to help optimize that function. Definitely review security features like authentication and data handling too—it’s not uncommon for AI prototypes to use SQL queries without proper parameterization (risking SQL injection attacks) or to include sensitive information. These problems must be fixed. A 2021 study found that about 40% of AI-generated code had potential vulnerabilities. So part of productionizing is staying vigilant. Run static analysis and/or security tests on the code manually, or prompt the AI to “scan this code for security issues.”
+
+Prototypes often lack documentation, which you’ll need to add as you formalize the code: a clear, human-reviewed explanation of each module will help future team members, as well as you, when you revisit the code months later. Once you’ve cleaned up your code, you might prompt an AI tool to produce a Markdown API document or README based on the code that describes how the system works. Chapter 1 discussed how AI can produce explanations of code; this is a great moment to leverage that.
+
+It’s crucial to test your prototype thoroughly, as you learned in Chapter 5. You might write unit tests for core logic, integration tests for major flows, etc. You can accelerate this by asking the AI to generate test cases:
+
+Write Jest tests for the to-do list component covering adding, editing, completing, deleting tasks.
+
+Then run and adjust the tests it generates. Having a good test suite gives you confidence as you refactor the prototype code.
+
+Sometimes you might decide to replace certain sections of your code entirely—such as if the prototype used some quick-and-dirty library or a hack that isn’t suitable in the long term. AI can speed this up as well. Suppose your prototype code uses local arrays for data, but now you need a proper database integration. Your prompt might be something like this:
+
+Integrate an SQLite database for storing the tasks instead of an in-memory array.
+
+The AI can provide a starting point for this integration, which you should then refine.
+
+In making these changes, it’s wise to switch your mindset from “rapid prototyping mode” to a more disciplined engineering approach. The AI is now your assistant in improving code quality—it’s no longer just spitting out quick features. The dynamic is a bit different: you might evaluate each AI suggestion more critically now that stability and quality are your top priorities. As I mentioned back in Chapter 4, senior developers can derive enormous benefit from AI because they know what to accept and what to fix. At this stage, you’ll be exercising that senior mindset heavily: you have a vision of the final system, so you task the AI with specific improvements or implementations.
+
+To ground this discussion, let’s consider a brief example. Imagine a solo developer, Jane, who wants to build a small web app that converts data from CSV files into charts. She uses an AI assistant to get a quick prototype done in just one weekend: a basic Node.js script with an API, plus a simple frontend to upload CSVs and render charts using a JavaScript chart library.
+
+She demonstrates this prototype to a few potential users and gets positive feedback, so Jane decides to turn it into a real product (a web service). Here’s how she navigates the transition:
+
+Hardening the backend
+The prototype’s Node.js API had no  authentication (anyone could upload data). For production, she needs user accounts and auth. She uses the AI to integrate an authentication system (maybe JWT-based). The AI provides a scaffold, but she carefully reviews it to ensure passwords are hashed properly and tokens are secure. She also adds input validation to the upload endpoint (the AI had not done that), using a combination of AI-suggested code and her own tweaks.
+
+Refactoring the frontend
+The initial frontend was a single HTML file with script  tags pointing at a CDN for dependencies. Jane decides to refactor into a structured React app for maintainability. She first asks the AI to refactor her project to be more production-ready by using a build system and npm rather than script tags. She then asks the AI to help integrate them as React components. For example, it turns the chart-rendering code from the prototype into a <Chart> component. Jane uses the AI to expedite writing these components, but she ensures that the state management and component hierarchy follow best practices (something the prototype didn’t consider deeply).
+
+Testing and checking performance
+Jane writes unit tests for critical functions (CSV parsing, data transformation). When she’s unsure about edge cases, she queries the AI:
+
+What edge cases should I test for CSV parsing?
+
+It suggests scenarios like empty fields and irregular columns, which she incorporates into her tests. She also notices that the prototype loaded entire CSV files into memory; for large files, this could crash. She modifies the code to stream the processing and uses AI to double-check her stream logic. Now the app can handle bigger files more reliably.
+
+Polishing the UI
+The prototype UI was utilitarian. For her product, Jane spends a bit more time on user experience. She asks the AI to recommend a responsive layout and perhaps integrate a CSS framework. The AI adds Bootstrap, which she then uses to improve the look (forms, buttons, layout). She manually fine-tunes some CSS afterward. This polishing stage is less about heavy coding and more about design choices, but AI still helps by providing quick code for standard UI patterns (like a navigation bar and a loading spinner).
+
+After these efforts, the once-rough prototype is a far cleaner, more secure, and more scalable application ready for real users. Jane deploys it, feeling confident because she added tests and reviewed the AI-generated code. This process from prototype to production might have taken her a couple of weeks, whereas writing the entire product from scratch would have taken much longer. The AI accelerated the initial prototype and continued to assist in the transition, but Jane’s human oversight and restructuring were indispensable in reaching production quality.
+
+Addressing Challenges in AI Prototyping
+While AI-driven prototyping is powerful, it’s not without challenges. As a developer, you should be aware of these and know how to mitigate them. Two areas of particular interest are scope creep and integration.
+
+Because it’s so easy to add features with AI, you might be tempted to keep going and going, adding “one more thing” to the prototype, a phenomenon known as scope creep.  This can lead to an ever-growing prototype that tries to be the final product. Remember the purpose of a prototype: to focus on the key question you want to answer or the core experience to demonstrate. If you find yourself implementing login systems, payment processing, etc., ask if that’s really needed at the prototype stage. It might be better to stub those out (the AI can generate a fake login flow that isn’t real, just to simulate it). Keeping the prototype focused will save you time and make it easier to throw away or rework later.
+
+Stay Focused
+Write down the goal of your prototype (“Demonstrate that users can upload a CSV and get a chart to test viability”), and use that as a North Star. Use the AI to get to that goal quickly, and resist the allure of gold-plating the prototype.
+
+Second, there’s the question of integration to real systems. Prototypes often use mock data or simplified subsystems. If your AI prototype uses dummy data or a local file, integrating it with real databases or services in production can be nontrivial. Be mindful when prototyping that some shortcuts were taken. For example, maybe the prototype emails weren’t actually sent but just logged to console. In production, you’ll need a real email service. The AI can help integrate those later, but it’s good to keep track: maintain a list of “things to address if we move forward” while prototyping. That way you won’t forget which parts were temporary. If working in a team, communicate these clearly. For instance, you might leave a comment in code: // TODO: integrate real email service here. Many AI tools actually include such TODO comments themselves when they generate a simplified solution, which is helpful.
+
+By anticipating these challenges, you can use AI prototyping effectively without falling into its traps. When it is used thoughtfully, the result is a robust prototype developed in record time, ready to either be transformed into a final product or set aside after extracting the lessons it offered.
+
+Summary and Next Steps
+In this chapter, you saw how AI-assisted vibe coding turbocharges the prototyping process. By letting AI handle the heavy lifting of code generation, developers can move from concept to working model with unprecedented speed. I covered tools like Vercel v0 for UI generation, Lovable for full stack prototypes, and AI-augmented IDEs like Cursor and Windsurf—each enabling different aspects of rapid prototyping. I also emphasized the iterative nature of AI prototyping: generating, testing, and refining in quick cycles, with natural-language prompts guiding the changes.
+
+While AI-driven prototyping can produce a functional demo in hours, we also discussed the critical transition to production. The message is clear: a prototype is not a final product. It’s the first draft. Human developers must refactor and harden the code, with AI continuing to assist in that journey (suggesting improvements, generating tests, etc.). Case studies of individuals and teams using these techniques highlight the real productivity gains—prototypes built in days instead of weeks, enabling faster user feedback and business decisions.
+
+By now, you should appreciate how vibe coding makes prototyping feel more like brainstorming with an assistant rather than grinding out boilerplate. It’s a fundamentally different vibe: more conversational, more high-level, and a lot faster. However, you’ve also seen the importance of maintaining code quality awareness even in a quick prototype—and definitely when evolving it beyond the prototype stage.
+
+In Chapter 7, I’ll shift focus from rapid prototyping to comprehensive web application development with AI assistance. While prototyping explores possibilities, full-scale development demands systematic approaches to architecture, implementation, and deployment.
+
+
+Chapter 7. Building Web Applications with AI
+This chapter shifts the focus from prompting quick prototypes to developing complete web applications using AI assistance. Web apps typically involve a frontend (often written in frameworks like React, Angular, or Vue), a backend (APIs, databases, servers), and glue to connect everything. Vibe coding can accelerate each of these layers.
+
+I’ll walk you through an end-to-end workflow for building a web application with an AI pair programmer, including:
+
+Setting up the project and its scaffolding
+
+Coding the frontend UI
+
+Implementing backend logic
+
+Integrating with a database
+
+Testing and validating the whole stack
+
+Along the way, I’ll highlight AI development patterns for frontends (for example, having AI generate React or Vue components from descriptions) and backends (writing routes, business logic, and database queries through natural-language prompts). I’ll also cover how to optimize collaboration between humans and AI in a full stack project, ensuring that each side contributes its strongest work. By the end of this chapter, you should have a clear roadmap for using AI not just for isolated coding tasks but for managing entire web development workflow efficiently and effectively.
+
+Setting Up the Project: Scaffolding with AI
+Every web application starts with some scaffolding—the initial setup of build tools, file structure, dependencies, etc. AI can automate the creation of a lot of the boilerplate. Modern web frameworks often come with command-line interface (CLI) tools that can generate a base project, but you might still need to configure certain things or integrate additional libraries. An AI assistant can help by either guiding you through these CLI tools or setting up custom project structures on demand.
+
+For example, suppose you want to start a new application project using React for the frontend and Express for the backend. A pre-AI workflow for this task would probably look something like this:
+
+Run a CLI tool or Vite to set up the React project.
+
+Initialize an Express app (perhaps with npm init and installing Express).
+
+Set up a proxy for development or configure Cross-Origin Resource Sharing (CORS) so the React frontend can talk to the Express backend.
+
+Maybe integrate a database like MongoDB or set up an SQLite file for simple usage.
+
+Using an AI coding environment like Cursor or Cline, you can instead describe your desired setup in one go:
+
+Set up a new project with a React frontend (using Vite) and an Express backend. The backend should serve a REST API for a to-do list and use an in-memory array to start. Configure the frontend to proxy API requests to the backend in development.
+
+An advanced AI IDE can take this instruction and do the following:
+
+Create two directories (frontend and backend).
+
+Run npm create vite@latest (if it has shell access) or template out a basic React app.
+
+Initialize a basic Express server file in the backend, with an endpoint like /api/to-dos (returning some sample data).
+
+Include a package.json in each directory with relevant scripts (like start both).
+
+Set up communication between frontend and backend by either configuring a proxy in the React development server or providing instructions for implementing CORS headers.
+
+Within a couple of minutes, you’ll have the skeleton of a full stack web app. Even if the AI doesn’t do everything automatically, it might present you with code and the instructions you need to finalize it (for example, “Add this proxy setting to your React package.json file”). This saves a lot of mindless setup time and allows you to focus immediately on features.
+
+If you aren’t using an AI IDE, you can still use ChatGPT or another assistant step-by-step as you go; for example:
+
+I want to create a new React app. What commands should I run?
+
+The AI can guide you through steps or recommend newer alternatives like Vite or Next.js:
+
+Now set up an Express server with a /api/to-dos route.
+
+It can generate the code for the Express server, which you copy into a file:
+
+How do I connect my React app to this API during development?
+
+It might suggest either a proxy configuration or tell you how to call the API (including the full URL, if not proxying).
+
+This way, even setting up the basic plumbing becomes a conversation rather than a hunt through documentation. As noted in earlier chapters, programming by intent means you tell the AI what outcome you want, and it figures out the steps. Setting up a project is a perfect scenario for that.
+
+At this stage, it’s important to assert your architectural decisions. The AI will follow your lead. Humans are essential for architectural and high-level decisions, so decide on the stack and major patterns yourself: Do you want a monorepo or separate repos for front and back? Will you use REST or GraphQL? Which database?
+
+Once you have these in mind, you can instruct the AI accordingly:
+
+Also set up a basic Prisma schema for the SQLite database.
+
+Or:
+
+Include a GraphQL server instead of REST.
+
+The AI might not perfectly execute complex setups, but it will get the bulk of the work done, and you can refine from there.
+
+Many experienced developers integrate these steps into project templates or use boilerplate generators, but AI offers a more flexible approach: you can customize on the fly using natural language. This means if your project is slightly unusual (maybe you need three services instead of the usual two tiers, or you want to preconfigure a particular library like Tailwind CSS), just ask the AI to include what you want.
+
+Frontend Development Patterns with AI
+Once the scaffolding is ready, developing the frontend of a web app is a major part of the effort. This section explores how you can leverage an AI pair programmer for your frontend code.
+
+Implementing components from descriptions
+You can ask the AI to create components by describing their functionality and appearance; for example:
+
+Create a React component called TodoList that takes a list of to-do items and displays them. Each item should show its title and a checkbox to mark it complete.
+
+The AI should produce the code as a functional component, with props and state as needed:
+
+Create a Vue component for a login form with inputs for username and password, and emit an event with the form data on submit.
+
+The AI will likely output the <template>, <script>, and <style> sections accordingly. You, as the developer, skip writing boilerplate and directly get the structure you need. It’s then easy to tweak if needed. Often the AI will even include basic validation or state handling, if your prompt implies that they’re needed.
+
+It’s important to ensure consistency at this stage. If you generate multiple components in isolation, you might need to adjust them to work together. For instance, if the TodoList expects items as a certain prop shape, make sure any component that uses TodoList provides that. You can either generate components in one prompt (so the AI is aware of everything) or simply wire them up yourself and ask the AI to fix any mismatches.
+
+Styling and layout
+CSS and styling can be tedious. Describe the look you want and let the AI handle the CSS details:
+
+Style the to-do list component: use a flex column for the list, add some spacing, and change the text color of completed items to gray and crossed out.
+
+For the login form component, center it on the page and make the input fields larger with rounded borders.
+
+The assistant can output CSS-in-JS, plain CSS, or inline styles, depending on context. If you’re using a framework like Tailwind CSS, you could even ask it to output the appropriate classes (though keep in mind that not all models know Tailwind thoroughly).
+
+The point is: you can iterate on design without manually fiddling with CSS values. This keeps your focus at a higher level of abstraction—specifying what looks good rather than writing every margin and color.
+
+Integrating APIs and state management
+Web frontends often need to fetch data from backends and manage state with something like Redux, context, or simple component state. AI can help write these integration pieces; for example:
+
+Add code to fetch the to-do list from /api/to-dos when the TodoList component mounts, and store it in state.
+
+Implement a function in the TodoList that, when a checkbox is toggled, sends a POST request to /api/to-dos/{id}/complete and then updates the state accordingly.
+
+The AI can generate the useEffect hook in React to do the fetch or the mounted() hook in Vue. It can also stub out the HTTP calls (using fetch or Axios, etc.). You’ll want to confirm that the API endpoints and payloads match what your backend expects (if you’ve built the backend or have a spec for it).
+
+If you haven’t built the backend yet, you might simultaneously be using the AI to create it—we’ll get to that soon. But you can work on front and back in parallel with AI assistance, because each can be specified and generated relatively independently, as long as you keep track of the interface between them.
+
+Handling complexity with AI guidance
+If your frontend has complex logic, such as dynamic form validation rules, conditional rendering, or intricate user interactions, you can implement these step-by-step with AI. A good practice is to break the problem down:
+
+Add a feature: when the user checks the “complete” box on a to-do, fade out that list item (CSS transition), then remove it from the list after 1 second.
+
+The AI might produce the code to add a CSS class on check and use a timeout to remove the item, including the necessary CSS for fading out:
+
+The form has an optional field for ‘notes’. Only show the notes text area if an ‘Add notes’ checkbox is checked.
+
+The AI can modify the component state and JSX to conditionally render the notes field.
+
+Each of these can be an iterative prompt. Essentially, you describe the UX behavior and AI writes the code. Always test after each addition to ensure it behaves as expected.
+
+Framework-specific tips
+Different frameworks have different idioms:
+
+In React, the AI might use hooks (like useState, useEffect). Double-check that it’s following best practices (for instance, that the dependencies array in use​Ef⁠fect is correct).
+
+In Vue, the AI might output Options API style or Composition API style depending on what it has seen. If you prefer one, you should specify that (for instance, “Use Vue 3 Composition API”).
+
+In Angular, the AI can generate components, but Angular has a steeper learning curve. The AI might be able to produce a template, a TypeScript class, and basic service injection on request, but you’ll likely need to do more manual work or use Angular CLI for structure, then ask AI to fill in specific parts (like form validation logic).
+
+Backend/API Development Patterns with AI
+Now let’s turn to the backend. Using AI to build the server side of a web application follows a similar paradigm: you describe the endpoints, data models, and logic you want, and the AI produces code. Common backend components include route handlers, business logic, database interactions, and validations. AI can help with all of these.
+
+Implementing API endpoints
+Suppose you’re building a RESTful API for your to-do list app. You might have endpoints like GET /to-dos, POST /to-dos, PUT /to-dos/:id, DELETE /to-dos/:id.  You can go endpoint by endpoint:
+
+In the Express app, add a GET /api/to-dos route that returns the list of to-dos (just use an array stored in memory for now).
+
+Add a POST /api/to-dos route that accepts a JSON body and adds a new to-do to the list. Return the new to-do with an ID.
+
+The AI will write the Express route handlers accordingly, likely using something like app.get('/api/to-dos', ...). If you’ve indicated that you’re using Express with JSON, it might include the necessary middleware if it’s not already present:
+
+app.use(express.json())
+As your backend grows, you can ask the AI to refactor:
+
+Refactor the Express routes into a separate router module.
+
+It might split the routes out into a separate file, which is a good practice for maintainability.
+
+Database integration
+You might use in-memory data for a prototype, but for a more complete application, you’ll want a database. Let’s say you choose MongoDB or PostgreSQL. You can prompt:
+
+Integrate MongoDB into the Express app using Mongoose. Create a to-do model with fields: title (string), completed (boolean). Modify the GET/POST routes to use the database instead of an in-memory array.
+
+The AI may output the Mongoose model definition and adjust the route handlers to query the database (like Todo.find() for GET and Todo.create() for POST). Similarly, for SQL, you could ask it to set up an object-relational mapping (ORM) like Prisma or Sequelize. Keep in mind you might need to provide configuration details (like connection strings). The AI might not know your database URI; you’ll have to slot that in. But it will handle the generic code.
+
+Business logic and validation
+If your backend has specific rules (for example, that users cannot delete a to-do that is marked important or that list titles must be unique), you can encode those via AI:
+
+Add validation to the POST /api/to-dos route: reject if the title is empty or longer than 100 chars, and return 400 status.
+
+The AI will include checks and send proper responses.
+
+Add logic: when a to-do is marked complete (say via PUT /api/to-dos/:id), if all to-dos are complete, log a message ‘All done!’
+
+It can insert that logic in the PUT handler.
+
+You describe these requirements in plain terms, and the AI modifies the code accordingly. You still need to test that the code does what you expect.
+
+Using frameworks or boilerplates
+Many web backends use frameworks beyond raw Express (like NestJS for Node or Django for Python). AI can work with those, too, though you may have to break down more involved tasks:
+
+For Django (Python), you might prompt:
+
+Create a Django model for to-do with fields X, and corresponding views for list and create.
+
+The AI might output model code and a generic view or DRF (Django REST Framework) serializer/viewset if it knows that context.
+
+For Ruby on Rails, you can get help generating models and controllers. (At that point, you might just use Rails scaffolding, but the AI could supplement by adding validations or adjusting routes).
+
+AI models demonstrate varying levels of proficiency across different programming languages and technology stacks, largely determined by the prevalence of those technologies in their training data. While models can work with any language they’ve encountered during training, their effectiveness varies significantly. Popular languages like JavaScript, Python, and Java typically receive stronger support due to their abundant representation in open source repositories, documentation, and educational materials that form part of the training corpus.
+
+Determining a model’s proficiency with your chosen stack requires practical evaluation. Start by testing the model with basic tasks in your target language, then progressively increase complexity to gauge its capabilities. Pay attention to whether the model generates idiomatic code that follows language-specific conventions, recognizes common frameworks and libraries without extensive explanation, and suggests appropriate design patterns for that ecosystem. Strong proficiency manifests as contextually appropriate suggestions, while weaker support often results in generic or outdated code patterns.
+
+Many AI providers publish documentation about their models’ capabilities, though these rarely include detailed language-specific benchmarks. The most reliable approach involves running small experiments with your actual technology stack. For instance, if you’re working with Ruby on Rails, test whether the model understands Rails conventions like ActiveRecord patterns or can generate proper RSpec tests. Similarly, for newer frameworks or less common languages, expect more variable results, and be prepared to provide additional context in your prompts to compensate for potential gaps in the model’s training.
+
+Orchestrating multistep operations
+Some endpoints might involve multiple steps, like creating an entry in one table and then another, or calling an external API. You can outline the sequence and let the AI draft it:
+
+When a new user signs up (POST /api/users), create a user record and also send a welcome email via SendGrid API.
+
+The AI can write code to save the user (maybe using an object-relational mapper, or ORM) and then an HTTP request to SendGrid’s API with appropriate payload. You’d fill in actual API keys or tweak content, but most of the boilerplate is done:
+
+Implement a transaction: when transferring money (POST /api/transfer), deduct from account A and add to account B, ensure it’s atomic (all-or-nothing).
+
+If you’re using an ORM or database that supports transactions, the AI might use those features (like an SQL transaction block or an ORM’s transaction method). Review such code cautiously for correctness—transaction logic, especially, can be tricky. But the AI might know common pitfalls and include checks. For instance, when prompted to handle a money transfer endpoint, an AI generated the following code structure:
+
+```
+async function transferMoney(fromAccountId, toAccountId, amount) {
+  const session = await db.startSession();
+  
+  try {
+    await session.startTransaction();
+    
+    // Deduct from source account
+    const sourceAccount = await Account.findByIdAndUpdate(
+      fromAccountId,
+      { $inc: { balance: -amount } },
+      { session, new: true }
+    );
+    
+    if (sourceAccount.balance < 0) {
+      throw new Error('Insufficient funds');
+    }
+    
+    // Add to destination account
+    await Account.findByIdAndUpdate(
+      toAccountId,
+      { $inc: { balance: amount } },
+      { session }
+    );
+    
+    await session.commitTransaction();
+    return { success: true };
+
+  } catch (error) {
+    await session.abortTransaction();
+    throw error;
+  } finally {
+    session.endSession();
+  }
+}
+```
+The AI correctly wrapped both database operations in a transaction, included validation for insufficient funds, and properly handled rollback on any error. While you’d still need to review edge cases and add appropriate logging, the fundamental transaction structure demonstrates understanding of atomic operations.
+
+API documentation and testing
+When building APIs, you can also have the AI produce documentation. For instance, “Write a brief documentation for the /api/to-dos endpoints.” It may generate something like this:
+
+GET /api/to-dos - returns list of to-dos.
+POST /api/to-dos - create a new to-do. Expects JSON: {title: string}. Returns the created to-do.
+...
+This is handy for quick reference and also to share with frontend developers (if you’re working in a team). Additionally, you can use AI to write tests for your API endpoints, using a testing framework like Jest or Mocha for Node, or PyTest for a Python API. With a prompt like “Generate tests for the to-dos API (one test for listing, one for creating, one for validation error),” the AI will output test code that you can run and verify. 
+
+Database Design and Integration
+Human knowledge of the business domain is crucial in designing a database schema, but AI can assist in translating that design into code (like migration scripts or ORM models). Also, if you’re unsure about your schema, you can brainstorm with the AI.
+
+For example, say your app is expanding beyond to-do lists to become a full project-management tool. You need to design several tables: Projects, Tasks, Users, and so on. You could ask, “What data models would I need for a simple project management app with users, projects, and tasks? Include relationships.” The AI might respond with something like this:
+
+User (id, name, email, etc.)
+
+Project (id, name, owner_id referencing User)
+
+Task (id, description, project_id, assigned_to (User), status, etc.)
+
+It might not be exactly what you want, but it gives you a starting point. You confirm or tweak these design ideas, then implement them.
+
+Using an ORM
+If you use an ORM like Prisma, Entity Framework, or SQLAlchemy, you can have the AI generate model classes or schema definitions:
+
+Using Sequelize (for Node), define models for User, Project, Task with associations: One User has many Projects, Project belongs to User; Project has many Tasks, Task belongs to Project; Task can be assigned to a User (many-to-one).
+
+The AI would then write JS/TS code to define those Sequelize models and associations, which you can then integrate into your codebase. It might also suggest foreign keys or cascade rules if it’s familiar with them.
+
+If you aren’t using an ORM and you’re writing raw SQL migrations, you could even have the AI draft migration scripts:
+
+Write an SQL script to create tables for users, projects, tasks with appropriate foreign keys.
+
+It will output an SQL DDL script, which you can review for correctness and run.
+
+Database Queries
+When integrating the database in your code, you might need queries more complex than simple CRUD. Suppose you want to get all projects, along with their tasks and the user assigned to each task—that’s a join across Project, Task, User. You could prompt:
+
+Write an SQL query to retrieve projects with their tasks and each task’s assigned user name.
+
+The AI could produce an SQL join query for you.
+
+Or if you’re using an ORM:
+
+Using Sequelize, fetch all projects with associated tasks and the user for each task.
+
+You could expect the code to come with something to load related data, like:
+
+include: [Task, { model: User, as: 'assignedUser' }]
+Checking AI-Generated Queries
+Database operations require careful verification to ensure the AI-generated code aligns with your actual schema and maintains data integrity. The AI cannot automatically know your specific table names, field names, or relationships unless you provide this information explicitly in your prompt. Even when models have conversation memory, you should include schema details in each complex database-related prompt to ensure accuracy. This explicit approach prevents the common issue of AI-generated queries that reference generic field names like user_id when your schema actually uses userId or customer_ref.
+
+Performance considerations often require human oversight. While AI models understand basic database concepts like primary keys and joins, they may not automatically suggest performance optimizations such as adding indexes on frequently queried fields or considering query execution plans. Review generated queries for efficiency, particularly for operations that will run frequently or against large datasets.
+
+Data consistency rules represent another critical area requiring explicit specification. When implementing delete operations, clearly define the cascading behavior you expect. For example, when deleting a Project record, you must decide whether the database should automatically delete associated Task records through cascading deletes or whether your application logic should handle this cleanup. Communicate these business rules clearly to the AI:
+
+When a project is deleted, configure the database to cascade delete all related tasks.
+
+Or alternatively:
+
+When deleting a project, first check for existing tasks and prevent deletion if any exist.
+
+The AI can implement either approach effectively when given clear direction. For cascade deletes, it might generate foreign key constraints with ON DELETE CASCADE.  For application-level handling, it could produce code that queries for related records before permitting deletion. The key lies in explicitly stating your data-integrity requirements rather than assuming the AI will infer the appropriate behavior for your specific domain.
+
+Full Stack Integration: Marrying Frontend and Backend
+Now that you’ve built both your frontend and backend with AI help, the next challenge is integrating them into a seamless web application. This involves making sure that the API endpoints are called correctly from the frontend, the data flows properly, and the overall system is coherent.
+
+Aligning Frontend and Backend Contracts
+This is crucial: the frontend expects to receive data in a certain shape, so what the backend sends should match that expectation. If you let AI work on each end in isolation, small mismatches can occur (maybe the backend returns { success: true, data: [...] }, but the frontend expects to receive the array directly). To avoid this, you can explicitly instruct the AI on the response format to use when coding both sides. Alternately, once both are done, test an end-to-end call: for instance, open the web app and see if the list loads. If it doesn’t, check the browser console against the server logs.
+
+I often use the AI to adjust one side to match the other:
+
+If the backend returns slightly different JSON key names than what the frontend expects and you notice a bug, you can say to the AI (on either side):
+
+Modify the code to use ‘tasks’ (plural) instead of ‘taskList’ (singular) in the JSON.
+
+If the frontend is sending form data as form-encoded but the backend expects JSON, you can ask the AI to convert that, maybe by using JSON.stringify on the frontend or adding body-parser on the backend.
+
+Real-Time Collaboration with AI
+AI-augmented IDEs that hold the context of the whole project, like Cline or Cursor, can be especially helpful during this integration phase. You could open the frontend and backend files side by side in your IDE-based tool and prompt:
+
+Ensure that the frontend fetch from /api/to-dos matches the Express route’s expected request/response. Fix any discrepancies.
+
+The AI might then harmonize the content (like adding await response.json() in the frontend if it was missing or adjusting the JSON structure).
+
+State management and sync
+In a full stack app, consider implementing things like loading states and error handling on the frontend for failed API calls for a professional result. You might use prompts like:
+
+Add loading indicators: when the React component is fetching tasks, show a ‘Loading...’ text until data is loaded.
+
+Or:
+
+Handle errors: if the API call fails (non-200 response), show an error message on the UI.
+
+It will add the isLoading state and conditional rendering or implement a try/catch around fetch to catch errors and display a message. This kind of polish makes your app feel robust.
+
+WebSockets and advanced integrations
+If your app requires real-time updates (like using WebSockets or SSE), you might prompt something like this:
+
+Set up a WebSocket using Socket.io. When a new task is created on the server, broadcast it to all connected clients. Modify the frontend to listen for new tasks and add them to the list in real time.
+
+This is complex, but an AI might generate the server-side Socket.io setup (like adding io.on('connection', ...) and emitting an event upon creation of a new task), as well as client-side code to connect and listen for that event. You would need to integrate this carefully, but it’s quite astonishing that these descriptions can lead to working real-time code. If it doesn’t work perfectly off the bat, iterative prompting and testing can get it there.
+
+Example: full stack flow with AI
+To illustrate, let’s imagine you’re building a simple contact-manager web app:
+
+You scaffold a React frontend and a Node/Express backend, as you did earlier in the chapter.
+
+First, for the frontend, prompt for a ContactList and a ContactForm component. Then prompt to add API calls:
+
+In ContactList, fetch contacts from /api/contacts on mount.
+
+In ContactForm, on submit, send a POST to /api/contacts with the form data, then update the list of contacts on success.
+
+For the backend, you may want to use an in-memory array or integrate a database first. Then prompt for Express routes GET /api/contacts (to return a list) and POST /api/contacts (to add a contact to the database or memory).
+
+Try adding a contact via the UI. If it shows up in the list, great. If not, debug. Maybe the POST route didn’t return the new contact properly or the form code didn’t refresh the list. Identify the gap and prompt the AI to fix it:
+
+After adding a contact, the backend should return the new contact object in the response, and the frontend should append it to the list without requiring a full reload.
+
+This might lead the AI to adjust the backend response and frontend state logic to push the new contact (maybe using React state update).
+
+Implement edit and delete functions similarly, each time letting AI handle the routine parts and focusing your input on what the feature should do.
+
+Doing all this manually could easily amount to a week or two of work for a junior dev but could be done in a day or two with an AI codeveloper, given that a lot of template code and wiring is automated.
+
+Optimizing AI-human collaboration in full stack development
+When working through an entire stack, it’s useful to establish a productive rhythm with your AI assistant. Here are some strategies to optimize your collaboration:
+
+Use the AI for boilerplate; write any custom logic yourself
+Identify which parts of the code are mundane and which are the unique core logic. Let the AI generate a CRUD API or a standard component—but if there’s a particularly tricky piece of logic, maybe a proprietary algorithm or a specific business rule that is easier to implement directly, do that part manually, then ask the AI to review or test it. Think of it as delegating repetitive tasks to the AI, while you handle the novel ones.
+
+Use AI to tackle your to-do list one item at a time
+As you develop, keep track of tasks (like features to add and bugs to fix). Then explain each task to the AI, one by one, and let it propose a solution. For example, let’s say you have a note that reads “Implement password hashing on user registration.” Try a prompt like this:
+
+Add password hashing using bcrypt in the POST /api/register route before saving the user.
+
+This targeted, systematic approach helps ensure you don’t forget anything.
+
+Prompt AI to improve code quality as you go
+After achieving functionality, you might prompt, “Refactor this code for better readability” or “Optimize this function.” The AI can often make the code cleaner or suggest performance improvements, like an assistant doing a second pass for polish under your supervision. Be sure to verify that any changes still pass your tests.
+
+Use AI for cross-checking
+If you’re uncertain about your design approach, ask the AI:
+
+Is using an array to store contacts in memory fine or should I use a database? What are the pros and cons?
+
+While you likely know the answer (use a database for persistence), it’s like bouncing ideas off a colleague. Sometimes the AI might mention a consideration you hadn’t thought of:
+
+If there are multiple server instances, an in-memory store won’t sync across them.
+
+Use AI to coordinate with your team
+If you’re working in a team, not everyone may be using the AI directly. In that case, make sure to ask the AI to document what you did. Also, it’s good to communicate your approach to the team: “I used an AI to generate these controllers quickly. I’ve checked them, but keep an eye out for any unconventional patterns.” Encourage a code-review culture in which everyone reviews AI-written code just like they would any other code to catch any quirks.
+
+Real-world teams that adopt AI (like those at Snyk) report that it can boost productivity, but they also stress keeping a human in the loop for validation. In one 2024 survey by GitHub, 97% of developers reported using AI coding tools at work in some capacity.
+
+Testing and Validation for AI-Generated Web Applications
+After building your web app with AI help, test thoroughly to ensure everything works as intended and to catch issues that you or the AI might have introduced. Here’s how you can approach testing in this AI-assisted context:
+
+Unit tests
+For backend logic, write unit tests for critical functions (like a function that calculates something or validates input). If the AI wrote the function, writing a test for it can reveal any hidden bugs. You can even have the AI generate these tests, as mentioned. Be cautious, though: AI-generated tests are sometimes trivial or assume an implementation, so you may need to guide it to test edge cases:
+
+Write tests for the password strength function, including edge cases like empty password, very long password, password with special chars, etc.
+
+Integration tests
+Test the API endpoints with something like Supertest (for Node) or direct HTTP calls. Check that each endpoint returns the expected results. AI can help you scaffold these:
+
+Write integration tests for the /api/to-dos endpoints using Jest and Supertest.
+
+It might produce tests that start the app, hit the endpoints, and assert on responses.
+
+Frontend tests
+Web UI testing can be done with tools like Jest (for component logic) and Cypress or Playwright for end-to-end UI tests. You can certainly ask AI to generate a Cypress test scenario:
+
+Write a Cypress test that loads the app, adds a new to-do via the form, and checks that it appears in the list.
+
+You’ll get a test script, which you can run. This is quite powerful—you quickly get end-to-end test coverage by leveraging the AI to script user interactions.
+
+Manual tests
+Whatever automated tests you run, always do some manual exploratory testing, too. Click around the web app yourself (or have QA do it, if you’re working in a team). The AI might not anticipate every real-world scenario: for example, maybe using the browser Back button breaks some state, or a particular sequence of actions causes a glitch. As you find bugs, fix them or ask the AI to help fix them. Manual testing is also important for UI/UX judgment—does the app feel good to use? Are there any awkward flows? The AI won’t know how to judge these subjective UX issues, so human feedback is key.
+
+Code review
+If you’re working with others, have them review the AI-generated code. Fresh eyes can catch things you might have glossed over—they might spot a security oversight or simply suggest a more idiomatic way to write something. Teams using AI often maintain normal code-review processes, just with more focus on reviewing for subtle bugs or security issues that an AI might inadvertently introduce.
+
+Security audit
+Chapter 8 will dive into security, but even at development time, it’s worth scanning your code for known vulnerability patterns.  There are automated tools you can run, like linters and Static Application Security Testing (SAST) tools, or you can prompt the AI:
+
+Review the Express app code and list any potential security vulnerabilities or best practice violations.
+
+The AI might flag some surprising things, like “You are not sanitizing user input here” or “You should set up CORS properly.” Use that as a checklist for hardening the app.
+
+One interesting effect of using AI is that you may write tests you wouldn’t have otherwise, because the AI makes it so easy to create them. This can actually lead to more robust code in the end. If you adopt a practice of generating tests immediately after generating features (essentially AI-assisted test-driven development, or at least post hoc tests), you ensure that the rapid development doesn’t compromise quality. Think of it like this: since the AI saved you time writing code, invest some of that saved time into writing and running tests.
+
+AI can suggest insecure code if the user isn’t careful. For example, earlier AI versions might generate SQL queries that are vulnerable to injection attacks if not specifically prompted to avoid that. By testing and reviewing, you catch these issues. One study found that developers using AI assistance tended to be overconfident in their code’s security, even when it was worse than it would’ve been if written manually.
+
+Never skip validation just because an AI wrote the code. Assume it can have bugs, just like any human-written code.
+
+Examples of Successful AI-Built Web Projects
+Let’s highlight a couple of examples (composites drawn from various reports) where AI assistance played a significant role in delivering real web applications.
+
+Ecommerce site by a solo developer
+A solo developer wanted to create a small ecommerce web app to sell custom T-shirts but had limited time. He used GPT, through an IDE extension, to build the entire stack. He prompted the AI to generate a React frontend with product listings, a cart, and checkout pages, as well as a Node.js backend with endpoints for products and orders. He used Stripe for payments, integrating it by asking the AI to help with Stripe’s API. After working on it in the evenings for two weeks, he had a functioning site.
+
+This developer reported that AI had done probably 70% of the coding, especially the repetitive UI parts and form handling, while he focused on configuring Stripe correctly and fine-tuning the UI for branding. In the end, customers could browse products, add them to the cart, and purchase them—all in a system built largely via vibe coding. It also highlights that external service integration (like Stripe) is feasible with AI guidance, as long as documentation is available for the model to draw from or you provide it.
+
+Internal company dashboard
+A product manager with some coding skills used an AI pair programmer to create an internal analytics dashboard for her team. Normally, she would have had to wait for engineering resources, but using a tool like Replit’s Ghostwriter or GitHub Copilot in a web project, she managed to build a basic web app herself. The AI helped with setting up a simple Flask backend to query their database (with safe read-only credentials) and a Vue.js frontend to display graphs (using a charting library). She described what each chart should show (“total sign-ups over time,” “active users by region”), and the AI wrote the SQL queries and chart code.
+
+The whole process took a couple of weeks of tinkering and testing, but eventually she delivered a working dashboard. The code quality wasn’t enterprise grade, but since it was internal, it was fine. More importantly, she empowered her team with a tool in a fraction of the time. This example illustrates how AI tools can enable nonspecialist programmers to produce useful web apps, unblocking tasks that might otherwise sit in a backlog. It’s an example of the “unbundling of the programmer” that I’ll discuss in Chapter 10, which is all about how individuals can create personal or team-specific software more easily now.
+
+Startup minimum viable product (MVP)
+A small startup (just two cofounders: one business, one technical) needed an MVP web application to show to investors. The technical cofounder used vibe coding extensively to build an MVP in record time. Using an AI assistant, he scaffolded a modern web app using Next.js for the SSR React frontend and a simple Node API. He leveraged AI to implement features like social login (the AI wrote the OAuth flows), image uploads (the AI integrated with a cloud-storage API), and an AI-based feature within the product itself. They even used the AI to help integrate an NLP model from an API. In a few months, one developer achieved what might normally take a small team four to six months. The result was a somewhat hacky but functioning product that they could demo, and they could even onboard beta users onto the platform.
+
+When the cofounders later hired more devs to polish the product, the new devs found the AI-written code to be mostly understandable, though they did refactor significant portions for scalability. This underlines that AI can get you to the first stage quickly, but you might need to invest in quality as you move to the next stages.
+
+These stories, while anecdotal, align with emerging patterns in the industry. In web development specifically, which often involves wiring many components together, the productivity boost is very tangible. Microsoft and others reported studies finding that developers with AI could complete tasks significantly faster than those without.
+
+However, there have also been cautionary tales. For instance, a developer might deploy an AI-generated web app with a security flaw because they don’t fully understand the code. This risk reinforces why testing and review are crucial.
+
+In conclusion, building web applications with AI assistance is becoming a mainstream approach. It doesn’t remove the need for skilled developers; rather, it augments them. The developers still plan the architecture, ensure correctness, and handle the complex or novel aspects of the code, while the AI handles the repetitive boilerplate code that glues everything together. The end-to-end workflow we walked through—from scaffolding to frontend to backend to testing—demonstrates that practically every step of web development can be accelerated with AI, as long as you apply your human judgment and expertise along the way.
+
+Summary and Next Steps
+In this chapter, you’ve seen how vibe coding extends to full-scale web application development. By treating the AI as an always available pair programmer, you can tackle frontend and backend tasks in parallel, generate components and APIs from natural descriptions, and iteratively refine a prototype application to production quality. The keys to success include clearly communicating your intent (so the AI knows what you want at each step), carefully verifying (to catch issues in the AI output), and leveraging the AI not just to generate code but for things like brainstorming schema designs and writing tests.
+
+This chapter also explored how a developer can effectively be a full stack engineer, augmented by AI bridging gaps in their knowledge by suggesting code in areas they are less familiar with. This greatly reduces development time for common features and democratizes development in some ways, enabling people to create custom web solutions without large teams (a theme I’ll revisit in Chapter 10).
+
+AI doesn’t replace understanding the requirements or ensuring quality; it accelerates execution.
+
+Now that your web application is up and running, the next concern is making sure it is secure, reliable, and maintainable. Chapter 8 dives into the challenges of security and reliability in AI-generated codebases, identifying common vulnerabilities that might slip in, how to audit for and fix them, and best practices (like the ones we’ve started applying here with tests and reviews) to ensure that moving fast with AI doesn’t break things. Essentially, we’ll shift from building to hardening—making sure your vibe-coded software stands up to real-world conditions and threats.

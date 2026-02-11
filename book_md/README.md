@@ -1,0 +1,16 @@
+# Book Content
+
+- [Preface](Preface.md)
+- [Chapter 1. Introduction: What Is Vibe Coding?](Chapter_1_Introduction_What_Is_Vibe_Coding.md)
+- [Chapter 2. The Art of the Prompt: Communicating Effectively with AI](Chapter_2_The_Art_of_the_Prompt_Communicating_Effe.md)
+- [Chapter 3. The 70% Problem: AI-Assisted Workflows That Actually Work](Chapter_3_The_70_Problem_AI-Assisted_Workflows_Tha.md)
+- [Chapter 4. Beyond the 70%: Maximizing Human Contribution](Chapter_4_Beyond_the_70_Maximizing_Human_Contribut.md)
+- [Chapter 5. Understanding Generated Code: Review, Refine, Own](Chapter_5_Understanding_Generated_Code_Review_Refi.md)
+- [Chapter 6. AI-Driven Prototyping: Tools and Techniques](Chapter_6_AI-Driven_Prototyping_Tools_and_Techniqu.md)
+- [Chapter 7. Building Web Applications with AI](Chapter_7_Building_Web_Applications_with_AI.md)
+- [Chapter 8. Security, Maintainability, and Reliability](Chapter_8_Security_Maintainability_and_Reliability.md)
+- [Chapter 9. The Ethical Implications of Vibe Coding](Chapter_9_The_Ethical_Implications_of_Vibe_Coding.md)
+- [Chapter 10. Autonomous Background Coding Agents](Chapter_10_Autonomous_Background_Coding_Agents.md)
+- [Chapter 11. Beyond Code Generation: The Future of AI-Augmented Development](Chapter_11_Beyond_Code_Generation_The_Future_of_AI.md)
+- [About the Author](About_the_Author.md)
+- [Index](Index.md)

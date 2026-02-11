@@ -1,0 +1,1021 @@
+Index
+A
+accessibility, future improvement with AI, Personalized User Experiences
+actions and reasoning in ReAct prompts, ReAct (Reason + Act) Prompting
+adaptability and learning, importance of, Be Adaptable—and Never Stop Learning
+AI (artificial intelligence)
+autonomous AI coding agents, Two steps back
+coding assistance, Introduction: What Is Vibe Coding?
+coding spectrum, The AI Coding Spectrum: From Vibe Coding to AI-Assisted Engineering
+combining multiple models to maximize strengths, Combining Multiple AI Models to Maximize Strengths-Human-AI Hybrid Teams
+confidence far exceeding its reliability, The 70% Problem: AI-Assisted Workflows That Actually Work
+as first drafter, What Actually Works: Practical Workflow Patterns, AI as first drafter
+going beyond code generation, How Vibe Coding Is Reshaping the Industry
+midlevel engineers using, Use AI!
+as pair programmer, What Actually Works: Practical Workflow Patterns, AI as pair programmer
+best practices for, Best practices for AI pair programming
+practicing problem solving and debugging without using AI, Practice Problem Solving and Debugging Without the AI Safety Net
+real-time collaboration with in full stack development, Real-Time Collaboration with AI-Optimizing AI-human collaboration in full stack development
+as validator, What Actually Works: Practical Workflow Patterns, AI as validator
+where AI still struggles, Where AI Still Struggles
+AI pair programmer versus AI assistant developer, How Do Background Agents Compare to In-IDE AI Assistants?
+AI patterns, learning from, Follow-Up
+AI-assisted engineering, Introduction: What Is Vibe Coding?
+differences from vibe coding, Different Mindsets, Different Expectations
+structured approach with AI partner, The AI-Assisted Engineering Approach: Structure with an AI Partner-The AI-Assisted Engineering Approach: Structure with an AI Partner
+code migration or refactoring, The AI-Assisted Engineering Approach: Structure with an AI Partner
+expectations, The AI-Assisted Engineering Approach: Structure with an AI Partner
+generating full mini-application or feature from detailed specs, The AI-Assisted Engineering Approach: Structure with an AI Partner
+goal of high-quality code, The AI-Assisted Engineering Approach: Structure with an AI Partner
+workflow, The AI-Assisted Engineering Approach: Structure with an AI Partner
+when it should take precedence, When AI-assisted engineering should take precedence
+AI-augmented development, future of, Beyond Code Generation: The Future of AI-Augmented Development-Summary and Next Steps
+automated test generation, Automated Test Generation
+how vibe coding is shaping the industry, How Vibe Coding Is Reshaping the Industry
+intelligent debugging, Intelligent Debugging
+possible changes by autonomous agents to software engineering, How Autonomous Agents Could Change Software Engineering-How Autonomous Agents Could Change Software Engineering
+predictive maintenance and refactoring, Predictive Maintenance and Refactoring
+project management, evolution with AI, The Evolution of Project Management with AI-The Evolution of Project Management with AI
+shaping programming languages or possible natural-language-driven development, The Future of Programming Languages: Natural-Language-Driven Development?-The Future of Programming Languages: Natural-Language-Driven Development?
+shaping the future of vibe coding, Summary and Next Steps-Summary and Next Steps
+AI-based coding tools
+generating convincing but incorrect output, The 70% Problem: AI-Assisted Workflows That Actually Work
+incapable of producing new abstractions or strategies, The 70% Problem: AI-Assisted Workflows That Actually Work
+integrating testing suggestions, The Importance of Testing: Unit, Integration, and End to End
+situations in which they struggle, The 70% Problem: AI-Assisted Workflows That Actually Work
+tasks they excel at, The 70% Problem: AI-Assisted Workflows That Actually Work
+AI-generated code, understanding, Understanding Generated Code: Review, Refine, Own-Summary and Next Steps
+code readability and structure, Code Readability and Structure: Patterns and Potential Issues
+debugging strategies for, Debugging Strategies: Finding and Fixing Errors
+developer's role, reviewing, refining, and owning the code, Summary and Next Steps
+majority solution not most appropriate solution, The “Majority” Problem: Most Common Doesn’t Mean Most Appropriate
+refactoring code for maintainability and ownership of, Refactoring for Maintainability: Making AI Code Your Code
+unit, integration, and end-to-end testing, importance of, The Importance of Testing: Unit, Integration, and End to End
+AI-human collaboration, optimizing in full stack development, Optimizing AI-human collaboration in full stack development
+algorithms
+junior developers' understanding of, Learn the Fundamentals—Don’t Skip the “Why”
+performance optimization in AI-generated code, Performance Optimization
+ambiguous references in prompts, Specificity and Clarity: Writing Prompts That Deliver
+Angular, Building Web Applications with AI
+tips on, Framework-specific tips
+Anthropic’s Claude language model, Cursor: The AI-Driven Code Editor
+APIs
+backend/API development patterns with AI, Backend/API Development Patterns with AI-API documentation and testing
+API documentation and testing, API documentation and testing
+implementing endpoints, Implementing API endpoints
+multistep operations at endpoints, orchestrating, Orchestrating multistep operations
+failed calls, error handling on frontend, State management and sync
+integrating in web application frontend using AI, Integrating APIs and state management
+junior developers implementing new endpoint following patterns, Junior Developers: Thrive Alongside AI
+outdated, checking for use in AI code, Code Readability and Structure: Patterns and Potential Issues
+penetration and fuzzing tests on, Penetration Testing and Fuzzing
+testing error handling in AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems
+in web application backends, Building Web Applications with AI
+architect and editor, senior engineers and developers as, Be the Architect and the Editor in Chief
+architecture
+foundational texts on, While Prompting
+midlevel engineers learning system architecture, Learn System Design and Architecture
+solid architecture needing human oversight, Learn System Design and Architecture
+using architectural patterns to encourage modularity and avoid sprawl, While Prompting
+Artifacts feature (Claude), Claude: The Reasoning Virtuoso
+async agents, From Copilots to Autonomous Agents: What Are Background Coding Agents?
+(see also autonomous background coding agents)
+coordination paradox, Challenges and Limitations
+async/await functions, Performance Optimization
+attributions for AI-generated code, Transparency and Attribution
+audits
+periodic security and performance audits of codebase, Ongoing Best Practices
+security, Testing and Validation for AI-Generated Web Applications
+(see also security)
+authentication
+asking AI to whip up user logging system, The Vibe-Coding Approach: Code by Conversation
+creating REST API for with Cline, VSCode + Cline: The Open Source Autonomous Coding Agent
+improper, in AI-generated code, Common Security Vulnerabilities in AI-Generated Code, Improper Authentication and Authorization
+author of AI-generated code, Intellectual Property Considerations
+authorization, improper, in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+autonomous AI coding agents, Two steps back
+using VSCode with Cline, VSCode + Cline: The Open Source Autonomous Coding Agent
+autonomous background coding agents, Autonomous Background Coding Agents
+about, From Copilots to Autonomous Agents: What Are Background Coding Agents?
+best practices for effective use, Best Practices for Using AI Coding Agents Effectively-Build Feedback Loops with Autonomous Systems
+challenges and limitations, Challenges and Limitations-Challenges and Limitations
+comparison to in-IDE AI assistants, How Do Background Agents Compare to In-IDE AI Assistants?
+how they could change software engineering, How Autonomous Agents Could Change Software Engineering-How Autonomous Agents Could Change Software Engineering
+how they work, How Do Autonomous Coding Agents Work?-How Do Background Agents Compare to In-IDE AI Assistants?
+major players in, Major Players in Autonomous Coding Agents-Challenges and Limitations
+B
+backends
+backend/API development patterns with AI
+business logic and validation, Business logic and validation
+database integration, Database integration
+implementing endpoints, Implementing API endpoints
+using frameworks or boilerplates, Using frameworks or boilerplates
+hardening for service converting CSV files to charts, Evolving a Prototype Toward Production
+integrating with frontend in web application using AI, Full Stack Integration: Marrying Frontend and Backend-Optimizing AI-human collaboration in full stack development
+aligning frontend and backend contracts, Aligning Frontend and Backend Contracts
+real-time collaboration with AI, Real-Time Collaboration with AI
+testing error handling in AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems
+web application, Building Web Applications with AI
+background coding agents, Autonomous Background Coding Agents
+(see also autonomous background coding agents)
+Bandit (security scanner), Leverage Automated Security Scanners
+bcrypt, using to hash and compare passwords, Improper Authentication and Authorization
+bias in AI output, Where AI Still Struggles, Bias and Fairness-Golden Rules for Responsible AI Use, Golden Rules for Responsible AI Use
+bidirectional translation (ChatGPT), ChatGPT: The Versatile Coding Companion
+big ball of mud architectural antipattern, While Prompting
+blue-green deployments, Before and During Deployment
+Bolt.new, AI Prototyping Tools
+boundaries between system components, managing, Learn to Manage Systems Integration and Boundaries
+brute-force text searches by autonomous coding agents, Execute
+business logic
+in backend components of web application, Backend/API Development Patterns with AI
+complex, CRUD operations involving, Feature prototyping and CRUD applications
+in web application backend, Business logic and validation
+C
+caching, Learn System Design and Architecture
+adding for performance in AI-generated code, Performance Optimization
+cascading deletes in databases, Checking AI-Generated Queries
+chain-of-thought (CoT) prompting, Chain-of-Thought Prompting-Chain-of-Thought Prompting
+ReAct prompting and, ReAct (Reason + Act) Prompting
+change, adapting to, Be Adaptable—and Never Stop Learning
+chat-based interfaces, Finding Your Place on the Spectrum
+chat-oriented programming (CHOP), Use AI as a Force Multiplier for Big Initiatives
+ChatGPT, The Vibe-Coding Approach: Code by Conversation
+OpenAI’s ToS for, Intellectual Property Considerations
+remarkable versatility and broad knowledge base, ChatGPT: The Versatile Coding Companion
+use by Cursor, Cursor: The AI-Driven Code Editor
+CI/CD (continuous integration and continuous deployment) pipelines
+automating, Before and During Deployment
+autonomous coding agents and, How Do Background Agents Compare to In-IDE AI Assistants?
+more frequent deployments with AI-assisted code, Ongoing Best Practices
+security in, Before and During Deployment
+Claude, The Vibe-Coding Approach: Code by Conversation, Cursor: The AI-Driven Code Editor, AI Models: The Landscape for Code Generation
+choosing between Google's Gemini, Anthropic's Claude, and OpenAI models, Choosing the Right Model for Your Needs
+reasoning virtuosity of, Claude: The Reasoning Virtuoso
+support for multiple AI models, Choosing the Right Model for Your Task
+Cline, Google Gemini: The Multimodal Coding Powerhouse, Rapid Prototyping with AI Assistants, AI Prototyping Tools, From Copilots to Autonomous Agents: What Are Background Coding Agents?
+transforming VSCode into powerful AI-assisted development environment, VSCode + Cline: The Open Source Autonomous Coding Agent
+cloud-based command-line agents, Major Players in Autonomous Coding Agents
+Code Assist, Google Gemini: The Multimodal Coding Powerhouse
+code by conversation approach in vibe coding, The Vibe-Coding Approach: Code by Conversation-The Vibe-Coding Approach: Code by Conversation
+code editors
+Cursor, Cursor: The AI-Driven Code Editor
+Gemini's integration with development workflows through, Google Gemini: The Multimodal Coding Powerhouse
+code generation
+AI-assisted engineering not stopping at, The AI-Assisted Engineering Approach: Structure with an AI Partner
+how it works, iterative cycle and AI's role in, How It Works: The Iterative Cycle and AI’s Role in Code Generation-How It Works: The Iterative Cycle and AI’s Role in Code Generation
+repetitive, using vibe coding for, Repetitive code generation
+code reviews
+for AI-generated web applications, Testing and Validation for AI-Generated Web Applications
+bottleneck amplified by autonomous coding agents, Challenges and Limitations
+code produced by autonomous coding agents, How Do Background Agents Compare to In-IDE AI Assistants?
+having all team members review code, Follow-Up
+midlevel engineers focusing on, Focus on Code Review and Quality Assurance
+performing human code review with security checklist, Perform a Human Code Review with a Security Checklist
+in responsible AI, Golden Rules for Responsible AI Use
+strategies for AI-assisted development, Code Review Strategies-Code Review Strategies
+using separate AI as reviewer for security of AI code, Use a Separate AI as a Reviewer
+codebase
+full indexing by Windsurf, Windsurf: An AI-Powered IDE with Full Codebase Indexing
+querying in plain English with Windsurf, Windsurf: An AI-Powered IDE with Full Codebase Indexing
+Codex, The Vibe-Coding Approach: Code by Conversation, From Copilots to Autonomous Agents: What Are Background Coding Agents?, Execute, Major Players in Autonomous Coding Agents
+coding spectrum, AI-assisted engineering versus vibe coding, finding your place on, Finding Your Place on the Spectrum
+coding standards, consistent, using in AI-generated code, While Prompting
+collaboration
+AI as collaborative partner, How Vibe Coding Is Reshaping the Industry
+junior developers collaborating with team members, Communicate and Collaborate
+collaboration features of tools, using, AI as first drafter
+combinatorial math, Chain-of-Thought Prompting
+comments in AI-generated code, Code Readability and Structure: Patterns and Potential Issues, Follow-Up
+communication
+clear communication in iterating with AI, From Concept to Prototype: Iterative Refinement
+cross-functional, getting good at, Get Good at Cross-Functional Communication
+junior developers communicating with team members, Communicate and Collaborate
+company dashboard (internal), built using AI, Examples of Successful AI-Built Web Projects
+compatibility constraints, mentioning in prompts, Contextual Prompting
+complexity
+analysis of in AI-generated code, Performance Optimization
+breaking up complex tasks in prompts, Know the Model’s Limits
+excessive, avoiding in AI-accelerated codebase, Working with Code Output
+handling frontend complex logic with AI guidance, Handling complexity with AI guidance
+Composer mode (Cursor), Cursor: The AI-Driven Code Editor
+concurrency, Learn the Fundamentals—Don’t Skip the “Why”, Performance Optimization
+concurrent agent operations, managing, Manage Concurrent Agent Operations
+configurations, insecure, in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+consistency and standardization in coding, Where AI Still Struggles
+constraints
+including in prompts, Specificity and Clarity: Writing Prompts That Deliver
+mentioning in contextual prompts, Contextual Prompting
+constructs, AI-specific, overrelying on, Working with Code Output
+context
+Claude's understanding of broader context, Claude: The Reasoning Virtuoso
+context window size in vibe coding, Productivity, Accessibility, and the Changing Nature of Programming
+Cursor's project-wide context, Cursor: The AI-Driven Code Editor
+global context suggestions by Windsurf, Windsurf: An AI-Powered IDE with Full Codebase Indexing
+leveraging in AI-assisted coding, How It Works: The Iterative Cycle and AI’s Role in Code Generation
+context window, One-Shot and Few-Shot Prompting
+contextual prompting, Contextual Prompting
+control over AI-generated prototyping, AI Prototyping Tools
+conversation, stateful, versus one-shot prompting, Stateful Conversation Versus One-Shot Prompting
+conversational interfaces, generating complete applications through, AI Prototyping Tools
+Copilot, How Do Background Agents Compare to In-IDE AI Assistants?
+lawsuit against, Intellectual Property Considerations
+reactive nature of Copilot-style assistants, How Do Background Agents Compare to In-IDE AI Assistants?
+copyrights, AI-generated code and, Intellectual Property Considerations, Intellectual Property Considerations
+possible copyrightable material, Intellectual Property Considerations
+cost optimization, Learn System Design and Architecture
+credentials
+hard-coded, in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+management of for deployments, Before and During Deployment
+credentials, hard-coded, in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+critical thinking and foresight, Learn to Manage Systems Integration and Boundaries
+cross-site scripting (XSS) in web apps, Common Security Vulnerabilities in AI-Generated Code
+CRUD (create, read, update, delete) operations, Zero-to-one product development
+feature prototyping and CRUD applications, Feature prototyping and CRUD applications
+CSS
+AI generating, Rapid Prototyping with AI Assistants
+AI integrating CSS library, From Concept to Prototype: Iterative Refinement
+AI outputting CSS styling, From Concept to Prototype: Iterative Refinement
+Cline generating complete CSS/HTML page example, Rapid Prototyping with AI Assistants
+handling for web application frontend using AI, Styling and layout
+CSV files, converting to charts, AI-assisted prototyping of, Evolving a Prototype Toward Production
+cultural biases, Bias and Fairness
+Cursor IDE, Cursor: The AI-Driven Code Editor, AI Prototyping Tools, From Copilots to Autonomous Agents: What Are Background Coding Agents?, Execute
+background coding agents, Major Players in Autonomous Coding Agents
+background coding gents, Plan
+code generation by, Cursor: The AI-Driven Code Editor
+editing existing code, Cursor: The AI-Driven Code Editor
+Gemini's integration with, Google Gemini: The Multimodal Coding Powerhouse
+using effectively in professional workflow, Cursor: The AI-Driven Code Editor
+D
+dashboards
+internal company dashboard built using AI, Examples of Successful AI-Built Web Projects
+data bias, Bias and Fairness
+data consistency rules (database), Checking AI-Generated Queries
+data partitioning and replication, Learn System Design and Architecture
+data protection laws, Golden Rules for Responsible AI Use
+data structures, Learn the Fundamentals—Don’t Skip the “Why”
+databases
+design and integration in web application using AI, Database Design and Integration-Checking AI-Generated Queries
+checking AI-generated queries, Checking AI-Generated Queries
+database queries, Database Queries
+using an ORM, Using an ORM
+integration in web application backend using AI, Database integration
+query optimization for AI-generated code, Performance Optimization
+in web application backends, Building Web Applications with AI
+transactions in, Orchestrating multistep operations
+date formatting, using AI for, AI as first drafter
+mismatches in AI-generated components generated in isolation, Building Effective Testing Frameworks for AI-Generated Systems
+de minimis, Intellectual Property Considerations
+death of the junior developer, Junior Developers: Thrive Alongside AI
+debugging
+of AI-assisted code, Different Mindsets, Different Expectations
+of AI-generated code, Debugging Strategies: Finding and Fixing Errors-Debugging Strategies: Finding and Fixing Errors
+by autonomous coding agents, How Do Background Agents Compare to In-IDE AI Assistants?
+effective prompts to AI for, Iterative Refinement: The Feedback Loop with the AI
+intelligent debugging using AI, Intelligent Debugging
+junior developers practicing without AI, Practice Problem Solving and Debugging Without the AI Safety Net
+lack of skill development in caused by AI coding, Two steps back
+as timeless engineering skill, Focus on Code Review and Quality Assurance
+using Cursor, Cursor: The AI-Driven Code Editor
+decision support in project management, The Evolution of Project Management with AI
+deep reasoning models, Understanding Model Categories
+DeepSeek model, Understanding Model Categories
+defaults, insecure, in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+deletes
+cascading deletes in databases, Checking AI-Generated Queries
+demo-quality trap, The demo-quality trap
+democratization of programming, The Vibe-Coding Approach: Code by Conversation
+dependence on AI coding tools, problems caused by, Two steps back
+dependencies, Setting Up the Project: Scaffolding with AI
+background coding agents installing, From Copilots to Autonomous Agents: What Are Background Coding Agents?
+checking for unvetted libraries or license risks, Golden Rules for Responsible AI Use
+Cline installing, VSCode + Cline: The Open Source Autonomous Coding Agent
+in React useEffect hook, Framework-specific tips
+updating, using future AI, Predictive Maintenance and Refactoring
+dependency management and updates, security vulnerability in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+deployments
+best practices for reliable deployment, Best Practices for Reliable Deployment-Ongoing Best Practices
+before and during deployment, Before and During Deployment
+ongoing practices after deployment, Ongoing Best Practices
+design
+AI-driven design and UX personalization, AI-Driven Design and User Experience Personalization-Personalized User Experiences
+AI for UX research, AI for UX Research
+generative design tools, Generative Design Tools
+personalized user experiences, Personalized User Experiences
+design-to-code process, acceleration using AI prototyping tools, AI Prototyping Tools
+learning system design, Learn System Design and Architecture
+UI and UX, midlevel engineers venturing into, Venture into UI and UX Design
+developers
+considered as authors of AI-generated code, Intellectual Property Considerations
+cultural and skill shift in future resulting from use of autonomous agents, How Autonomous Agents Could Change Software Engineering
+developers as editors, code reviews formalizing, Code Review Strategies
+evolving AI-generated prototype toward production, Evolving a Prototype Toward Production-Evolving a Prototype Toward Production
+how they're actually using AI, How Developers Are Actually Using AI-AI as validator
+common failure patterns, Common Failure Patterns-The demo-quality trap
+practical workflow patterns, what actually works, What Actually Works: Practical Workflow Patterns
+innovations resulting in more growth and opportunities for, Summary and Next Steps
+junior developers thriving along with AI, Junior Developers: Thrive Alongside AI-Shift Your Mindset: From Consuming to Creating
+communicating and collaborating, Communicate and Collaborate
+developing eye for maintainability, Build an Eye for Maintainability
+developing prompting and tooling skills, Develop Your Prompting and Tooling Skills (Wisely)
+focusing on testing and verification, Focus on Testing and Verification
+learning the fundamentals, Learn the Fundamentals—Don’t Skip the “Why”
+practicing problem solving and debugging without AI, Practice Problem Solving and Debugging Without the AI Safety Net
+seeking feedback and mentorship, Seek Feedback and Mentorship
+shifting mindset from consuming to creating solutions, Shift Your Mindset: From Consuming to Creating
+reviewing, refining, and owning AI-generated code, Summary and Next Steps
+roles evolving, not disappearing, Beyond the 70%: Maximizing Human Contribution
+development
+AI-assisted, The Vibe-Coding Approach: Code by Conversation
+AI-assisted engineering permeating entire lifecycle, The AI-Assisted Engineering Approach: Structure with an AI Partner
+AI-powered tools dramatically accelerating, The Vibe-Coding Approach: Code by Conversation
+faster cycles with AI-assisted coding, Where AI Still Struggles
+plan-first development with AI support, The AI-Assisted Engineering Approach: Structure with an AI Partner
+Devin, Verify, How Do Background Agents Compare to In-IDE AI Assistants?
+as AI teammate, Major Players in Autonomous Coding Agents
+(see also AI)
+DevOps
+background coding agents integrating with tools, How Do Background Agents Compare to In-IDE AI Assistants?
+midlevel engineers mastering, Master Performance Optimization and DevOps
+vibe coding woven into, What Actually Works: Practical Workflow Patterns
+diffs, Report
+discrimination resulting from AI usage, Golden Rules for Responsible AI Use
+diverse teams, hiring, Bias and Fairness
+Django, Using frameworks or boilerplates
+documentation
+adding while evolving prototype toward production, Evolving a Prototype Toward Production
+produced by AI for web application backend API, API documentation and testing
+providing for AI-accelerated codebase, Follow-Up
+Doe v. GitHub, Inc. class-action lawsuit, Intellectual Property Considerations
+domain expertise, building, Build Your Domain Expertise
+domain mastery and foresight, cultivating, Continue to Cultivate Domain Mastery and Foresight
+domain-specific natural languages, The Future of Programming Languages: Natural-Language-Driven Development?
+domains, software-engineering-specific, Build Your Domain Expertise
+E
+ecommerce site by solo developer, built using AI, Examples of Successful AI-Built Web Projects
+edge cases
+AI introducing unusual edge cases, Building Effective Testing Frameworks for AI-Generated Systems
+brainstorming for prototype using AI, Evolving a Prototype Toward Production
+checking AI's handling of, From Intent to Implementation: Understanding the AI’s Interpretation
+emotional and team health insights, gauging using AI, The Evolution of Project Management with AI
+end-to-end tests
+writing for AI-generated code, The Importance of Testing: Unit, Integration, and End to End
+endpoints
+implementing for backend API, Implementing API endpoints
+multistep operations, orchestrating, Orchestrating multistep operations
+engineering
+switching from rapid prototyping mode to disciplined engineering, Evolving a Prototype Toward Production
+engineers
+future-proofing your career with durable engineering skills, Summary and Next Steps
+midlevel engineers, adapting and specializing, Midlevel Engineers: Adapt and Specialize-Venture into UI and UX Design
+building domain expertise, Build Your Domain Expertise
+cross-functional communication, Get Good at Cross-Functional Communication
+focusing on code review and quality assurance, Focus on Code Review and Quality Assurance
+learning new tools and adapting to change, Be Adaptable—and Never Stop Learning
+learning system design and architecture, Learn System Design and Architecture
+learning systems thinking, Learn Systems Thinking
+managing systems integration and boundaries, Learn to Manage Systems Integration and Boundaries
+performance optimization and DevOps, Master Performance Optimization and DevOps
+using AI, Use AI!
+venturing into UI and UX design, Venture into UI and UX Design
+senior engineers and developers, leveraging experience with AI, Senior Engineers and Developers: Leverage Your Experience with AI-Hone Your Soft Skills and Leadership
+being the architect and editor in chief, Be the Architect and the Editor in Chief
+cultivating domain mastery and foresight, Continue to Cultivate Domain Mastery and Foresight
+honing soft skills and leadership, Hone Your Soft Skills and Leadership
+mentoring and setting standards, Mentor and Set Standards
+using AI as force multiplier for big initiatives, Use AI as a Force Multiplier for Big Initiatives
+environment, specifying in prompts, Specificity and Clarity: Writing Prompts That Deliver
+error handling
+revealing sensitive information in AI-generated code, Common Security Vulnerabilities in AI-Generated Code, Improper Authentication and Authorization
+testing for AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems
+errors
+finding and fixing in AI-generated code, Debugging Strategies: Finding and Fixing Errors-Debugging Strategies: Finding and Fixing Errors
+ESLint and security plug-ins, Leverage Automated Security Scanners
+ethical implications of vibe coding, The Ethical Implications of Vibe Coding-Summary and Next Steps, How Vibe Coding Is Reshaping the Industry
+bias and fairness, Bias and Fairness-Golden Rules for Responsible AI Use
+intellectual property considerations, The Ethical Implications of Vibe Coding-Gray Areas
+transparency and attribution, Transparency and Attribution-Transparency and Attribution
+EU's AI Act, Transparency and Attribution
+exceptions (unhandled) in AI code, Code Readability and Structure: Patterns and Potential Issues
+execution of code and commands by autonomous coding agents, How Do Background Agents Compare to In-IDE AI Assistants?
+execution stage, autonomous coding agents, Execute
+expectations of AI-assisted engineering versus vibe coding, Different Mindsets, Different Expectations
+experimentation
+enhancement by AI-assisted coding, Where AI Still Struggles
+vibe coding encouraging mindset of, How It Works: The Iterative Cycle and AI’s Role in Code Generation
+Express routes, Implementing API endpoints
+F
+failure modes and recovery procedures, Learn System Design and Architecture
+failure patterns with use of AI-assisted coding, Common Failure Patterns
+demo-quality trap, The demo-quality trap
+two steps back pattern, Two steps back
+failures
+learning from, Ongoing Best Practices
+fair use, Intellectual Property Considerations
+fairness in AI-generated output, Bias and Fairness-Golden Rules for Responsible AI Use
+fallbacks in AI-generated code, Working with Code Output
+features
+ease of adding using AI, Addressing Challenges in AI Prototyping
+feedback
+feedback loop with AI in prompts, Iterative Refinement: The Feedback Loop with the AI
+feedback loops with autonomous systems, Build Feedback Loops with Autonomous Systems
+junior developers seeking from team members, Seek Feedback and Mentorship
+few-shot prompting, One-Shot and Few-Shot Prompting
+fidelity of AI-generated prototypes to input or intention, AI Prototyping Tools
+first drafter, AI as, What Actually Works: Practical Workflow Patterns, AI as first drafter
+force multiplier, AI as, Hone Your Soft Skills and Leadership
+foresight, using to steer AI, Continue to Cultivate Domain Mastery and Foresight, Learn to Manage Systems Integration and Boundaries
+formatters, Building Effective Testing Frameworks for AI-Generated Systems, While Prompting
+formatting
+ensuring consistent code formatting in AI code, Code Readability and Structure: Patterns and Potential Issues
+frameworks
+modern framework utilization by AI coding assistants, Modern framework utilization
+using in web application backends, Using frameworks or boilerplates
+frontends
+integrating with backend in web application using AI, Full Stack Integration: Marrying Frontend and Backend-Optimizing AI-human collaboration in full stack development
+aligning frontend and backend contracts, Aligning Frontend and Backend Contracts
+real-time collaboration with AI, Real-Time Collaboration with AI-Optimizing AI-human collaboration in full stack development
+refactoring for prototype service converting CSV files to charts, Evolving a Prototype Toward Production
+testing error handling in AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems
+testing for AI-generated web applications, Testing and Validation for AI-Generated Web Applications
+web application, Building Web Applications with AI
+web application frontend development patterns with AI, Frontend Development Patterns with AI-Framework-specific tips
+framework-specific tips, Framework-specific tips
+handling complexity with AI, Handling complexity with AI guidance
+implementing components from descriptions, Implementing components from descriptions
+integrating APIs and state management, Integrating APIs and state management
+styling and layout, Styling and layout
+full stack flow with AI (example), Example: full stack flow with AI
+full-text searches, coding agents defaulting to, Execute
+functionality you didn't want in AI code, From Intent to Implementation: Understanding the AI’s Interpretation
+functions
+AI defining multiple functions when one is expected, Code Readability and Structure: Patterns and Potential Issues
+performance optimization in AI-generated code, Performance Optimization, Performance Optimization
+refactoring in AI-generated code, Refactoring for Maintainability: Making AI Code Your Code
+fundamentals
+evergreen nature of, How Vibe Coding Is Reshaping the Industry
+importance of learning by junior developers, Learn the Fundamentals—Don’t Skip the “Why”
+future of AI-augmented development (see AI-augmented development, future of)
+future-proofing your career with durable engineering skills, Summary and Next Steps
+fuzz testing of AI-generated code, Penetration Testing and Fuzzing, Building Effective Testing Frameworks for AI-Generated Systems
+G
+Gemini, Productivity, Accessibility, and the Changing Nature of Programming
+choosing between Google's Gemini, Anthropic's Claude, and OpenAI models, Choosing the Right Model for Your Needs
+multimodal coding capabilities, Google Gemini: The Multimodal Coding Powerhouse
+support for multiple AI models, Choosing the Right Model for Your Task
+gender bias, Bias and Fairness
+generator versus reviewer asymmetry, How Do Background Agents Compare to In-IDE AI Assistants?
+GitHub CodeQL, Leverage Automated Security Scanners
+GitHub Copilot, From Copilots to Autonomous Agents: What Are Background Coding Agents?
+lawsuit against, Intellectual Property Considerations
+living in the editor, How Do Background Agents Compare to In-IDE AI Assistants?
+GitHub’s Copilot for Pull Requests, Code Review Strategies
+glue code and integration, using vibe coding for, Glue code and integration
+goals of vibe coding versus AI-assisted engineering, Different Mindsets, Different Expectations
+Google Gemini (see Gemini)
+Google Jules, Major Players in Autonomous Coding Agents
+(see also Jules)
+Google LLC v. Oracle America, Inc. (court case), Intellectual Property Considerations
+governance and process in responsible AI, Golden Rules for Responsible AI Use
+GPT-4, OpenAI's ToS for code, Intellectual Property Considerations
+gray areas in intellectual property issues with AI-generated code, Gray Areas
+H
+Helmet middleware, Provide Updates to Compensate for Training Cutoffs
+hooks in React, Framework-specific tips
+HTML/CSS
+AI generating, Rapid Prototyping with AI Assistants
+Cline generating complete HTML/CSS page example, Rapid Prototyping with AI Assistants
+generation by AI design tools, Generative Design Tools
+UI Layout AI generating, Human-AI Hybrid Teams
+HTML/CSS page
+creating using AI assistant, Rapid Prototyping with AI Assistants
+human contribution, maximizing, Beyond the 70%: Maximizing Human Contribution-Summary and Next Steps
+AI-human collaboration in full stack development, Optimizing AI-human collaboration in full stack development
+future-proofing your career with durable engineering skills, Summary and Next Steps
+humans monitoring automations, Ongoing Best Practices
+junior developers thriving along with AI, Junior Developers: Thrive Alongside AI-Shift Your Mindset: From Consuming to Creating
+midlevel engineers, adapting and specializing, Midlevel Engineers: Adapt and Specialize-Venture into UI and UX Design
+senior engineers and developers, leveraging experience with AI, Senior Engineers and Developers: Leverage Your Experience with AI-Hone Your Soft Skills and Leadership
+human oversight of AI-assisted coding, How It Works: The Iterative Cycle and AI’s Role in Code Generation, The 70% Problem: AI-Assisted Workflows That Actually Work, Golden Rules for Responsible AI Use
+AI-driven prototyping tools and, AI Prototyping Tools
+evolving a prototype toward production, Evolving a Prototype Toward Production
+performing human code review for security, Perform a Human Code Review with a Security Checklist
+human-AI hybrid teams, Human-AI Hybrid Teams
+human-AI pair programming, AI as pair programmer, Be the Architect and the Editor in Chief
+human intelligence exercised in code reviews, Code Review Strategies
+versus human-human pair programming, AI as pair programmer
+(see also human-human)
+human-human pair programming
+versus human-AI pair programming, AI as pair programmer
+junior developers with senior mentors, Seek Feedback and Mentorship
+human-related data, testing with diverse inputs, Bias and Fairness
+I
+idempotence, Building Effective Testing Frameworks for AI-Generated Systems
+IDEs (integrated development environments)
+AI assistants in, comparison to autonomous coding agents, How Do Background Agents Compare to In-IDE AI Assistants?
+AI features blending into traditional coding, Finding Your Place on the Spectrum
+AI-augmented, integrating AI directly into development, AI Prototyping Tools
+AI-augmented, using in full stack development for web application, Real-Time Collaboration with AI
+AI-enhanced IDEs, The Vibe-Coding Approach: Code by Conversation
+autonomous background agents integrated with, Major Players in Autonomous Coding Agents
+modern IDEs with IntelliSense, warnings and flags from, Pay Attention to Warnings in Context
+ignoring AI's clarification or output (prompt antipattern), Ignoring AI’s clarification or output
+inclusivity, prompting for, Bias and Fairness
+inconsistencies (minor) in AI code, Code Readability and Structure: Patterns and Potential Issues
+inconsistency in prompts, Inconsistency
+infrastructure as code, using to define deployment environment, Before and During Deployment
+instructor role, assigning to AI, Role Prompting
+integration of prototypes into real systems, Addressing Challenges in AI Prototyping
+integration tests
+for AI-generated web applications, Testing and Validation for AI-Generated Web Applications
+writing for AI-generated code, The Importance of Testing: Unit, Integration, and End to End
+integration, using vibe coding for, Glue code and integration
+intellectual property, considerations with AI-generated code, Package Management Issues, The Ethical Implications of Vibe Coding-Gray Areas
+copyrights, licenses, and ownership of code, Intellectual Property Considerations-Intellectual Property Considerations
+dealing with suspicious AI output, What to Do If You Get Suspicious Output
+gray areas, Gray Areas
+intent over implementation, How Vibe Coding Is Reshaping the Industry
+intent, interpretation by AI, Where AI Still Struggles
+intent, programming with, Introduction: What Is Vibe Coding?, Beyond Lines of Code: Programming with Intent-How It Works: The Iterative Cycle and AI’s Role in Code Generation, Rapid Prototyping with AI Assistants
+from intent to implementation, understanding AI's interpretation, From Intent to Implementation: Understanding the AI’s Interpretation
+internationalization, AI model training and, Bias and Fairness
+iterative loop in AI-driven prototyping, From Concept to Prototype: Iterative Refinement
+iterative prototype refinement with AI-driven prototyping, From Concept to Prototype: Iterative Refinement-Evolving a Prototype Toward Production
+iterative refinement of prompts, Iterative Refinement: The Feedback Loop with the AI
+J
+jobs in software, shifting landscape of, Productivity, Accessibility, and the Changing Nature of Programming
+Jules, From Copilots to Autonomous Agents: What Are Background Coding Agents?, How Do Background Agents Compare to In-IDE AI Assistants?, Major Players in Autonomous Coding Agents
+junior developers (see developers)
+K
+key management, Before and During Deployment
+knowledge paradox, Two steps back
+L
+leadership and soft skills, honing, Hone Your Soft Skills and Leadership
+learning, importance of, Be Adaptable—and Never Stop Learning
+legal requirements around AI, Golden Rules for Responsible AI Use
+library usage in AI-generated code, Code Readability and Structure: Patterns and Potential Issues
+licensing considerations in AI code, Package Management Issues, Intellectual Property Considerations
+linters, Finding Your Place on the Spectrum, Building Effective Testing Frameworks for AI-Generated Systems, While Prompting
+LLMs (large language models), Introduction: What Is Vibe Coding?, Differentiate Models by Task Type
+ambiguous prompts, problems with, Prompt Engineering Fundamentals
+leveraged by Cursor, Cursor: The AI-Driven Code Editor
+as power tools meant for power users, Summary and Next Steps
+thriving on examples and correlations, Iterative Refinement: The Feedback Loop with the AI
+training on vast corpus of programming knowledge, Where AI Still Struggles
+load balancing, Learn System Design and Architecture
+load testing, Building Effective Testing Frameworks for AI-Generated Systems
+logging
+incorporating and using in tests of AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems
+optimizing practices for security purposes, Optimize Your Logging Practices
+Lovable, AI Prototyping Tools
+M
+maintainability
+ensuring in AI-accelerated codebases, Ensuring Maintainability in AI-Accelerated Codebases-Follow-Up
+considerations while prompting, While Prompting
+follow-up practices, Follow-Up
+working with code output, Working with Code Output
+junior developers developing eye for, Build an Eye for Maintainability
+refactoring AI-generated code for, Refactoring for Maintainability: Making AI Code Your Code
+testing for AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems
+maintenance, predictive, using AI, Predictive Maintenance and Refactoring
+majority solution effect, The “Majority” Problem: Most Common Doesn’t Mean Most Appropriate
+memory
+optimizations for performance in AI-generated code, Performance Optimization
+memory management, Learn the Fundamentals—Don’t Skip the “Why”
+mentorship
+junior developers seeking from team members, Seek Feedback and Mentorship
+senior engineers mentoring and setting standards, Mentor and Set Standards
+metaprogramming, Metaprompting
+midlevel engineers (see engineers)
+minimum viable product (MVP)
+building quickly with help of AI pair programmer, Zero-to-one product development
+web application MVP, Examples of Successful AI-Built Web Projects
+model cards, Golden Rules for Responsible AI Use
+models (AI), AI Models: The Landscape for Code Generation-Practical Tips for Any Model
+adapting your tone in prompts to, Prompting Techniques: A Toolbox for Effective Communication
+categories based on approach and strengths, Understanding Model Categories
+choosing right model for your needs, Choosing the Right Model for Your Needs
+choosing right model for your task, Choosing the Right Model for Your Task
+combining multiple models to maximize strengths, Combining Multiple AI Models to Maximize Strengths-Human-AI Hybrid Teams
+differentiating models by task type, Differentiate Models by Task Type
+human-AI hybrid teams, Human-AI Hybrid Teams
+using an orchestration system, Use an Orchestration System
+context window size, Productivity, Accessibility, and the Changing Nature of Programming
+future improvements to, narrowing 30% gap, How Autonomous Agents Could Change Software Engineering
+knowing limits of, Know the Model’s Limits
+major models in coding landscape, Major Models-ChatGPT: The Versatile Coding Companion
+ChatGPT, ChatGPT: The Versatile Coding Companion
+Claude, Claude: The Reasoning Virtuoso
+Google Gemini, Google Gemini: The Multimodal Coding Powerhouse
+multimodel approach in development, Choosing the Right Model for Your Needs
+practical tips for any model, Practical Tips for Any Model
+providing updates to compensate for training cutoffs, Provide Updates to Compensate for Training Cutoffs
+updated models with security focus, using, Use Updated Models or Tools with a Security Focus
+variable output quality in coding, Where AI Still Struggles
+modes of operation (Windsurf), Windsurf: An AI-Powered IDE with Full Codebase Indexing
+modularity, encouraging in AI code, While Prompting
+MongoDB, Database integration
+monitoring, setting up in AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems
+multimodal processing (AI models), Understanding Model Categories
+MVP (see minimum viable product)
+N
+natural-language coding environments, Finding Your Place on the Spectrum
+natural-language project status queries, The Evolution of Project Management with AI
+natural-language-driven development, The Future of Programming Languages: Natural-Language-Driven Development?-The Future of Programming Languages: Natural-Language-Driven Development?
+nondeterminism in AI systems, Building Effective Testing Frameworks for AI-Generated Systems
+O
+object-relational mappers (see ORMs)
+observability, setting up for deployments, Before and During Deployment
+off-by-one errors, Code Readability and Structure: Patterns and Potential Issues
+one-shot prompting, One-Shot and Few-Shot Prompting
+stateful conversation versus, Stateful Conversation Versus One-Shot Prompting
+open source
+and class action lawsuit Doe v. GitHub, Inc., Intellectual Property Considerations
+information about norms, sources of, Intellectual Property Considerations
+not synonymous with public domain, Intellectual Property Considerations
+open source AI models, Understanding Model Categories
+OpenAI
+models, AI Models: The Landscape for Code Generation
+support for multiple AI models, Choosing the Right Model for Your Task
+OpenAI models
+choosing between Gemini, Claude, and OpenAI models, Choosing the Right Model for Your Needs
+OpenAI's Codex, The Vibe-Coding Approach: Code by Conversation, Execute, Major Players in Autonomous Coding Agents
+OpenAI’s ToS (terms of service), Intellectual Property Considerations
+operational runbooks, Ongoing Best Practices
+orchestration system for multiple AI models, Use an Orchestration System
+organizational challenges with autonomous coding agents, Challenges and Limitations
+ORMs (object-relational mappers), Database integration, Orchestrating multistep operations
+AI generating model classes or schemas for web application database, Using an ORM
+output
+clearly incorrect output from AI, handling, Ignoring AI’s clarification or output
+getting multiple outputs from same prompt and choosing best one, Self-Consistency (Multiple Outputs and Majority Voting)
+giving instructions about in metaprogramming prompts, Metaprompting
+output format, specifying in prompts, Specificity and Clarity: Writing Prompts That Deliver
+overloaded prompts, The overloaded prompt
+overreliance and skill atrophy from AI-assisted coding, Where AI Still Struggles
+OWASP Top 10 security vulnerabilities, Provide Updates to Compensate for Training Cutoffs
+OWASP’s ZAP, Penetration Testing and Fuzzing
+ownership of code, Summary and Next Steps, Intellectual Property Considerations
+code generated by autonomous coding agents, Challenges and Limitations
+P
+package hallucination, Package Management Issues
+package management issues in AI-generated code, Package Management Issues
+pair programmer, AI as, What Actually Works: Practical Workflow Patterns, AI as pair programmer
+best practices for AI pair programming, Best practices for AI pair programming
+pair programming
+AI pair programmer versus AI assistant developer, How Do Background Agents Compare to In-IDE AI Assistants?
+human-human versus human-AI, AI as pair programmer
+junior developers with senior mentors, Seek Feedback and Mentorship
+parallelism, Performance Optimization
+passwords
+cryptographically hashed, Improper Authentication and Authorization
+security vulnerabilities in AI-generated code, Improper Authentication and Authorization
+using bcrypt to hash and compare in AI-generated code, Improper Authentication and Authorization
+patterns (AI), learning from, Follow-Up
+patterns in AI-generated code, Code Readability and Structure: Patterns and Potential Issues
+penetration testing of AI-generated code, Penetration Testing and Fuzzing
+performance
+AI-generated database queries, Checking AI-Generated Queries
+checking for AI-driven prototype, Evolving a Prototype Toward Production
+midlevel engineers mastering performance optimization, Master Performance Optimization and DevOps
+optimization for AI-generated code, Refactoring for Maintainability: Making AI Code Your Code, Performance Optimization-Performance Optimization
+areas to cover, Performance Optimization
+example, function merging sorted arrays, Performance Optimization
+periodic audits of AI-accelerated codebase, Ongoing Best Practices
+pitfalls in AI-generated code, Code Readability and Structure: Patterns and Potential Issues
+testing for AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems
+tuning, using future AI, Predictive Maintenance and Refactoring
+performance constraints, mentioning in prompts, Contextual Prompting
+personalized user experiences, Personalized User Experiences
+placeholders in AI code, Code Readability and Structure: Patterns and Potential Issues
+planning and oversight features, agent-specific, leveraging, Leverage Agent-Specific Planning and Oversight Features
+planning stage, autonomous coding agents, Plan
+poor prompts, example of, Poor prompt
+improving the prompt, Improved prompt
+PostgreSQL, Database integration
+PR (pull request) review process
+autonomous coding agents integrating with, Report
+privacy and security concerns (AI coding), Where AI Still Struggles
+privacy concerns with user data, Golden Rules for Responsible AI Use
+problem solving
+junior developers practicing without AI, Practice Problem Solving and Debugging Without the AI Safety Net
+productivity gains from AI-assisted coding
+faster development cycles, Where AI Still Struggles
+programming
+AI as force multiplier, Hone Your Soft Skills and Leadership
+disadvantages of new style of development, Productivity, Accessibility, and the Changing Nature of Programming
+with intent, Beyond Lines of Code: Programming with Intent-How It Works: The Iterative Cycle and AI’s Role in Code Generation, Rapid Prototyping with AI Assistants
+productivity, accessibility, and changing nature of, Productivity, Accessibility, and the Changing Nature of Programming-Productivity, Accessibility, and the Changing Nature of Programming
+programming languages
+future of, in AI-augmented development, The Future of Programming Languages: Natural-Language-Driven Development?-The Future of Programming Languages: Natural-Language-Driven Development?
+specifying in prompts, Specificity and Clarity: Writing Prompts That Deliver
+project level, autonomous coding agents operating at, How Do Background Agents Compare to In-IDE AI Assistants?
+project management, evolution with AI, The Evolution of Project Management with AI-The Evolution of Project Management with AI
+prompt antipatterns, avoiding, Common Prompt Antipatterns and How to Avoid Them-Vague references like “the above code”
+ignoring AI's clarification or output, Ignoring AI’s clarification or output
+inconsistency in prompts, Inconsistency
+missing the question, Missing the question
+overloaded prompts, The overloaded prompt
+vague prompts, The vague prompt
+vague references, Vague references like “the above code”
+vague success criteria, Vague success criteria
+prompt engineering, The Art of the Prompt: Communicating Effectively with AI
+fundamentals of, Prompt Engineering Fundamentals
+prompting techniques, Prompting Techniques: A Toolbox for Effective Communication-ReAct (Reason + Act) Prompting
+advanced prompting, combining techniques and handling complexity, Advanced Prompting: Combining Techniques and Handling Complexity-Vague references like “the above code”
+knowing model's limits, Know the Model’s Limits
+chain-of-thought prompting, Chain-of-Thought Prompting, Chain-of-Thought Prompting
+contextual prompting, Contextual Prompting
+metaprogramming, Metaprompting
+one-shot and two-shot prompting, One-Shot and Few-Shot Prompting
+ReAct, ReAct (Reason + Act) Prompting
+role prompting, Role Prompting
+self-consistency, Self-Consistency (Multiple Outputs and Majority Voting)
+zero-shot prompting, Zero-Shot Prompting
+prompts
+ambiguity in, leading to ambiguity in code, Where AI Still Struggles
+checking AI's interpretation and implementation of, From Intent to Implementation: Understanding the AI’s Interpretation
+considerations for maintainability of AI code while prompting, While Prompting
+effective communication with AI, The Art of the Prompt: Communicating Effectively with AI
+comparison of two prompts, Comparing Two Prompts-Improved prompt
+iterative refinement and feedback loop with AI, Iterative Refinement: The Feedback Loop with the AI
+specificity and clarity in prompts, Specificity and Clarity: Writing Prompts That Deliver
+junior developers developing skills in, Develop Your Prompting and Tooling Skills (Wisely)
+prompt artists versus AI orchestra conductors, Finding Your Place on the Spectrum
+prompting AI as form of communication, Communicate and Collaborate
+prompting and code generation, responsible AI, Golden Rules for Responsible AI Use
+refining in iterative prototyping using AI, From Concept to Prototype: Iterative Refinement
+understanding, How It Works: The Iterative Cycle and AI’s Role in Code Generation
+proof of concept, Rapid Prototyping with AI Assistants
+property-based testing, Building Effective Testing Frameworks for AI-Generated Systems
+prototyping
+AI-driven, tools and techniques, AI-Driven Prototyping: Tools and Techniques-Summary and Next Steps
+addressing challenges in AI prototyping, Addressing Challenges in AI Prototyping
+concept to prototype, iterative refinement, From Concept to Prototype: Iterative Refinement-From Concept to Prototype: Iterative Refinement
+evolving prototype toward production, Evolving a Prototype Toward Production
+prototyping tools, AI Prototyping Tools-AI Prototyping Tools
+rapid prototyping with AI assistants, Rapid Prototyping with AI Assistants-Rapid Prototyping with AI Assistants
+enhancement by AI-assisted coding, Where AI Still Struggles
+feature prototyping, Feature prototyping and CRUD applications
+PRs (pull requests), Code Review Strategies
+autonomous coding agent PRs, Challenges and Limitations
+Q
+quality
+demo-quality trap with AI coding, The demo-quality trap
+variable output quality of AI models, Where AI Still Struggles
+quality assurance
+AI tools enhancing efficiency and effectiveness of, AI as validator
+maximizing benefits of AI and human capabilities in, AI as validator
+midlevel engineers focusing on, Focus on Code Review and Quality Assurance
+process for AI-assisted projects, unusual edge cases and, Building Effective Testing Frameworks for AI-Generated Systems
+question, missing in prompts, Missing the question
+R
+race, gender, and age, variables in algorithms, Bias and Fairness
+racial biases, Bias and Fairness
+RAG (retrieval-augmented generation), Windsurf: An AI-Powered IDE with Full Codebase Indexing
+rate limiting or throttling mechanisms to prevent brute force attacks, Improper Authentication and Authorization
+React, Building Web Applications with AI
+tips on, Framework-specific tips
+ReAct (Reason + Act) prompting, ReAct (Reason + Act) Prompting
+readability of code
+AI-generated code, issues with, Code Readability and Structure: Patterns and Potential Issues
+reasoning, deep reasoning AI models, Understanding Model Categories
+refactoring
+of AI code after testing, Building Effective Testing Frameworks for AI-Generated Systems
+of AI code for maintainability, Refactoring for Maintainability: Making AI Code Your Code
+continuous refactoring of AI-accelerated codebase, Working with Code Output
+requesting for AI-assisted code that could be simpler, Code Review Strategies
+using future AI, Predictive Maintenance and Refactoring
+references (vague), in prompts, Vague references like “the above code”
+reliability, Building Effective Testing Frameworks for AI-Generated Systems
+of infrastructure and operations around the code, Ongoing Best Practices
+repetitive code generation, using vibe coding for, Repetitive code generation
+reporting by autonomous coding agents, Report
+requirements
+including in prompts, Specificity and Clarity: Writing Prompts That Deliver
+interpretation by AI, Where AI Still Struggles
+thinking about how to convey to AI, Prompt Engineering Fundamentals
+requirements analysis, Communicate and Collaborate
+resilience, building into AI-accelerated codebase, Working with Code Output
+resource management, Learn System Design and Architecture
+responsibility and ethical concerns with use of AI, How Vibe Coding Is Reshaping the Industry
+responsible AI use, golden rules for, Golden Rules for Responsible AI Use-Golden Rules for Responsible AI Use
+responsible AI checklist, Golden Rules for Responsible AI Use
+using the responsible AI checklist, Golden Rules for Responsible AI Use
+RESTful APIs
+endpoints, Implementing API endpoints
+retrieval-augmented generation (RAG), Windsurf: An AI-Powered IDE with Full Codebase Indexing
+reviewing code, generator versus reviewer asymmetry, How Do Background Agents Compare to In-IDE AI Assistants?
+risk analysis and management, using AI for, The Evolution of Project Management with AI
+roles, new, in engineering teams, How Autonomous Agents Could Change Software Engineering
+rollback plans, Before and During Deployment
+routing AI endpoints, Implementing API endpoints
+rubber duck debugging prompts, Iterative Refinement: The Feedback Loop with the AI
+Ruby on Rails, Using frameworks or boilerplates
+runbooks, Ongoing Best Practices
+S
+safety systems (AI), sensitivity to role descriptions, Role Prompting
+SAST (static analysis tools), Leverage Automated Security Scanners
+scaffolding
+vibe coding starting without, The Vibe-Coding Approach: Code by Conversation
+web application scaffolding using AI, Setting Up the Project: Scaffolding with AI-Setting Up the Project: Scaffolding with AI
+scheduling and sprint planning, using AI for, The Evolution of Project Management with AI
+scope creep, Addressing Challenges in AI Prototyping
+screenshot-to-code capability, AI Prototyping Tools
+secret data, keeping secret, Golden Rules for Responsible AI Use
+secret management tools, Before and During Deployment
+secrets or credentials, hard-coded, in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+security, Security, Maintainability, and Reliability-Slow Down
+audit for AI-generated web applications, Testing and Validation for AI-Generated Web Applications
+audits of AI-generated code, Security Audits-Slow Down
+optimizing logging practices, Optimize Your Logging Practices
+paying attention to warnings in context, Pay Attention to Warnings in Context
+penetrating testing and fuzzing, Penetration Testing and Fuzzing
+performing human review for security, Perform a Human Code Review with a Security Checklist
+security-focused unit tests, Add Security-Focused Unit Tests
+slowing down for audits, Slow Down
+updates of AI model training, Provide Updates to Compensate for Training Cutoffs
+using automated security scanners, Leverage Automated Security Scanners
+using separate AI as reviewer, Use a Separate AI as a Reviewer
+using updated models or tools with security focus, Use Updated Models or Tools with a Security Focus
+common vulnerabilities in AI-generated code, Common Security Vulnerabilities in AI-Generated Code-Package Management Issues
+improper authentication and authorization, Improper Authentication and Authorization
+package management issues, Package Management Issues
+remaining vigilant about in deployments, Before and During Deployment
+vulnerabilities in AI-generated code, Evolving a Prototype Toward Production
+security analyst role, assigning to AI, Role Prompting
+self-consistency, Self-Consistency (Multiple Outputs and Majority Voting)
+Semgrep, Leverage Automated Security Scanners
+senior engineers (see engineers)
+Sequelize, Using an ORM
+servers in web application backends, Building Web Applications with AI
+70% problem, The 70% Problem: AI-Assisted Workflows That Actually Work-How Developers Are Actually Using AI
+maximizing human contribution in remaining 30%, Beyond the 70%: Maximizing Human Contribution
+shadow testing, Before and During Deployment
+sign-up page, prototyping using AI assistant, Rapid Prototyping with AI Assistants
+skill atrophy resulting from AI-assisted coding, Where AI Still Struggles
+skills
+durable engineering skills that future-proof your career, Summary and Next Steps
+evolution of resulting from use of vibe coding, How Vibe Coding Is Reshaping the Industry
+Snyk, Use Updated Models or Tools with a Security Focus
+best practices for security audits of AI-generated code, Slow Down
+soft skills and leadership, honing, Hone Your Soft Skills and Leadership
+software engineering
+continuous change in, Summary and Next Steps
+how autonomous coding agents could change it, How Autonomous Agents Could Change Software Engineering-How Autonomous Agents Could Change Software Engineering
+solutions
+most common not most appropriate, The “Majority” Problem: Most Common Doesn’t Mean Most Appropriate
+shifting mindset from consuming to creating, Shift Your Mindset: From Consuming to Creating
+Sonnet models, Claude: The Reasoning Virtuoso
+sources, acknowledging for AI-generated code, Transparency and Attribution
+specificity in prompts, The vague prompt
+strategies for, Specificity and Clarity: Writing Prompts That Deliver
+speed-optimized models, Understanding Model Categories
+sprawl, avoiding in AI-generated code, While Prompting
+sprint planning, using AI for, The Evolution of Project Management with AI
+SQL
+AI generating SQL migration scripts, Using an ORM
+database query written using AI, Database Queries
+SQL injection vulnerabilities in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+staged rollout strategies, Before and During Deployment
+startup minimum viable product web application, Examples of Successful AI-Built Web Projects
+state, Stateful Conversation Versus One-Shot Prompting
+managing for web application frontend using AI, Integrating APIs and state management
+managing using AI in full stack web app, State management and sync
+stateful conversation versus one-shot prompting, Stateful Conversation Versus One-Shot Prompting
+static analysis tools (SAST), Leverage Automated Security Scanners
+style guidelines
+checking AI code for compliance with, Code Readability and Structure: Patterns and Potential Issues
+refactoring AI code to align with, Refactoring for Maintainability: Making AI Code Your Code
+styling and layout for web application, using AI for, Styling and layout
+success criteria (vague), in prompts, Vague success criteria
+supervised coding agents, From Copilots to Autonomous Agents: What Are Background Coding Agents?
+synchronization and state management in full stack web app, State management and sync
+syntax issues (minor) in AI code, Code Readability and Structure: Patterns and Potential Issues
+systems
+durable engineering skills to future-proof your career, Summary and Next Steps
+learning system design and architecture, Learn System Design and Architecture
+learning systems thinking, Learn Systems Thinking
+systems integration and boundaries, managing, Learn to Manage Systems Integration and Boundaries
+T
+tasks for autonomous coding agents, selecting strategically, Strategically Select the Tasks Autonomous Agents Are Going to Implement
+team practices, evolving to integrate autonomous coding agents, Evolve Your Team Practices to Integrate Agents
+team-integrated autonomous coding agents, Major Players in Autonomous Coding Agents
+technical debt, tracking in AI-accelerated codebase, Follow-Up
+terms of service (ToS) of AI tools, Intellectual Property Considerations
+testing
+AI coding tools integrating testing suggestions, The Importance of Testing: Unit, Integration, and End to End
+AI generating tests for web application backend API, API documentation and testing
+AI tools assisting in, AI as validator
+of AI-driven prototypes, Evolving a Prototype Toward Production
+for AI-generated web applications, Testing and Validation for AI-Generated Web Applications-Testing and Validation for AI-Generated Web Applications
+automatic test generation by AI, AI in Testing, Debugging, and Maintenance
+building effective frameworks for AI-generated systems, Building Effective Testing Frameworks for AI-Generated Systems-Building Effective Testing Frameworks for AI-Generated Systems
+challenges when integrating multiple AI-generated components, Building Effective Testing Frameworks for AI-Generated Systems
+nondeterminism in AI systems, Building Effective Testing Frameworks for AI-Generated Systems
+types of tests to include, Building Effective Testing Frameworks for AI-Generated Systems
+critical importance for AI-generated code, Focus on Code Review and Quality Assurance
+helping to ensure maintainability of AI-accelerated codebase, Working with Code Output
+junior developers focusing on, Focus on Testing and Verification
+in production, Ongoing Best Practices
+shadow testing via deployment, Before and During Deployment
+test-driven debugging, Debugging Strategies: Finding and Fixing Errors
+unit tests for AI-driven prototype, Evolving a Prototype Toward Production
+unit, integration, and end-to-end testing, importance in AI code, The Importance of Testing: Unit, Integration, and End to End
+thinking out loud, prompting AI models to, Chain-of-Thought Prompting
+timing attacks, Improper Authentication and Authorization
+TODOs, adding in prototyping, Addressing Challenges in AI Prototyping
+tools
+acknowledging use of in AI-generated code, Transparency and Attribution
+AI prototyping tools, AI Prototyping Tools-AI Prototyping Tools
+AI-powered, emerging ecosystem of, A Glimpse of the Tools: The Emerging Ecosystem-Windsurf: An AI-Powered IDE with Full Codebase Indexing
+Cursor code editor, Cursor: The AI-Driven Code Editor
+Windsurf IDE, Windsurf: An AI-Powered IDE with Full Codebase Indexing
+junior developers building AI tooling skills, Develop Your Prompting and Tooling Skills (Wisely)
+using updated AI-powered tools with security focus, Use Updated Models or Tools with a Security Focus
+tools for coding spectrum, Finding Your Place on the Spectrum
+transactions, implementing in web application backend, Orchestrating multistep operations
+transition points in AI-enhanced development, Recognizing the transition points
+transparency about use of AI in development, Transparency and Attribution
+two steps back antipattern, Two steps back
+U
+UI and UX design, Where AI Still Struggles
+AI for UX research, AI for UX Research
+generative design tools, Generative Design Tools
+midlevel engineers venturing into, Venture into UI and UX Design
+personalized user experiences, creating with AI, Personalized User Experiences
+polishing UI for AI-driven prototype, Evolving a Prototype Toward Production
+rapid prototyping with AI assistants, Rapid Prototyping with AI Assistants
+unfairness resulting from AI usage, Golden Rules for Responsible AI Use
+unit tests
+for AI-generated web applications, Testing and Validation for AI-Generated Web Applications
+security-focused, adding to AI-generated code, Add Security-Focused Unit Tests
+writing for AI-generated code, The Importance of Testing: Unit, Integration, and End to End
+writing with AI to test AI-generated code, Building Effective Testing Frameworks for AI-Generated Systems
+updates to dependencies added in AI-generated code, Common Security Vulnerabilities in AI-Generated Code
+use cases, ideal, for vibe coding, Ideal Use Cases for Vibe Coding
+user enumeration, Improper Authentication and Authorization
+V
+vague prompts, The vague prompt
+validation
+for AI-generated web applications, Testing and Validation for AI-Generated Web Applications-Testing and Validation for AI-Generated Web Applications
+in backend/API development with AI, Business logic and validation
+validator, AI as, What Actually Works: Practical Workflow Patterns, AI as validator
+variables in AI-generated code, Code Readability and Structure: Patterns and Potential Issues
+verbosity in AI code, Code Readability and Structure: Patterns and Potential Issues, Refactoring for Maintainability: Making AI Code Your Code
+Vercel v0, AI Prototyping Tools
+verification
+of AI-generated code, focusing on, Focus on Testing and Verification
+by autonomous coding agents, Verify
+version control
+more essential with AI-generated code, AI as first drafter
+vibe coding
+about, Introduction: What Is Vibe Coding?
+benefits and limitations of, nuanced view, The Benefits and Limitations of Vibe Coding: A Nuanced View-Summary and Next Steps
+benefits of, Where AI Still Struggles
+combining creative vibe with solid engineering, Summary and Next Steps
+limitations and trade-offs, Where AI Still Struggles-Summary and Next Steps
+code by conversation approach, The Vibe-Coding Approach: Code by Conversation-The Vibe-Coding Approach: Code by Conversation
+productivity boost from, The Vibe-Coding Approach: Code by Conversation
+risks in, The Vibe-Coding Approach: Code by Conversation
+differences from AI-assisted engineering, Different Mindsets, Different Expectations
+encouraging mindset of experimentation, How It Works: The Iterative Cycle and AI’s Role in Code Generation
+golden rules of, The Golden Rules of Vibe Coding-The Golden Rules of Vibe Coding
+how it's reshaping the industry, How Vibe Coding Is Reshaping the Industry
+key point about, How It Works: The Iterative Cycle and AI’s Role in Code Generation
+shaping the future of, Summary and Next Steps-Summary and Next Steps
+typical cycle in, How It Works: The Iterative Cycle and AI’s Role in Code Generation
+VSCode (Visual Studio Code), From Copilots to Autonomous Agents: What Are Background Coding Agents?
+AI extensions, How Do Background Agents Compare to In-IDE AI Assistants?
+Cline transforming VSCode into open source autonomous coding agent, VSCode + Cline: The Open Source Autonomous Coding Agent
+Gemini's integration with, Google Gemini: The Multimodal Coding Powerhouse
+Vue, Building Web Applications with AI
+tips on, Framework-specific tips
+W
+web applications, building with AI, Building Web Applications with AI-Summary and Next Steps
+backend/API development patterns with AI, Backend/API Development Patterns with AI-API documentation and testing
+database design and integration, Database Design and Integration-Checking AI-Generated Queries
+end-to-end workflow, Building Web Applications with AI
+examples of successful projects, Examples of Successful AI-Built Web Projects-Examples of Successful AI-Built Web Projects
+frontend development patterns with AI, Frontend Development Patterns with AI-Framework-specific tips
+full stack integration, Full Stack Integration: Marrying Frontend and Backend-Optimizing AI-human collaboration in full stack development
+aligning frontend and backend contracts, Aligning Frontend and Backend Contracts
+real-time collaboration with AI, Real-Time Collaboration with AI-Optimizing AI-human collaboration in full stack development
+multimodel approach, Human-AI Hybrid Teams
+setting up the project, scaffolding with AI, Setting Up the Project: Scaffolding with AI-Setting Up the Project: Scaffolding with AI
+testing and validation, Testing and Validation for AI-Generated Web Applications-Testing and Validation for AI-Generated Web Applications
+WebSockets
+setting up using AI in full stack web app, WebSockets and advanced integrations
+why, not just what, asking in debugging AI code, Debugging Strategies: Finding and Fixing Errors
+Windsurf IDE, Windsurf: An AI-Powered IDE with Full Codebase Indexing, AI Prototyping Tools
+Cascade view, Windsurf: An AI-Powered IDE with Full Codebase Indexing
+Gemini's integration with, Google Gemini: The Multimodal Coding Powerhouse
+strengths of, Windsurf: An AI-Powered IDE with Full Codebase Indexing
+workflow-integrated agents, Major Players in Autonomous Coding Agents
+X
+XSS (cross-site scripting) in web apps, Common Security Vulnerabilities in AI-Generated Code
+Z
+ZAP (OWASP), penetrating testing with, Penetration Testing and Fuzzing
+zero-shot prompting, Zero-Shot Prompting
+zero-to-one product development, Zero-to-one product development
