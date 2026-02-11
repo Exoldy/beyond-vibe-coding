@@ -1,6 +1,7 @@
 export default {
     title: 'Beyond Vibe Coding',
     description: 'A book about AI in software development',
+    base: '/beyond-vibe-coding/',
     themeConfig: {
         sidebar: [
             {
