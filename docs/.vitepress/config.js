@@ -5,22 +5,22 @@ export default {
     themeConfig: {
         sidebar: [
             {
-                text: 'Book Content',
+                text: 'Содержание',
                 items: [
-                    { text: 'Preface', link: '/Preface' },
-                    { text: 'Chapter 1. Introduction', link: '/chapter_1' },
-                    { text: 'Chapter 2. The Art of the Prompt', link: '/chapter_2' },
-                    { text: 'Chapter 3. The 70% Problem', link: '/chapter_3' },
-                    { text: 'Chapter 4. Beyond the 70%', link: '/chapter_4' },
-                    { text: 'Chapter 5. Understanding Generated Code', link: '/chapter_5' },
-                    { text: 'Chapter 6. AI-Driven Prototyping', link: '/chapter_6' },
-                    { text: 'Chapter 7. Building Web Applications', link: '/chapter_7' },
-                    { text: 'Chapter 8. Security and Reliability', link: '/chapter_8' },
-                    { text: 'Chapter 9. Ethical Implications', link: '/chapter_9' },
-                    { text: 'Chapter 10. Autonomous Agents', link: '/chapter_10' },
-                    { text: 'Chapter 11. The Future', link: '/chapter_11' },
-                    { text: 'About the Author', link: '/about' },
-                    { text: 'Index', link: '/index_page' }
+                    { text: 'Предисловие', link: '/Preface' },
+                    { text: 'Глава 1. Введение', link: '/chapter_1' },
+                    { text: 'Глава 2. Искусство промта', link: '/chapter_2' },
+                    { text: 'Глава 3. Проблема 70%', link: '/chapter_3' },
+                    { text: 'Глава 4. За пределами 70%', link: '/chapter_4' },
+                    { text: 'Глава 5. Понимание кода ИИ', link: '/chapter_5' },
+                    { text: 'Глава 6. Прототипирование с ИИ', link: '/chapter_6' },
+                    { text: 'Глава 7. Веб-приложения', link: '/chapter_7' },
+                    { text: 'Глава 8. Безопасность и надежность', link: '/chapter_8' },
+                    { text: 'Глава 9. Этические вопросы', link: '/chapter_9' },
+                    { text: 'Глава 10. Автономные агенты', link: '/chapter_10' },
+                    { text: 'Глава 11. Будущее', link: '/chapter_11' },
+                    { text: 'Об авторе', link: '/about' },
+                    { text: 'Указатель', link: '/index_page' }
                 ]
             }
         ],
