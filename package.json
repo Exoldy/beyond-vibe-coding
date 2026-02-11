@@ -1,0 +1,22 @@
+{
+    "name": "beyond-vibe-coding",
+    "version": "1.0.0",
+    "description": "Beyond Vibe Coding - A book about AI in software development",
+    "main": "index.js",
+    "scripts": {
+        "dev": "vitepress dev docs",
+        "build": "vitepress build docs",
+        "serve": "vitepress serve docs"
+    },
+    "keywords": [
+        "ai",
+        "coding",
+        "book",
+        "vitepress"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "vitepress": "^1.0.0-rc.44"
+    }
+}
